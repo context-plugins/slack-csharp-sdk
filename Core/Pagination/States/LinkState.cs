@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
-using SlackWebApi.Core.Models;
+using Slack.Core.Models;
 
-namespace SlackWebApi.Core.Pagination.States;
+namespace Slack.Core.Pagination.States;
 
 internal sealed record LinkState<TResponse> : IPageState<TResponse, LinkState<TResponse>>
 {
@@ -69,7 +69,7 @@ file static class LinkPaginationExtensions
 
     private static Uri BuildBaseUri(UrlTemplate template)
     {
-        var url = template.BaseUrl.TrimEnd('/') + "/" + template.Path.TrimStart('/');
+        var url = $"{template.BaseUrl.TrimEnd('/')}/{template.Path.TrimStart('/')}";
         foreach (var (key, value) in template.Variables)
             url = url.Replace($"{{{key}}}", value?.ToString() ?? string.Empty);
 

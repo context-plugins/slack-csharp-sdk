@@ -1,3 +1,3 @@
-namespace SlackWebApi.Core.Models;
+namespace Slack.Core.Models;
 
 public readonly record struct HeaderParam(string Key, object? Value);

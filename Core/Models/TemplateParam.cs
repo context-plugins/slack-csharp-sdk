@@ -1,4 +1,4 @@
-namespace SlackWebApi.Core.Models;
+namespace Slack.Core.Models;
 
 internal readonly record struct TemplateParam(string Key, object? Value)
 {

@@ -1,7 +1,8 @@
 using System.Net.Http;
-using SlackWebApi.Core.Models;
+using System.Net.Http.Headers;
+using Slack.Core.Models;
 
-namespace SlackWebApi.Core.Request;
+namespace Slack.Core.Request;
 
 internal sealed class BinaryRequest : IRequest
 {
@@ -16,6 +17,11 @@ internal sealed class BinaryRequest : IRequest
     {
         var content = new StreamContent(new NonDisposingStream(_binaryContent.Stream));
         content.Headers.ContentType = _binaryContent.ContentType;
+        if (_binaryContent.FileName is { } fileName)
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileNameStar = fileName,
+            };
         return content;
     }
 

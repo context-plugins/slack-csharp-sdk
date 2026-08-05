@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for error response from admin.conversations.delete
@@ -12,5 +12,5 @@ public record AdminConversationsDeleteerrorschema1Error
     public required AdminConversationsDeleteErrorEnum Error { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok Ok { get; init; }
+    public required bool Ok { get; init; }
 }

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace SlackWebApi.Core;
+namespace Slack.Core;
 
 public sealed record RequestOptions
 {

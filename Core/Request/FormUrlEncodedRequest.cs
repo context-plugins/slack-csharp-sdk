@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using SlackWebApi.Core.Models;
+using Slack.Core.Models;
 
-namespace SlackWebApi.Core.Request;
+namespace Slack.Core.Request;
 
 internal sealed class FormUrlEncodedRequest : IRequest
 {

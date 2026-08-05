@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for successful response of admin.conversations.getTeams
@@ -10,7 +9,7 @@ namespace SlackWebApi.Models;
 public record AdminConversationsGetTeamsschema
 {
     [JsonPropertyName("ok")]
-    public required Ok1 Ok { get; init; }
+    public required bool Ok { get; init; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("response_metadata")]

@@ -6,17 +6,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Polly;
 using Polly.Timeout;
-using SlackWebApi.Core.Authentication;
-using SlackWebApi.Core.ErrorResponse;
-using SlackWebApi.Core.Extensions;
-using SlackWebApi.Core.Logging;
-using SlackWebApi.Core.Models;
-using SlackWebApi.Core.Pagination;
-using SlackWebApi.Core.Pagination.States;
-using SlackWebApi.Core.Request;
-using SlackWebApi.Core.Response;
+using Slack.Core.Authentication;
+using Slack.Core.ErrorResponse;
+using Slack.Core.Extensions;
+using Slack.Core.Logging;
+using Slack.Core.Models;
+using Slack.Core.Pagination;
+using Slack.Core.Pagination.States;
+using Slack.Core.Request;
+using Slack.Core.Response;
 
-namespace SlackWebApi.Core;
+namespace Slack.Core;
 
 internal sealed class RawClient
 {
@@ -105,8 +105,7 @@ internal sealed class RawClient
     {
         var pages = ExecutePagedResult(initialState, requestFactory, itemsSelector, response,
             requestOptions, cancellationToken);
-        return new Pageable<TResponse, TItem>(ThrowOnError(pages.AsPages(cancellationToken), cancellationToken),
-            itemsSelector);
+        return new Pageable<TResponse, TItem>(ThrowOnError(pages.AsPages(cancellationToken), cancellationToken), itemsSelector);
 
         static async IAsyncEnumerable<TResponse> ThrowOnError(
             IAsyncEnumerable<ApiResult<TResponse, TError>> pages,
@@ -152,7 +151,7 @@ internal sealed class RawClient
                     yield break;
 
                 var next = state.Next(page, result.Headers);
-                if (next == null)
+                if (next is null)
                     yield break;
 
                 state = next;

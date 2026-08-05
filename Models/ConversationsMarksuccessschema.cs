@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for successful response conversations.mark method
@@ -9,5 +8,5 @@ namespace SlackWebApi.Models;
 public record ConversationsMarksuccessschema
 {
     [JsonPropertyName("ok")]
-    public required Ok1 Ok { get; init; }
+    public required bool Ok { get; init; }
 }

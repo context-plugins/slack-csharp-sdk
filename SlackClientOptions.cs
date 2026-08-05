@@ -1,11 +1,11 @@
-using SlackWebApi.Core.Authentication.OAuth2;
-using SlackWebApi.Core.Authentication.OAuth2.AuthorizationCode;
-using SlackWebApi.Core.Configuration;
-using SlackWebApi.Servers;
+using Slack.Core.Authentication.OAuth2;
+using Slack.Core.Authentication.OAuth2.AuthorizationCode;
+using Slack.Core.Configuration;
+using Slack.Servers;
 
-namespace SlackWebApi;
+namespace Slack;
 
-public class SlackWebApiClientOptions
+public class SlackClientOptions
 {
     public ServerEnvironment Environment { get; set; } = ServerEnvironment.Default();
     public RetryOptions Retry { get; set; } = RetryOptions.Default();

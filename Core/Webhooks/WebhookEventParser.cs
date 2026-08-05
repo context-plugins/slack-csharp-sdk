@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace SlackWebApi.Core.Webhooks;
+namespace Slack.Core.Webhooks;
 
 public abstract class WebhookEventParser<TEvent>
     where TEvent : class

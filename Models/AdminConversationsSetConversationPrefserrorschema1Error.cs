@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for error response from admin.conversations.setConversationPrefs
@@ -12,5 +12,5 @@ public record AdminConversationsSetConversationPrefserrorschema1Error
     public required AdminConversationsSetConversationPrefsErrorEnum Error { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok Ok { get; init; }
+    public required bool Ok { get; init; }
 }

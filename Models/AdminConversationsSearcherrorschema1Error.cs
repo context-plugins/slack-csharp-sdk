@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for error response from admin.conversations.search
@@ -12,5 +12,5 @@ public record AdminConversationsSearcherrorschema1Error
     public required AdminConversationsSearchErrorEnum Error { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok Ok { get; init; }
+    public required bool Ok { get; init; }
 }

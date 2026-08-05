@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlackWebApi.Core.ErrorResponse;
+namespace Slack.Core.ErrorResponse;
 
 public interface IErrorResponse<TError>
 {

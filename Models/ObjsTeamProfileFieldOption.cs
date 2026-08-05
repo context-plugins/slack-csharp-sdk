@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 public record ObjsTeamProfileFieldOption
 {

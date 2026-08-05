@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for error response from conversations.open method
@@ -19,5 +19,5 @@ public record ConversationsOpenerrorschema1
     public required ConversationsOpenErrorEnum Error { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok Ok { get; init; }
+    public required bool Ok { get; init; }
 }

@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for successful response of chat.postMessage method
@@ -17,7 +16,7 @@ public record ChatPostMessagesuccessschema
     public required Messageobject Message { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok1 Ok { get; init; }
+    public required bool Ok { get; init; }
 
     [JsonPropertyName("ts")]
     [RegularExpression("^\\d{10}\\.\\d{6}$")]

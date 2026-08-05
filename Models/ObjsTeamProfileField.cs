@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 public record ObjsTeamProfileField
 {
@@ -37,5 +37,5 @@ public record ObjsTeamProfileField
     public IReadOnlyList<string?>? PossibleValues { get; init; }
 
     [JsonPropertyName("type")]
-    public required TypeModel Type { get; init; }
+    public required TypeEnum Type { get; init; }
 }

@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 public record Errorsisreturnedwhenanerrorassociatesanuser
 {
@@ -10,7 +10,7 @@ public record Errorsisreturnedwhenanerrorassociatesanuser
     public required ConversationsInviteErrorEnum Error { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok Ok { get; init; }
+    public required bool Ok { get; init; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("user")]

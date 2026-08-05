@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 
-namespace SlackWebApi.Core.Configuration;
+namespace Slack.Core.Configuration;
 
 public record RetryOptions
 {

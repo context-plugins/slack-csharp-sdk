@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for successful response from conversations.leave method
@@ -13,5 +12,5 @@ public record ConversationsLeavesuccessschema
     public bool? NotInChannel { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok1 Ok { get; init; }
+    public required bool Ok { get; init; }
 }

@@ -2,16 +2,16 @@ using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using SlackWebApi.Core;
-using SlackWebApi.Core.ErrorResponse;
-using SlackWebApi.Core.Exceptions;
-using SlackWebApi.Core.Models;
-using SlackWebApi.Core.Request;
-using SlackWebApi.Core.Response;
-using SlackWebApi.Models;
-using SlackWebApi.Models.Enums;
+using Slack.Core;
+using Slack.Core.ErrorResponse;
+using Slack.Core.Exceptions;
+using Slack.Core.Models;
+using Slack.Core.Request;
+using Slack.Core.Response;
+using Slack.Models;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Api;
+namespace Slack.Api;
 
 public sealed class Pins
 {
@@ -61,6 +61,40 @@ public sealed class Pins
             ct);
 
     /// <summary>
+    /// pins_add
+    /// </summary>
+    /// <param name="token">Authentication token. Requires scope: <c>pins:write</c></param>
+    /// <param name="contentType"></param>
+    /// <param name="channel"></param>
+    /// <param name="timestamp"></param>
+    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>A <see cref="Task{TResult}"/> of <see cref="PinsAddschema1"/> instance.</returns>
+    /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
+    /// <remarks>
+    /// Pins an item to a channel.
+    /// </remarks>
+    public Task<PinsAddschema1> PinsAdd1(string token,
+        ContentType contentType,
+        string channel,
+        string? timestamp,
+        RequestOptions? requestOptions = null,
+        CancellationToken ct = default) =>
+        _rawClient.Execute(_server.Default("/pins.add"),
+            [],
+            [],
+            [new HeaderParam("token", token),
+                new HeaderParam("Content-Type", contentType),
+                new HeaderParam("Idempotency-Key", Guid.NewGuid())],
+            HttpMethod.Post,
+            FormUrlEncodedRequest.Create([new Param("channel", channel), new Param("timestamp", timestamp)]),
+            JsonResponse.Create<PinsAddschema1>(),
+            RawErrorResponse.Instance,
+            [_auth.SlackAuth],
+            requestOptions,
+            ct);
+
+    /// <summary>
     /// pins_list
     /// </summary>
     /// <param name="token">Authentication token. Requires scope: <c>pins:read</c></param>
@@ -74,6 +108,36 @@ public sealed class Pins
     /// Lists items pinned to a channel.
     /// </remarks>
     public Task<object> PinsList(string token,
+        string channel,
+        ContentType contentType,
+        RequestOptions? requestOptions = null,
+        CancellationToken ct = default) =>
+        _rawClient.Execute(_server.Default("/pins.list"),
+            [],
+            [new Param("token", token), new Param("channel", channel)],
+            [new HeaderParam("Content-Type", contentType)],
+            HttpMethod.Get,
+            EmptyBody.Instance,
+            JsonResponse.Create<object>(),
+            RawErrorResponse.Instance,
+            [_auth.SlackAuth],
+            requestOptions,
+            ct);
+
+    /// <summary>
+    /// pins_list
+    /// </summary>
+    /// <param name="token">Authentication token. Requires scope: <c>pins:read</c></param>
+    /// <param name="channel">Channel to get pinned items for.</param>
+    /// <param name="contentType"></param>
+    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>A <see cref="Task{TResult}"/> of <see cref="object"/> instance.</returns>
+    /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
+    /// <remarks>
+    /// Lists items pinned to a channel.
+    /// </remarks>
+    public Task<object> PinsList1(string token,
         string channel,
         ContentType contentType,
         RequestOptions? requestOptions = null,
@@ -119,6 +183,40 @@ public sealed class Pins
             HttpMethod.Post,
             FormUrlEncodedRequest.Create([new Param("channel", channel), new Param("timestamp", timestamp)]),
             JsonResponse.Create<PinsRemoveschema>(),
+            RawErrorResponse.Instance,
+            [_auth.SlackAuth],
+            requestOptions,
+            ct);
+
+    /// <summary>
+    /// pins_remove
+    /// </summary>
+    /// <param name="token">Authentication token. Requires scope: <c>pins:write</c></param>
+    /// <param name="contentType"></param>
+    /// <param name="channel"></param>
+    /// <param name="timestamp"></param>
+    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
+    /// <param name="ct">Cancellation token</param>
+    /// <returns>A <see cref="Task{TResult}"/> of <see cref="PinsRemoveschema1"/> instance.</returns>
+    /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
+    /// <remarks>
+    /// Un-pins an item from a channel.
+    /// </remarks>
+    public Task<PinsRemoveschema1> PinsRemove1(string token,
+        ContentType contentType,
+        string channel,
+        string? timestamp,
+        RequestOptions? requestOptions = null,
+        CancellationToken ct = default) =>
+        _rawClient.Execute(_server.Default("/pins.remove"),
+            [],
+            [],
+            [new HeaderParam("token", token),
+                new HeaderParam("Content-Type", contentType),
+                new HeaderParam("Idempotency-Key", Guid.NewGuid())],
+            HttpMethod.Post,
+            FormUrlEncodedRequest.Create([new Param("channel", channel), new Param("timestamp", timestamp)]),
+            JsonResponse.Create<PinsRemoveschema1>(),
             RawErrorResponse.Instance,
             [_auth.SlackAuth],
             requestOptions,

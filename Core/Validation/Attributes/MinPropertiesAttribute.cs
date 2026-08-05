@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
-namespace SlackWebApi.Core.Validation.Attributes;
+namespace Slack.Core.Validation.Attributes;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
 public sealed class MinPropertiesAttribute : ValidationAttribute

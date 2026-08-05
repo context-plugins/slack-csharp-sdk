@@ -1,4 +1,4 @@
-namespace SlackWebApi.Core.Validation;
+namespace Slack.Core.Validation;
 
 public enum FormatKind
 {

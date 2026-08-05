@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
@@ -25,7 +24,7 @@ public record ApimethodusersGetPresence
     public bool? ManualAway { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok1 Ok { get; init; }
+    public required bool Ok { get; init; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("online")]

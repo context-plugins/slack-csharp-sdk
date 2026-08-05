@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using SlackWebApi.Core.Validation.Attributes;
-using SlackWebApi.Models.Enums;
+using Slack.Core.Validation.Attributes;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for successful response from conversations.list method
@@ -15,7 +14,7 @@ public record ConversationsListsuccessschema
     public required IReadOnlyList<object> Channels { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok1 Ok { get; init; }
+    public required bool Ok { get; init; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("response_metadata")]

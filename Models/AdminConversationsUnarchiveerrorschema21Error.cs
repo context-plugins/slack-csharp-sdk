@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for error response from admin.conversations.rename
@@ -12,5 +12,5 @@ public record AdminConversationsUnarchiveerrorschema21Error
     public required AdminConversationsRenameErrorEnum Error { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok Ok { get; init; }
+    public required bool Ok { get; init; }
 }

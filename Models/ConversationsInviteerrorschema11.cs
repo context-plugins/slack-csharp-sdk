@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using SlackWebApi.Core.Validation.Attributes;
-using SlackWebApi.Models.Enums;
+using Slack.Core.Validation.Attributes;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for error response from conversations.invite method
@@ -33,7 +33,7 @@ public record ConversationsInviteerrorschema11
     public string? Needed { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok Ok { get; init; }
+    public required bool Ok { get; init; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("provided")]

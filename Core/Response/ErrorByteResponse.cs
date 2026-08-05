@@ -1,9 +1,9 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using SlackWebApi.Core.Models;
+using Slack.Core.Models;
 
-namespace SlackWebApi.Core.Response;
+namespace Slack.Core.Response;
 
 internal sealed class ErrorByteResponse : IResponse<ErrorByteContent>
 {

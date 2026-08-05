@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for successful response auth.test method
@@ -19,7 +18,7 @@ public record AuthTestsuccessschema
     public bool? IsEnterpriseInstall { get; init; }
 
     [JsonPropertyName("ok")]
-    public required Ok1 Ok { get; init; }
+    public required bool Ok { get; init; }
 
     [JsonPropertyName("team")]
     public required string Team { get; init; }

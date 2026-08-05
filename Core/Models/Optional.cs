@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace SlackWebApi.Core.Models;
+namespace Slack.Core.Models;
 
 [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
 internal readonly record struct Optional<TValue>

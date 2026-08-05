@@ -1,0 +1,19 @@
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using Slack.Models.Enums;
+
+namespace Slack.Models;
+
+public record Errorsisreturnedwhenanerrorassociatesanuser1
+{
+    [JsonPropertyName("error")]
+    public required ConversationsInviteErrorEnum Error { get; init; }
+
+    [JsonPropertyName("ok")]
+    public required Ok Ok { get; init; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("user")]
+    [RegularExpression("^[UW][A-Z0-9]{2,}$")]
+    public string? User { get; init; }
+}

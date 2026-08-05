@@ -1,9 +1,9 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using SlackWebApi.Core.ErrorResponse;
+using Slack.Core.ErrorResponse;
 
-namespace SlackWebApi.Core.Response;
+namespace Slack.Core.Response;
 
 public sealed class RawErrorBodyResponse : IResponse<RawError>
 {

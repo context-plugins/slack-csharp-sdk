@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for successful response from usergroups.create method
@@ -9,7 +8,7 @@ namespace SlackWebApi.Models;
 public record UsergroupsCreateschema
 {
     [JsonPropertyName("ok")]
-    public required Ok1 Ok { get; init; }
+    public required bool Ok { get; init; }
 
     [JsonPropertyName("usergroup")]
     public required SubteamUsergroupObject Usergroup { get; init; }

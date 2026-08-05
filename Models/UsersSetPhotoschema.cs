@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for successful response from users.setPhoto method
@@ -9,7 +8,7 @@ namespace SlackWebApi.Models;
 public record UsersSetPhotoschema
 {
     [JsonPropertyName("ok")]
-    public required Ok1 Ok { get; init; }
+    public required bool Ok { get; init; }
 
     [JsonPropertyName("profile")]
     public required Profile1 Profile { get; init; }
