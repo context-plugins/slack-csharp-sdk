@@ -7,9 +7,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using Slack.Core.Exceptions;
+using SlackWebApi.Core.Exceptions;
 
-namespace Slack.Core.Response;
+namespace SlackWebApi.Core.Response;
 
 internal sealed class JsonSseResponse<TResponse> : IResponse<IAsyncEnumerable<TResponse>>
 {

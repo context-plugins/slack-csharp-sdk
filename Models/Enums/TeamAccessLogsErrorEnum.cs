@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Enum;
+using SlackWebApi.Core.Enum;
 
-namespace Slack.Models.Enums;
+namespace SlackWebApi.Models.Enums;
 
 [JsonConverter(typeof(StringEnumConverter<TeamAccessLogsErrorEnum>))]
 public sealed record TeamAccessLogsErrorEnum : StringEnum<TeamAccessLogsErrorEnum>

@@ -1,6 +1,6 @@
 using System.Net.Http;
 
-namespace Slack.Core.Request;
+namespace SlackWebApi.Core.Request;
 
 internal interface IRequest
 {

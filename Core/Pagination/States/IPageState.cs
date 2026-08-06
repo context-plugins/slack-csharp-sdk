@@ -1,6 +1,6 @@
 using System.Net.Http.Headers;
 
-namespace Slack.Core.Pagination.States;
+namespace SlackWebApi.Core.Pagination.States;
 
 internal interface IPageState<in TResponse, out TState>
 {

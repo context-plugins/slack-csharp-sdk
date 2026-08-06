@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Core;
+namespace SlackWebApi.Core;
 
 internal sealed class UriFactory
 {

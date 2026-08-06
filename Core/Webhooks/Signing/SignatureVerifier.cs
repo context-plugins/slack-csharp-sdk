@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Slack.Core.Webhooks.Signing;
+namespace SlackWebApi.Core.Webhooks.Signing;
 
 internal sealed class SignatureVerifier
 {

@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 
-namespace Slack.Core.Extensions;
+namespace SlackWebApi.Core.Extensions;
 
 internal static class JsonSerializerExtensions
 {

@@ -1,7 +1,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 
-namespace Slack.Core.Request;
+namespace SlackWebApi.Core.Request;
 
 internal sealed class JsonRequest<TData> : IRequest
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Slack.Core.Webhooks.Signing;
+namespace SlackWebApi.Core.Webhooks.Signing;
 
 internal abstract record SignatureHeaderFormat
 {

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Slack.Core.Pagination;
+namespace SlackWebApi.Core.Pagination;
 
 public sealed class Pageable<TPage, TItem> : IAsyncEnumerable<TItem>
 {

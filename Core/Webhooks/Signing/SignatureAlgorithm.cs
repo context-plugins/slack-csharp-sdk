@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace Slack.Core.Webhooks.Signing;
+namespace SlackWebApi.Core.Webhooks.Signing;
 
 internal abstract record SignatureAlgorithm
 {

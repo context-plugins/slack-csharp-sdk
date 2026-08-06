@@ -1,6 +1,6 @@
-using Slack.Core.Enum;
+using SlackWebApi.Core.Enum;
 
-namespace Slack.Core.Webhooks;
+namespace SlackWebApi.Core.Webhooks;
 
 public abstract record WebhookEvent<TPayload>
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-namespace Slack.Core.Configuration;
+namespace SlackWebApi.Core.Configuration;
 
 public record LoggingOptions
 {

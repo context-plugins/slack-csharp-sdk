@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Enum;
+using SlackWebApi.Core.Enum;
 
-namespace Slack.Core.Authentication.OAuth2.AuthorizationCode;
+namespace SlackWebApi.Core.Authentication.OAuth2.AuthorizationCode;
 
 [JsonConverter(typeof(StringEnumConverter<PkceMethod>))]
 public sealed record PkceMethod : StringEnum<PkceMethod>

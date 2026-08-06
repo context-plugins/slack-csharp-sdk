@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Slack.Core;
+namespace SlackWebApi.Core;
 
 internal static class RuntimeEnvironment
 {

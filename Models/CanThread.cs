@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 public record CanThread
 {

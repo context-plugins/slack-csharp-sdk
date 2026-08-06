@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 
-namespace Slack.Core.Validation;
+namespace SlackWebApi.Core.Validation;
 
 internal static class SchemaConstraintExtensions
 {

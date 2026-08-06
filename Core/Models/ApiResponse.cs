@@ -1,7 +1,7 @@
-using Slack.Core.ErrorResponse;
-using Slack.Core.Response;
+using SlackWebApi.Core.ErrorResponse;
+using SlackWebApi.Core.Response;
 
-namespace Slack.Core.Models;
+namespace SlackWebApi.Core.Models;
 
 internal sealed class ApiResponse<TResponse, TError>
 {

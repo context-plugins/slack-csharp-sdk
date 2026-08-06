@@ -2,9 +2,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http.Headers;
-using Slack.Core.Exceptions;
+using SlackWebApi.Core.Exceptions;
 
-namespace Slack.Core.Models;
+namespace SlackWebApi.Core.Models;
 
 /// <summary>
 ///     Represents either a successful response of type <typeparamref name="TResponse" />

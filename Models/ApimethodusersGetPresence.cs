@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65

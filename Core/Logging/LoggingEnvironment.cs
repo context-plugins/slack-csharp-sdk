@@ -1,8 +1,8 @@
 using System;
 using Microsoft.Extensions.Logging;
-using Slack.Core.Configuration;
+using SlackWebApi.Core.Configuration;
 
-namespace Slack.Core.Logging;
+namespace SlackWebApi.Core.Logging;
 
 internal static class LoggingEnvironment
 {

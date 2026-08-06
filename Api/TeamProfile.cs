@@ -1,16 +1,16 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Slack.Core;
-using Slack.Core.ErrorResponse;
-using Slack.Core.Exceptions;
-using Slack.Core.Models;
-using Slack.Core.Request;
-using Slack.Core.Response;
-using Slack.Models;
-using Slack.Models.Enums;
+using SlackWebApi.Core;
+using SlackWebApi.Core.ErrorResponse;
+using SlackWebApi.Core.Exceptions;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Core.Request;
+using SlackWebApi.Core.Response;
+using SlackWebApi.Models;
+using SlackWebApi.Models.Enums;
 
-namespace Slack.Api;
+namespace SlackWebApi.Api;
 
 public sealed class TeamProfile
 {
@@ -50,36 +50,6 @@ public sealed class TeamProfile
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<TeamProfileGetsuccessschema>(),
-            RawErrorResponse.Instance,
-            [_auth.SlackAuth],
-            requestOptions,
-            ct);
-
-    /// <summary>
-    /// team_profile_get
-    /// </summary>
-    /// <param name="token">Authentication token. Requires scope: <c>users.profile:read</c></param>
-    /// <param name="visibility">Filter by visibility.</param>
-    /// <param name="contentType"></param>
-    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="TeamProfileGetsuccessschema1"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
-    /// <remarks>
-    /// Retrieve a team's profile.
-    /// </remarks>
-    public Task<TeamProfileGetsuccessschema1> TeamProfileGet1(string token,
-        string? visibility,
-        ContentType contentType,
-        RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/team.profile.get"),
-            [],
-            [new Param("token", token), new Param("visibility", visibility)],
-            [new HeaderParam("Content-Type", contentType)],
-            HttpMethod.Get,
-            EmptyBody.Instance,
-            JsonResponse.Create<TeamProfileGetsuccessschema1>(),
             RawErrorResponse.Instance,
             [_auth.SlackAuth],
             requestOptions,

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response of admin.conversations.getConversationPrefs

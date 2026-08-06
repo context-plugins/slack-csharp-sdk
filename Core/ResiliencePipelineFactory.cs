@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Polly;
 using Polly.Retry;
 using Polly.Timeout;
-using Slack.Core.Configuration;
-using Slack.Core.Logging;
-using Slack.Core.Request;
+using SlackWebApi.Core.Configuration;
+using SlackWebApi.Core.Logging;
+using SlackWebApi.Core.Request;
 
-namespace Slack.Core;
+namespace SlackWebApi.Core;
 
 internal sealed class ResiliencePipelineFactory
 {

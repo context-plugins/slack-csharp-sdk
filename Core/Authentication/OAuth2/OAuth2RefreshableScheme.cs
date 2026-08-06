@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Slack.Core.Authentication.OAuth2;
+namespace SlackWebApi.Core.Authentication.OAuth2;
 
 internal sealed class OAuth2RefreshableScheme<TCredentials> : IRevocableAuthScheme
 {

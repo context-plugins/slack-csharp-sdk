@@ -1,16 +1,16 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Slack.Core;
-using Slack.Core.ErrorResponse;
-using Slack.Core.Exceptions;
-using Slack.Core.Models;
-using Slack.Core.Request;
-using Slack.Core.Response;
-using Slack.Models;
-using Slack.Models.Enums;
+using SlackWebApi.Core;
+using SlackWebApi.Core.ErrorResponse;
+using SlackWebApi.Core.Exceptions;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Core.Request;
+using SlackWebApi.Core.Response;
+using SlackWebApi.Models;
+using SlackWebApi.Models.Enums;
 
-namespace Slack.Api;
+namespace SlackWebApi.Api;
 
 public sealed class AppsPermissions
 {
@@ -54,34 +54,6 @@ public sealed class AppsPermissions
             ct);
 
     /// <summary>
-    /// apps_permissions_info
-    /// </summary>
-    /// <param name="token">Authentication token. Requires scope: <c>none</c></param>
-    /// <param name="contentType"></param>
-    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="AppsPermissionsInfoschema1"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
-    /// <remarks>
-    /// Returns list of permissions this app has on a team.
-    /// </remarks>
-    public Task<AppsPermissionsInfoschema1> AppsPermissionsInfo1(string? token,
-        ContentType contentType,
-        RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/apps.permissions.info"),
-            [],
-            [new Param("token", token)],
-            [new HeaderParam("Content-Type", contentType)],
-            HttpMethod.Get,
-            EmptyBody.Instance,
-            JsonResponse.Create<AppsPermissionsInfoschema1>(),
-            RawErrorResponse.Instance,
-            [_auth.SlackAuth],
-            requestOptions,
-            ct);
-
-    /// <summary>
     /// apps_permissions_request
     /// </summary>
     /// <param name="token">Authentication token. Requires scope: <c>none</c></param>
@@ -108,38 +80,6 @@ public sealed class AppsPermissions
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<AppsPermissionsRequestschema>(),
-            RawErrorResponse.Instance,
-            [_auth.SlackAuth],
-            requestOptions,
-            ct);
-
-    /// <summary>
-    /// apps_permissions_request
-    /// </summary>
-    /// <param name="token">Authentication token. Requires scope: <c>none</c></param>
-    /// <param name="scopes">A comma separated list of scopes to request for</param>
-    /// <param name="triggerId">Token used to trigger the permissions API</param>
-    /// <param name="contentType"></param>
-    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="AppsPermissionsRequestschema1"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
-    /// <remarks>
-    /// Allows an app to request additional scopes
-    /// </remarks>
-    public Task<AppsPermissionsRequestschema1> AppsPermissionsRequest1(string token,
-        string scopes,
-        string triggerId,
-        ContentType contentType,
-        RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/apps.permissions.request"),
-            [],
-            [new Param("token", token), new Param("scopes", scopes), new Param("trigger_id", triggerId)],
-            [new HeaderParam("Content-Type", contentType)],
-            HttpMethod.Get,
-            EmptyBody.Instance,
-            JsonResponse.Create<AppsPermissionsRequestschema1>(),
             RawErrorResponse.Instance,
             [_auth.SlackAuth],
             requestOptions,

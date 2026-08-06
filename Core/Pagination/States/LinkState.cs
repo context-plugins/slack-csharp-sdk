@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Core.Pagination.States;
+namespace SlackWebApi.Core.Pagination.States;
 
 internal sealed record LinkState<TResponse> : IPageState<TResponse, LinkState<TResponse>>
 {

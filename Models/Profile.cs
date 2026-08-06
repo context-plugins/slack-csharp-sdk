@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Slack.Core.Validation.Attributes;
+using SlackWebApi.Core.Validation.Attributes;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 public record Profile
 {

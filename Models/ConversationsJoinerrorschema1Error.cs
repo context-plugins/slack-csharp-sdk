@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Models.Enums;
+using SlackWebApi.Models.Enums;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for error response from conversations.join method

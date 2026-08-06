@@ -1,16 +1,16 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Slack.Core;
-using Slack.Core.ErrorResponse;
-using Slack.Core.Exceptions;
-using Slack.Core.Models;
-using Slack.Core.Request;
-using Slack.Core.Response;
-using Slack.Models;
-using Slack.Models.Enums;
+using SlackWebApi.Core;
+using SlackWebApi.Core.ErrorResponse;
+using SlackWebApi.Core.Exceptions;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Core.Request;
+using SlackWebApi.Core.Response;
+using SlackWebApi.Models;
+using SlackWebApi.Models.Enums;
 
-namespace Slack.Api;
+namespace SlackWebApi.Api;
 
 public sealed class Emoji
 {
@@ -48,34 +48,6 @@ public sealed class Emoji
             HttpMethod.Get,
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
-            RawErrorResponse.Instance,
-            [_auth.SlackAuth],
-            requestOptions,
-            ct);
-
-    /// <summary>
-    /// emoji_list
-    /// </summary>
-    /// <param name="token">Authentication token. Requires scope: <c>emoji:read</c></param>
-    /// <param name="contentType"></param>
-    /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
-    /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="Defaultsuccesstemplate1"/> instance.</returns>
-    /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
-    /// <remarks>
-    /// Lists custom emoji for a team.
-    /// </remarks>
-    public Task<Defaultsuccesstemplate1> EmojiList1(string token,
-        ContentType contentType,
-        RequestOptions? requestOptions = null,
-        CancellationToken ct = default) =>
-        _rawClient.Execute(_server.Default("/emoji.list"),
-            [],
-            [new Param("token", token)],
-            [new HeaderParam("Content-Type", contentType)],
-            HttpMethod.Get,
-            EmptyBody.Instance,
-            JsonResponse.Create<Defaultsuccesstemplate1>(),
             RawErrorResponse.Instance,
             [_auth.SlackAuth],
             requestOptions,

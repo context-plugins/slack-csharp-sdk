@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Slack.Core.Webhooks;
+namespace SlackWebApi.Core.Webhooks;
 
 public sealed class WebhookRequest
 {

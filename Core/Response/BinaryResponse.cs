@@ -2,9 +2,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Core.Response;
+namespace SlackWebApi.Core.Response;
 
 internal sealed class BinaryResponse : IResponse<BinaryContent>
 {

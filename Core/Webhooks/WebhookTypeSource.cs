@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json;
 
-namespace Slack.Core.Webhooks;
+namespace SlackWebApi.Core.Webhooks;
 
 internal abstract record WebhookTypeSource
 {

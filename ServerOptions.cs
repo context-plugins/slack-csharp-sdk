@@ -1,6 +1,6 @@
-using Slack.Servers;
+using SlackWebApi.Servers;
 
-namespace Slack;
+namespace SlackWebApi;
 
 public class ServerOptions
 {

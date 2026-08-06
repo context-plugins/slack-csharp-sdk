@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.Json;
-using Slack.Core.Extensions;
-using Slack.Core.Models;
+using SlackWebApi.Core.Extensions;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Core;
+namespace SlackWebApi.Core;
 
 internal static class ParameterFlattener
 {

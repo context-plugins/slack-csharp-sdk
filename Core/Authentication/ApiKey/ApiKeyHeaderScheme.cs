@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Slack.Core.Authentication.ApiKey;
+namespace SlackWebApi.Core.Authentication.ApiKey;
 
 internal sealed class ApiKeyHeaderScheme : IAuthScheme
 {
