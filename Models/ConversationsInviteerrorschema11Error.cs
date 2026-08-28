@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 using SlackWebApi.Core.Validation.Attributes;
 using SlackWebApi.Models.Enums;
 
@@ -38,4 +39,7 @@ public record ConversationsInviteerrorschema11Error
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("provided")]
     public string? Provided { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

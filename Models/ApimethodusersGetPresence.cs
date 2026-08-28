@@ -1,11 +1,12 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
 /// <summary>
 /// Generated from users.getPresence with shasum e7251aec575d8863f9e0eb38663ae9dc26655f65
 /// </summary>
-public record ApimethodusersGetPresence
+public record ApImethodusersGetPresence
 {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("auto_away")]
@@ -32,4 +33,7 @@ public record ApimethodusersGetPresence
 
     [JsonPropertyName("presence")]
     public required string Presence { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

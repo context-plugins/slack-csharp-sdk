@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 using SlackWebApi.Core.Validation.Attributes;
 
 namespace SlackWebApi.Models;
@@ -24,4 +25,7 @@ public record UsersListschema
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("response_metadata")]
     public object? ResponseMetadata { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

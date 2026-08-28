@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
@@ -17,4 +18,7 @@ public record AdminConversationsGetTeamsschema
 
     [JsonPropertyName("team_ids")]
     public required IReadOnlyList<string> TeamIds { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

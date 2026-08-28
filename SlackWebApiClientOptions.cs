@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using SlackWebApi.Core.Authentication.OAuth2;
 using SlackWebApi.Core.Authentication.OAuth2.AuthorizationCode;
 using SlackWebApi.Core.Configuration;
+using SlackWebApi.Core.Hooks;
 using SlackWebApi.Servers;
 
 namespace SlackWebApi;
@@ -11,6 +13,7 @@ public class SlackWebApiClientOptions
     public RetryOptions Retry { get; set; } = RetryOptions.Default();
     public LoggingOptions Logging { get; set; } = new();
     public ServerOptions Server { get; set; } = new();
+    public IReadOnlyList<SdkHook> Hooks { get; set; } = [];
     public OAuth2AuthorizationCodeCredentials? SlackAuth { get; set; }
     public IOAuth2RefreshableTokenStrategy<OAuth2AuthorizationCodeCredentials>? SlackAuthTokenStrategy { get; set; }
 }

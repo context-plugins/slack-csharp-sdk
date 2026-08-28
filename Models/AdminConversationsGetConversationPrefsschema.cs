@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
@@ -13,4 +14,7 @@ public record AdminConversationsGetConversationPrefsschema
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("prefs")]
     public Prefs1? Prefs { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

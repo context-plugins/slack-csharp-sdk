@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
@@ -21,4 +22,7 @@ public record DndEndSnoozeschema
 
     [JsonPropertyName("snooze_enabled")]
     public required bool SnoozeEnabled { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 using SlackWebApi.Core.Validation.Attributes;
 
 namespace SlackWebApi.Models;
@@ -20,4 +21,7 @@ public record ConversationsMemberssuccessschema
 
     [JsonPropertyName("response_metadata")]
     public required ResponseMetadata ResponseMetadata { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

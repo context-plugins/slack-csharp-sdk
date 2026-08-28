@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
@@ -20,4 +21,7 @@ public record ChatMeMessageschema
     [JsonPropertyName("ts")]
     [RegularExpression("^\\d{10}\\.\\d{6}$")]
     public string? Ts { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

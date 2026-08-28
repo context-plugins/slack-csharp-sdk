@@ -13196,7 +13196,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;FilesRevokePublicUrlschema&gt; FilesRevokePublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesRevokePublicUrLschema&gt; FilesRevokePublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
 
 <dl>
 <dd>
@@ -13220,7 +13220,7 @@ Revokes public/external sharing access for a file
 try
 {
     var response = await client.Files.FilesRevokePublicUrl(contentType, token, file);
-    // TODO: Handle 'response' of type FilesRevokePublicUrlschema
+    // TODO: Handle 'response' of type FilesRevokePublicUrLschema
 }
 catch (SdkException<RawError> ex)
 {
@@ -13250,7 +13250,7 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesRevokePublicUrlschema](Models/FilesRevokePublicUrlschema.cs)</code>
+**OnSuccess**: <code>[FilesRevokePublicUrLschema](Models/FilesRevokePublicUrLschema.cs)</code>
 
 **OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
 
@@ -13263,7 +13263,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;FilesSharedPublicUrlschema&gt; FilesSharedPublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesSharedPublicUrLschema&gt; FilesSharedPublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
 
 <dl>
 <dd>
@@ -13287,7 +13287,7 @@ Enables a file for public/external sharing.
 try
 {
     var response = await client.Files.FilesSharedPublicUrl(contentType, token, file);
-    // TODO: Handle 'response' of type FilesSharedPublicUrlschema
+    // TODO: Handle 'response' of type FilesSharedPublicUrLschema
 }
 catch (SdkException<RawError> ex)
 {
@@ -13317,7 +13317,7 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesSharedPublicUrlschema](Models/FilesSharedPublicUrlschema.cs)</code>
+**OnSuccess**: <code>[FilesSharedPublicUrLschema](Models/FilesSharedPublicUrLschema.cs)</code>
 
 **OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
 
@@ -16713,7 +16713,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ApimethodusersGetPresence&gt; UsersGetPresence(string token, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ApImethodusersGetPresence&gt; UsersGetPresence(string token, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
 
 <dl>
 <dd>
@@ -16737,7 +16737,7 @@ Gets user presence information.
 try
 {
     var response = await client.Users.UsersGetPresence(token, user, contentType);
-    // TODO: Handle 'response' of type ApimethodusersGetPresence
+    // TODO: Handle 'response' of type ApImethodusersGetPresence
 }
 catch (SdkException<RawError> ex)
 {
@@ -16767,7 +16767,7 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ApimethodusersGetPresence](Models/ApimethodusersGetPresence.cs)</code>
+**OnSuccess**: <code>[ApImethodusersGetPresence](Models/ApImethodusersGetPresence.cs)</code>
 
 **OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
 

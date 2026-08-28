@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 using SlackWebApi.Models.Enums;
 
 namespace SlackWebApi.Models;
@@ -41,4 +42,7 @@ public record UsersSetPhotoerrorschema1Error
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("time_ident")]
     public int? TimeIdent { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

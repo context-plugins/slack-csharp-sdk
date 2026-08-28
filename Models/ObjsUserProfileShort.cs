@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
@@ -40,4 +41,7 @@ public record ObjsUserProfileShort
     [JsonPropertyName("team")]
     [RegularExpression("^[TE][A-Z0-9]{8,}$")]
     public required string Team { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

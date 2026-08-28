@@ -436,12 +436,12 @@ public sealed class Files
     /// <param name="file"></param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
     /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="FilesRevokePublicUrlschema"/> instance.</returns>
+    /// <returns>A <see cref="Task{TResult}"/> of <see cref="FilesRevokePublicUrLschema"/> instance.</returns>
     /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Revokes public/external sharing access for a file
     /// </remarks>
-    public Task<FilesRevokePublicUrlschema> FilesRevokePublicUrl(ContentType contentType,
+    public Task<FilesRevokePublicUrLschema> FilesRevokePublicUrl(ContentType contentType,
         string? token,
         string? file,
         RequestOptions? requestOptions = null,
@@ -454,7 +454,7 @@ public sealed class Files
                 new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
             FormUrlEncodedRequest.Create([new Param("file", file)]),
-            JsonResponse.Create<FilesRevokePublicUrlschema>(),
+            JsonResponse.Create<FilesRevokePublicUrLschema>(),
             RawErrorResponse.Instance,
             [_auth.SlackAuth],
             requestOptions,
@@ -468,12 +468,12 @@ public sealed class Files
     /// <param name="file"></param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
     /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="FilesSharedPublicUrlschema"/> instance.</returns>
+    /// <returns>A <see cref="Task{TResult}"/> of <see cref="FilesSharedPublicUrLschema"/> instance.</returns>
     /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Enables a file for public/external sharing.
     /// </remarks>
-    public Task<FilesSharedPublicUrlschema> FilesSharedPublicUrl(ContentType contentType,
+    public Task<FilesSharedPublicUrLschema> FilesSharedPublicUrl(ContentType contentType,
         string? token,
         string? file,
         RequestOptions? requestOptions = null,
@@ -486,7 +486,7 @@ public sealed class Files
                 new HeaderParam("Idempotency-Key", Guid.NewGuid())],
             HttpMethod.Post,
             FormUrlEncodedRequest.Create([new Param("file", file)]),
-            JsonResponse.Create<FilesSharedPublicUrlschema>(),
+            JsonResponse.Create<FilesSharedPublicUrLschema>(),
             RawErrorResponse.Instance,
             [_auth.SlackAuth],
             requestOptions,

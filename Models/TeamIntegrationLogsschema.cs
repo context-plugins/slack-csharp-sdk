@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 using SlackWebApi.Core.Validation.Attributes;
 
 namespace SlackWebApi.Models;
@@ -20,4 +21,7 @@ public record TeamIntegrationLogsschema
 
     [JsonPropertyName("paging")]
     public required Pagingobject Paging { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

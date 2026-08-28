@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
@@ -18,4 +19,7 @@ public record DndSetSnoozeschema
 
     [JsonPropertyName("snooze_remaining")]
     public required int SnoozeRemaining { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

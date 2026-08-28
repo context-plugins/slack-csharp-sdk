@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
@@ -24,4 +25,7 @@ public record ChatScheduleMessagesuccessschema
     [JsonPropertyName("scheduled_message_id")]
     [RegularExpression("^[Q][A-Z0-9]{8,}$")]
     public required string ScheduledMessageId { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
@@ -12,4 +13,7 @@ public record RemindersAddschema
 
     [JsonPropertyName("reminder")]
     public required ObjsReminder Reminder { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

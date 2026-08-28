@@ -5,7 +5,7 @@ using SlackWebApi.Core.ErrorResponse;
 
 namespace SlackWebApi.Core.Response;
 
-public sealed class RawErrorBodyResponse : IResponse<RawError>
+internal sealed class RawErrorBodyResponse : IResponse<RawError>
 {
     public static RawErrorBodyResponse Instance { get; } = new();
 

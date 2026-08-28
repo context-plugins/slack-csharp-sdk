@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 using SlackWebApi.Models.Enums;
 
 namespace SlackWebApi.Models;
@@ -13,4 +14,7 @@ public record AdminConversationsConvertToPrivateerrorschema1
 
     [JsonPropertyName("ok")]
     public required bool Ok { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

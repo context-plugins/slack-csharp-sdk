@@ -1,15 +1,19 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response from files.sharedPublicURL method
 /// </summary>
-public record FilesSharedPublicUrlschema
+public record FilesSharedPublicUrLschema
 {
     [JsonPropertyName("file")]
     public required Fileobject File { get; init; }
 
     [JsonPropertyName("ok")]
     public required bool Ok { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

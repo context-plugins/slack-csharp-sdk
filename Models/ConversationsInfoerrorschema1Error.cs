@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 using SlackWebApi.Models.Enums;
 
 namespace SlackWebApi.Models;
@@ -28,4 +29,7 @@ public record ConversationsInfoerrorschema1Error
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("provided")]
     public string? Provided { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

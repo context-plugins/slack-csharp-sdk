@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 
 namespace SlackWebApi.Models;
 
@@ -12,4 +13,7 @@ public record UsersSetPhotoschema
 
     [JsonPropertyName("profile")]
     public required Profile1 Profile { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

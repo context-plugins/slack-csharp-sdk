@@ -28,7 +28,13 @@ public sealed class SlackWebApiClient
         var resiliencePipelineFactory = new ResiliencePipelineFactory(options.Retry);
         var httpLogger = new HttpLogger(options.Logging, "SlackWebApiClient");
         var rawClient =
-            new RawClient(httpClient, urlFactory, httpStatusPolicy, headersFactory, resiliencePipelineFactory, httpLogger);
+            new RawClient(httpClient,
+                urlFactory,
+                httpStatusPolicy,
+                headersFactory,
+                resiliencePipelineFactory,
+                httpLogger,
+                options.Hooks);
         var auth = new AuthSchemes(options, server, rawClient, urlFactory);
         Admin = new Admin(rawClient, server, auth);
         AdminApps = new AdminApps(rawClient, server, auth);

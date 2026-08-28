@@ -105,12 +105,12 @@ public sealed class Users
     /// <param name="contentType"></param>
     /// <param name="requestOptions">Per-request options, such as an overriding log level for this call</param>
     /// <param name="ct">Cancellation token</param>
-    /// <returns>A <see cref="Task{TResult}"/> of <see cref="ApimethodusersGetPresence"/> instance.</returns>
+    /// <returns>A <see cref="Task{TResult}"/> of <see cref="ApImethodusersGetPresence"/> instance.</returns>
     /// <exception cref="SdkException{TResult}"> of <see cref="RawError"/> when the server returns an error response.</exception>
     /// <remarks>
     /// Gets user presence information.
     /// </remarks>
-    public Task<ApimethodusersGetPresence> UsersGetPresence(string token,
+    public Task<ApImethodusersGetPresence> UsersGetPresence(string token,
         string? user,
         ContentType contentType,
         RequestOptions? requestOptions = null,
@@ -121,7 +121,7 @@ public sealed class Users
             [new HeaderParam("Content-Type", contentType)],
             HttpMethod.Get,
             EmptyBody.Instance,
-            JsonResponse.Create<ApimethodusersGetPresence>(),
+            JsonResponse.Create<ApImethodusersGetPresence>(),
             RawErrorResponse.Instance,
             [_auth.SlackAuth],
             requestOptions,

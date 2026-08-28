@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 using SlackWebApi.Models.Enums;
 
 namespace SlackWebApi.Models;
@@ -6,7 +7,7 @@ namespace SlackWebApi.Models;
 /// <summary>
 /// Schema for error response from files.sharedPublicURL method
 /// </summary>
-public record FilesSharedPublicUrlerrorschema1
+public record FilesSharedPublicUrLerrorschema1
 {
     /// <summary>
     /// Note: PHP callstack is only visible in dev/qa
@@ -16,8 +17,11 @@ public record FilesSharedPublicUrlerrorschema1
     public string? Callstack { get; init; }
 
     [JsonPropertyName("error")]
-    public required FilesSharedPublicUrlerrorEnum Error { get; init; }
+    public required FilesSharedPublicUrlErrorEnum Error { get; init; }
 
     [JsonPropertyName("ok")]
     public required bool Ok { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }

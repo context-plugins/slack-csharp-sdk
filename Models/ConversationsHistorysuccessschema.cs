@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using SlackWebApi.Core.Models;
 using SlackWebApi.Core.Validation.Attributes;
 
 namespace SlackWebApi.Models;
@@ -29,4 +30,7 @@ public record ConversationsHistorysuccessschema
 
     [JsonPropertyName("pin_count")]
     public required int PinCount { get; init; }
+
+    [JsonExtensionData]
+    public AdditionalProperties AdditionalProperties { get; init; } = [];
 }
