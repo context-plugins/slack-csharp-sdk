@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Core.Models;
-using SlackWebApi.Models.Enums;
+using Slack.Core.Models;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for error response from admin.conversations.unarchive

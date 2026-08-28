@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlackWebApi.Core.Authentication;
+namespace Slack.Core.Authentication;
 
 /// <summary>
 /// Represents a set of schemes that must all apply (AND logic).

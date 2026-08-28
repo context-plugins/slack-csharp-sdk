@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Core.Enum;
+using Slack.Core.Enum;
 
-namespace SlackWebApi.Models.Enums;
+namespace Slack.Models.Enums;
 
 [JsonConverter(typeof(StringEnumConverter<FilesCommentsDeleteErrorEnum>))]
 public sealed record FilesCommentsDeleteErrorEnum : StringEnum<FilesCommentsDeleteErrorEnum>

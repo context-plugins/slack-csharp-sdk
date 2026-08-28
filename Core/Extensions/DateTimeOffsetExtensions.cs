@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace SlackWebApi.Core.Extensions;
+namespace Slack.Core.Extensions;
 
 internal static class DateTimeOffsetExtensions
 {

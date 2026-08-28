@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using SlackWebApi.Core.Models;
-using SlackWebApi.Core.Validation.Attributes;
+using Slack.Core.Models;
+using Slack.Core.Validation.Attributes;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for successful response from conversations.history method

@@ -1,7 +1,7 @@
 using System.Net.Http;
-using SlackWebApi.Core.Extensions;
+using Slack.Core.Extensions;
 
-namespace SlackWebApi.Core.Request;
+namespace Slack.Core.Request;
 
 internal sealed class EmptyBody : IRequest
 {

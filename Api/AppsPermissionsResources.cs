@@ -1,16 +1,16 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using SlackWebApi.Core;
-using SlackWebApi.Core.ErrorResponse;
-using SlackWebApi.Core.Exceptions;
-using SlackWebApi.Core.Models;
-using SlackWebApi.Core.Request;
-using SlackWebApi.Core.Response;
-using SlackWebApi.Models;
-using SlackWebApi.Models.Enums;
+using Slack.Core;
+using Slack.Core.ErrorResponse;
+using Slack.Core.Exceptions;
+using Slack.Core.Models;
+using Slack.Core.Request;
+using Slack.Core.Response;
+using Slack.Models;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Api;
+namespace Slack.Api;
 
 public sealed class AppsPermissionsResources
 {

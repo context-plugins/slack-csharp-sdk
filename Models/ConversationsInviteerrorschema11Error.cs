@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using SlackWebApi.Core.Models;
-using SlackWebApi.Core.Validation.Attributes;
-using SlackWebApi.Models.Enums;
+using Slack.Core.Models;
+using Slack.Core.Validation.Attributes;
+using Slack.Models.Enums;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// Schema for error response from conversations.invite method

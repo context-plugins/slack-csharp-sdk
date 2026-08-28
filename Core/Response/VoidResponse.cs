@@ -2,7 +2,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlackWebApi.Core.Response;
+namespace Slack.Core.Response;
 
 public sealed class VoidResponse : IResponse<VoidResponse>
 {

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Net.Http.Headers;
-using SlackWebApi.Core.Models;
+using Slack.Core.Models;
 
-namespace SlackWebApi.Core.Extensions;
+namespace Slack.Core.Extensions;
 
 internal static class HttpRequestExtensions
 {

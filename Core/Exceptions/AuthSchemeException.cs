@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace SlackWebApi.Core.Exceptions;
+namespace Slack.Core.Exceptions;
 
 public sealed class AuthSchemeException : Exception
 {

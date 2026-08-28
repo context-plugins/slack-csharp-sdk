@@ -1,6 +1,6 @@
 using System;
 
-namespace SlackWebApi.Core.Exceptions;
+namespace Slack.Core.Exceptions;
 
 public abstract class SseException : Exception
 {

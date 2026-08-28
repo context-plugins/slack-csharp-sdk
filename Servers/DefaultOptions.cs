@@ -1,6 +1,6 @@
-using SlackWebApi.Core.Models;
+using Slack.Core.Models;
 
-namespace SlackWebApi.Servers;
+namespace Slack.Servers;
 
 public class DefaultOptions
 {

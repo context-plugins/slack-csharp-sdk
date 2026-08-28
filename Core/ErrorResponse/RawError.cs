@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SlackWebApi.Core.ErrorResponse;
+namespace Slack.Core.ErrorResponse;
 
 public sealed class RawError
 {

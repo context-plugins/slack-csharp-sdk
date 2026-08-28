@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Json;
-using SlackWebApi.Core.Extensions;
+using Slack.Core.Extensions;
 
-namespace SlackWebApi.Core.Models;
+namespace Slack.Core.Models;
 
 public sealed class AdditionalProperties : IDictionary<string, JsonElement>, IEquatable<AdditionalProperties>
 {

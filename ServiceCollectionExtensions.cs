@@ -3,15 +3,15 @@ using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace SlackWebApi;
+namespace Slack;
 
 public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddSlackWebApiClient(Action<SlackWebApiClientOptions>? configure = null)
+        public IServiceCollection AddSlackClient(Action<SlackClientOptions>? configure = null)
         {
-            var options = new SlackWebApiClientOptions();
+            var options = new SlackClientOptions();
             configure?.Invoke(options);
             services.AddHttpClient();
             services.AddSingleton(sp =>
@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
                         };
                     var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
                     var httpClient = httpClientFactory.CreateClient();
-                    return new SlackWebApiClient(httpClient, options);
+                    return new SlackClient(httpClient, options);
                 });
             return services;
         }

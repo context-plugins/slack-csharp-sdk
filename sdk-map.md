@@ -1,20 +1,20 @@
 <!-- Generated file — do not edit; regenerated with the SDK. -->
 
-# SDK map — Slack Web API (.NET)
+# SDK map — Slack (.NET)
 
 > A generated table of contents for this SDK. Consult this map and its sub-pages to learn signatures, error types, and server/auth wiring **by lookup**. Model shapes and enum values are *not* duplicated here — the map names the file declaring each type; read the shape there. The compiler is the backstop: a wrong name fails to build.
 
 |  |  |
 | --- | --- |
-| SDK display name | Slack Web API |
-| Root namespace | `SlackWebApi` |
+| SDK display name | Slack |
+| Root namespace | `Slack` |
 | Target framework | `netstandard2.0` (C# `LangVersion 14`, `Nullable enable`) |
 | API spec version | `1.7.0` |
 | Generator | APIMatic |
 
 Staleness check: the API spec version above changes when the SDK is regenerated from a new spec. If a lookup here fails to compile, trust the compiler and re-read the source file named in the row.
 
-All `Source` paths on this map and its sub-pages are relative to the **SDK root** — the directory holding this file and `SlackWebApi.csproj` — never to the page that carries them. Open them as-is from the SDK root, from any page; if the SDK sits under a subdirectory of a larger repo, prefix that subdirectory.
+All `Source` paths on this map and its sub-pages are relative to the **SDK root** — the directory holding this file and `Slack.csproj` — never to the page that carries them. Open them as-is from the SDK root, from any page; if the SDK sits under a subdirectory of a larger repo, prefix that subdirectory.
 
 ---
 
@@ -24,7 +24,7 @@ All `Source` paths on this map and its sub-pages are relative to the **SDK root*
 var httpClient = new HttpClient();
 // TODO: configure more client options here
 var options =
-    new SlackWebApiClientOptions
+    new SlackClientOptions
     {
         SlackAuth = new OAuth2AuthorizationCodeCredentials
         {
@@ -34,13 +34,13 @@ var options =
         },
         Environment = ServerEnvironment.Production,
     };
-var client = new SlackWebApiClient(httpClient, options);
+var client = new SlackClient(httpClient, options);
 ```
 
-DI alternative (`services.AddSlackWebApiClient`):
+DI alternative (`services.AddSlackClient`):
 
 ```csharp
-services.AddSlackWebApiClient(options =>
+services.AddSlackClient(options =>
     {
         options.SlackAuth =
             new OAuth2AuthorizationCodeCredentials
@@ -54,9 +54,9 @@ services.AddSlackWebApiClient(options =>
     });
 ```
 
-Every API group is a property on the client (e.g. `client.Admin`). Source: `SlackWebApiClient.cs`. The only constructor is `SlackWebApiClient(HttpClient httpClient, SlackWebApiClientOptions options)`.
+Every API group is a property on the client (e.g. `client.Admin`). Source: `SlackClient.cs`. The only constructor is `SlackClient(HttpClient httpClient, SlackClientOptions options)`.
 
-All `SlackWebApiClientOptions` properties (source: `SlackWebApiClientOptions.cs`):
+All `SlackClientOptions` properties (source: `SlackClientOptions.cs`):
 
 | Property | Type |
 | --- | --- |
@@ -68,7 +68,7 @@ All `SlackWebApiClientOptions` properties (source: `SlackWebApiClientOptions.cs`
 | `SlackAuth` | `OAuth2AuthorizationCodeCredentials?` |
 | `SlackAuthTokenStrategy` | `IOAuth2RefreshableTokenStrategy<OAuth2AuthorizationCodeCredentials>?` |
 
-`RetryOptions` members (namespace `SlackWebApi.Core.Configuration` — add `using SlackWebApi.Core.Configuration;`; source: `Core/Configuration/RetryOptions.cs`; all members are `required`, so build a full instance or start from `RetryOptions.Default()`):
+`RetryOptions` members (namespace `Slack.Core.Configuration` — add `using Slack.Core.Configuration;`; source: `Core/Configuration/RetryOptions.cs`; all members are `required`, so build a full instance or start from `RetryOptions.Default()`):
 
 | Member | Type |
 | --- | --- |
@@ -210,10 +210,10 @@ Namespaces by content type (add `using` accordingly):
 
 | Contents | Namespace |
 | --- | --- |
-| Client & options (root) | `SlackWebApi` |
-| Operation controllers (`Api/`) | `SlackWebApi.Api` |
-| Records (`Models/`) | `SlackWebApi.Models` |
-| Enums (`Models/Enums/`) | `SlackWebApi.Models.Enums` |
+| Client & options (root) | `Slack` |
+| Operation controllers (`Api/`) | `Slack.Api` |
+| Records (`Models/`) | `Slack.Models` |
+| Enums (`Models/Enums/`) | `Slack.Models.Enums` |
 
 ---
 

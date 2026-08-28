@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http.Headers;
 
-namespace SlackWebApi.Core.Extensions;
+namespace Slack.Core.Extensions;
 
 internal static class HeaderValueExtensions
 {

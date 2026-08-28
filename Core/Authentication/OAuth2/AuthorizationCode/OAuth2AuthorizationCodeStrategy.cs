@@ -5,12 +5,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using SlackWebApi.Core.ErrorResponse;
-using SlackWebApi.Core.Models;
-using SlackWebApi.Core.Request;
-using SlackWebApi.Core.Response;
+using Slack.Core.ErrorResponse;
+using Slack.Core.Models;
+using Slack.Core.Request;
+using Slack.Core.Response;
 
-namespace SlackWebApi.Core.Authentication.OAuth2.AuthorizationCode;
+namespace Slack.Core.Authentication.OAuth2.AuthorizationCode;
 
 internal sealed class OAuth2AuthorizationCodeStrategy
     : IOAuth2RefreshableTokenStrategy<OAuth2AuthorizationCodeCredentials>

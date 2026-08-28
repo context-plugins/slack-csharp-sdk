@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using SlackWebApi.Core.Models;
+using Slack.Core.Models;
 
-namespace SlackWebApi.Models;
+namespace Slack.Models;
 
 /// <summary>
 /// This method either only returns a brief _OK_ response or a verbose schema is not available for this method.

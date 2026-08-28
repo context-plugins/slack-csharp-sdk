@@ -1,17 +1,17 @@
 using System.Net.Http;
-using SlackWebApi.Api;
-using SlackWebApi.Core;
-using SlackWebApi.Core.Logging;
-using SlackWebApi.Core.Models;
+using Slack.Api;
+using Slack.Core;
+using Slack.Core.Logging;
+using Slack.Core.Models;
 
-namespace SlackWebApi;
+namespace Slack;
 
 /// <summary>
 /// One way to interact with the Slack platform is its HTTP RPC-based Web API, a collection of methods requiring OAuth 2.0-based user, bot, or workspace tokens blessed with related OAuth scopes.
 /// </summary>
-public sealed class SlackWebApiClient
+public sealed class SlackClient
 {
-    public SlackWebApiClient(HttpClient httpClient, SlackWebApiClientOptions options)
+    public SlackClient(HttpClient httpClient, SlackClientOptions options)
     {
         var server = new Server(options.Environment, options.Server);
         var queryParameterFactory = new QueryParameterFactory([]);
@@ -19,14 +19,14 @@ public sealed class SlackWebApiClient
         var urlFactory = new UriFactory(queryParameterFactory, templateParamsFactory);
         var httpStatusPolicy = new HttpStatusPolicy([]);
         var headersFactory =
-            new HeadersFactory([new HeaderParam("User-Agent", "SlackWebApiClient/1.7.0 CSharp"),
+            new HeadersFactory([new HeaderParam("User-Agent", "SlackClient/1.7.0 CSharp"),
                     new HeaderParam("X-APIMatic-Lang", "CSharp"),
                     new HeaderParam("X-APIMatic-Package-Version", "1.7.0"),
                     new HeaderParam("X-APIMatic-Gen-Version", "4.0.0"),
                     new HeaderParam("X-APIMatic-OS", RuntimeEnvironment.Os),
                     new HeaderParam("X-APIMatic-Runtime", RuntimeEnvironment.Runtime)]);
         var resiliencePipelineFactory = new ResiliencePipelineFactory(options.Retry);
-        var httpLogger = new HttpLogger(options.Logging, "SlackWebApiClient");
+        var httpLogger = new HttpLogger(options.Logging, "SlackClient");
         var rawClient =
             new RawClient(httpClient,
                 urlFactory,

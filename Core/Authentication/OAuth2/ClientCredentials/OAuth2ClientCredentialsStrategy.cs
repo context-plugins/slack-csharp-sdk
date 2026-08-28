@@ -4,12 +4,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using SlackWebApi.Core.ErrorResponse;
-using SlackWebApi.Core.Models;
-using SlackWebApi.Core.Request;
-using SlackWebApi.Core.Response;
+using Slack.Core.ErrorResponse;
+using Slack.Core.Models;
+using Slack.Core.Request;
+using Slack.Core.Response;
 
-namespace SlackWebApi.Core.Authentication.OAuth2.ClientCredentials;
+namespace Slack.Core.Authentication.OAuth2.ClientCredentials;
 
 internal sealed class OAuth2ClientCredentialsStrategy : IOAuth2TokenStrategy<OAuth2ClientCredentials>
 {

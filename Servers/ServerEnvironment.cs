@@ -1,8 +1,8 @@
 using System;
 using System.Text.Json.Serialization;
-using SlackWebApi.Core.Enum;
+using Slack.Core.Enum;
 
-namespace SlackWebApi.Servers;
+namespace Slack.Servers;
 
 [JsonConverter(typeof(StringEnumConverter<ServerEnvironment>))]
 public record ServerEnvironment : StringEnum<ServerEnvironment>

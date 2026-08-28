@@ -6,18 +6,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using Polly;
 using Polly.Timeout;
-using SlackWebApi.Core.Authentication;
-using SlackWebApi.Core.ErrorResponse;
-using SlackWebApi.Core.Extensions;
-using SlackWebApi.Core.Hooks;
-using SlackWebApi.Core.Logging;
-using SlackWebApi.Core.Models;
-using SlackWebApi.Core.Pagination;
-using SlackWebApi.Core.Pagination.States;
-using SlackWebApi.Core.Request;
-using SlackWebApi.Core.Response;
+using Slack.Core.Authentication;
+using Slack.Core.ErrorResponse;
+using Slack.Core.Extensions;
+using Slack.Core.Hooks;
+using Slack.Core.Logging;
+using Slack.Core.Models;
+using Slack.Core.Pagination;
+using Slack.Core.Pagination.States;
+using Slack.Core.Request;
+using Slack.Core.Response;
 
-namespace SlackWebApi.Core;
+namespace Slack.Core;
 
 internal sealed class RawClient
 {

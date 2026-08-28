@@ -1,9 +1,9 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using SlackWebApi.Core.Extensions;
+using Slack.Core.Extensions;
 
-namespace SlackWebApi.Core.Converters;
+namespace Slack.Core.Converters;
 
 internal sealed class Iso8601DateTimeOffsetConverter : JsonConverter<DateTimeOffset>
 {

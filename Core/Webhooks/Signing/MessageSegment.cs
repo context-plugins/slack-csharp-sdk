@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SlackWebApi.Core.Webhooks.Signing;
+namespace Slack.Core.Webhooks.Signing;
 
 internal abstract record MessageSegment
 {

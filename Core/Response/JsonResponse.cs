@@ -3,9 +3,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
-using SlackWebApi.Core.Extensions;
+using Slack.Core.Extensions;
 
-namespace SlackWebApi.Core.Response;
+namespace Slack.Core.Response;
 
 internal sealed class JsonResponse<TResponse> : IResponse<TResponse>
 {

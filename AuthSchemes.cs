@@ -1,15 +1,15 @@
-using SlackWebApi.Core;
-using SlackWebApi.Core.Authentication;
-using SlackWebApi.Core.Authentication.OAuth2;
-using SlackWebApi.Core.Authentication.OAuth2.AuthorizationCode;
+using Slack.Core;
+using Slack.Core.Authentication;
+using Slack.Core.Authentication.OAuth2;
+using Slack.Core.Authentication.OAuth2.AuthorizationCode;
 
-namespace SlackWebApi;
+namespace Slack;
 
 internal sealed class AuthSchemes
 {
     public IAuthScheme SlackAuth { get; }
 
-    public AuthSchemes(SlackWebApiClientOptions options, Server server, RawClient rawClient, UriFactory urlFactory)
+    public AuthSchemes(SlackClientOptions options, Server server, RawClient rawClient, UriFactory urlFactory)
     {
         SlackAuth =
             OAuth2RefreshableScheme<OAuth2AuthorizationCodeCredentials>.Create(options.SlackAuth,

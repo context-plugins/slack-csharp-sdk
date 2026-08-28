@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
-using SlackWebApi.Core.Hooks;
+using Slack.Core.Hooks;
 
-namespace SlackWebApi.Core;
+namespace Slack.Core;
 
 public sealed record RequestOptions
 {

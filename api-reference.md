@@ -1,6 +1,6 @@
 # Reference
 
-> Source: [SlackWebApiClient](SlackWebApiClient.cs)
+> Source: [SlackClient](SlackClient.cs)
 
 ## Admin
 
