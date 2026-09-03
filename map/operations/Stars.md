@@ -8,6 +8,7 @@ Accessor: `client.Stars` · Source: `Api/Stars.cs` · 3 operations
 
 ### StarsAdd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `StarsAdd(string token, ContentType contentType, string? channel, string? file, string? fileComment, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`channel` … `timestamp`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `StarsAddschema`
@@ -20,6 +21,7 @@ Accessor: `client.Stars` · Source: `Api/Stars.cs` · 3 operations
 
 ### StarsList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `StarsList(string? token, string? count, string? page, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 5 params (`token` … `limit`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `count` ← `count`, `page` ← `page`, `cursor` ← `cursor`, `limit` ← `limit`
@@ -33,6 +35,7 @@ Accessor: `client.Stars` · Source: `Api/Stars.cs` · 3 operations
 
 ### StarsRemove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `StarsRemove(string token, ContentType contentType, string? channel, string? file, string? fileComment, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`channel` … `timestamp`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `StarsRemoveschema`

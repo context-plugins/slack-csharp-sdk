@@ -8,6 +8,7 @@ Accessor: `client.Bots` · Source: `Api/Bots.cs` · 1 operation
 
 ### BotsInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `BotsInfo(string token, string? bot, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `bot` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `bot` ← `bot`

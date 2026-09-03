@@ -8,6 +8,7 @@ Accessor: `client.UsergroupsUsers` · Source: `Api/UsergroupsUsers.cs` · 2 oper
 
 ### UsergroupsUsersList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsergroupsUsersList(string token, string usergroup, bool? includeDisabled, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeDisabled` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `usergroup` ← `usergroup`, `include_disabled` ← `includeDisabled`
@@ -21,6 +22,7 @@ Accessor: `client.UsergroupsUsers` · Source: `Api/UsergroupsUsers.cs` · 2 oper
 
 ### UsergroupsUsersUpdate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsergroupsUsersUpdate(string token, ContentType contentType, string usergroup, string users, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeCount` — nullable, no default → **must pass explicitly**
 - **Returns**: `UsergroupsUsersUpdateschema`

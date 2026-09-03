@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response from files.info method
@@ -26,7 +26,7 @@ public record FilesInfoschema
     public required Fileobject File { get; init; }
 
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("paging")]

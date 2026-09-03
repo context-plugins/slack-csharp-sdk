@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
-using Slack.Models.Enums;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Models.Enums;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for error response from conversations.create method
@@ -28,7 +28,7 @@ public record ConversationsCreateerrorschema1Error
     public string? Needed { get; init; }
 
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "False";
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("provided")]

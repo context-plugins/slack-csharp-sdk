@@ -8,6 +8,7 @@ Accessor: `client.Migration` · Source: `Api/Migration.cs` · 1 operation
 
 ### MigrationExchange
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `MigrationExchange(string token, string users, string? teamId, bool? toOld, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `teamId` — nullable, no default → **must pass explicitly**
   - `toOld` — nullable, no default → **must pass explicitly**

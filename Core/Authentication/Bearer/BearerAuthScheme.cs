@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Slack.Core.Authentication.Bearer;
+namespace SlackWebApi.Core.Authentication.Bearer;
 
 internal sealed class BearerAuthScheme : IAuthScheme
 {

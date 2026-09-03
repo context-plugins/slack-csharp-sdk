@@ -1,7 +1,7 @@
-using Slack.Core.Models;
-using Slack.Servers;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Servers;
 
-namespace Slack;
+namespace SlackWebApi;
 
 public class Server
 {

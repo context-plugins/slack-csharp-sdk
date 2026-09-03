@@ -8,6 +8,7 @@ Accessor: `client.AdminAppsApproved` · Source: `Api/AdminAppsApproved.cs` · 1 
 
 ### AdminAppsApprovedList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminAppsApprovedList(string token, int? limit, string? cursor, string? teamId, string? enterpriseId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`limit` … `enterpriseId`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `limit` ← `limit`, `cursor` ← `cursor`, `team_id` ← `teamId`, `enterprise_id` ← `enterpriseId`

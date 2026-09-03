@@ -1,8 +1,8 @@
-# Slack
+# Slack Web API
 
 [![Built with APIMatic][apimatic-badge]][apimatic-url] [![License: MIT][license-badge]][license-url]
 
-The Slack SDK for .NET provides access to the [Slack REST APIs](https://api.slack.com/web) from .NET applications.
+The Slack Web API SDK for .NET provides access to the [Slack Web API REST APIs](https://api.slack.com/web) from .NET applications.
 
 > [!TIP]
 > **Looking for a specific signature, model, enum, or error type?** This SDK ships a generated,
@@ -19,7 +19,7 @@ One way to interact with the Slack platform is its HTTP RPC-based Web API, a col
 Add the .NET SDK as a project reference into your solution:
 
 ```bash
-dotnet add reference <path-to-sdk>/Slack.csproj
+dotnet add reference <path-to-sdk>/SlackWebApi.csproj
 ```
 
 ---
@@ -28,10 +28,10 @@ dotnet add reference <path-to-sdk>/Slack.csproj
 
 ### Dependency Injection
 
-Register the client with `IServiceCollection` and resolve it from the container. The `HttpClient` is managed by `IHttpClientFactory`. Configure the client's behavior through [SlackClientOptions](SlackClientOptions.cs).
+Register the client with `IServiceCollection` and resolve it from the container. The `HttpClient` is managed by `IHttpClientFactory`. Configure the client's behavior through [SlackWebApiClientOptions](SlackWebApiClientOptions.cs).
 
 ```csharp
-services.AddSlackClient(options =>
+services.AddSlackWebApiClient(options =>
     {
         options.SlackAuth =
             new OAuth2AuthorizationCodeCredentials
@@ -47,13 +47,13 @@ services.AddSlackClient(options =>
 
 ### Direct Instantiation
 
-Create the client by passing an `HttpClient` you manage yourself. Configure the client's behavior through [SlackClientOptions](SlackClientOptions.cs).
+Create the client by passing an `HttpClient` you manage yourself. Configure the client's behavior through [SlackWebApiClientOptions](SlackWebApiClientOptions.cs).
 
 ```csharp
 var httpClient = new HttpClient();
 // TODO: configure more client options here
 var options =
-    new SlackClientOptions
+    new SlackWebApiClientOptions
     {
         SlackAuth = new OAuth2AuthorizationCodeCredentials
         {
@@ -63,7 +63,7 @@ var options =
         },
         Environment = ServerEnvironment.Production,
     };
-var client = new SlackClient(httpClient, options);
+var client = new SlackWebApiClient(httpClient, options);
 ```
 
 ---
@@ -101,7 +101,7 @@ The map and the [API Reference](api-reference.md) answer different questions, an
 ## Best Practices
 
 > [!TIP]
-> Use a **single `SlackClient` instance** for the lifetime of your application and
+> Use a **single `SlackWebApiClient` instance** for the lifetime of your application and
 > reuse it across all requests. Creating a new instance per request might exhaust the
 > connection pool.
 

@@ -8,6 +8,7 @@ Accessor: `client.TeamProfile` · Source: `Api/TeamProfile.cs` · 1 operation
 
 ### TeamProfileGet
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `TeamProfileGet(string token, string? visibility, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `visibility` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `visibility` ← `visibility`

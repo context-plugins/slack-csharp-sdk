@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response api.test method
@@ -9,7 +9,7 @@ namespace Slack.Models;
 public record ApiTestsuccessschema
 {
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonExtensionData]
     public AdditionalProperties<object> AdditionalProperties { get; init; } = [];

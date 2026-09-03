@@ -8,6 +8,7 @@ Accessor: `client.Usergroups` · Source: `Api/Usergroups.cs` · 7 operations
 
 ### UsergroupsCreate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsergroupsCreate(string token, ContentType contentType, string name, string? channels, string? description, string? handle, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`channels` … `includeCount`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `UsergroupsCreateschema`
@@ -20,6 +21,7 @@ Accessor: `client.Usergroups` · Source: `Api/Usergroups.cs` · 7 operations
 
 ### UsergroupsDisable
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsergroupsDisable(string token, ContentType contentType, string usergroup, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeCount` — nullable, no default → **must pass explicitly**
 - **Returns**: `UsergroupsDisableschema`
@@ -32,6 +34,7 @@ Accessor: `client.Usergroups` · Source: `Api/Usergroups.cs` · 7 operations
 
 ### UsergroupsEnable
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsergroupsEnable(string token, ContentType contentType, string usergroup, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeCount` — nullable, no default → **must pass explicitly**
 - **Returns**: `UsergroupsEnableschema`
@@ -44,6 +47,7 @@ Accessor: `client.Usergroups` · Source: `Api/Usergroups.cs` · 7 operations
 
 ### UsergroupsList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsergroupsList(string token, bool? includeUsers, bool? includeCount, bool? includeDisabled, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeUsers` — nullable, no default → **must pass explicitly**
   - `includeCount` — nullable, no default → **must pass explicitly**
@@ -59,6 +63,7 @@ Accessor: `client.Usergroups` · Source: `Api/Usergroups.cs` · 7 operations
 
 ### UsergroupsUpdate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsergroupsUpdate(string token, ContentType contentType, string usergroup, string? handle, string? description, string? channels, bool? includeCount, string? name, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 5 params (`handle` … `name`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `UsergroupsUpdateschema`
@@ -71,6 +76,7 @@ Accessor: `client.Usergroups` · Source: `Api/Usergroups.cs` · 7 operations
 
 ### UsergroupsUsersList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsergroupsUsersList(string token, string usergroup, bool? includeDisabled, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeDisabled` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `usergroup` ← `usergroup`, `include_disabled` ← `includeDisabled`
@@ -84,6 +90,7 @@ Accessor: `client.Usergroups` · Source: `Api/Usergroups.cs` · 7 operations
 
 ### UsergroupsUsersUpdate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsergroupsUsersUpdate(string token, ContentType contentType, string usergroup, string users, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeCount` — nullable, no default → **must pass explicitly**
 - **Returns**: `UsergroupsUsersUpdateschema`

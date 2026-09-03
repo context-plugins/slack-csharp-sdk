@@ -8,6 +8,7 @@ Accessor: `client.AdminEmoji` · Source: `Api/AdminEmoji.cs` · 5 operations
 
 ### AdminEmojiAdd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminEmojiAdd(ContentType contentType, string token, string name, string url, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -19,6 +20,7 @@ Accessor: `client.AdminEmoji` · Source: `Api/AdminEmoji.cs` · 5 operations
 
 ### AdminEmojiAddAlias
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminEmojiAddAlias(ContentType contentType, string token, string name, string aliasFor, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -30,6 +32,7 @@ Accessor: `client.AdminEmoji` · Source: `Api/AdminEmoji.cs` · 5 operations
 
 ### AdminEmojiList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminEmojiList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `cursor` — nullable, no default → **must pass explicitly**
   - `limit` — nullable, no default → **must pass explicitly**
@@ -44,6 +47,7 @@ Accessor: `client.AdminEmoji` · Source: `Api/AdminEmoji.cs` · 5 operations
 
 ### AdminEmojiRemove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminEmojiRemove(ContentType contentType, string token, string name, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -55,6 +59,7 @@ Accessor: `client.AdminEmoji` · Source: `Api/AdminEmoji.cs` · 5 operations
 
 ### AdminEmojiRename
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminEmojiRename(ContentType contentType, string token, string name, string newName, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**

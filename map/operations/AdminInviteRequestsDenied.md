@@ -8,6 +8,7 @@ Accessor: `client.AdminInviteRequestsDenied` · Source: `Api/AdminInviteRequests
 
 ### AdminInviteRequestsDeniedList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminInviteRequestsDeniedList(string? teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `teamId` — nullable, no default → **must pass explicitly**
   - `cursor` — nullable, no default → **must pass explicitly**

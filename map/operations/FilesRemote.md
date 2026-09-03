@@ -8,6 +8,7 @@ Accessor: `client.FilesRemote` · Source: `Api/FilesRemote.cs` · 6 operations
 
 ### FilesRemoteAdd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteAdd(ContentType contentType, string? token, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 7 params (`token` … `indexableFileContents`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `Defaultsuccesstemplate`
@@ -20,6 +21,7 @@ Accessor: `client.FilesRemote` · Source: `Api/FilesRemote.cs` · 6 operations
 
 ### FilesRemoteInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteInfo(string? token, string? file, string? externalId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `file` — nullable, no default → **must pass explicitly**
@@ -35,6 +37,7 @@ Accessor: `client.FilesRemote` · Source: `Api/FilesRemote.cs` · 6 operations
 
 ### FilesRemoteList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteList(string? token, string? channel, double? tsFrom, double? tsTo, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 6 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`, `ts_from` ← `tsFrom`, `ts_to` ← `tsTo`, `limit` ← `limit`, `cursor` ← `cursor`
@@ -48,6 +51,7 @@ Accessor: `client.FilesRemote` · Source: `Api/FilesRemote.cs` · 6 operations
 
 ### FilesRemoteRemove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteRemove(ContentType contentType, string? token, string? file, string? externalId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `file` — nullable, no default → **must pass explicitly**
@@ -62,6 +66,7 @@ Accessor: `client.FilesRemote` · Source: `Api/FilesRemote.cs` · 6 operations
 
 ### FilesRemoteShare
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteShare(string? token, string? file, string? externalId, string? channels, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`token` … `channels`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `file` ← `file`, `external_id` ← `externalId`, `channels` ← `channels`
@@ -75,6 +80,7 @@ Accessor: `client.FilesRemote` · Source: `Api/FilesRemote.cs` · 6 operations
 
 ### FilesRemoteUpdate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteUpdate(ContentType contentType, string? token, string? file, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 8 params (`token` … `indexableFileContents`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `Defaultsuccesstemplate`

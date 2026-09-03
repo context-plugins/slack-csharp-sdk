@@ -8,6 +8,7 @@ Accessor: `client.Dialog` · Source: `Api/Dialog.cs` · 1 operation
 
 ### DialogOpen
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `DialogOpen(string dialog, string triggerId, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `dialog` ← `dialog`, `trigger_id` ← `triggerId`
 - **Returns**: `DialogOpenschema`

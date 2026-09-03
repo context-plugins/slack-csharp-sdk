@@ -8,6 +8,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersConversations
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersConversations(string? token, string? user, string? types, bool? excludeArchived, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 6 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `user` ← `user`, `types` ← `types`, `exclude_archived` ← `excludeArchived`, `limit` ← `limit`, `cursor` ← `cursor`
@@ -21,6 +22,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersDeletePhoto
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersDeletePhoto(ContentType contentType, string token, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `UsersDeletePhotoschema`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -32,6 +34,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersGetPresence
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersGetPresence(string token, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `user` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `user` ← `user`
@@ -45,6 +48,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersIdentity
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersIdentity(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`
@@ -57,6 +61,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersInfo(string token, bool? includeLocale, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeLocale` — nullable, no default → **must pass explicitly**
   - `user` — nullable, no default → **must pass explicitly**
@@ -71,6 +76,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersList(string? token, int? limit, string? cursor, bool? includeLocale, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`token` … `includeLocale`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `limit` ← `limit`, `cursor` ← `cursor`, `include_locale` ← `includeLocale`
@@ -84,6 +90,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersLookupByEmail
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersLookupByEmail(string token, string email, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `token` ← `token`, `email` ← `email`
 - **Returns**: `UsersLookupByEmailsuccessschema`
@@ -96,6 +103,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersProfileGet
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersProfileGet(string token, bool? includeLabels, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeLabels` — nullable, no default → **must pass explicitly**
   - `user` — nullable, no default → **must pass explicitly**
@@ -110,6 +118,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersProfileSet
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersProfileSet(string token, ContentType contentType, string? name, string? profile, string? user, string? value, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`name` … `value`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `UsersProfileSetschema`
@@ -122,6 +131,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersSetActive
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersSetActive(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `UsersSetActiveschema`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -133,6 +143,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersSetPhoto
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersSetPhoto(ContentType contentType, string token, string? cropW, string? cropX, string? cropY, string? image, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`cropW` … `image`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `UsersSetPhotoschema`
@@ -145,6 +156,7 @@ Accessor: `client.Users` · Source: `Api/Users.cs` · 12 operations
 
 ### UsersSetPresence
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersSetPresence(string token, ContentType contentType, string presence, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `UsersSetPresenceschema`
 - **Error**: `SdkException<RawError>` — **Case B**

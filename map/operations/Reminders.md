@@ -8,6 +8,7 @@ Accessor: `client.Reminders` · Source: `Api/Reminders.cs` · 5 operations
 
 ### RemindersAdd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `RemindersAdd(string token, ContentType contentType, string text, string time, string? user, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `user` — nullable, no default → **must pass explicitly**
 - **Returns**: `RemindersAddschema`
@@ -20,6 +21,7 @@ Accessor: `client.Reminders` · Source: `Api/Reminders.cs` · 5 operations
 
 ### RemindersComplete
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `RemindersComplete(ContentType contentType, string? token, string? reminder, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `reminder` — nullable, no default → **must pass explicitly**
@@ -33,6 +35,7 @@ Accessor: `client.Reminders` · Source: `Api/Reminders.cs` · 5 operations
 
 ### RemindersDelete
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `RemindersDelete(ContentType contentType, string? token, string? reminder, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `reminder` — nullable, no default → **must pass explicitly**
@@ -46,6 +49,7 @@ Accessor: `client.Reminders` · Source: `Api/Reminders.cs` · 5 operations
 
 ### RemindersInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `RemindersInfo(string? token, string? reminder, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `reminder` — nullable, no default → **must pass explicitly**
@@ -60,6 +64,7 @@ Accessor: `client.Reminders` · Source: `Api/Reminders.cs` · 5 operations
 
 ### RemindersList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `RemindersList(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`

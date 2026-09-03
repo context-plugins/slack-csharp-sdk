@@ -1,9 +1,9 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Slack.Core.Extensions;
-using Slack.Core.Models;
+using SlackWebApi.Core.Extensions;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Core.Request;
+namespace SlackWebApi.Core.Request;
 
 internal sealed class BinaryRequest : IRequest
 {

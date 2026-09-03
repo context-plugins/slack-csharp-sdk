@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response from team.profile.get method
@@ -9,7 +9,7 @@ namespace Slack.Models;
 public record TeamProfileGetsuccessschema
 {
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonPropertyName("profile")]
     public required Profile Profile { get; init; }

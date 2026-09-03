@@ -8,6 +8,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesCommentsDelete
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesCommentsDelete(ContentType contentType, string? token, string? file, string? id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `file` — nullable, no default → **must pass explicitly**
@@ -22,6 +23,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesDelete
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesDelete(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `file` — nullable, no default → **must pass explicitly**
@@ -35,6 +37,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesInfo(string? token, string? file, string? count, string? page, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 6 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `file` ← `file`, `count` ← `count`, `page` ← `page`, `limit` ← `limit`, `cursor` ← `cursor`
@@ -48,6 +51,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesList(string? token, string? user, string? channel, double? tsFrom, double? tsTo, string? types, string? count, string? page, bool? showFilesHiddenByLimit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 9 params (`token` … `showFilesHiddenByLimit`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `user` ← `user`, `channel` ← `channel`, `ts_from` ← `tsFrom`, `ts_to` ← `tsTo`, `types` ← `types`, `count` ← `count`, `page` ← `page`, `show_files_hidden_by_limit` ← `showFilesHiddenByLimit`
@@ -61,6 +65,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesRemoteAdd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteAdd(ContentType contentType, string? token, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 7 params (`token` … `indexableFileContents`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `Defaultsuccesstemplate`
@@ -73,6 +78,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesRemoteInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteInfo(string? token, string? file, string? externalId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `file` — nullable, no default → **must pass explicitly**
@@ -88,6 +94,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesRemoteList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteList(string? token, string? channel, double? tsFrom, double? tsTo, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 6 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`, `ts_from` ← `tsFrom`, `ts_to` ← `tsTo`, `limit` ← `limit`, `cursor` ← `cursor`
@@ -101,6 +108,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesRemoteRemove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteRemove(ContentType contentType, string? token, string? file, string? externalId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `file` — nullable, no default → **must pass explicitly**
@@ -115,6 +123,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesRemoteShare
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteShare(string? token, string? file, string? externalId, string? channels, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`token` … `channels`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `file` ← `file`, `external_id` ← `externalId`, `channels` ← `channels`
@@ -128,6 +137,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesRemoteUpdate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRemoteUpdate(ContentType contentType, string? token, string? file, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 8 params (`token` … `indexableFileContents`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `Defaultsuccesstemplate`
@@ -140,6 +150,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesRevokePublicUrl
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesRevokePublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `file` — nullable, no default → **must pass explicitly**
@@ -153,6 +164,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesSharedPublicUrl
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesSharedPublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `file` — nullable, no default → **must pass explicitly**
@@ -166,6 +178,7 @@ Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
 
 ### FilesUpload
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `FilesUpload(ContentType contentType, string? token, string? file, string? content, string? filetype, string? filename, string? title, string? initialComment, string? channels, double? threadTs, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 9 params (`token` … `threadTs`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `FilesUploadschema`

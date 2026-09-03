@@ -2,10 +2,10 @@ using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Slack.Core.Models;
-using Slack.Core.Response;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Core.Response;
 
-namespace Slack.Core.ErrorResponse;
+namespace SlackWebApi.Core.ErrorResponse;
 
 public abstract class ApiError
 {

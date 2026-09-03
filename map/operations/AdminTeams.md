@@ -8,6 +8,7 @@ Accessor: `client.AdminTeams` · Source: `Api/AdminTeams.cs` · 2 operations
 
 ### AdminTeamsCreate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminTeamsCreate(string token, ContentType contentType, string teamDomain, string teamName, string? teamDescription, string? teamDiscoverability, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `teamDescription` — nullable, no default → **must pass explicitly**
   - `teamDiscoverability` — nullable, no default → **must pass explicitly**
@@ -21,6 +22,7 @@ Accessor: `client.AdminTeams` · Source: `Api/AdminTeams.cs` · 2 operations
 
 ### AdminTeamsList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminTeamsList(int? limit, string? cursor, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `limit` — nullable, no default → **must pass explicitly**
   - `cursor` — nullable, no default → **must pass explicitly**

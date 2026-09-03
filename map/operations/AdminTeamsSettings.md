@@ -8,6 +8,7 @@ Accessor: `client.AdminTeamsSettings` · Source: `Api/AdminTeamsSettings.cs` · 
 
 ### AdminTeamsSettingsInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminTeamsSettingsInfo(string teamId, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `team_id` ← `teamId`
 - **Returns**: `Defaultsuccesstemplate`
@@ -20,6 +21,7 @@ Accessor: `client.AdminTeamsSettings` · Source: `Api/AdminTeamsSettings.cs` · 
 
 ### AdminTeamsSettingsSetDefaultChannels
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminTeamsSettingsSetDefaultChannels(ContentType contentType, string token, string teamId, string channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -31,6 +33,7 @@ Accessor: `client.AdminTeamsSettings` · Source: `Api/AdminTeamsSettings.cs` · 
 
 ### AdminTeamsSettingsSetDescription
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminTeamsSettingsSetDescription(string token, ContentType contentType, string teamId, string description, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -42,6 +45,7 @@ Accessor: `client.AdminTeamsSettings` · Source: `Api/AdminTeamsSettings.cs` · 
 
 ### AdminTeamsSettingsSetDiscoverability
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminTeamsSettingsSetDiscoverability(string token, ContentType contentType, string teamId, string discoverability, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -53,6 +57,7 @@ Accessor: `client.AdminTeamsSettings` · Source: `Api/AdminTeamsSettings.cs` · 
 
 ### AdminTeamsSettingsSetIcon
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminTeamsSettingsSetIcon(ContentType contentType, string token, string imageUrl, string teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -64,6 +69,7 @@ Accessor: `client.AdminTeamsSettings` · Source: `Api/AdminTeamsSettings.cs` · 
 
 ### AdminTeamsSettingsSetName
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminTeamsSettingsSetName(string token, ContentType contentType, string teamId, string name, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**

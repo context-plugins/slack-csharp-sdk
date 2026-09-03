@@ -1,6 +1,6 @@
 using System;
 
-namespace Slack.Core.Exceptions;
+namespace SlackWebApi.Core.Exceptions;
 
 public sealed class SdkException<TError> : Exception
 {

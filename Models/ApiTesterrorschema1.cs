@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for error response api.test method
@@ -12,7 +12,7 @@ public record ApiTesterrorschema1
     public required string Error { get; init; }
 
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "False";
 
     [JsonExtensionData]
     public AdditionalProperties<object> AdditionalProperties { get; init; } = [];

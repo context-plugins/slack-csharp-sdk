@@ -8,6 +8,7 @@ Accessor: `client.Views` · Source: `Api/Views.cs` · 4 operations
 
 ### ViewsOpen
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ViewsOpen(string triggerId, string view, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `trigger_id` ← `triggerId`, `view` ← `view`
 - **Returns**: `Defaultsuccesstemplate`
@@ -20,6 +21,7 @@ Accessor: `client.Views` · Source: `Api/Views.cs` · 4 operations
 
 ### ViewsPublish
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ViewsPublish(string userId, string view, string? hash, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `hash` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `user_id` ← `userId`, `view` ← `view`, `hash` ← `hash`
@@ -33,6 +35,7 @@ Accessor: `client.Views` · Source: `Api/Views.cs` · 4 operations
 
 ### ViewsPush
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ViewsPush(string triggerId, string view, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `trigger_id` ← `triggerId`, `view` ← `view`
 - **Returns**: `Defaultsuccesstemplate`
@@ -45,6 +48,7 @@ Accessor: `client.Views` · Source: `Api/Views.cs` · 4 operations
 
 ### ViewsUpdate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ViewsUpdate(string? viewId, string? externalId, string? view, string? hash, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`viewId` … `hash`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `view_id` ← `viewId`, `external_id` ← `externalId`, `view` ← `view`, `hash` ← `hash`

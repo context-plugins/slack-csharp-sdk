@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response of chat.scheduleMessage method
@@ -17,7 +17,7 @@ public record ChatScheduleMessagesuccessschema
     public required Message Message { get; init; }
 
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonPropertyName("post_at")]
     public required int PostAt { get; init; }

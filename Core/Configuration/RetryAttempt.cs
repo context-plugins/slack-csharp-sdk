@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 
-namespace Slack.Core.Configuration;
+namespace SlackWebApi.Core.Configuration;
 
 public sealed record RetryAttempt
 {

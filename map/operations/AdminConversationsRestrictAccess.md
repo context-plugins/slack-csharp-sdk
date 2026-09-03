@@ -8,6 +8,7 @@ Accessor: `client.AdminConversationsRestrictAccess` · Source: `Api/AdminConvers
 
 ### AdminConversationsRestrictAccessAddGroup
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminConversationsRestrictAccessAddGroup(ContentType contentType, string token, string groupId, string channelId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `teamId` — nullable, no default → **must pass explicitly**
 - **Returns**: `Defaultsuccesstemplate`
@@ -20,6 +21,7 @@ Accessor: `client.AdminConversationsRestrictAccess` · Source: `Api/AdminConvers
 
 ### AdminConversationsRestrictAccessListGroups
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminConversationsRestrictAccessListGroups(string token, string channelId, string? teamId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `teamId` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `channel_id` ← `channelId`, `team_id` ← `teamId`
@@ -33,6 +35,7 @@ Accessor: `client.AdminConversationsRestrictAccess` · Source: `Api/AdminConvers
 
 ### AdminConversationsRestrictAccessRemoveGroup
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminConversationsRestrictAccessRemoveGroup(ContentType contentType, string token, string teamId, string groupId, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**

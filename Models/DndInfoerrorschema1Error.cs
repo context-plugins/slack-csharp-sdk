@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
-using Slack.Models.Enums;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Models.Enums;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for error response from dnd.info method
@@ -20,7 +20,7 @@ public record DndInfoerrorschema1Error
     public required DndInfoErrorEnum Error { get; init; }
 
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "False";
 
     [JsonExtensionData]
     public AdditionalProperties AdditionalProperties { get; init; } = [];

@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace Slack.Core.Enum;
+namespace SlackWebApi.Core.Enum;
 
 public abstract record IntEnum<TEnum> : TypedEnum<int, TEnum>
     where TEnum : IntEnum<TEnum>

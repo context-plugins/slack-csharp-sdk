@@ -8,6 +8,7 @@ Accessor: `client.OauthV2` · Source: `Api/OauthV2.cs` · 1 operation
 
 ### OauthV2Access
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `OauthV2Access(string code, string? clientId, string? clientSecret, string? redirectUri, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `clientId` — nullable, no default → **must pass explicitly**
   - `clientSecret` — nullable, no default → **must pass explicitly**

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
-using Slack.Core.Authentication;
-using Slack.Core.Request;
+using SlackWebApi.Core.Authentication;
+using SlackWebApi.Core.Request;
 
-namespace Slack.Core.Models;
+namespace SlackWebApi.Core.Models;
 
 internal sealed class ApiRequest
 {

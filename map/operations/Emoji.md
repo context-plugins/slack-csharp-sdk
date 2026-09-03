@@ -8,6 +8,7 @@ Accessor: `client.Emoji` · Source: `Api/Emoji.cs` · 1 operation
 
 ### EmojiList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `EmojiList(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `token` ← `token`
 - **Returns**: `Defaultsuccesstemplate`

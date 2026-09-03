@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response from conversations.rename method
@@ -12,7 +12,7 @@ public record ConversationsRenamesuccessschema
     public required object Channel { get; init; }
 
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonExtensionData]
     public AdditionalProperties AdditionalProperties { get; init; } = [];

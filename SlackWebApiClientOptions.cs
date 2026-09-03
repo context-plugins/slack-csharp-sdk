@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using Slack.Core.Authentication.OAuth2;
-using Slack.Core.Authentication.OAuth2.AuthorizationCode;
-using Slack.Core.Configuration;
-using Slack.Core.Hooks;
-using Slack.Servers;
+using SlackWebApi.Core.Authentication.OAuth2;
+using SlackWebApi.Core.Authentication.OAuth2.AuthorizationCode;
+using SlackWebApi.Core.Configuration;
+using SlackWebApi.Core.Hooks;
+using SlackWebApi.Servers;
 
-namespace Slack;
+namespace SlackWebApi;
 
-public class SlackClientOptions
+public class SlackWebApiClientOptions
 {
     public ServerEnvironment Environment { get; set; } = ServerEnvironment.Default();
     public RetryOptions Retry { get; set; } = RetryOptions.Default();

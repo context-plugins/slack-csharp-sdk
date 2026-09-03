@@ -8,6 +8,7 @@ Accessor: `client.AppsEventAuthorizations` · Source: `Api/AppsEventAuthorizatio
 
 ### AppsEventAuthorizationsList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsEventAuthorizationsList(string eventContext, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `cursor` — nullable, no default → **must pass explicitly**
   - `limit` — nullable, no default → **must pass explicitly**

@@ -1,4 +1,4 @@
-namespace Slack.Core.Authentication.OAuth2.ClientCredentials;
+namespace SlackWebApi.Core.Authentication.OAuth2.ClientCredentials;
 
 public sealed class OAuth2ClientCredentials
 {

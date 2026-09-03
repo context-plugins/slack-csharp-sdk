@@ -8,6 +8,7 @@ Accessor: `client.AppsPermissionsScopes` · Source: `Api/AppsPermissionsScopes.c
 
 ### AppsPermissionsScopesList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsScopesList(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `token` ← `token`
 - **Returns**: `ApiPermissionsScopesListsuccessschema`

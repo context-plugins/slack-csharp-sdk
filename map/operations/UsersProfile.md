@@ -8,6 +8,7 @@ Accessor: `client.UsersProfile` · Source: `Api/UsersProfile.cs` · 2 operations
 
 ### UsersProfileGet
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersProfileGet(string token, bool? includeLabels, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `includeLabels` — nullable, no default → **must pass explicitly**
   - `user` — nullable, no default → **must pass explicitly**
@@ -22,6 +23,7 @@ Accessor: `client.UsersProfile` · Source: `Api/UsersProfile.cs` · 2 operations
 
 ### UsersProfileSet
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `UsersProfileSet(string token, ContentType contentType, string? name, string? profile, string? user, string? value, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`name` … `value`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `UsersProfileSetschema`

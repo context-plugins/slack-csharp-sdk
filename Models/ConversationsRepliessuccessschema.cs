@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response from conversations.replies method
@@ -17,7 +17,7 @@ public record ConversationsRepliessuccessschema
     public required IReadOnlyList<object> Messages { get; init; }
 
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonExtensionData]
     public AdditionalProperties AdditionalProperties { get; init; } = [];

@@ -8,6 +8,7 @@ Accessor: `client.Pins` · Source: `Api/Pins.cs` · 3 operations
 
 ### PinsAdd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `PinsAdd(string token, ContentType contentType, string channel, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `timestamp` — nullable, no default → **must pass explicitly**
 - **Returns**: `PinsAddschema`
@@ -20,6 +21,7 @@ Accessor: `client.Pins` · Source: `Api/Pins.cs` · 3 operations
 
 ### PinsList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `PinsList(string token, string channel, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`
 - **Returns**: `object`
@@ -31,6 +33,7 @@ Accessor: `client.Pins` · Source: `Api/Pins.cs` · 3 operations
 
 ### PinsRemove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `PinsRemove(string token, ContentType contentType, string channel, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `timestamp` — nullable, no default → **must pass explicitly**
 - **Returns**: `PinsRemoveschema`

@@ -8,6 +8,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsArchive
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsArchive(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -21,6 +22,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsClose
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsClose(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -34,6 +36,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsCreate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsCreate(ContentType contentType, string? token, string? name, bool? isPrivate, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `name` — nullable, no default → **must pass explicitly**
@@ -48,6 +51,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsHistory
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsHistory(string? token, string? channel, double? latest, double? oldest, bool? inclusive, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 7 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`, `latest` ← `latest`, `oldest` ← `oldest`, `inclusive` ← `inclusive`, `limit` ← `limit`, `cursor` ← `cursor`
@@ -61,6 +65,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsInfo(string? token, string? channel, bool? includeLocale, bool? includeNumMembers, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`token` … `includeNumMembers`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`, `include_locale` ← `includeLocale`, `include_num_members` ← `includeNumMembers`
@@ -74,6 +79,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsInvite
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsInvite(ContentType contentType, string? token, string? channel, string? users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -88,6 +94,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsJoin
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsJoin(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -101,6 +108,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsKick
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsKick(ContentType contentType, string? token, string? channel, string? user, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -115,6 +123,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsLeave
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsLeave(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -128,6 +137,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsList(string? token, bool? excludeArchived, string? types, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 5 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `exclude_archived` ← `excludeArchived`, `types` ← `types`, `limit` ← `limit`, `cursor` ← `cursor`
@@ -141,6 +151,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsMark
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsMark(ContentType contentType, string? token, string? channel, double? ts, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -155,6 +166,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsMembers
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsMembers(string? token, string? channel, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`, `limit` ← `limit`, `cursor` ← `cursor`
@@ -168,6 +180,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsOpen
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsOpen(ContentType contentType, string? token, string? channel, string? users, bool? returnIm, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 4 params (`token` … `returnIm`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `ConversationsOpensuccessschema`
@@ -180,6 +193,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsRename
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsRename(ContentType contentType, string? token, string? channel, string? name, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -194,6 +208,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsReplies
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsReplies(string? token, string? channel, double? ts, double? latest, double? oldest, bool? inclusive, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 8 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`, `ts` ← `ts`, `latest` ← `latest`, `oldest` ← `oldest`, `inclusive` ← `inclusive`, `limit` ← `limit`, `cursor` ← `cursor`
@@ -207,6 +222,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsSetPurpose
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsSetPurpose(ContentType contentType, string? token, string? channel, string? purpose, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -221,6 +237,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsSetTopic
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsSetTopic(ContentType contentType, string? token, string? channel, string? topic, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**
@@ -235,6 +252,7 @@ Accessor: `client.Conversations` · Source: `Api/Conversations.cs` · 18 operati
 
 ### ConversationsUnarchive
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ConversationsUnarchive(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `channel` — nullable, no default → **must pass explicitly**

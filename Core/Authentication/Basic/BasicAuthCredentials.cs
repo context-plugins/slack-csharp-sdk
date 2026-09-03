@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Slack.Core.Authentication.Basic;
+namespace SlackWebApi.Core.Authentication.Basic;
 
 public sealed class BasicAuthCredentials
 {

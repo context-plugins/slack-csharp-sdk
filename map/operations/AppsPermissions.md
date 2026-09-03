@@ -8,6 +8,7 @@ Accessor: `client.AppsPermissions` · Source: `Api/AppsPermissions.cs` · 2 oper
 
 ### AppsPermissionsInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsInfo(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`
@@ -21,6 +22,7 @@ Accessor: `client.AppsPermissions` · Source: `Api/AppsPermissions.cs` · 2 oper
 
 ### AppsPermissionsRequest
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsRequest(string token, string scopes, string triggerId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `token` ← `token`, `scopes` ← `scopes`, `trigger_id` ← `triggerId`
 - **Returns**: `AppsPermissionsRequestschema`

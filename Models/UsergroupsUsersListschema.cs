@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response from usergroups.users.list method
@@ -10,7 +10,7 @@ namespace Slack.Models;
 public record UsergroupsUsersListschema
 {
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonPropertyName("users")]
     public required IReadOnlyList<string> Users { get; init; }

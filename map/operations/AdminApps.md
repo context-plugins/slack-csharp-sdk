@@ -8,6 +8,7 @@ Accessor: `client.AdminApps` · Source: `Api/AdminApps.cs` · 2 operations
 
 ### AdminAppsApprove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminAppsApprove(string token, ContentType contentType, string? appId, string? requestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `appId` — nullable, no default → **must pass explicitly**
   - `requestId` — nullable, no default → **must pass explicitly**
@@ -22,6 +23,7 @@ Accessor: `client.AdminApps` · Source: `Api/AdminApps.cs` · 2 operations
 
 ### AdminAppsRestrict
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminAppsRestrict(string token, ContentType contentType, string? appId, string? requestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `appId` — nullable, no default → **must pass explicitly**
   - `requestId` — nullable, no default → **must pass explicitly**

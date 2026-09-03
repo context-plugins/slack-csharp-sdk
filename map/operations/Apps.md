@@ -8,6 +8,7 @@ Accessor: `client.Apps` · Source: `Api/Apps.cs` · 8 operations
 
 ### AppsEventAuthorizationsList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsEventAuthorizationsList(string eventContext, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `cursor` — nullable, no default → **must pass explicitly**
   - `limit` — nullable, no default → **must pass explicitly**
@@ -22,6 +23,7 @@ Accessor: `client.Apps` · Source: `Api/Apps.cs` · 8 operations
 
 ### AppsPermissionsInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsInfo(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`
@@ -35,6 +37,7 @@ Accessor: `client.Apps` · Source: `Api/Apps.cs` · 8 operations
 
 ### AppsPermissionsRequest
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsRequest(string token, string scopes, string triggerId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `token` ← `token`, `scopes` ← `scopes`, `trigger_id` ← `triggerId`
 - **Returns**: `AppsPermissionsRequestschema`
@@ -47,6 +50,7 @@ Accessor: `client.Apps` · Source: `Api/Apps.cs` · 8 operations
 
 ### AppsPermissionsResourcesList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsResourcesList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `cursor` — nullable, no default → **must pass explicitly**
   - `limit` — nullable, no default → **must pass explicitly**
@@ -61,6 +65,7 @@ Accessor: `client.Apps` · Source: `Api/Apps.cs` · 8 operations
 
 ### AppsPermissionsScopesList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsScopesList(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `token` ← `token`
 - **Returns**: `ApiPermissionsScopesListsuccessschema`
@@ -73,6 +78,7 @@ Accessor: `client.Apps` · Source: `Api/Apps.cs` · 8 operations
 
 ### AppsPermissionsUsersList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsUsersList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `cursor` — nullable, no default → **must pass explicitly**
   - `limit` — nullable, no default → **must pass explicitly**
@@ -87,6 +93,7 @@ Accessor: `client.Apps` · Source: `Api/Apps.cs` · 8 operations
 
 ### AppsPermissionsUsersRequest
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsUsersRequest(string token, string scopes, string triggerId, string user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `token` ← `token`, `scopes` ← `scopes`, `trigger_id` ← `triggerId`, `user` ← `user`
 - **Returns**: `Defaultsuccesstemplate`
@@ -99,6 +106,7 @@ Accessor: `client.Apps` · Source: `Api/Apps.cs` · 8 operations
 
 ### AppsUninstall
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsUninstall(string? token, string? clientId, string? clientSecret, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `token` — nullable, no default → **must pass explicitly**
   - `clientId` — nullable, no default → **must pass explicitly**

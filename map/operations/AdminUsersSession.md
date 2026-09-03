@@ -8,6 +8,7 @@ Accessor: `client.AdminUsersSession` · Source: `Api/AdminUsersSession.cs` · 2 
 
 ### AdminUsersSessionInvalidate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersSessionInvalidate(string token, ContentType contentType, string teamId, int sessionId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -19,6 +20,7 @@ Accessor: `client.AdminUsersSession` · Source: `Api/AdminUsersSession.cs` · 2 
 
 ### AdminUsersSessionReset
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersSessionReset(string token, ContentType contentType, string userId, bool? mobileOnly, bool? webOnly, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `mobileOnly` — nullable, no default → **must pass explicitly**
   - `webOnly` — nullable, no default → **must pass explicitly**

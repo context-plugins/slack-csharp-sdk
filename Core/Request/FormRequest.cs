@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Core.Request;
+namespace SlackWebApi.Core.Request;
 
 internal sealed class FormRequest : IRequest
 {

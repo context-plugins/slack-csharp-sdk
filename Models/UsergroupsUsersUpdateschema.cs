@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response from usergroups.users.update method
@@ -9,7 +9,7 @@ namespace Slack.Models;
 public record UsergroupsUsersUpdateschema
 {
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonPropertyName("usergroup")]
     public required SubteamUsergroupObject Usergroup { get; init; }

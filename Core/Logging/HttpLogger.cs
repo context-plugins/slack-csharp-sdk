@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using Slack.Core.Configuration;
+using SlackWebApi.Core.Configuration;
 
-namespace Slack.Core.Logging;
+namespace SlackWebApi.Core.Logging;
 
 internal sealed class HttpLogger
 {

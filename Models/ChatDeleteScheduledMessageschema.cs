@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response from chat.deleteScheduledMessage method
@@ -9,7 +9,7 @@ namespace Slack.Models;
 public record ChatDeleteScheduledMessageschema
 {
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonExtensionData]
     public AdditionalProperties AdditionalProperties { get; init; } = [];

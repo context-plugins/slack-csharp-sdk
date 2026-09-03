@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// This method either only returns a brief _not OK_ response or a verbose schema is not available for this method.
@@ -9,7 +9,7 @@ namespace Slack.Models;
 public record Defaulterrortemplate1Error
 {
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "False";
 
     [JsonExtensionData]
     public AdditionalProperties AdditionalProperties { get; init; } = [];

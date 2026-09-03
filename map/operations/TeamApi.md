@@ -8,6 +8,7 @@ Accessor: `client.TeamApi` · Source: `Api/TeamApi.cs` · 5 operations
 
 ### TeamAccessLogs
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `TeamAccessLogs(string token, string? before, string? count, string? page, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `before` — nullable, no default → **must pass explicitly**
   - `count` — nullable, no default → **must pass explicitly**
@@ -23,6 +24,7 @@ Accessor: `client.TeamApi` · Source: `Api/TeamApi.cs` · 5 operations
 
 ### TeamBillableInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `TeamBillableInfo(string token, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `user` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `user` ← `user`
@@ -36,6 +38,7 @@ Accessor: `client.TeamApi` · Source: `Api/TeamApi.cs` · 5 operations
 
 ### TeamInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `TeamInfo(string token, string? team, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `team` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `team` ← `team`
@@ -49,6 +52,7 @@ Accessor: `client.TeamApi` · Source: `Api/TeamApi.cs` · 5 operations
 
 ### TeamIntegrationLogs
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `TeamIntegrationLogs(string token, string? appId, string? changeType, string? count, string? page, string? serviceId, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 6 params (`appId` … `user`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Query params (wire ← C#)**: `token` ← `token`, `app_id` ← `appId`, `change_type` ← `changeType`, `count` ← `count`, `page` ← `page`, `service_id` ← `serviceId`, `user` ← `user`
@@ -62,6 +66,7 @@ Accessor: `client.TeamApi` · Source: `Api/TeamApi.cs` · 5 operations
 
 ### TeamProfileGet
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `TeamProfileGet(string token, string? visibility, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `visibility` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `visibility` ← `visibility`

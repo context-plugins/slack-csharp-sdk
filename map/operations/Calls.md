@@ -8,6 +8,7 @@ Accessor: `client.Calls` · Source: `Api/Calls.cs` · 6 operations
 
 ### CallsAdd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `CallsAdd(string token, ContentType contentType, string externalUniqueId, string joinUrl, string? externalDisplayId, string? desktopAppJoinUrl, int? dateStart, string? title, string? createdBy, string? users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 6 params (`externalDisplayId` … `users`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `Defaultsuccesstemplate`
@@ -20,6 +21,7 @@ Accessor: `client.Calls` · Source: `Api/Calls.cs` · 6 operations
 
 ### CallsEnd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `CallsEnd(string token, ContentType contentType, string id, int? duration, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `duration` — nullable, no default → **must pass explicitly**
 - **Returns**: `Defaultsuccesstemplate`
@@ -32,6 +34,7 @@ Accessor: `client.Calls` · Source: `Api/Calls.cs` · 6 operations
 
 ### CallsInfo
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `CallsInfo(string id, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Query params (wire ← C#)**: `id` ← `id`
 - **Returns**: `Defaultsuccesstemplate`
@@ -44,6 +47,7 @@ Accessor: `client.Calls` · Source: `Api/Calls.cs` · 6 operations
 
 ### CallsParticipantsAdd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `CallsParticipantsAdd(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -55,6 +59,7 @@ Accessor: `client.Calls` · Source: `Api/Calls.cs` · 6 operations
 
 ### CallsParticipantsRemove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `CallsParticipantsRemove(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -66,6 +71,7 @@ Accessor: `client.Calls` · Source: `Api/Calls.cs` · 6 operations
 
 ### CallsUpdate
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `CallsUpdate(string token, ContentType contentType, string id, string? title, string? joinUrl, string? desktopAppJoinUrl, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `title` — nullable, no default → **must pass explicitly**
   - `joinUrl` — nullable, no default → **must pass explicitly**

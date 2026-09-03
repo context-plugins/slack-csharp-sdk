@@ -8,6 +8,7 @@ Accessor: `client.CallsParticipants` · Source: `Api/CallsParticipants.cs` · 2 
 
 ### CallsParticipantsAdd
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `CallsParticipantsAdd(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -19,6 +20,7 @@ Accessor: `client.CallsParticipants` · Source: `Api/CallsParticipants.cs` · 2 
 
 ### CallsParticipantsRemove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `CallsParticipantsRemove(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**

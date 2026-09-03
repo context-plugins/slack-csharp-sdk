@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
-using Slack.Core.Validation.Attributes;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Core.Validation.Attributes;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response conversations.members method
@@ -17,7 +17,7 @@ public record ConversationsMemberssuccessschema
     public required IReadOnlyList<string> Members { get; init; }
 
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonPropertyName("response_metadata")]
     public required ResponseMetadata ResponseMetadata { get; init; }

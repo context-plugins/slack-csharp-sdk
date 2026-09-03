@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Slack.Core.Request;
+namespace SlackWebApi.Core.Request;
 
 internal sealed class NonDisposingStream : Stream
 {

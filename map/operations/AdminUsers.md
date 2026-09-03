@@ -8,6 +8,7 @@ Accessor: `client.AdminUsers` · Source: `Api/AdminUsers.cs` · 8 operations
 
 ### AdminUsersAssign
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersAssign(string token, ContentType contentType, string teamId, string userId, bool? isRestricted, bool? isUltraRestricted, string? channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `isRestricted` — nullable, no default → **must pass explicitly**
   - `isUltraRestricted` — nullable, no default → **must pass explicitly**
@@ -22,6 +23,7 @@ Accessor: `client.AdminUsers` · Source: `Api/AdminUsers.cs` · 8 operations
 
 ### AdminUsersInvite
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersInvite(string token, ContentType contentType, string teamId, string email, string channelIds, string? customMessage, string? realName, bool? resend, bool? isRestricted, bool? isUltraRestricted, string? guestExpirationTs, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - 6 params (`customMessage` … `guestExpirationTs`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
 - **Returns**: `Defaultsuccesstemplate`
@@ -34,6 +36,7 @@ Accessor: `client.AdminUsers` · Source: `Api/AdminUsers.cs` · 8 operations
 
 ### AdminUsersList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersList(string teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `cursor` — nullable, no default → **must pass explicitly**
   - `limit` — nullable, no default → **must pass explicitly**
@@ -48,6 +51,7 @@ Accessor: `client.AdminUsers` · Source: `Api/AdminUsers.cs` · 8 operations
 
 ### AdminUsersRemove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersRemove(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -59,6 +63,7 @@ Accessor: `client.AdminUsers` · Source: `Api/AdminUsers.cs` · 8 operations
 
 ### AdminUsersSetAdmin
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersSetAdmin(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -70,6 +75,7 @@ Accessor: `client.AdminUsers` · Source: `Api/AdminUsers.cs` · 8 operations
 
 ### AdminUsersSetExpiration
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersSetExpiration(string token, ContentType contentType, string teamId, string userId, int expirationTs, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -81,6 +87,7 @@ Accessor: `client.AdminUsers` · Source: `Api/AdminUsers.cs` · 8 operations
 
 ### AdminUsersSetOwner
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersSetOwner(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**
@@ -92,6 +99,7 @@ Accessor: `client.AdminUsers` · Source: `Api/AdminUsers.cs` · 8 operations
 
 ### AdminUsersSetRegular
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminUsersSetRegular(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `Defaultsuccesstemplate`
 - **Error**: `SdkException<RawError>` — **Case B**

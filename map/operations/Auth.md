@@ -8,6 +8,7 @@ Accessor: `client.Auth` · Source: `Api/Auth.cs` · 2 operations
 
 ### AuthRevoke
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AuthRevoke(string token, bool? test, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `test` — nullable, no default → **must pass explicitly**
 - **Query params (wire ← C#)**: `token` ← `token`, `test` ← `test`
@@ -21,6 +22,7 @@ Accessor: `client.Auth` · Source: `Api/Auth.cs` · 2 operations
 
 ### AuthTest
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AuthTest(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
 - **Returns**: `AuthTestsuccessschema`
 - **Error**: `SdkException<RawError>` — **Case B**

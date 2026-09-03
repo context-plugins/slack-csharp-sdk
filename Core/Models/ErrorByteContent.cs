@@ -1,7 +1,7 @@
 using System;
 using System.Net.Http.Headers;
 
-namespace Slack.Core.Models;
+namespace SlackWebApi.Core.Models;
 
 public sealed class ErrorByteContent
 {

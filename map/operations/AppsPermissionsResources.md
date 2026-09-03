@@ -8,6 +8,7 @@ Accessor: `client.AppsPermissionsResources` · Source: `Api/AppsPermissionsResou
 
 ### AppsPermissionsResourcesList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AppsPermissionsResourcesList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `cursor` — nullable, no default → **must pass explicitly**
   - `limit` — nullable, no default → **must pass explicitly**

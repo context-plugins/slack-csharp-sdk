@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
+using SlackWebApi.Core.Models;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 /// <summary>
 /// Schema for successful response from migration.exchange method
@@ -18,7 +18,7 @@ public record MigrationExchangesuccessschema
     public IReadOnlyList<string>? InvalidUserIds { get; init; }
 
     [JsonPropertyName("ok")]
-    public required bool Ok { get; init; }
+    public string Ok { get; } = "True";
 
     [JsonPropertyName("team_id")]
     [RegularExpression("^[T][A-Z0-9]{2,}$")]

@@ -8,6 +8,7 @@ Accessor: `client.Rtm` · Source: `Api/Rtm.cs` · 1 operation
 
 ### RtmConnect
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `RtmConnect(string token, bool? batchPresenceAware, bool? presenceSub, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `batchPresenceAware` — nullable, no default → **must pass explicitly**
   - `presenceSub` — nullable, no default → **must pass explicitly**

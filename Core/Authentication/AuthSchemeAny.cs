@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Slack.Core.Exceptions;
+using SlackWebApi.Core.Exceptions;
 
-namespace Slack.Core.Authentication;
+namespace SlackWebApi.Core.Authentication;
 
 /// <summary>
 /// Represents multiple alternative schemes (OR logic).

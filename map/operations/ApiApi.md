@@ -8,6 +8,7 @@ Accessor: `client.ApiApi` · Source: `Api/ApiApi.cs` · 1 operation
 
 ### ApiTest
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `ApiTest(string? error, string? foo, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `error` — nullable, no default → **must pass explicitly**
   - `foo` — nullable, no default → **must pass explicitly**

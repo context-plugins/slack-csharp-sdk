@@ -8,6 +8,7 @@ Accessor: `client.AdminInviteRequests` · Source: `Api/AdminInviteRequests.cs` �
 
 ### AdminInviteRequestsApprove
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminInviteRequestsApprove(string token, ContentType contentType, string inviteRequestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `teamId` — nullable, no default → **must pass explicitly**
 - **Returns**: `Defaultsuccesstemplate`
@@ -20,6 +21,7 @@ Accessor: `client.AdminInviteRequests` · Source: `Api/AdminInviteRequests.cs` �
 
 ### AdminInviteRequestsDeny
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminInviteRequestsDeny(string token, ContentType contentType, string inviteRequestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `teamId` — nullable, no default → **must pass explicitly**
 - **Returns**: `Defaultsuccesstemplate`
@@ -32,6 +34,7 @@ Accessor: `client.AdminInviteRequests` · Source: `Api/AdminInviteRequests.cs` �
 
 ### AdminInviteRequestsList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminInviteRequestsList(string? teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `teamId` — nullable, no default → **must pass explicitly**
   - `cursor` — nullable, no default → **must pass explicitly**

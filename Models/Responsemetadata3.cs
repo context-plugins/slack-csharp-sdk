@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
-using Slack.Core.Validation.Attributes;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Core.Validation.Attributes;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 public record Responsemetadata3
 {

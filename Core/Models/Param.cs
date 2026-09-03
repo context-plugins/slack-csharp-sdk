@@ -1,4 +1,4 @@
-namespace Slack.Core.Models;
+namespace SlackWebApi.Core.Models;
 
 internal readonly record struct Param(
     string? Key,

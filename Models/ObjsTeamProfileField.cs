@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Slack.Core.Models;
-using Slack.Models.Enums;
+using SlackWebApi.Core.Models;
+using SlackWebApi.Models.Enums;
 
-namespace Slack.Models;
+namespace SlackWebApi.Models;
 
 public record ObjsTeamProfileField
 {

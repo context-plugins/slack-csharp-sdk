@@ -8,6 +8,7 @@ Accessor: `client.AdminAppsRequests` · Source: `Api/AdminAppsRequests.cs` · 1 
 
 ### AdminAppsRequestsList
 
+- **Auth**: `options.SlackAuth`
 - **Signature**: `AdminAppsRequestsList(string token, int? limit, string? cursor, string? teamId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
   - `limit` — nullable, no default → **must pass explicitly**
   - `cursor` — nullable, no default → **must pass explicitly**

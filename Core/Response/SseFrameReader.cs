@@ -5,9 +5,9 @@ using System.Net.ServerSentEvents;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Slack.Core.Exceptions;
+using SlackWebApi.Core.Exceptions;
 
-namespace Slack.Core.Response;
+namespace SlackWebApi.Core.Response;
 
 internal static class SseFrameReader
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Slack.Core.Webhooks.Signing;
+namespace SlackWebApi.Core.Webhooks.Signing;
 
 internal abstract record SignatureDigestEncoding
 {

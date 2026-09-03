@@ -1,6 +1,6 @@
 using System.Net.Http;
 
-namespace Slack.Core.Extensions;
+namespace SlackWebApi.Core.Extensions;
 
 internal static class HttpContentExtension
 {
