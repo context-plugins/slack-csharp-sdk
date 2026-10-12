@@ -2,70 +2,78 @@
 
 # AdminEmoji — operations
 
-Accessor: `client.AdminEmoji` · Source: `Api/AdminEmoji.cs` · 5 operations
+Accessor: `client.AdminEmoji` · Source: `src/SlackWebApi/Api/AdminEmoji.cs` · 5 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AdminEmojiAdd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminEmojiAdd(ContentType contentType, string token, string name, string url, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminEmojiAdd(AdminEmojiAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`, `Token`, `Name`, `Url`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminEmojiAddRequest` | `src/SlackWebApi/Requests/AdminEmoji/AdminEmojiAddRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminEmojiAddAlias
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminEmojiAddAlias(ContentType contentType, string token, string name, string aliasFor, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminEmojiAddAlias(AdminEmojiAddAliasRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`, `Token`, `Name`, `AliasFor`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminEmojiAddAliasRequest` | `src/SlackWebApi/Requests/AdminEmoji/AdminEmojiAddAliasRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminEmojiList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminEmojiList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `cursor` — nullable, no default → **must pass explicitly**
-  - `limit` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `cursor` ← `cursor`, `limit` ← `limit`
+- **Signature**: `AdminEmojiList(AdminEmojiListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `cursor` ← `Cursor`, `limit` ← `Limit`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminEmojiListRequest` | `src/SlackWebApi/Requests/AdminEmoji/AdminEmojiListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminEmojiRemove
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminEmojiRemove(ContentType contentType, string token, string name, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminEmojiRemove(AdminEmojiRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`, `Token`, `Name`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminEmojiRemoveRequest` | `src/SlackWebApi/Requests/AdminEmoji/AdminEmojiRemoveRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminEmojiRename
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminEmojiRename(ContentType contentType, string token, string name, string newName, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminEmojiRename(AdminEmojiRenameRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`, `Token`, `Name`, `NewName`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminEmojiRenameRequest` | `src/SlackWebApi/Requests/AdminEmoji/AdminEmojiRenameRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

@@ -2,34 +2,37 @@
 
 # AppsPermissions — operations
 
-Accessor: `client.AppsPermissions` · Source: `Api/AppsPermissions.cs` · 2 operations
+Accessor: `client.AppsPermissions` · Source: `src/SlackWebApi/Api/AppsPermissions.cs` · 2 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AppsPermissionsInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsPermissionsInfo(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`
+- **Signature**: `AppsPermissionsInfo(AppsPermissionsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`
 - **Returns**: `AppsPermissionsInfoschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `AppsPermissionsInfoschema` | `Models/AppsPermissionsInfoschema.cs` |
+| `AppsPermissionsInfoRequest` | `src/SlackWebApi/Requests/AppsPermissions/AppsPermissionsInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `AppsPermissionsInfoschema` | `src/SlackWebApi/Models/AppsPermissionsInfoschema.cs` |
 
 ### AppsPermissionsRequest
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsPermissionsRequest(string token, string scopes, string triggerId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `token` ← `token`, `scopes` ← `scopes`, `trigger_id` ← `triggerId`
+- **Signature**: `AppsPermissionsRequest(AppsPermissionsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `Scopes`, `TriggerId`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `scopes` ← `Scopes`, `trigger_id` ← `TriggerId`
 - **Returns**: `AppsPermissionsRequestschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `AppsPermissionsRequestschema` | `Models/AppsPermissionsRequestschema.cs` |
+| `AppsPermissionsRequest` | `src/SlackWebApi/Requests/AppsPermissions/AppsPermissionsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `AppsPermissionsRequestschema` | `src/SlackWebApi/Models/AppsPermissionsRequestschema.cs` |
 

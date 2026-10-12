@@ -2,102 +2,107 @@
 
 # Usergroups — operations
 
-Accessor: `client.Usergroups` · Source: `Api/Usergroups.cs` · 7 operations
+Accessor: `client.Usergroups` · Source: `src/SlackWebApi/Api/Usergroups.cs` · 7 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### UsergroupsCreate
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `UsergroupsCreate(string token, ContentType contentType, string name, string? channels, string? description, string? handle, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`channels` … `includeCount`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `UsergroupsCreate(UsergroupsCreateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Name`
 - **Returns**: `UsergroupsCreateschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `UsergroupsCreateschema` | `Models/UsergroupsCreateschema.cs` |
+| `UsergroupsCreateRequest` | `src/SlackWebApi/Requests/Usergroups/UsergroupsCreateRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `UsergroupsCreateschema` | `src/SlackWebApi/Models/UsergroupsCreateschema.cs` |
 
 ### UsergroupsDisable
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `UsergroupsDisable(string token, ContentType contentType, string usergroup, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `includeCount` — nullable, no default → **must pass explicitly**
+- **Signature**: `UsergroupsDisable(UsergroupsDisableRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Usergroup`
 - **Returns**: `UsergroupsDisableschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `UsergroupsDisableschema` | `Models/UsergroupsDisableschema.cs` |
+| `UsergroupsDisableRequest` | `src/SlackWebApi/Requests/Usergroups/UsergroupsDisableRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `UsergroupsDisableschema` | `src/SlackWebApi/Models/UsergroupsDisableschema.cs` |
 
 ### UsergroupsEnable
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `UsergroupsEnable(string token, ContentType contentType, string usergroup, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `includeCount` — nullable, no default → **must pass explicitly**
+- **Signature**: `UsergroupsEnable(UsergroupsEnableRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Usergroup`
 - **Returns**: `UsergroupsEnableschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `UsergroupsEnableschema` | `Models/UsergroupsEnableschema.cs` |
+| `UsergroupsEnableRequest` | `src/SlackWebApi/Requests/Usergroups/UsergroupsEnableRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `UsergroupsEnableschema` | `src/SlackWebApi/Models/UsergroupsEnableschema.cs` |
 
 ### UsergroupsList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `UsergroupsList(string token, bool? includeUsers, bool? includeCount, bool? includeDisabled, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `includeUsers` — nullable, no default → **must pass explicitly**
-  - `includeCount` — nullable, no default → **must pass explicitly**
-  - `includeDisabled` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `include_users` ← `includeUsers`, `include_count` ← `includeCount`, `include_disabled` ← `includeDisabled`
+- **Signature**: `UsergroupsList(UsergroupsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `include_users` ← `IncludeUsers`, `include_count` ← `IncludeCount`, `include_disabled` ← `IncludeDisabled`
 - **Returns**: `UsergroupsListschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `UsergroupsListschema` | `Models/UsergroupsListschema.cs` |
+| `UsergroupsListRequest` | `src/SlackWebApi/Requests/Usergroups/UsergroupsListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `UsergroupsListschema` | `src/SlackWebApi/Models/UsergroupsListschema.cs` |
 
 ### UsergroupsUpdate
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `UsergroupsUpdate(string token, ContentType contentType, string usergroup, string? handle, string? description, string? channels, bool? includeCount, string? name, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 5 params (`handle` … `name`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `UsergroupsUpdate(UsergroupsUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Usergroup`
 - **Returns**: `UsergroupsUpdateschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `UsergroupsUpdateschema` | `Models/UsergroupsUpdateschema.cs` |
+| `UsergroupsUpdateRequest` | `src/SlackWebApi/Requests/Usergroups/UsergroupsUpdateRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `UsergroupsUpdateschema` | `src/SlackWebApi/Models/UsergroupsUpdateschema.cs` |
 
 ### UsergroupsUsersList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `UsergroupsUsersList(string token, string usergroup, bool? includeDisabled, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `includeDisabled` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `usergroup` ← `usergroup`, `include_disabled` ← `includeDisabled`
+- **Signature**: `UsergroupsUsersList(UsergroupsUsersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `Usergroup`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `usergroup` ← `Usergroup`, `include_disabled` ← `IncludeDisabled`
 - **Returns**: `UsergroupsUsersListschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `UsergroupsUsersListschema` | `Models/UsergroupsUsersListschema.cs` |
+| `UsergroupsUsersListRequest` | `src/SlackWebApi/Requests/UsergroupsUsers/UsergroupsUsersListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `UsergroupsUsersListschema` | `src/SlackWebApi/Models/UsergroupsUsersListschema.cs` |
 
 ### UsergroupsUsersUpdate
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `UsergroupsUsersUpdate(string token, ContentType contentType, string usergroup, string users, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `includeCount` — nullable, no default → **must pass explicitly**
+- **Signature**: `UsergroupsUsersUpdate(UsergroupsUsersUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Usergroup`, `Users`
 - **Returns**: `UsergroupsUsersUpdateschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `UsergroupsUsersUpdateschema` | `Models/UsergroupsUsersUpdateschema.cs` |
+| `UsergroupsUsersUpdateRequest` | `src/SlackWebApi/Requests/UsergroupsUsers/UsergroupsUsersUpdateRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `UsergroupsUsersUpdateschema` | `src/SlackWebApi/Models/UsergroupsUsersUpdateschema.cs` |
 

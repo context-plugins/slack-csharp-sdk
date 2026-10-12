@@ -2,121 +2,127 @@
 
 # Apps — operations
 
-Accessor: `client.Apps` · Source: `Api/Apps.cs` · 8 operations
+Accessor: `client.Apps` · Source: `src/SlackWebApi/Api/Apps.cs` · 8 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AppsEventAuthorizationsList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsEventAuthorizationsList(string eventContext, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `cursor` — nullable, no default → **must pass explicitly**
-  - `limit` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `event_context` ← `eventContext`, `cursor` ← `cursor`, `limit` ← `limit`
+- **Signature**: `AppsEventAuthorizationsList(AppsEventAuthorizationsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `EventContext`, `Token`, `ContentType`
+- **Query params (wire ← C#)**: `event_context` ← `EventContext`, `cursor` ← `Cursor`, `limit` ← `Limit`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AppsEventAuthorizationsListRequest` | `src/SlackWebApi/Requests/AppsEventAuthorizations/AppsEventAuthorizationsListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AppsPermissionsInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsPermissionsInfo(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`
+- **Signature**: `AppsPermissionsInfo(AppsPermissionsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`
 - **Returns**: `AppsPermissionsInfoschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `AppsPermissionsInfoschema` | `Models/AppsPermissionsInfoschema.cs` |
+| `AppsPermissionsInfoRequest` | `src/SlackWebApi/Requests/AppsPermissions/AppsPermissionsInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `AppsPermissionsInfoschema` | `src/SlackWebApi/Models/AppsPermissionsInfoschema.cs` |
 
 ### AppsPermissionsRequest
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsPermissionsRequest(string token, string scopes, string triggerId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `token` ← `token`, `scopes` ← `scopes`, `trigger_id` ← `triggerId`
+- **Signature**: `AppsPermissionsRequest(AppsPermissionsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `Scopes`, `TriggerId`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `scopes` ← `Scopes`, `trigger_id` ← `TriggerId`
 - **Returns**: `AppsPermissionsRequestschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `AppsPermissionsRequestschema` | `Models/AppsPermissionsRequestschema.cs` |
+| `AppsPermissionsRequest` | `src/SlackWebApi/Requests/AppsPermissions/AppsPermissionsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `AppsPermissionsRequestschema` | `src/SlackWebApi/Models/AppsPermissionsRequestschema.cs` |
 
 ### AppsPermissionsResourcesList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsPermissionsResourcesList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `cursor` — nullable, no default → **must pass explicitly**
-  - `limit` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `cursor` ← `cursor`, `limit` ← `limit`
+- **Signature**: `AppsPermissionsResourcesList(AppsPermissionsResourcesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `cursor` ← `Cursor`, `limit` ← `Limit`
 - **Returns**: `AppsPermissionsResourcesListsuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `AppsPermissionsResourcesListsuccessschema` | `Models/AppsPermissionsResourcesListsuccessschema.cs` |
+| `AppsPermissionsResourcesListRequest` | `src/SlackWebApi/Requests/AppsPermissionsResources/AppsPermissionsResourcesListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `AppsPermissionsResourcesListsuccessschema` | `src/SlackWebApi/Models/AppsPermissionsResourcesListsuccessschema.cs` |
 
 ### AppsPermissionsScopesList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsPermissionsScopesList(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `token` ← `token`
+- **Signature**: `AppsPermissionsScopesList(AppsPermissionsScopesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`
 - **Returns**: `ApiPermissionsScopesListsuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ApiPermissionsScopesListsuccessschema` | `Models/ApiPermissionsScopesListsuccessschema.cs` |
+| `AppsPermissionsScopesListRequest` | `src/SlackWebApi/Requests/AppsPermissionsScopes/AppsPermissionsScopesListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ApiPermissionsScopesListsuccessschema` | `src/SlackWebApi/Models/ApiPermissionsScopesListsuccessschema.cs` |
 
 ### AppsPermissionsUsersList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsPermissionsUsersList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `cursor` — nullable, no default → **must pass explicitly**
-  - `limit` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `cursor` ← `cursor`, `limit` ← `limit`
+- **Signature**: `AppsPermissionsUsersList(AppsPermissionsUsersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `cursor` ← `Cursor`, `limit` ← `Limit`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AppsPermissionsUsersListRequest` | `src/SlackWebApi/Requests/AppsPermissionsUsers/AppsPermissionsUsersListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AppsPermissionsUsersRequest
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsPermissionsUsersRequest(string token, string scopes, string triggerId, string user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `token` ← `token`, `scopes` ← `scopes`, `trigger_id` ← `triggerId`, `user` ← `user`
+- **Signature**: `AppsPermissionsUsersRequest(AppsPermissionsUsersRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `Scopes`, `TriggerId`, `User`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `scopes` ← `Scopes`, `trigger_id` ← `TriggerId`, `user` ← `User`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AppsPermissionsUsersRequest` | `src/SlackWebApi/Requests/AppsPermissionsUsers/AppsPermissionsUsersRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AppsUninstall
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AppsUninstall(string? token, string? clientId, string? clientSecret, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `clientId` — nullable, no default → **must pass explicitly**
-  - `clientSecret` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `client_id` ← `clientId`, `client_secret` ← `clientSecret`
+- **Signature**: `AppsUninstall(AppsUninstallRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `client_id` ← `ClientId`, `client_secret` ← `ClientSecret`
 - **Returns**: `AppsUninstallschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `AppsUninstallschema` | `Models/AppsUninstallschema.cs` |
+| `AppsUninstallRequest` | `src/SlackWebApi/Requests/Apps/AppsUninstallRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `AppsUninstallschema` | `src/SlackWebApi/Models/AppsUninstallschema.cs` |
 

@@ -2,31 +2,35 @@
 
 # CallsParticipants — operations
 
-Accessor: `client.CallsParticipants` · Source: `Api/CallsParticipants.cs` · 2 operations
+Accessor: `client.CallsParticipants` · Source: `src/SlackWebApi/Api/CallsParticipants.cs` · 2 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### CallsParticipantsAdd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `CallsParticipantsAdd(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `CallsParticipantsAdd(CallsParticipantsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Id`, `Users`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `CallsParticipantsAddRequest` | `src/SlackWebApi/Requests/CallsParticipants/CallsParticipantsAddRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### CallsParticipantsRemove
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `CallsParticipantsRemove(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `CallsParticipantsRemove(CallsParticipantsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Id`, `Users`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `CallsParticipantsRemoveRequest` | `src/SlackWebApi/Requests/CallsParticipants/CallsParticipantsRemoveRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

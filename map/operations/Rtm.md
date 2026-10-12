@@ -2,22 +2,22 @@
 
 # Rtm — operations
 
-Accessor: `client.Rtm` · Source: `Api/Rtm.cs` · 1 operation
+Accessor: `client.Rtm` · Source: `src/SlackWebApi/Api/Rtm.cs` · 1 operation
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### RtmConnect
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `RtmConnect(string token, bool? batchPresenceAware, bool? presenceSub, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `batchPresenceAware` — nullable, no default → **must pass explicitly**
-  - `presenceSub` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `batch_presence_aware` ← `batchPresenceAware`, `presence_sub` ← `presenceSub`
+- **Signature**: `RtmConnect(RtmConnectRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `batch_presence_aware` ← `BatchPresenceAware`, `presence_sub` ← `PresenceSub`
 - **Returns**: `RtmConnectschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `RtmConnectschema` | `Models/RtmConnectschema.cs` |
+| `RtmConnectRequest` | `src/SlackWebApi/Requests/Rtm/RtmConnectRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `RtmConnectschema` | `src/SlackWebApi/Models/RtmConnectschema.cs` |
 

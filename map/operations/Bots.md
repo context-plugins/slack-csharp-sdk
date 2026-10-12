@@ -2,21 +2,22 @@
 
 # Bots — operations
 
-Accessor: `client.Bots` · Source: `Api/Bots.cs` · 1 operation
+Accessor: `client.Bots` · Source: `src/SlackWebApi/Api/Bots.cs` · 1 operation
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### BotsInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `BotsInfo(string token, string? bot, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `bot` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `bot` ← `bot`
+- **Signature**: `BotsInfo(BotsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `bot` ← `Bot`
 - **Returns**: `BotsInfoschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `BotsInfoschema` | `Models/BotsInfoschema.cs` |
+| `BotsInfoRequest` | `src/SlackWebApi/Requests/Bots/BotsInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `BotsInfoschema` | `src/SlackWebApi/Models/BotsInfoschema.cs` |
 

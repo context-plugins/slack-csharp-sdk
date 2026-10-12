@@ -2,73 +2,79 @@
 
 # Dnd — operations
 
-Accessor: `client.Dnd` · Source: `Api/Dnd.cs` · 5 operations
+Accessor: `client.Dnd` · Source: `src/SlackWebApi/Api/Dnd.cs` · 5 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### DndEndDnd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `DndEndDnd(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `DndEndDnd(DndEndDndRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
 - **Returns**: `DndEndDndschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `DndEndDndschema` | `Models/DndEndDndschema.cs` |
+| `DndEndDndRequest` | `src/SlackWebApi/Requests/Dnd/DndEndDndRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `DndEndDndschema` | `src/SlackWebApi/Models/DndEndDndschema.cs` |
 
 ### DndEndSnooze
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `DndEndSnooze(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `DndEndSnooze(DndEndSnoozeRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
 - **Returns**: `DndEndSnoozeschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `DndEndSnoozeschema` | `Models/DndEndSnoozeschema.cs` |
+| `DndEndSnoozeRequest` | `src/SlackWebApi/Requests/Dnd/DndEndSnoozeRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `DndEndSnoozeschema` | `src/SlackWebApi/Models/DndEndSnoozeschema.cs` |
 
 ### DndInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `DndInfo(string? token, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `user` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `user` ← `user`
+- **Signature**: `DndInfo(DndInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `user` ← `User`
 - **Returns**: `DndInfoschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `DndInfoschema` | `Models/DndInfoschema.cs` |
+| `DndInfoRequest` | `src/SlackWebApi/Requests/Dnd/DndInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `DndInfoschema` | `src/SlackWebApi/Models/DndInfoschema.cs` |
 
 ### DndSetSnooze
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `DndSetSnooze(ContentType contentType, string token, string numMinutes, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `DndSetSnooze(DndSetSnoozeRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`, `Token`, `NumMinutes`
 - **Returns**: `DndSetSnoozeschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `DndSetSnoozeschema` | `Models/DndSetSnoozeschema.cs` |
+| `DndSetSnoozeRequest` | `src/SlackWebApi/Requests/Dnd/DndSetSnoozeRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `DndSetSnoozeschema` | `src/SlackWebApi/Models/DndSetSnoozeschema.cs` |
 
 ### DndTeamInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `DndTeamInfo(string? token, string? users, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `users` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `users` ← `users`
+- **Signature**: `DndTeamInfo(DndTeamInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `users` ← `Users`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `DndTeamInfoRequest` | `src/SlackWebApi/Requests/Dnd/DndTeamInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

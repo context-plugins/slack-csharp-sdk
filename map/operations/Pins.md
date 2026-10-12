@@ -2,45 +2,49 @@
 
 # Pins — operations
 
-Accessor: `client.Pins` · Source: `Api/Pins.cs` · 3 operations
+Accessor: `client.Pins` · Source: `src/SlackWebApi/Api/Pins.cs` · 3 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### PinsAdd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `PinsAdd(string token, ContentType contentType, string channel, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `timestamp` — nullable, no default → **must pass explicitly**
+- **Signature**: `PinsAdd(PinsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Channel`
 - **Returns**: `PinsAddschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `PinsAddschema` | `Models/PinsAddschema.cs` |
+| `PinsAddRequest` | `src/SlackWebApi/Requests/Pins/PinsAddRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `PinsAddschema` | `src/SlackWebApi/Models/PinsAddschema.cs` |
 
 ### PinsList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `PinsList(string token, string channel, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`
+- **Signature**: `PinsList(PinsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `Channel`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `channel` ← `Channel`
 - **Returns**: `object`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
+| `PinsListRequest` | `src/SlackWebApi/Requests/Pins/PinsListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
 
 ### PinsRemove
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `PinsRemove(string token, ContentType contentType, string channel, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `timestamp` — nullable, no default → **must pass explicitly**
+- **Signature**: `PinsRemove(PinsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Channel`
 - **Returns**: `PinsRemoveschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `PinsRemoveschema` | `Models/PinsRemoveschema.cs` |
+| `PinsRemoveRequest` | `src/SlackWebApi/Requests/Pins/PinsRemoveRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `PinsRemoveschema` | `src/SlackWebApi/Models/PinsRemoveschema.cs` |
 

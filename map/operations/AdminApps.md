@@ -2,37 +2,35 @@
 
 # AdminApps — operations
 
-Accessor: `client.AdminApps` · Source: `Api/AdminApps.cs` · 2 operations
+Accessor: `client.AdminApps` · Source: `src/SlackWebApi/Api/AdminApps.cs` · 2 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AdminAppsApprove
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminAppsApprove(string token, ContentType contentType, string? appId, string? requestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `appId` — nullable, no default → **must pass explicitly**
-  - `requestId` — nullable, no default → **must pass explicitly**
-  - `teamId` — nullable, no default → **must pass explicitly**
+- **Signature**: `AdminAppsApprove(AdminAppsApproveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminAppsApproveRequest` | `src/SlackWebApi/Requests/AdminApps/AdminAppsApproveRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminAppsRestrict
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminAppsRestrict(string token, ContentType contentType, string? appId, string? requestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `appId` — nullable, no default → **must pass explicitly**
-  - `requestId` — nullable, no default → **must pass explicitly**
-  - `teamId` — nullable, no default → **must pass explicitly**
+- **Signature**: `AdminAppsRestrict(AdminAppsRestrictRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminAppsRestrictRequest` | `src/SlackWebApi/Requests/AdminApps/AdminAppsRestrictRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

@@ -2,80 +2,92 @@
 
 # AdminTeamsSettings — operations
 
-Accessor: `client.AdminTeamsSettings` · Source: `Api/AdminTeamsSettings.cs` · 6 operations
+Accessor: `client.AdminTeamsSettings` · Source: `src/SlackWebApi/Api/AdminTeamsSettings.cs` · 6 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AdminTeamsSettingsInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminTeamsSettingsInfo(string teamId, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `team_id` ← `teamId`
+- **Signature**: `AdminTeamsSettingsInfo(AdminTeamsSettingsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `TeamId`, `Token`, `ContentType`
+- **Query params (wire ← C#)**: `team_id` ← `TeamId`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminTeamsSettingsInfoRequest` | `src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminTeamsSettingsSetDefaultChannels
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminTeamsSettingsSetDefaultChannels(ContentType contentType, string token, string teamId, string channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminTeamsSettingsSetDefaultChannels(AdminTeamsSettingsSetDefaultChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`, `Token`, `TeamId`, `ChannelIds`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminTeamsSettingsSetDefaultChannelsRequest` | `src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetDefaultChannelsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminTeamsSettingsSetDescription
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminTeamsSettingsSetDescription(string token, ContentType contentType, string teamId, string description, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminTeamsSettingsSetDescription(AdminTeamsSettingsSetDescriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `TeamId`, `Description`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminTeamsSettingsSetDescriptionRequest` | `src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetDescriptionRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminTeamsSettingsSetDiscoverability
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminTeamsSettingsSetDiscoverability(string token, ContentType contentType, string teamId, string discoverability, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminTeamsSettingsSetDiscoverability(AdminTeamsSettingsSetDiscoverabilityRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `TeamId`, `Discoverability`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminTeamsSettingsSetDiscoverabilityRequest` | `src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetDiscoverabilityRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminTeamsSettingsSetIcon
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminTeamsSettingsSetIcon(ContentType contentType, string token, string imageUrl, string teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminTeamsSettingsSetIcon(AdminTeamsSettingsSetIconRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`, `Token`, `ImageUrl`, `TeamId`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminTeamsSettingsSetIconRequest` | `src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetIconRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminTeamsSettingsSetName
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminTeamsSettingsSetName(string token, ContentType contentType, string teamId, string name, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminTeamsSettingsSetName(AdminTeamsSettingsSetNameRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `TeamId`, `Name`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminTeamsSettingsSetNameRequest` | `src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetNameRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

@@ -2,85 +2,92 @@
 
 # Calls — operations
 
-Accessor: `client.Calls` · Source: `Api/Calls.cs` · 6 operations
+Accessor: `client.Calls` · Source: `src/SlackWebApi/Api/Calls.cs` · 6 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### CallsAdd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `CallsAdd(string token, ContentType contentType, string externalUniqueId, string joinUrl, string? externalDisplayId, string? desktopAppJoinUrl, int? dateStart, string? title, string? createdBy, string? users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 6 params (`externalDisplayId` … `users`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `CallsAdd(CallsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `ExternalUniqueId`, `JoinUrl`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `CallsAddRequest` | `src/SlackWebApi/Requests/Calls/CallsAddRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### CallsEnd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `CallsEnd(string token, ContentType contentType, string id, int? duration, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `duration` — nullable, no default → **must pass explicitly**
+- **Signature**: `CallsEnd(CallsEndRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Id`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `CallsEndRequest` | `src/SlackWebApi/Requests/Calls/CallsEndRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### CallsInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `CallsInfo(string id, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `id` ← `id`
+- **Signature**: `CallsInfo(CallsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Id`, `Token`, `ContentType`
+- **Query params (wire ← C#)**: `id` ← `Id`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `CallsInfoRequest` | `src/SlackWebApi/Requests/Calls/CallsInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### CallsParticipantsAdd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `CallsParticipantsAdd(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `CallsParticipantsAdd(CallsParticipantsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Id`, `Users`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `CallsParticipantsAddRequest` | `src/SlackWebApi/Requests/CallsParticipants/CallsParticipantsAddRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### CallsParticipantsRemove
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `CallsParticipantsRemove(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `CallsParticipantsRemove(CallsParticipantsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Id`, `Users`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `CallsParticipantsRemoveRequest` | `src/SlackWebApi/Requests/CallsParticipants/CallsParticipantsRemoveRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### CallsUpdate
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `CallsUpdate(string token, ContentType contentType, string id, string? title, string? joinUrl, string? desktopAppJoinUrl, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `title` — nullable, no default → **must pass explicitly**
-  - `joinUrl` — nullable, no default → **must pass explicitly**
-  - `desktopAppJoinUrl` — nullable, no default → **must pass explicitly**
+- **Signature**: `CallsUpdate(CallsUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Id`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `CallsUpdateRequest` | `src/SlackWebApi/Requests/Calls/CallsUpdateRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

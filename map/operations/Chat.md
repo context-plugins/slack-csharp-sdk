@@ -2,140 +2,149 @@
 
 # Chat — operations
 
-Accessor: `client.Chat` · Source: `Api/Chat.cs` · 10 operations
+Accessor: `client.Chat` · Source: `src/SlackWebApi/Api/Chat.cs` · 10 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### ChatDelete
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatDelete(ContentType contentType, string? token, double? ts, string? channel, bool? asUser, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`token` … `asUser`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `ChatDelete(ChatDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `ChatDeletesuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatDeletesuccessschema` | `Models/ChatDeletesuccessschema.cs` |
+| `ChatDeleteRequest` | `src/SlackWebApi/Requests/Chat/ChatDeleteRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatDeletesuccessschema` | `src/SlackWebApi/Models/ChatDeletesuccessschema.cs` |
 
 ### ChatDeleteScheduledMessage
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatDeleteScheduledMessage(string token, ContentType contentType, string channel, string scheduledMessageId, bool? asUser, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `asUser` — nullable, no default → **must pass explicitly**
+- **Signature**: `ChatDeleteScheduledMessage(ChatDeleteScheduledMessageRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Channel`, `ScheduledMessageId`
 - **Returns**: `ChatDeleteScheduledMessageschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatDeleteScheduledMessageschema` | `Models/ChatDeleteScheduledMessageschema.cs` |
+| `ChatDeleteScheduledMessageRequest` | `src/SlackWebApi/Requests/Chat/ChatDeleteScheduledMessageRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatDeleteScheduledMessageschema` | `src/SlackWebApi/Models/ChatDeleteScheduledMessageschema.cs` |
 
 ### ChatGetPermalink
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatGetPermalink(string token, string channel, string messageTs, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`, `message_ts` ← `messageTs`
+- **Signature**: `ChatGetPermalink(ChatGetPermalinkRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `Channel`, `MessageTs`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `channel` ← `Channel`, `message_ts` ← `MessageTs`
 - **Returns**: `ChatGetPermalinksuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatGetPermalinksuccessschema` | `Models/ChatGetPermalinksuccessschema.cs` |
+| `ChatGetPermalinkRequest` | `src/SlackWebApi/Requests/Chat/ChatGetPermalinkRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatGetPermalinksuccessschema` | `src/SlackWebApi/Models/ChatGetPermalinksuccessschema.cs` |
 
 ### ChatMeMessage
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatMeMessage(ContentType contentType, string? token, string? channel, string? text, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `channel` — nullable, no default → **must pass explicitly**
-  - `text` — nullable, no default → **must pass explicitly**
+- **Signature**: `ChatMeMessage(ChatMeMessageRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `ChatMeMessageschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatMeMessageschema` | `Models/ChatMeMessageschema.cs` |
+| `ChatMeMessageRequest` | `src/SlackWebApi/Requests/Chat/ChatMeMessageRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatMeMessageschema` | `src/SlackWebApi/Models/ChatMeMessageschema.cs` |
 
 ### ChatPostEphemeral
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatPostEphemeral(string token, ContentType contentType, string channel, string user, bool? asUser, string? attachments, string? blocks, string? iconEmoji, string? iconUrl, bool? linkNames, string? parse, string? text, string? threadTs, string? username, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 10 params (`asUser` … `username`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `ChatPostEphemeral(ChatPostEphemeralRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Channel`, `User`
 - **Returns**: `ChatPostEphemeralsuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatPostEphemeralsuccessschema` | `Models/ChatPostEphemeralsuccessschema.cs` |
+| `ChatPostEphemeralRequest` | `src/SlackWebApi/Requests/Chat/ChatPostEphemeralRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatPostEphemeralsuccessschema` | `src/SlackWebApi/Models/ChatPostEphemeralsuccessschema.cs` |
 
 ### ChatPostMessage
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatPostMessage(string token, ContentType contentType, string channel, string? asUser, string? attachments, string? blocks, string? iconEmoji, string? iconUrl, bool? linkNames, bool? mrkdwn, string? parse, bool? replyBroadcast, string? text, string? threadTs, bool? unfurlLinks, bool? unfurlMedia, string? username, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 14 params (`asUser` … `username`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `ChatPostMessage(ChatPostMessageRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Channel`
 - **Returns**: `ChatPostMessagesuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatPostMessagesuccessschema` | `Models/ChatPostMessagesuccessschema.cs` |
+| `ChatPostMessageRequest` | `src/SlackWebApi/Requests/Chat/ChatPostMessageRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatPostMessagesuccessschema` | `src/SlackWebApi/Models/ChatPostMessagesuccessschema.cs` |
 
 ### ChatScheduleMessage
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatScheduleMessage(ContentType contentType, string? token, string? channel, string? text, string? postAt, string? parse, bool? asUser, bool? linkNames, string? attachments, string? blocks, bool? unfurlLinks, bool? unfurlMedia, double? threadTs, bool? replyBroadcast, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 13 params (`token` … `replyBroadcast`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `ChatScheduleMessage(ChatScheduleMessageRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `ChatScheduleMessagesuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatScheduleMessagesuccessschema` | `Models/ChatScheduleMessagesuccessschema.cs` |
+| `ChatScheduleMessageRequest` | `src/SlackWebApi/Requests/Chat/ChatScheduleMessageRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatScheduleMessagesuccessschema` | `src/SlackWebApi/Models/ChatScheduleMessagesuccessschema.cs` |
 
 ### ChatScheduledMessagesList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatScheduledMessagesList(string? channel, double? latest, double? oldest, int? limit, string? cursor, ContentType contentType, string? token, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 6 params (`channel` … `token`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `channel` ← `channel`, `latest` ← `latest`, `oldest` ← `oldest`, `limit` ← `limit`, `cursor` ← `cursor`
+- **Signature**: `ChatScheduledMessagesList(ChatScheduledMessagesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `channel` ← `Channel`, `latest` ← `Latest`, `oldest` ← `Oldest`, `limit` ← `Limit`, `cursor` ← `Cursor`
 - **Returns**: `ChatScheduledMessagesListschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatScheduledMessagesListschema` | `Models/ChatScheduledMessagesListschema.cs` |
+| `ChatScheduledMessagesListRequest` | `src/SlackWebApi/Requests/ChatScheduledMessages/ChatScheduledMessagesListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatScheduledMessagesListschema` | `src/SlackWebApi/Models/ChatScheduledMessagesListschema.cs` |
 
 ### ChatUnfurl
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatUnfurl(string token, ContentType contentType, string channel, string ts, string? unfurls, string? userAuthMessage, bool? userAuthRequired, string? userAuthUrl, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`unfurls` … `userAuthUrl`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `ChatUnfurl(ChatUnfurlRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Channel`, `Ts`
 - **Returns**: `ChatUnfurlsuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatUnfurlsuccessschema` | `Models/ChatUnfurlsuccessschema.cs` |
+| `ChatUnfurlRequest` | `src/SlackWebApi/Requests/Chat/ChatUnfurlRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatUnfurlsuccessschema` | `src/SlackWebApi/Models/ChatUnfurlsuccessschema.cs` |
 
 ### ChatUpdate
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ChatUpdate(string token, ContentType contentType, string channel, string ts, string? asUser, string? attachments, string? blocks, string? linkNames, string? parse, string? text, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 6 params (`asUser` … `text`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `ChatUpdate(ChatUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Channel`, `Ts`
 - **Returns**: `ChatUpdatesuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ChatUpdatesuccessschema` | `Models/ChatUpdatesuccessschema.cs` |
+| `ChatUpdateRequest` | `src/SlackWebApi/Requests/Chat/ChatUpdateRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ChatUpdatesuccessschema` | `src/SlackWebApi/Models/ChatUpdatesuccessschema.cs` |
 

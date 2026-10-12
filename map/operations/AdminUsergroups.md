@@ -2,60 +2,64 @@
 
 # AdminUsergroups — operations
 
-Accessor: `client.AdminUsergroups` · Source: `Api/AdminUsergroups.cs` · 4 operations
+Accessor: `client.AdminUsergroups` · Source: `src/SlackWebApi/Api/AdminUsergroups.cs` · 4 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AdminUsergroupsAddChannels
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminUsergroupsAddChannels(string token, ContentType contentType, string usergroupId, string channelIds, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `teamId` — nullable, no default → **must pass explicitly**
+- **Signature**: `AdminUsergroupsAddChannels(AdminUsergroupsAddChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `UsergroupId`, `ChannelIds`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminUsergroupsAddChannelsRequest` | `src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsAddChannelsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminUsergroupsAddTeams
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminUsergroupsAddTeams(string token, ContentType contentType, string usergroupId, string teamIds, bool? autoProvision, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `autoProvision` — nullable, no default → **must pass explicitly**
+- **Signature**: `AdminUsergroupsAddTeams(AdminUsergroupsAddTeamsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `UsergroupId`, `TeamIds`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminUsergroupsAddTeamsRequest` | `src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsAddTeamsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminUsergroupsListChannels
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminUsergroupsListChannels(string usergroupId, string? teamId, bool? includeNumMembers, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `teamId` — nullable, no default → **must pass explicitly**
-  - `includeNumMembers` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `usergroup_id` ← `usergroupId`, `team_id` ← `teamId`, `include_num_members` ← `includeNumMembers`
+- **Signature**: `AdminUsergroupsListChannels(AdminUsergroupsListChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `UsergroupId`, `Token`, `ContentType`
+- **Query params (wire ← C#)**: `usergroup_id` ← `UsergroupId`, `team_id` ← `TeamId`, `include_num_members` ← `IncludeNumMembers`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminUsergroupsListChannelsRequest` | `src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsListChannelsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminUsergroupsRemoveChannels
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminUsergroupsRemoveChannels(string token, ContentType contentType, string usergroupId, string channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminUsergroupsRemoveChannels(AdminUsergroupsRemoveChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `UsergroupId`, `ChannelIds`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminUsergroupsRemoveChannelsRequest` | `src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsRemoveChannelsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

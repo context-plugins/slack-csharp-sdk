@@ -2,23 +2,22 @@
 
 # AdminInviteRequestsApproved — operations
 
-Accessor: `client.AdminInviteRequestsApproved` · Source: `Api/AdminInviteRequestsApproved.cs` · 1 operation
+Accessor: `client.AdminInviteRequestsApproved` · Source: `src/SlackWebApi/Api/AdminInviteRequestsApproved.cs` · 1 operation
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AdminInviteRequestsApprovedList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminInviteRequestsApprovedList(string? teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `teamId` — nullable, no default → **must pass explicitly**
-  - `cursor` — nullable, no default → **must pass explicitly**
-  - `limit` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `team_id` ← `teamId`, `cursor` ← `cursor`, `limit` ← `limit`
+- **Signature**: `AdminInviteRequestsApprovedList(AdminInviteRequestsApprovedListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `team_id` ← `TeamId`, `cursor` ← `Cursor`, `limit` ← `Limit`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminInviteRequestsApprovedListRequest` | `src/SlackWebApi/Requests/AdminInviteRequestsApproved/AdminInviteRequestsApprovedListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

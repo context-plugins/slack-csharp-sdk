@@ -2,23 +2,22 @@
 
 # AdminAppsRequests — operations
 
-Accessor: `client.AdminAppsRequests` · Source: `Api/AdminAppsRequests.cs` · 1 operation
+Accessor: `client.AdminAppsRequests` · Source: `src/SlackWebApi/Api/AdminAppsRequests.cs` · 1 operation
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AdminAppsRequestsList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminAppsRequestsList(string token, int? limit, string? cursor, string? teamId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `limit` — nullable, no default → **must pass explicitly**
-  - `cursor` — nullable, no default → **must pass explicitly**
-  - `teamId` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `limit` ← `limit`, `cursor` ← `cursor`, `team_id` ← `teamId`
+- **Signature**: `AdminAppsRequestsList(AdminAppsRequestsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `limit` ← `Limit`, `cursor` ← `Cursor`, `team_id` ← `TeamId`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminAppsRequestsListRequest` | `src/SlackWebApi/Requests/AdminAppsRequests/AdminAppsRequestsListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

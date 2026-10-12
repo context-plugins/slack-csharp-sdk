@@ -2,46 +2,50 @@
 
 # AdminConversationsRestrictAccess — operations
 
-Accessor: `client.AdminConversationsRestrictAccess` · Source: `Api/AdminConversationsRestrictAccess.cs` · 3 operations
+Accessor: `client.AdminConversationsRestrictAccess` · Source: `src/SlackWebApi/Api/AdminConversationsRestrictAccess.cs` · 3 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AdminConversationsRestrictAccessAddGroup
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminConversationsRestrictAccessAddGroup(ContentType contentType, string token, string groupId, string channelId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `teamId` — nullable, no default → **must pass explicitly**
+- **Signature**: `AdminConversationsRestrictAccessAddGroup(AdminConversationsRestrictAccessAddGroupRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`, `Token`, `GroupId`, `ChannelId`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminConversationsRestrictAccessAddGroupRequest` | `src/SlackWebApi/Requests/AdminConversationsRestrictAccess/AdminConversationsRestrictAccessAddGroupRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminConversationsRestrictAccessListGroups
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminConversationsRestrictAccessListGroups(string token, string channelId, string? teamId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `teamId` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `channel_id` ← `channelId`, `team_id` ← `teamId`
+- **Signature**: `AdminConversationsRestrictAccessListGroups(AdminConversationsRestrictAccessListGroupsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ChannelId`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `channel_id` ← `ChannelId`, `team_id` ← `TeamId`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminConversationsRestrictAccessListGroupsRequest` | `src/SlackWebApi/Requests/AdminConversationsRestrictAccess/AdminConversationsRestrictAccessListGroupsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### AdminConversationsRestrictAccessRemoveGroup
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminConversationsRestrictAccessRemoveGroup(ContentType contentType, string token, string teamId, string groupId, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `AdminConversationsRestrictAccessRemoveGroup(AdminConversationsRestrictAccessRemoveGroupRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`, `Token`, `TeamId`, `GroupId`, `ChannelId`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminConversationsRestrictAccessRemoveGroupRequest` | `src/SlackWebApi/Requests/AdminConversationsRestrictAccess/AdminConversationsRestrictAccessRemoveGroupRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

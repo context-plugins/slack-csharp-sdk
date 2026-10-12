@@ -2,22 +2,21 @@
 
 # FilesComments — operations
 
-Accessor: `client.FilesComments` · Source: `Api/FilesComments.cs` · 1 operation
+Accessor: `client.FilesComments` · Source: `src/SlackWebApi/Api/FilesComments.cs` · 1 operation
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### FilesCommentsDelete
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesCommentsDelete(ContentType contentType, string? token, string? file, string? id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `file` — nullable, no default → **must pass explicitly**
-  - `id` — nullable, no default → **must pass explicitly**
+- **Signature**: `FilesCommentsDelete(FilesCommentsDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `FilesCommentsDeleteschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `FilesCommentsDeleteschema` | `Models/FilesCommentsDeleteschema.cs` |
+| `FilesCommentsDeleteRequest` | `src/SlackWebApi/Requests/FilesComments/FilesCommentsDeleteRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `FilesCommentsDeleteschema` | `src/SlackWebApi/Models/FilesCommentsDeleteschema.cs` |
 

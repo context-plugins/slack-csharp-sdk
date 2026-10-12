@@ -2,22 +2,22 @@
 
 # AdminTeamsOwners — operations
 
-Accessor: `client.AdminTeamsOwners` · Source: `Api/AdminTeamsOwners.cs` · 1 operation
+Accessor: `client.AdminTeamsOwners` · Source: `src/SlackWebApi/Api/AdminTeamsOwners.cs` · 1 operation
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### AdminTeamsOwnersList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `AdminTeamsOwnersList(string token, string teamId, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `limit` — nullable, no default → **must pass explicitly**
-  - `cursor` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `team_id` ← `teamId`, `limit` ← `limit`, `cursor` ← `cursor`
+- **Signature**: `AdminTeamsOwnersList(AdminTeamsOwnersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `TeamId`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `team_id` ← `TeamId`, `limit` ← `Limit`, `cursor` ← `Cursor`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `AdminTeamsOwnersListRequest` | `src/SlackWebApi/Requests/AdminTeamsOwners/AdminTeamsOwnersListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

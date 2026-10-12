@@ -2,35 +2,36 @@
 
 # UsersProfile — operations
 
-Accessor: `client.UsersProfile` · Source: `Api/UsersProfile.cs` · 2 operations
+Accessor: `client.UsersProfile` · Source: `src/SlackWebApi/Api/UsersProfile.cs` · 2 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### UsersProfileGet
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `UsersProfileGet(string token, bool? includeLabels, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `includeLabels` — nullable, no default → **must pass explicitly**
-  - `user` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `include_labels` ← `includeLabels`, `user` ← `user`
+- **Signature**: `UsersProfileGet(UsersProfileGetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `include_labels` ← `IncludeLabels`, `user` ← `User`
 - **Returns**: `UsersProfileGetschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `UsersProfileGetschema` | `Models/UsersProfileGetschema.cs` |
+| `UsersProfileGetRequest` | `src/SlackWebApi/Requests/UsersProfile/UsersProfileGetRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `UsersProfileGetschema` | `src/SlackWebApi/Models/UsersProfileGetschema.cs` |
 
 ### UsersProfileSet
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `UsersProfileSet(string token, ContentType contentType, string? name, string? profile, string? user, string? value, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`name` … `value`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `UsersProfileSet(UsersProfileSetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
 - **Returns**: `UsersProfileSetschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `UsersProfileSetschema` | `Models/UsersProfileSetschema.cs` |
+| `UsersProfileSetRequest` | `src/SlackWebApi/Requests/UsersProfile/UsersProfileSetRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `UsersProfileSetschema` | `src/SlackWebApi/Models/UsersProfileSetschema.cs` |
 

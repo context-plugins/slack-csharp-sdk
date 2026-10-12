@@ -2,77 +2,79 @@
 
 # Reminders — operations
 
-Accessor: `client.Reminders` · Source: `Api/Reminders.cs` · 5 operations
+Accessor: `client.Reminders` · Source: `src/SlackWebApi/Api/Reminders.cs` · 5 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### RemindersAdd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `RemindersAdd(string token, ContentType contentType, string text, string time, string? user, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `user` — nullable, no default → **must pass explicitly**
+- **Signature**: `RemindersAdd(RemindersAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Text`, `Time`
 - **Returns**: `RemindersAddschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `RemindersAddschema` | `Models/RemindersAddschema.cs` |
+| `RemindersAddRequest` | `src/SlackWebApi/Requests/Reminders/RemindersAddRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `RemindersAddschema` | `src/SlackWebApi/Models/RemindersAddschema.cs` |
 
 ### RemindersComplete
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `RemindersComplete(ContentType contentType, string? token, string? reminder, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `reminder` — nullable, no default → **must pass explicitly**
+- **Signature**: `RemindersComplete(RemindersCompleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `RemindersCompleteschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `RemindersCompleteschema` | `Models/RemindersCompleteschema.cs` |
+| `RemindersCompleteRequest` | `src/SlackWebApi/Requests/Reminders/RemindersCompleteRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `RemindersCompleteschema` | `src/SlackWebApi/Models/RemindersCompleteschema.cs` |
 
 ### RemindersDelete
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `RemindersDelete(ContentType contentType, string? token, string? reminder, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `reminder` — nullable, no default → **must pass explicitly**
+- **Signature**: `RemindersDelete(RemindersDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `RemindersDeleteschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `RemindersDeleteschema` | `Models/RemindersDeleteschema.cs` |
+| `RemindersDeleteRequest` | `src/SlackWebApi/Requests/Reminders/RemindersDeleteRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `RemindersDeleteschema` | `src/SlackWebApi/Models/RemindersDeleteschema.cs` |
 
 ### RemindersInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `RemindersInfo(string? token, string? reminder, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `reminder` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `reminder` ← `reminder`
+- **Signature**: `RemindersInfo(RemindersInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `reminder` ← `Reminder`
 - **Returns**: `RemindersInfoschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `RemindersInfoschema` | `Models/RemindersInfoschema.cs` |
+| `RemindersInfoRequest` | `src/SlackWebApi/Requests/Reminders/RemindersInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `RemindersInfoschema` | `src/SlackWebApi/Models/RemindersInfoschema.cs` |
 
 ### RemindersList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `RemindersList(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`
+- **Signature**: `RemindersList(RemindersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`
 - **Returns**: `RemindersListschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `RemindersListschema` | `Models/RemindersListschema.cs` |
+| `RemindersListRequest` | `src/SlackWebApi/Requests/Reminders/RemindersListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `RemindersListschema` | `src/SlackWebApi/Models/RemindersListschema.cs` |
 

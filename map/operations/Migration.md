@@ -2,22 +2,22 @@
 
 # Migration — operations
 
-Accessor: `client.Migration` · Source: `Api/Migration.cs` · 1 operation
+Accessor: `client.Migration` · Source: `src/SlackWebApi/Api/Migration.cs` · 1 operation
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### MigrationExchange
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `MigrationExchange(string token, string users, string? teamId, bool? toOld, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `teamId` — nullable, no default → **must pass explicitly**
-  - `toOld` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `users` ← `users`, `team_id` ← `teamId`, `to_old` ← `toOld`
+- **Signature**: `MigrationExchange(MigrationExchangeRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `Users`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `users` ← `Users`, `team_id` ← `TeamId`, `to_old` ← `ToOld`
 - **Returns**: `MigrationExchangesuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `MigrationExchangesuccessschema` | `Models/MigrationExchangesuccessschema.cs` |
+| `MigrationExchangeRequest` | `src/SlackWebApi/Requests/Migration/MigrationExchangeRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `MigrationExchangesuccessschema` | `src/SlackWebApi/Models/MigrationExchangesuccessschema.cs` |
 

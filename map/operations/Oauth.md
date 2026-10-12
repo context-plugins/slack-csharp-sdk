@@ -2,51 +2,52 @@
 
 # Oauth — operations
 
-Accessor: `client.Oauth` · Source: `Api/Oauth.cs` · 3 operations
+Accessor: `client.Oauth` · Source: `src/SlackWebApi/Api/Oauth.cs` · 3 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### OauthAccess
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `OauthAccess(string? clientId, string? clientSecret, string? code, string? redirectUri, bool? singleChannel, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 5 params (`clientId` … `singleChannel`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `client_id` ← `clientId`, `client_secret` ← `clientSecret`, `code` ← `code`, `redirect_uri` ← `redirectUri`, `single_channel` ← `singleChannel`
+- **Signature**: `OauthAccess(OauthAccessRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `client_id` ← `ClientId`, `client_secret` ← `ClientSecret`, `code` ← `Code`, `redirect_uri` ← `RedirectUri`, `single_channel` ← `SingleChannel`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `OauthAccessRequest` | `src/SlackWebApi/Requests/Oauth/OauthAccessRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### OauthToken
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `OauthToken(string? clientId, string? clientSecret, string? code, string? redirectUri, bool? singleChannel, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 5 params (`clientId` … `singleChannel`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `client_id` ← `clientId`, `client_secret` ← `clientSecret`, `code` ← `code`, `redirect_uri` ← `redirectUri`, `single_channel` ← `singleChannel`
+- **Signature**: `OauthToken(OauthTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `client_id` ← `ClientId`, `client_secret` ← `ClientSecret`, `code` ← `Code`, `redirect_uri` ← `RedirectUri`, `single_channel` ← `SingleChannel`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `OauthTokenRequest` | `src/SlackWebApi/Requests/Oauth/OauthTokenRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### OauthV2Access
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `OauthV2Access(string code, string? clientId, string? clientSecret, string? redirectUri, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `clientId` — nullable, no default → **must pass explicitly**
-  - `clientSecret` — nullable, no default → **must pass explicitly**
-  - `redirectUri` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `code` ← `code`, `client_id` ← `clientId`, `client_secret` ← `clientSecret`, `redirect_uri` ← `redirectUri`
+- **Signature**: `OauthV2Access(OauthV2AccessRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Code`, `ContentType`
+- **Query params (wire ← C#)**: `code` ← `Code`, `client_id` ← `ClientId`, `client_secret` ← `ClientSecret`, `redirect_uri` ← `RedirectUri`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `OauthV2AccessRequest` | `src/SlackWebApi/Requests/OauthV2/OauthV2AccessRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 

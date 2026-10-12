@@ -2,79 +2,82 @@
 
 # TeamApi — operations
 
-Accessor: `client.TeamApi` · Source: `Api/TeamApi.cs` · 5 operations
+Accessor: `client.TeamApi` · Source: `src/SlackWebApi/Api/TeamApi.cs` · 5 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### TeamAccessLogs
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `TeamAccessLogs(string token, string? before, string? count, string? page, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `before` — nullable, no default → **must pass explicitly**
-  - `count` — nullable, no default → **must pass explicitly**
-  - `page` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `before` ← `before`, `count` ← `count`, `page` ← `page`
+- **Signature**: `TeamAccessLogs(TeamAccessLogsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `before` ← `Before`, `count` ← `Count`, `page` ← `Page`
 - **Returns**: `TeamAccessLogsschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `TeamAccessLogsschema` | `Models/TeamAccessLogsschema.cs` |
+| `TeamAccessLogsRequest` | `src/SlackWebApi/Requests/TeamApi/TeamAccessLogsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `TeamAccessLogsschema` | `src/SlackWebApi/Models/TeamAccessLogsschema.cs` |
 
 ### TeamBillableInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `TeamBillableInfo(string token, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `user` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `user` ← `user`
+- **Signature**: `TeamBillableInfo(TeamBillableInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `user` ← `User`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `TeamBillableInfoRequest` | `src/SlackWebApi/Requests/TeamApi/TeamBillableInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### TeamInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `TeamInfo(string token, string? team, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `team` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `team` ← `team`
+- **Signature**: `TeamInfo(TeamInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `team` ← `Team`
 - **Returns**: `TeamInfoschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `TeamInfoschema` | `Models/TeamInfoschema.cs` |
+| `TeamInfoRequest` | `src/SlackWebApi/Requests/TeamApi/TeamInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `TeamInfoschema` | `src/SlackWebApi/Models/TeamInfoschema.cs` |
 
 ### TeamIntegrationLogs
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `TeamIntegrationLogs(string token, string? appId, string? changeType, string? count, string? page, string? serviceId, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 6 params (`appId` … `user`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `token` ← `token`, `app_id` ← `appId`, `change_type` ← `changeType`, `count` ← `count`, `page` ← `page`, `service_id` ← `serviceId`, `user` ← `user`
+- **Signature**: `TeamIntegrationLogs(TeamIntegrationLogsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `app_id` ← `AppId`, `change_type` ← `ChangeType`, `count` ← `Count`, `page` ← `Page`, `service_id` ← `ServiceId`, `user` ← `User`
 - **Returns**: `TeamIntegrationLogsschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `TeamIntegrationLogsschema` | `Models/TeamIntegrationLogsschema.cs` |
+| `TeamIntegrationLogsRequest` | `src/SlackWebApi/Requests/TeamApi/TeamIntegrationLogsRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `TeamIntegrationLogsschema` | `src/SlackWebApi/Models/TeamIntegrationLogsschema.cs` |
 
 ### TeamProfileGet
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `TeamProfileGet(string token, string? visibility, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `visibility` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `visibility` ← `visibility`
+- **Signature**: `TeamProfileGet(TeamProfileGetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `visibility` ← `Visibility`
 - **Returns**: `TeamProfileGetsuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `TeamProfileGetsuccessschema` | `Models/TeamProfileGetsuccessschema.cs` |
+| `TeamProfileGetRequest` | `src/SlackWebApi/Requests/TeamProfile/TeamProfileGetRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `TeamProfileGetsuccessschema` | `src/SlackWebApi/Models/TeamProfileGetsuccessschema.cs` |
 

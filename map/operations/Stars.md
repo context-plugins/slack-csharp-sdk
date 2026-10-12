@@ -2,47 +2,50 @@
 
 # Stars — operations
 
-Accessor: `client.Stars` · Source: `Api/Stars.cs` · 3 operations
+Accessor: `client.Stars` · Source: `src/SlackWebApi/Api/Stars.cs` · 3 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### StarsAdd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `StarsAdd(string token, ContentType contentType, string? channel, string? file, string? fileComment, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`channel` … `timestamp`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `StarsAdd(StarsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
 - **Returns**: `StarsAddschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `StarsAddschema` | `Models/StarsAddschema.cs` |
+| `StarsAddRequest` | `src/SlackWebApi/Requests/Stars/StarsAddRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `StarsAddschema` | `src/SlackWebApi/Models/StarsAddschema.cs` |
 
 ### StarsList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `StarsList(string? token, string? count, string? page, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 5 params (`token` … `limit`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `token` ← `token`, `count` ← `count`, `page` ← `page`, `cursor` ← `cursor`, `limit` ← `limit`
+- **Signature**: `StarsList(StarsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `count` ← `Count`, `page` ← `Page`, `cursor` ← `Cursor`, `limit` ← `Limit`
 - **Returns**: `StarsListschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `StarsListschema` | `Models/StarsListschema.cs` |
+| `StarsListRequest` | `src/SlackWebApi/Requests/Stars/StarsListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `StarsListschema` | `src/SlackWebApi/Models/StarsListschema.cs` |
 
 ### StarsRemove
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `StarsRemove(string token, ContentType contentType, string? channel, string? file, string? fileComment, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`channel` … `timestamp`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `StarsRemove(StarsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
 - **Returns**: `StarsRemoveschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `StarsRemoveschema` | `Models/StarsRemoveschema.cs` |
+| `StarsRemoveRequest` | `src/SlackWebApi/Requests/Stars/StarsRemoveRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `StarsRemoveschema` | `src/SlackWebApi/Models/StarsRemoveschema.cs` |
 

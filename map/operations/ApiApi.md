@@ -2,22 +2,22 @@
 
 # ApiApi — operations
 
-Accessor: `client.ApiApi` · Source: `Api/ApiApi.cs` · 1 operation
+Accessor: `client.ApiApi` · Source: `src/SlackWebApi/Api/ApiApi.cs` · 1 operation
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### ApiTest
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ApiTest(string? error, string? foo, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `error` — nullable, no default → **must pass explicitly**
-  - `foo` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `error` ← `error`, `foo` ← `foo`
+- **Signature**: `ApiTest(ApiTestRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `error` ← `Error`, `foo` ← `Foo`
 - **Returns**: `ApiTestsuccessschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ApiTestsuccessschema` | `Models/ApiTestsuccessschema.cs` |
+| `ApiTestRequest` | `src/SlackWebApi/Requests/ApiApi/ApiTestRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ApiTestsuccessschema` | `src/SlackWebApi/Models/ApiTestsuccessschema.cs` |
 

@@ -2,190 +2,194 @@
 
 # Files — operations
 
-Accessor: `client.Files` · Source: `Api/Files.cs` · 13 operations
+Accessor: `client.Files` · Source: `src/SlackWebApi/Api/Files.cs` · 13 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### FilesCommentsDelete
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesCommentsDelete(ContentType contentType, string? token, string? file, string? id, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `file` — nullable, no default → **must pass explicitly**
-  - `id` — nullable, no default → **must pass explicitly**
+- **Signature**: `FilesCommentsDelete(FilesCommentsDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `FilesCommentsDeleteschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `FilesCommentsDeleteschema` | `Models/FilesCommentsDeleteschema.cs` |
+| `FilesCommentsDeleteRequest` | `src/SlackWebApi/Requests/FilesComments/FilesCommentsDeleteRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `FilesCommentsDeleteschema` | `src/SlackWebApi/Models/FilesCommentsDeleteschema.cs` |
 
 ### FilesDelete
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesDelete(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `file` — nullable, no default → **must pass explicitly**
+- **Signature**: `FilesDelete(FilesDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `FilesDeleteschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `FilesDeleteschema` | `Models/FilesDeleteschema.cs` |
+| `FilesDeleteRequest` | `src/SlackWebApi/Requests/Files/FilesDeleteRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `FilesDeleteschema` | `src/SlackWebApi/Models/FilesDeleteschema.cs` |
 
 ### FilesInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesInfo(string? token, string? file, string? count, string? page, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 6 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `token` ← `token`, `file` ← `file`, `count` ← `count`, `page` ← `page`, `limit` ← `limit`, `cursor` ← `cursor`
+- **Signature**: `FilesInfo(FilesInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `file` ← `File`, `count` ← `Count`, `page` ← `Page`, `limit` ← `Limit`, `cursor` ← `Cursor`
 - **Returns**: `FilesInfoschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `FilesInfoschema` | `Models/FilesInfoschema.cs` |
+| `FilesInfoRequest` | `src/SlackWebApi/Requests/Files/FilesInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `FilesInfoschema` | `src/SlackWebApi/Models/FilesInfoschema.cs` |
 
 ### FilesList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesList(string? token, string? user, string? channel, double? tsFrom, double? tsTo, string? types, string? count, string? page, bool? showFilesHiddenByLimit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 9 params (`token` … `showFilesHiddenByLimit`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `token` ← `token`, `user` ← `user`, `channel` ← `channel`, `ts_from` ← `tsFrom`, `ts_to` ← `tsTo`, `types` ← `types`, `count` ← `count`, `page` ← `page`, `show_files_hidden_by_limit` ← `showFilesHiddenByLimit`
+- **Signature**: `FilesList(FilesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `user` ← `User`, `channel` ← `Channel`, `ts_from` ← `TsFrom`, `ts_to` ← `TsTo`, `types` ← `Types`, `count` ← `Count`, `page` ← `Page`, `show_files_hidden_by_limit` ← `ShowFilesHiddenByLimit`
 - **Returns**: `FilesListschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `FilesListschema` | `Models/FilesListschema.cs` |
+| `FilesListRequest` | `src/SlackWebApi/Requests/Files/FilesListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `FilesListschema` | `src/SlackWebApi/Models/FilesListschema.cs` |
 
 ### FilesRemoteAdd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesRemoteAdd(ContentType contentType, string? token, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 7 params (`token` … `indexableFileContents`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `FilesRemoteAdd(FilesRemoteAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `FilesRemoteAddRequest` | `src/SlackWebApi/Requests/FilesRemote/FilesRemoteAddRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### FilesRemoteInfo
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesRemoteInfo(string? token, string? file, string? externalId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `file` — nullable, no default → **must pass explicitly**
-  - `externalId` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `token` ← `token`, `file` ← `file`, `external_id` ← `externalId`
+- **Signature**: `FilesRemoteInfo(FilesRemoteInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `file` ← `File`, `external_id` ← `ExternalId`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `FilesRemoteInfoRequest` | `src/SlackWebApi/Requests/FilesRemote/FilesRemoteInfoRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### FilesRemoteList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesRemoteList(string? token, string? channel, double? tsFrom, double? tsTo, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 6 params (`token` … `cursor`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`, `ts_from` ← `tsFrom`, `ts_to` ← `tsTo`, `limit` ← `limit`, `cursor` ← `cursor`
+- **Signature**: `FilesRemoteList(FilesRemoteListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `channel` ← `Channel`, `ts_from` ← `TsFrom`, `ts_to` ← `TsTo`, `limit` ← `Limit`, `cursor` ← `Cursor`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `FilesRemoteListRequest` | `src/SlackWebApi/Requests/FilesRemote/FilesRemoteListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### FilesRemoteRemove
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesRemoteRemove(ContentType contentType, string? token, string? file, string? externalId, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `file` — nullable, no default → **must pass explicitly**
-  - `externalId` — nullable, no default → **must pass explicitly**
+- **Signature**: `FilesRemoteRemove(FilesRemoteRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `FilesRemoteRemoveRequest` | `src/SlackWebApi/Requests/FilesRemote/FilesRemoteRemoveRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### FilesRemoteShare
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesRemoteShare(string? token, string? file, string? externalId, string? channels, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`token` … `channels`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `token` ← `token`, `file` ← `file`, `external_id` ← `externalId`, `channels` ← `channels`
+- **Signature**: `FilesRemoteShare(FilesRemoteShareRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `file` ← `File`, `external_id` ← `ExternalId`, `channels` ← `Channels`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `FilesRemoteShareRequest` | `src/SlackWebApi/Requests/FilesRemote/FilesRemoteShareRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### FilesRemoteUpdate
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesRemoteUpdate(ContentType contentType, string? token, string? file, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 8 params (`token` … `indexableFileContents`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `FilesRemoteUpdate(FilesRemoteUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `FilesRemoteUpdateRequest` | `src/SlackWebApi/Requests/FilesRemote/FilesRemoteUpdateRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### FilesRevokePublicUrl
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesRevokePublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `file` — nullable, no default → **must pass explicitly**
+- **Signature**: `FilesRevokePublicUrl(FilesRevokePublicUrlRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `FilesRevokePublicUrLschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `FilesRevokePublicUrLschema` | `Models/FilesRevokePublicUrLschema.cs` |
+| `FilesRevokePublicUrlRequest` | `src/SlackWebApi/Requests/Files/FilesRevokePublicUrlRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `FilesRevokePublicUrLschema` | `src/SlackWebApi/Models/FilesRevokePublicUrLschema.cs` |
 
 ### FilesSharedPublicUrl
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesSharedPublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `token` — nullable, no default → **must pass explicitly**
-  - `file` — nullable, no default → **must pass explicitly**
+- **Signature**: `FilesSharedPublicUrl(FilesSharedPublicUrlRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `FilesSharedPublicUrLschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `FilesSharedPublicUrLschema` | `Models/FilesSharedPublicUrLschema.cs` |
+| `FilesSharedPublicUrlRequest` | `src/SlackWebApi/Requests/Files/FilesSharedPublicUrlRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `FilesSharedPublicUrLschema` | `src/SlackWebApi/Models/FilesSharedPublicUrLschema.cs` |
 
 ### FilesUpload
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `FilesUpload(ContentType contentType, string? token, string? file, string? content, string? filetype, string? filename, string? title, string? initialComment, string? channels, double? threadTs, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 9 params (`token` … `threadTs`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `FilesUpload(FilesUploadRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `ContentType`
 - **Returns**: `FilesUploadschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `FilesUploadschema` | `Models/FilesUploadschema.cs` |
+| `FilesUploadRequest` | `src/SlackWebApi/Requests/Files/FilesUploadRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `FilesUploadschema` | `src/SlackWebApi/Models/FilesUploadschema.cs` |
 

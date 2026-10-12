@@ -1,13 +1,15 @@
 # Reference
 
-> Source: [SlackWebApiClient](SlackWebApiClient.cs)
+Every operation below is shown in its throwing form. On an error status it throws `ApiException<TError>` — the status code, headers, content type and the operation's error type, `RawError` (the raw body) when the spec declares none — and where an operation offers an `…AsResult` sibling, that sibling returns `ApiResult<TResponse, TError>` instead. A request that produces no usable response surfaces as `SdkConnectionException` or `SdkTimeoutException`, a body that does not match the documented response type as `ResponseDeserializationException`, and a credential that cannot be applied as `AuthSchemeException`; all of them derive from `SdkException` and name the failed call. See [README → Error Handling](README.md#error-handling).
+
+> Source: [SlackWebApiClient](src/SlackWebApi/SlackWebApiClient.cs)
 
 ## Admin
 
-> Source: [Admin](Api/Admin.cs)
+> Source: [Admin](src/SlackWebApi/Api/Admin.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsApprove(string token, ContentType contentType, string? appId, string? requestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsApprove(AdminAppsApproveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -30,10 +32,14 @@ Approve an app for installation on a workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminAppsApprove(token, contentType, appId, requestId, teamId);
+    var response = await client.Admin.AdminAppsApprove(new AdminAppsApproveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -42,18 +48,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>appId</code> | <code>string?</code> | - |
-| <code>requestId</code> | <code>string?</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminAppsApproveRequest](src/SlackWebApi/Requests/AdminApps/AdminAppsApproveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -63,9 +63,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -76,7 +76,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsApprovedList(string token, int? limit, string? cursor, string? teamId, string? enterpriseId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsApprovedList(AdminAppsApprovedListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -99,10 +99,14 @@ List approved apps for an org or workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminAppsApprovedList(token, limit, cursor, teamId, enterpriseId, contentType);
+    var response = await client.Admin.AdminAppsApprovedList(new AdminAppsApprovedListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -111,19 +115,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:read` |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>teamId</code> | <code>string?</code> | - |
-| <code>enterpriseId</code> | <code>string?</code> | - |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminAppsApprovedListRequest](src/SlackWebApi/Requests/AdminAppsApproved/AdminAppsApprovedListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -133,9 +130,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -146,7 +143,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRequestsList(string token, int? limit, string? cursor, string? teamId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRequestsList(AdminAppsRequestsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -169,10 +166,14 @@ List app requests for a team/workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminAppsRequestsList(token, limit, cursor, teamId, contentType);
+    var response = await client.Admin.AdminAppsRequestsList(new AdminAppsRequestsListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -181,18 +182,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:read` |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>teamId</code> | <code>string?</code> | - |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminAppsRequestsListRequest](src/SlackWebApi/Requests/AdminAppsRequests/AdminAppsRequestsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -202,9 +197,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -215,7 +210,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRestrict(string token, ContentType contentType, string? appId, string? requestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRestrict(AdminAppsRestrictRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -238,10 +233,14 @@ Restrict an app for installation on a workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminAppsRestrict(token, contentType, appId, requestId, teamId);
+    var response = await client.Admin.AdminAppsRestrict(new AdminAppsRestrictRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -250,18 +249,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>appId</code> | <code>string?</code> | - |
-| <code>requestId</code> | <code>string?</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminAppsRestrictRequest](src/SlackWebApi/Requests/AdminApps/AdminAppsRestrictRequest.cs)</code>
 
 </dd>
 </dl>
@@ -271,9 +264,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -284,7 +277,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRestrictedList(string token, int? limit, string? cursor, string? teamId, string? enterpriseId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRestrictedList(AdminAppsRestrictedListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -307,10 +300,14 @@ List restricted apps for an org or workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminAppsRestrictedList(token, limit, cursor, teamId, enterpriseId, contentType);
+    var response = await client.Admin.AdminAppsRestrictedList(new AdminAppsRestrictedListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -319,19 +316,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:read` |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>teamId</code> | <code>string?</code> | - |
-| <code>enterpriseId</code> | <code>string?</code> | - |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminAppsRestrictedListRequest](src/SlackWebApi/Requests/AdminAppsRestricted/AdminAppsRestrictedListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -341,9 +331,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -354,7 +344,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsArchiveschema&gt; AdminConversationsArchive(string token, ContentType contentType, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsArchiveschema&gt; AdminConversationsArchive(AdminConversationsArchiveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -377,10 +367,15 @@ Archive a public or private channel.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsArchive(token, contentType, channelId);
+    var response = await client.Admin.AdminConversationsArchive(new AdminConversationsArchiveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsArchiveschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -389,16 +384,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsArchiveRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsArchiveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -408,9 +399,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsArchiveschema](Models/AdminConversationsArchiveschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsArchiveschema](src/SlackWebApi/Models/AdminConversationsArchiveschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -421,7 +412,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsConvertToPrivateschema&gt; AdminConversationsConvertToPrivate(string token, ContentType contentType, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsConvertToPrivateschema&gt; AdminConversationsConvertToPrivate(AdminConversationsConvertToPrivateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -444,10 +435,15 @@ Convert a public channel to a private channel.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsConvertToPrivate(token, contentType, channelId);
+    var response = await client.Admin.AdminConversationsConvertToPrivate(new AdminConversationsConvertToPrivateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsConvertToPrivateschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -456,16 +452,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsConvertToPrivateRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsConvertToPrivateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -475,9 +467,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsConvertToPrivateschema](Models/AdminConversationsConvertToPrivateschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsConvertToPrivateschema](src/SlackWebApi/Models/AdminConversationsConvertToPrivateschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -488,7 +480,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsCreateschema&gt; AdminConversationsCreate(string token, ContentType contentType, string name, bool isPrivate, string? description, bool? orgWide, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsCreateschema&gt; AdminConversationsCreate(AdminConversationsCreateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -511,16 +503,16 @@ Create a public or private channel-based conversation.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsCreate(token,
-        contentType,
-        name,
-        isPrivate,
-        description,
-        orgWide,
-        teamId);
+    var response = await client.Admin.AdminConversationsCreate(new AdminConversationsCreateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Name = "some example string",
+        IsPrivate = true,
+    });
     // TODO: Handle 'response' of type AdminConversationsCreateschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -529,20 +521,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>isPrivate</code> | <code>bool</code> | - |
-| <code>description</code> | <code>string?</code> | - |
-| <code>orgWide</code> | <code>bool?</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminConversationsCreateRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsCreateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -552,9 +536,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsCreateschema](Models/AdminConversationsCreateschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsCreateschema](src/SlackWebApi/Models/AdminConversationsCreateschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -565,7 +549,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsDeleteschema&gt; AdminConversationsDelete(string token, ContentType contentType, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsDeleteschema&gt; AdminConversationsDelete(AdminConversationsDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -588,10 +572,15 @@ Delete a public or private channel.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsDelete(token, contentType, channelId);
+    var response = await client.Admin.AdminConversationsDelete(new AdminConversationsDeleteRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsDeleteschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -600,16 +589,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsDeleteRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsDeleteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -619,9 +604,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsDeleteschema](Models/AdminConversationsDeleteschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsDeleteschema](src/SlackWebApi/Models/AdminConversationsDeleteschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -632,7 +617,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsRenameschema&gt; AdminConversationsDisconnectShared(string token, ContentType contentType, string channelId, string? leavingTeamIds, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsRenameschema&gt; AdminConversationsDisconnectShared(AdminConversationsDisconnectSharedRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -655,10 +640,15 @@ Disconnect a connected channel from one or more workspaces.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsDisconnectShared(token, contentType, channelId, leavingTeamIds);
+    var response = await client.Admin.AdminConversationsDisconnectShared(new AdminConversationsDisconnectSharedRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsRenameschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -667,17 +657,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>leavingTeamIds</code> | <code>string?</code> | - |
+<code>[AdminConversationsDisconnectSharedRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsDisconnectSharedRequest.cs)</code>
 
 </dd>
 </dl>
@@ -687,9 +672,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsRenameschema](Models/AdminConversationsRenameschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsRenameschema](src/SlackWebApi/Models/AdminConversationsRenameschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -700,7 +685,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsEkmListOriginalConnectedChannelInfo(string token, string? channelIds, string? teamIds, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsEkmListOriginalConnectedChannelInfo(AdminConversationsEkmListOriginalConnectedChannelInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -723,15 +708,15 @@ List all disconnected channels—i.e., channels that were once connected to othe
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsEkmListOriginalConnectedChannelInfo(token,
-        channelIds,
-        teamIds,
-        limit,
-        cursor,
-        contentType);
+    var response = await client.Admin.AdminConversationsEkmListOriginalConnectedChannelInfo(
+        new AdminConversationsEkmListOriginalConnectedChannelInfoRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -740,19 +725,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>channelIds</code> | <code>string?</code> | A comma-separated list of channels to filter to. |
-| <code>teamIds</code> | <code>string?</code> | A comma-separated list of the workspaces to which the channels you would like returned belong. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsEkmListOriginalConnectedChannelInfoRequest](src/SlackWebApi/Requests/AdminConversationsEkm/AdminConversationsEkmListOriginalConnectedChannelInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -762,9 +740,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -775,7 +753,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsGetConversationPrefsschema&gt; AdminConversationsGetConversationPrefs(string channelId, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsGetConversationPrefsschema&gt; AdminConversationsGetConversationPrefs(AdminConversationsGetConversationPrefsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -798,10 +776,16 @@ Get conversation preferences for a public or private channel.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsGetConversationPrefs(channelId, token, contentType);
+    var response = await client.Admin.AdminConversationsGetConversationPrefs(
+        new AdminConversationsGetConversationPrefsRequest
+        {
+            ChannelId = "some example string",
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type AdminConversationsGetConversationPrefsschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -810,16 +794,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>channelId</code> | <code>string</code> | The channel to get preferences for. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsGetConversationPrefsRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsGetConversationPrefsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -829,9 +809,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsGetConversationPrefsschema](Models/AdminConversationsGetConversationPrefsschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsGetConversationPrefsschema](src/SlackWebApi/Models/AdminConversationsGetConversationPrefsschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -842,7 +822,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsGetTeamsschema&gt; AdminConversationsGetTeams(string channelId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsGetTeamsschema&gt; AdminConversationsGetTeams(AdminConversationsGetTeamsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -865,10 +845,15 @@ Get all the workspaces a given public or private channel is connected to within 
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsGetTeams(channelId, cursor, limit, token, contentType);
+    var response = await client.Admin.AdminConversationsGetTeams(new AdminConversationsGetTeamsRequest
+    {
+        ChannelId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AdminConversationsGetTeamsschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -877,18 +862,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>channelId</code> | <code>string</code> | The channel to determine connected workspaces within the organization for. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsGetTeamsRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsGetTeamsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -898,9 +877,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsGetTeamsschema](Models/AdminConversationsGetTeamsschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsGetTeamsschema](src/SlackWebApi/Models/AdminConversationsGetTeamsschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -911,7 +890,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsInviteschema&gt; AdminConversationsInvite(string token, ContentType contentType, string userIds, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsInviteschema&gt; AdminConversationsInvite(AdminConversationsInviteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -934,10 +913,16 @@ Invite a user to a public or private channel.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsInvite(token, contentType, userIds, channelId);
+    var response = await client.Admin.AdminConversationsInvite(new AdminConversationsInviteRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UserIds = "some example string",
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsInviteschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -946,17 +931,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>userIds</code> | <code>string</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsInviteRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsInviteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -966,9 +946,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsInviteschema](Models/AdminConversationsInviteschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsInviteschema](src/SlackWebApi/Models/AdminConversationsInviteschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -979,7 +959,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsRenameschema1&gt; AdminConversationsRename(string token, ContentType contentType, string channelId, string name, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsRenameschema1&gt; AdminConversationsRename(AdminConversationsRenameRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1002,10 +982,16 @@ Rename a public or private channel.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsRename(token, contentType, channelId, name);
+    var response = await client.Admin.AdminConversationsRename(new AdminConversationsRenameRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+        Name = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsRenameschema1
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1014,17 +1000,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
+<code>[AdminConversationsRenameRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsRenameRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1034,9 +1015,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsRenameschema1](Models/AdminConversationsRenameschema1.cs)</code>
+**OnSuccess**: <code>[AdminConversationsRenameschema1](src/SlackWebApi/Models/AdminConversationsRenameschema1.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1047,7 +1028,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessAddGroup(ContentType contentType, string token, string groupId, string channelId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessAddGroup(AdminConversationsRestrictAccessAddGroupRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1070,14 +1051,17 @@ Add an allowlist of IDP groups for accessing a channel
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsRestrictAccessAddGroup(contentType,
-        token,
-        groupId,
-        channelId,
-        teamId);
+    var response = await client.Admin.AdminConversationsRestrictAccessAddGroup(
+        new AdminConversationsRestrictAccessAddGroupRequest
+        {
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            Token = "some example string",
+            GroupId = "some example string",
+            ChannelId = "some example string",
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1086,18 +1070,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>groupId</code> | <code>string</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminConversationsRestrictAccessAddGroupRequest](src/SlackWebApi/Requests/AdminConversationsRestrictAccess/AdminConversationsRestrictAccessAddGroupRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1107,9 +1085,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1120,7 +1098,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessListGroups(string token, string channelId, string? teamId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessListGroups(AdminConversationsRestrictAccessListGroupsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1143,10 +1121,16 @@ List all IDP Groups linked to a channel
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsRestrictAccessListGroups(token, channelId, teamId, contentType);
+    var response = await client.Admin.AdminConversationsRestrictAccessListGroups(
+        new AdminConversationsRestrictAccessListGroupsRequest
+        {
+            Token = "some example string",
+            ChannelId = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1155,17 +1139,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsRestrictAccessListGroupsRequest](src/SlackWebApi/Requests/AdminConversationsRestrictAccess/AdminConversationsRestrictAccessListGroupsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1175,9 +1154,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1188,7 +1167,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessRemoveGroup(ContentType contentType, string token, string teamId, string groupId, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessRemoveGroup(AdminConversationsRestrictAccessRemoveGroupRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1211,14 +1190,18 @@ Remove a linked IDP group linked from a private channel
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsRestrictAccessRemoveGroup(contentType,
-        token,
-        teamId,
-        groupId,
-        channelId);
+    var response = await client.Admin.AdminConversationsRestrictAccessRemoveGroup(
+        new AdminConversationsRestrictAccessRemoveGroupRequest
+        {
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            Token = "some example string",
+            TeamId = "some example string",
+            GroupId = "some example string",
+            ChannelId = "some example string",
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1227,18 +1210,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>groupId</code> | <code>string</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsRestrictAccessRemoveGroupRequest](src/SlackWebApi/Requests/AdminConversationsRestrictAccess/AdminConversationsRestrictAccessRemoveGroupRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1248,9 +1225,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1261,7 +1238,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsSearchschema&gt; AdminConversationsSearch(string? teamIds, string? query, int? limit, string? cursor, string? searchChannelTypes, string? sort, string? sortDir, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsSearchschema&gt; AdminConversationsSearch(AdminConversationsSearchRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1284,18 +1261,14 @@ Search for public or private channels in an Enterprise organization.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsSearch(teamIds,
-        query,
-        limit,
-        cursor,
-        searchChannelTypes,
-        sort,
-        sortDir,
-        token,
-        contentType);
+    var response = await client.Admin.AdminConversationsSearch(new AdminConversationsSearchRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AdminConversationsSearchschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1304,22 +1277,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamIds</code> | <code>string?</code> | Comma separated string of team IDs, signifying the workspaces to search through. |
-| <code>query</code> | <code>string?</code> | Name of the the channel to query by. |
-| <code>limit</code> | <code>int?</code> | Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>searchChannelTypes</code> | <code>string?</code> | The type of channel to include or exclude in the search. For example `private` will search private channels, while `private_exclude` will exclude them. For a full list of types, check the [Types section](#types). |
-| <code>sort</code> | <code>string?</code> | Possible values are `relevant` (search ranking based on what we think is closest), `name` (alphabetical), `member_count` (number of users in the channel), and `created` (date channel was created). You can optionally pair this with the `sort_dir` arg to change how it is sorted |
-| <code>sortDir</code> | <code>string?</code> | Sort direction. Possible values are `asc` for ascending order like (1, 2, 3) or (a, b, c), and `desc` for descending order like (3, 2, 1) or (c, b, a) |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsSearchRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsSearchRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1329,9 +1292,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsSearchschema](Models/AdminConversationsSearchschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsSearchschema](src/SlackWebApi/Models/AdminConversationsSearchschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1342,7 +1305,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsSetConversationPrefsschema&gt; AdminConversationsSetConversationPrefs(string token, ContentType contentType, string channelId, string prefs, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsSetConversationPrefsschema&gt; AdminConversationsSetConversationPrefs(AdminConversationsSetConversationPrefsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1365,10 +1328,17 @@ Set the posting permissions for a public or private channel.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsSetConversationPrefs(token, contentType, channelId, prefs);
+    var response = await client.Admin.AdminConversationsSetConversationPrefs(
+        new AdminConversationsSetConversationPrefsRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            ChannelId = "some example string",
+            Prefs = "some example string",
+        });
     // TODO: Handle 'response' of type AdminConversationsSetConversationPrefsschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1377,17 +1347,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>prefs</code> | <code>string</code> | - |
+<code>[AdminConversationsSetConversationPrefsRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsSetConversationPrefsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1397,9 +1362,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsSetConversationPrefsschema](Models/AdminConversationsSetConversationPrefsschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsSetConversationPrefsschema](src/SlackWebApi/Models/AdminConversationsSetConversationPrefsschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1410,7 +1375,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsSetTeams(string token, ContentType contentType, string channelId, string? teamId, string? targetTeamIds, bool? orgChannel, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsSetTeams(AdminConversationsSetTeamsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1433,15 +1398,15 @@ Set the workspaces in an Enterprise grid org that connect to a public or private
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsSetTeams(token,
-        contentType,
-        channelId,
-        teamId,
-        targetTeamIds,
-        orgChannel);
+    var response = await client.Admin.AdminConversationsSetTeams(new AdminConversationsSetTeamsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1450,19 +1415,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
-| <code>targetTeamIds</code> | <code>string?</code> | - |
-| <code>orgChannel</code> | <code>bool?</code> | - |
+<code>[AdminConversationsSetTeamsRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsSetTeamsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1472,9 +1430,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1485,7 +1443,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsUnarchiveschema&gt; AdminConversationsUnarchive(string token, ContentType contentType, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsUnarchiveschema&gt; AdminConversationsUnarchive(AdminConversationsUnarchiveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1508,10 +1466,15 @@ Unarchive a public or private channel.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminConversationsUnarchive(token, contentType, channelId);
+    var response = await client.Admin.AdminConversationsUnarchive(new AdminConversationsUnarchiveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsUnarchiveschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1520,16 +1483,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsUnarchiveRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsUnarchiveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1539,9 +1498,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsUnarchiveschema](Models/AdminConversationsUnarchiveschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsUnarchiveschema](src/SlackWebApi/Models/AdminConversationsUnarchiveschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1552,7 +1511,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiAdd(ContentType contentType, string token, string name, string url, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiAdd(AdminEmojiAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1575,10 +1534,16 @@ Add an emoji.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminEmojiAdd(contentType, token, name, url);
+    var response = await client.Admin.AdminEmojiAdd(new AdminEmojiAddRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        Name = "some example string",
+        Url = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1587,17 +1552,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>url</code> | <code>string</code> | - |
+<code>[AdminEmojiAddRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1607,9 +1567,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1620,7 +1580,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiAddAlias(ContentType contentType, string token, string name, string aliasFor, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiAddAlias(AdminEmojiAddAliasRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1643,10 +1603,16 @@ Add an emoji alias.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminEmojiAddAlias(contentType, token, name, aliasFor);
+    var response = await client.Admin.AdminEmojiAddAlias(new AdminEmojiAddAliasRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        Name = "some example string",
+        AliasFor = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1655,17 +1621,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>aliasFor</code> | <code>string</code> | - |
+<code>[AdminEmojiAddAliasRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiAddAliasRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1675,9 +1636,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1688,7 +1649,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiList(AdminEmojiListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1711,10 +1672,14 @@ List emoji for an Enterprise Grid organization.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminEmojiList(token, cursor, limit, contentType);
+    var response = await client.Admin.AdminEmojiList(new AdminEmojiListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1723,17 +1688,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminEmojiListRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1743,9 +1703,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1756,7 +1716,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiRemove(ContentType contentType, string token, string name, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiRemove(AdminEmojiRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1779,10 +1739,15 @@ Remove an emoji across an Enterprise Grid organization
 ```csharp
 try
 {
-    var response = await client.Admin.AdminEmojiRemove(contentType, token, name);
+    var response = await client.Admin.AdminEmojiRemove(new AdminEmojiRemoveRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        Name = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1791,16 +1756,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
+<code>[AdminEmojiRemoveRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1810,9 +1771,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1823,7 +1784,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiRename(ContentType contentType, string token, string name, string newName, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiRename(AdminEmojiRenameRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1846,10 +1807,16 @@ Rename an emoji.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminEmojiRename(contentType, token, name, newName);
+    var response = await client.Admin.AdminEmojiRename(new AdminEmojiRenameRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        Name = "some example string",
+        NewName = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1858,17 +1825,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>newName</code> | <code>string</code> | - |
+<code>[AdminEmojiRenameRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiRenameRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1878,9 +1840,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1891,7 +1853,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsApprove(string token, ContentType contentType, string inviteRequestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsApprove(AdminInviteRequestsApproveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1914,10 +1876,15 @@ Approve a workspace invite request.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminInviteRequestsApprove(token, contentType, inviteRequestId, teamId);
+    var response = await client.Admin.AdminInviteRequestsApprove(new AdminInviteRequestsApproveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        InviteRequestId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1926,17 +1893,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>inviteRequestId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminInviteRequestsApproveRequest](src/SlackWebApi/Requests/AdminInviteRequests/AdminInviteRequestsApproveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -1946,9 +1908,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -1959,7 +1921,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsApprovedList(string? teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsApprovedList(AdminInviteRequestsApprovedListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -1982,10 +1944,14 @@ List all approved workspace invite requests.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminInviteRequestsApprovedList(teamId, cursor, limit, token, contentType);
+    var response = await client.Admin.AdminInviteRequestsApprovedList(new AdminInviteRequestsApprovedListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -1994,18 +1960,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string?</code> | ID for the workspace where the invite requests were made. |
-| <code>cursor</code> | <code>string?</code> | Value of the `next_cursor` field sent as part of the previous API response |
-| <code>limit</code> | <code>int?</code> | The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminInviteRequestsApprovedListRequest](src/SlackWebApi/Requests/AdminInviteRequestsApproved/AdminInviteRequestsApprovedListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2015,9 +1975,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2028,7 +1988,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsDeniedList(string? teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsDeniedList(AdminInviteRequestsDeniedListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2051,10 +2011,14 @@ List all denied workspace invite requests.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminInviteRequestsDeniedList(teamId, cursor, limit, token, contentType);
+    var response = await client.Admin.AdminInviteRequestsDeniedList(new AdminInviteRequestsDeniedListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2063,18 +2027,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string?</code> | ID for the workspace where the invite requests were made. |
-| <code>cursor</code> | <code>string?</code> | Value of the `next_cursor` field sent as part of the previous api response |
-| <code>limit</code> | <code>int?</code> | The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminInviteRequestsDeniedListRequest](src/SlackWebApi/Requests/AdminInviteRequestsDenied/AdminInviteRequestsDeniedListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2084,9 +2042,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2097,7 +2055,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsDeny(string token, ContentType contentType, string inviteRequestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsDeny(AdminInviteRequestsDenyRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2120,10 +2078,15 @@ Deny a workspace invite request.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminInviteRequestsDeny(token, contentType, inviteRequestId, teamId);
+    var response = await client.Admin.AdminInviteRequestsDeny(new AdminInviteRequestsDenyRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        InviteRequestId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2132,17 +2095,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>inviteRequestId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminInviteRequestsDenyRequest](src/SlackWebApi/Requests/AdminInviteRequests/AdminInviteRequestsDenyRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2152,9 +2110,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2165,7 +2123,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsList(string? teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsList(AdminInviteRequestsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2188,10 +2146,14 @@ List all pending workspace invite requests.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminInviteRequestsList(teamId, cursor, limit, token, contentType);
+    var response = await client.Admin.AdminInviteRequestsList(new AdminInviteRequestsListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2200,18 +2162,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string?</code> | ID for the workspace where the invite requests were made. |
-| <code>cursor</code> | <code>string?</code> | Value of the `next_cursor` field sent as part of the previous API response |
-| <code>limit</code> | <code>int?</code> | The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminInviteRequestsListRequest](src/SlackWebApi/Requests/AdminInviteRequests/AdminInviteRequestsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2221,9 +2177,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2234,7 +2190,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsAdminsList(string token, string teamId, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsAdminsList(AdminTeamsAdminsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2257,10 +2213,15 @@ List all of the admins on a given workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsAdminsList(token, teamId, limit, cursor, contentType);
+    var response = await client.Admin.AdminTeamsAdminsList(new AdminTeamsAdminsListRequest
+    {
+        Token = "some example string",
+        TeamId = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2269,18 +2230,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminTeamsAdminsListRequest](src/SlackWebApi/Requests/AdminTeamsAdmins/AdminTeamsAdminsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2290,9 +2245,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2303,7 +2258,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsCreate(string token, ContentType contentType, string teamDomain, string teamName, string? teamDescription, string? teamDiscoverability, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsCreate(AdminTeamsCreateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2326,15 +2281,16 @@ Create an Enterprise team.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsCreate(token,
-        contentType,
-        teamDomain,
-        teamName,
-        teamDescription,
-        teamDiscoverability);
+    var response = await client.Admin.AdminTeamsCreate(new AdminTeamsCreateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamDomain = "some example string",
+        TeamName = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2343,19 +2299,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamDomain</code> | <code>string</code> | - |
-| <code>teamName</code> | <code>string</code> | - |
-| <code>teamDescription</code> | <code>string?</code> | - |
-| <code>teamDiscoverability</code> | <code>string?</code> | - |
+<code>[AdminTeamsCreateRequest](src/SlackWebApi/Requests/AdminTeams/AdminTeamsCreateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2365,9 +2314,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2378,7 +2327,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsList(int? limit, string? cursor, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsList(AdminTeamsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2401,10 +2350,14 @@ List all teams on an Enterprise organization
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsList(limit, cursor, token, contentType);
+    var response = await client.Admin.AdminTeamsList(new AdminTeamsListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2413,17 +2366,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 100 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminTeamsListRequest](src/SlackWebApi/Requests/AdminTeams/AdminTeamsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2433,9 +2381,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2446,7 +2394,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsOwnersList(string token, string teamId, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsOwnersList(AdminTeamsOwnersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2469,10 +2417,15 @@ List all of the owners on a given workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsOwnersList(token, teamId, limit, cursor, contentType);
+    var response = await client.Admin.AdminTeamsOwnersList(new AdminTeamsOwnersListRequest
+    {
+        Token = "some example string",
+        TeamId = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2481,18 +2434,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminTeamsOwnersListRequest](src/SlackWebApi/Requests/AdminTeamsOwners/AdminTeamsOwnersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2502,9 +2449,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2515,7 +2462,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsInfo(string teamId, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsInfo(AdminTeamsSettingsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2538,10 +2485,15 @@ Fetch information about settings in a workspace
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsSettingsInfo(teamId, token, contentType);
+    var response = await client.Admin.AdminTeamsSettingsInfo(new AdminTeamsSettingsInfoRequest
+    {
+        TeamId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2550,16 +2502,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminTeamsSettingsInfoRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2569,9 +2517,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2582,7 +2530,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDefaultChannels(ContentType contentType, string token, string teamId, string channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDefaultChannels(AdminTeamsSettingsSetDefaultChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2605,10 +2553,17 @@ Set the default channels of a workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsSettingsSetDefaultChannels(contentType, token, teamId, channelIds);
+    var response = await client.Admin.AdminTeamsSettingsSetDefaultChannels(
+        new AdminTeamsSettingsSetDefaultChannelsRequest
+        {
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            Token = "some example string",
+            TeamId = "some example string",
+            ChannelIds = "some example string",
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2617,17 +2572,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>channelIds</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetDefaultChannelsRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetDefaultChannelsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2637,9 +2587,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2650,7 +2600,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDescription(string token, ContentType contentType, string teamId, string description, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDescription(AdminTeamsSettingsSetDescriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2673,10 +2623,16 @@ Set the description of a given workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsSettingsSetDescription(token, contentType, teamId, description);
+    var response = await client.Admin.AdminTeamsSettingsSetDescription(new AdminTeamsSettingsSetDescriptionRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        Description = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2685,17 +2641,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>description</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetDescriptionRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetDescriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2705,9 +2656,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2718,7 +2669,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDiscoverability(string token, ContentType contentType, string teamId, string discoverability, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDiscoverability(AdminTeamsSettingsSetDiscoverabilityRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2741,10 +2692,17 @@ An API method that allows admins to set the discoverability of a given workspace
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsSettingsSetDiscoverability(token, contentType, teamId, discoverability);
+    var response = await client.Admin.AdminTeamsSettingsSetDiscoverability(
+        new AdminTeamsSettingsSetDiscoverabilityRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            TeamId = "some example string",
+            Discoverability = "some example string",
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2753,17 +2711,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>discoverability</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetDiscoverabilityRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetDiscoverabilityRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2773,9 +2726,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2786,7 +2739,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetIcon(ContentType contentType, string token, string imageUrl, string teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetIcon(AdminTeamsSettingsSetIconRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2809,10 +2762,16 @@ Sets the icon of a workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsSettingsSetIcon(contentType, token, imageUrl, teamId);
+    var response = await client.Admin.AdminTeamsSettingsSetIcon(new AdminTeamsSettingsSetIconRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        ImageUrl = "some example string",
+        TeamId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2821,17 +2780,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>imageUrl</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetIconRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetIconRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2841,9 +2795,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2854,7 +2808,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetName(string token, ContentType contentType, string teamId, string name, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetName(AdminTeamsSettingsSetNameRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2877,10 +2831,16 @@ Set the name of a given workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminTeamsSettingsSetName(token, contentType, teamId, name);
+    var response = await client.Admin.AdminTeamsSettingsSetName(new AdminTeamsSettingsSetNameRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        Name = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2889,17 +2849,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetNameRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetNameRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2909,9 +2864,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2922,7 +2877,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsAddChannels(string token, ContentType contentType, string usergroupId, string channelIds, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsAddChannels(AdminUsergroupsAddChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -2945,10 +2900,16 @@ Add one or more default channels to an IDP group.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsergroupsAddChannels(token, contentType, usergroupId, channelIds, teamId);
+    var response = await client.Admin.AdminUsergroupsAddChannels(new AdminUsergroupsAddChannelsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UsergroupId = "some example string",
+        ChannelIds = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -2957,18 +2918,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroupId</code> | <code>string</code> | - |
-| <code>channelIds</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminUsergroupsAddChannelsRequest](src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsAddChannelsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -2978,9 +2933,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -2991,7 +2946,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsAddTeams(string token, ContentType contentType, string usergroupId, string teamIds, bool? autoProvision, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsAddTeams(AdminUsergroupsAddTeamsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3014,10 +2969,16 @@ Associate one or more default workspaces with an organization-wide IDP group.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsergroupsAddTeams(token, contentType, usergroupId, teamIds, autoProvision);
+    var response = await client.Admin.AdminUsergroupsAddTeams(new AdminUsergroupsAddTeamsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UsergroupId = "some example string",
+        TeamIds = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3026,18 +2987,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroupId</code> | <code>string</code> | - |
-| <code>teamIds</code> | <code>string</code> | - |
-| <code>autoProvision</code> | <code>bool?</code> | - |
+<code>[AdminUsergroupsAddTeamsRequest](src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsAddTeamsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3047,9 +3002,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3060,7 +3015,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsListChannels(string usergroupId, string? teamId, bool? includeNumMembers, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsListChannels(AdminUsergroupsListChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3083,14 +3038,15 @@ List the channels linked to an org-level IDP group (user group).
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsergroupsListChannels(usergroupId,
-        teamId,
-        includeNumMembers,
-        token,
-        contentType);
+    var response = await client.Admin.AdminUsergroupsListChannels(new AdminUsergroupsListChannelsRequest
+    {
+        UsergroupId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3099,18 +3055,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>usergroupId</code> | <code>string</code> | ID of the IDP group to list default channels for. |
-| <code>teamId</code> | <code>string?</code> | ID of the the workspace. |
-| <code>includeNumMembers</code> | <code>bool?</code> | Flag to include or exclude the count of members per channel. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.usergroups:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminUsergroupsListChannelsRequest](src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsListChannelsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3120,9 +3070,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3133,7 +3083,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsRemoveChannels(string token, ContentType contentType, string usergroupId, string channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsRemoveChannels(AdminUsergroupsRemoveChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3156,10 +3106,16 @@ Remove one or more default channels from an org-level IDP group (user group).
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsergroupsRemoveChannels(token, contentType, usergroupId, channelIds);
+    var response = await client.Admin.AdminUsergroupsRemoveChannels(new AdminUsergroupsRemoveChannelsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UsergroupId = "some example string",
+        ChannelIds = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3168,17 +3124,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroupId</code> | <code>string</code> | - |
-| <code>channelIds</code> | <code>string</code> | - |
+<code>[AdminUsergroupsRemoveChannelsRequest](src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsRemoveChannelsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3188,9 +3139,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3201,7 +3152,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersAssign(string token, ContentType contentType, string teamId, string userId, bool? isRestricted, bool? isUltraRestricted, string? channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersAssign(AdminUsersAssignRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3224,16 +3175,16 @@ Add an Enterprise user to a workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersAssign(token,
-        contentType,
-        teamId,
-        userId,
-        isRestricted,
-        isUltraRestricted,
-        channelIds);
+    var response = await client.Admin.AdminUsersAssign(new AdminUsersAssignRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3242,20 +3193,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
-| <code>isRestricted</code> | <code>bool?</code> | - |
-| <code>isUltraRestricted</code> | <code>bool?</code> | - |
-| <code>channelIds</code> | <code>string?</code> | - |
+<code>[AdminUsersAssignRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersAssignRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3265,9 +3208,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3278,7 +3221,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersInvite(string token, ContentType contentType, string teamId, string email, string channelIds, string? customMessage, string? realName, bool? resend, bool? isRestricted, bool? isUltraRestricted, string? guestExpirationTs, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersInvite(AdminUsersInviteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3301,20 +3244,17 @@ Invite a user to a workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersInvite(token,
-        contentType,
-        teamId,
-        email,
-        channelIds,
-        customMessage,
-        realName,
-        resend,
-        isRestricted,
-        isUltraRestricted,
-        guestExpirationTs);
+    var response = await client.Admin.AdminUsersInvite(new AdminUsersInviteRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        Email = "some example string",
+        ChannelIds = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3323,24 +3263,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>email</code> | <code>string</code> | - |
-| <code>channelIds</code> | <code>string</code> | - |
-| <code>customMessage</code> | <code>string?</code> | - |
-| <code>realName</code> | <code>string?</code> | - |
-| <code>resend</code> | <code>bool?</code> | - |
-| <code>isRestricted</code> | <code>bool?</code> | - |
-| <code>isUltraRestricted</code> | <code>bool?</code> | - |
-| <code>guestExpirationTs</code> | <code>string?</code> | - |
+<code>[AdminUsersInviteRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersInviteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3350,9 +3278,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3363,7 +3291,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersList(string teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersList(AdminUsersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3386,10 +3314,15 @@ List users on a workspace
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersList(teamId, cursor, limit, token, contentType);
+    var response = await client.Admin.AdminUsersList(new AdminUsersListRequest
+    {
+        TeamId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3398,18 +3331,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string</code> | The ID (`T1234`) of the workspace. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>limit</code> | <code>int?</code> | Limit for how many users to be retrieved per page |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminUsersListRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3419,9 +3346,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3432,7 +3359,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersRemove(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersRemove(AdminUsersRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3455,10 +3382,16 @@ Remove a user from a workspace.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersRemove(token, contentType, teamId, userId);
+    var response = await client.Admin.AdminUsersRemove(new AdminUsersRemoveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3467,17 +3400,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
+<code>[AdminUsersRemoveRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3487,9 +3415,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3500,7 +3428,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSessionInvalidate(string token, ContentType contentType, string teamId, int sessionId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSessionInvalidate(AdminUsersSessionInvalidateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3523,10 +3451,16 @@ Invalidate a single session for a user by session_id
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersSessionInvalidate(token, contentType, teamId, sessionId);
+    var response = await client.Admin.AdminUsersSessionInvalidate(new AdminUsersSessionInvalidateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        SessionId = 1,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3535,17 +3469,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>sessionId</code> | <code>int</code> | - |
+<code>[AdminUsersSessionInvalidateRequest](src/SlackWebApi/Requests/AdminUsersSession/AdminUsersSessionInvalidateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3555,9 +3484,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3568,7 +3497,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSessionReset(string token, ContentType contentType, string userId, bool? mobileOnly, bool? webOnly, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSessionReset(AdminUsersSessionResetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3591,10 +3520,15 @@ Wipes all valid sessions on all devices for a given user
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersSessionReset(token, contentType, userId, mobileOnly, webOnly);
+    var response = await client.Admin.AdminUsersSessionReset(new AdminUsersSessionResetRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3603,18 +3537,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>userId</code> | <code>string</code> | - |
-| <code>mobileOnly</code> | <code>bool?</code> | - |
-| <code>webOnly</code> | <code>bool?</code> | - |
+<code>[AdminUsersSessionResetRequest](src/SlackWebApi/Requests/AdminUsersSession/AdminUsersSessionResetRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3624,9 +3552,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3637,7 +3565,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetAdmin(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetAdmin(AdminUsersSetAdminRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3660,10 +3588,16 @@ Set an existing guest, regular user, or owner to be an admin user.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersSetAdmin(token, contentType, teamId, userId);
+    var response = await client.Admin.AdminUsersSetAdmin(new AdminUsersSetAdminRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3672,17 +3606,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
+<code>[AdminUsersSetAdminRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersSetAdminRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3692,9 +3621,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3705,7 +3634,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetExpiration(string token, ContentType contentType, string teamId, string userId, int expirationTs, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetExpiration(AdminUsersSetExpirationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3728,10 +3657,17 @@ Set an expiration for a guest user
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersSetExpiration(token, contentType, teamId, userId, expirationTs);
+    var response = await client.Admin.AdminUsersSetExpiration(new AdminUsersSetExpirationRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+        ExpirationTs = 1,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3740,18 +3676,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
-| <code>expirationTs</code> | <code>int</code> | - |
+<code>[AdminUsersSetExpirationRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersSetExpirationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3761,9 +3691,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3774,7 +3704,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetOwner(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetOwner(AdminUsersSetOwnerRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3797,10 +3727,16 @@ Set an existing guest, regular user, or admin user to be a workspace owner.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersSetOwner(token, contentType, teamId, userId);
+    var response = await client.Admin.AdminUsersSetOwner(new AdminUsersSetOwnerRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3809,17 +3745,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
+<code>[AdminUsersSetOwnerRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersSetOwnerRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3829,9 +3760,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3842,7 +3773,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetRegular(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetRegular(AdminUsersSetRegularRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3865,10 +3796,16 @@ Set an existing guest user, admin user, or owner to be a regular user.
 ```csharp
 try
 {
-    var response = await client.Admin.AdminUsersSetRegular(token, contentType, teamId, userId);
+    var response = await client.Admin.AdminUsersSetRegular(new AdminUsersSetRegularRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3877,17 +3814,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
+<code>[AdminUsersSetRegularRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersSetRegularRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3897,9 +3829,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3911,10 +3843,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminApps
 
-> Source: [AdminApps](Api/AdminApps.cs)
+> Source: [AdminApps](src/SlackWebApi/Api/AdminApps.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsApprove(string token, ContentType contentType, string? appId, string? requestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsApprove(AdminAppsApproveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -3937,10 +3869,14 @@ Approve an app for installation on a workspace.
 ```csharp
 try
 {
-    var response = await client.AdminApps.AdminAppsApprove(token, contentType, appId, requestId, teamId);
+    var response = await client.AdminApps.AdminAppsApprove(new AdminAppsApproveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -3949,18 +3885,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>appId</code> | <code>string?</code> | - |
-| <code>requestId</code> | <code>string?</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminAppsApproveRequest](src/SlackWebApi/Requests/AdminApps/AdminAppsApproveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -3970,9 +3900,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -3983,7 +3913,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRestrict(string token, ContentType contentType, string? appId, string? requestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRestrict(AdminAppsRestrictRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4006,10 +3936,14 @@ Restrict an app for installation on a workspace.
 ```csharp
 try
 {
-    var response = await client.AdminApps.AdminAppsRestrict(token, contentType, appId, requestId, teamId);
+    var response = await client.AdminApps.AdminAppsRestrict(new AdminAppsRestrictRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4018,18 +3952,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>appId</code> | <code>string?</code> | - |
-| <code>requestId</code> | <code>string?</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminAppsRestrictRequest](src/SlackWebApi/Requests/AdminApps/AdminAppsRestrictRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4039,9 +3967,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4053,10 +3981,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminAppsApproved
 
-> Source: [AdminAppsApproved](Api/AdminAppsApproved.cs)
+> Source: [AdminAppsApproved](src/SlackWebApi/Api/AdminAppsApproved.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsApprovedList(string token, int? limit, string? cursor, string? teamId, string? enterpriseId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsApprovedList(AdminAppsApprovedListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4079,15 +4007,14 @@ List approved apps for an org or workspace.
 ```csharp
 try
 {
-    var response = await client.AdminAppsApproved.AdminAppsApprovedList(token,
-        limit,
-        cursor,
-        teamId,
-        enterpriseId,
-        contentType);
+    var response = await client.AdminAppsApproved.AdminAppsApprovedList(new AdminAppsApprovedListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4096,19 +4023,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:read` |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>teamId</code> | <code>string?</code> | - |
-| <code>enterpriseId</code> | <code>string?</code> | - |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminAppsApprovedListRequest](src/SlackWebApi/Requests/AdminAppsApproved/AdminAppsApprovedListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4118,9 +4038,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4132,10 +4052,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminAppsRequests
 
-> Source: [AdminAppsRequests](Api/AdminAppsRequests.cs)
+> Source: [AdminAppsRequests](src/SlackWebApi/Api/AdminAppsRequests.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRequestsList(string token, int? limit, string? cursor, string? teamId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRequestsList(AdminAppsRequestsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4158,10 +4078,14 @@ List app requests for a team/workspace.
 ```csharp
 try
 {
-    var response = await client.AdminAppsRequests.AdminAppsRequestsList(token, limit, cursor, teamId, contentType);
+    var response = await client.AdminAppsRequests.AdminAppsRequestsList(new AdminAppsRequestsListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4170,18 +4094,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:read` |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>teamId</code> | <code>string?</code> | - |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminAppsRequestsListRequest](src/SlackWebApi/Requests/AdminAppsRequests/AdminAppsRequestsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4191,9 +4109,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4205,10 +4123,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminAppsRestricted
 
-> Source: [AdminAppsRestricted](Api/AdminAppsRestricted.cs)
+> Source: [AdminAppsRestricted](src/SlackWebApi/Api/AdminAppsRestricted.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRestrictedList(string token, int? limit, string? cursor, string? teamId, string? enterpriseId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminAppsRestrictedList(AdminAppsRestrictedListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4231,15 +4149,14 @@ List restricted apps for an org or workspace.
 ```csharp
 try
 {
-    var response = await client.AdminAppsRestricted.AdminAppsRestrictedList(token,
-        limit,
-        cursor,
-        teamId,
-        enterpriseId,
-        contentType);
+    var response = await client.AdminAppsRestricted.AdminAppsRestrictedList(new AdminAppsRestrictedListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4248,19 +4165,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.apps:read` |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>teamId</code> | <code>string?</code> | - |
-| <code>enterpriseId</code> | <code>string?</code> | - |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminAppsRestrictedListRequest](src/SlackWebApi/Requests/AdminAppsRestricted/AdminAppsRestrictedListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4270,9 +4180,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4284,10 +4194,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminConversations
 
-> Source: [AdminConversations](Api/AdminConversations.cs)
+> Source: [AdminConversations](src/SlackWebApi/Api/AdminConversations.cs)
 
 <details>
-<summary><code>Task&lt;AdminConversationsArchiveschema&gt; AdminConversationsArchive(string token, ContentType contentType, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsArchiveschema&gt; AdminConversationsArchive(AdminConversationsArchiveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4310,10 +4220,15 @@ Archive a public or private channel.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsArchive(token, contentType, channelId);
+    var response = await client.AdminConversations.AdminConversationsArchive(new AdminConversationsArchiveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsArchiveschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4322,16 +4237,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsArchiveRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsArchiveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4341,9 +4252,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsArchiveschema](Models/AdminConversationsArchiveschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsArchiveschema](src/SlackWebApi/Models/AdminConversationsArchiveschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4354,7 +4265,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsConvertToPrivateschema&gt; AdminConversationsConvertToPrivate(string token, ContentType contentType, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsConvertToPrivateschema&gt; AdminConversationsConvertToPrivate(AdminConversationsConvertToPrivateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4377,10 +4288,16 @@ Convert a public channel to a private channel.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsConvertToPrivate(token, contentType, channelId);
+    var response = await client.AdminConversations.AdminConversationsConvertToPrivate(
+        new AdminConversationsConvertToPrivateRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            ChannelId = "some example string",
+        });
     // TODO: Handle 'response' of type AdminConversationsConvertToPrivateschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4389,16 +4306,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsConvertToPrivateRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsConvertToPrivateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4408,9 +4321,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsConvertToPrivateschema](Models/AdminConversationsConvertToPrivateschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsConvertToPrivateschema](src/SlackWebApi/Models/AdminConversationsConvertToPrivateschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4421,7 +4334,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsCreateschema&gt; AdminConversationsCreate(string token, ContentType contentType, string name, bool isPrivate, string? description, bool? orgWide, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsCreateschema&gt; AdminConversationsCreate(AdminConversationsCreateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4444,16 +4357,16 @@ Create a public or private channel-based conversation.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsCreate(token,
-        contentType,
-        name,
-        isPrivate,
-        description,
-        orgWide,
-        teamId);
+    var response = await client.AdminConversations.AdminConversationsCreate(new AdminConversationsCreateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Name = "some example string",
+        IsPrivate = true,
+    });
     // TODO: Handle 'response' of type AdminConversationsCreateschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4462,20 +4375,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>isPrivate</code> | <code>bool</code> | - |
-| <code>description</code> | <code>string?</code> | - |
-| <code>orgWide</code> | <code>bool?</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminConversationsCreateRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsCreateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4485,9 +4390,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsCreateschema](Models/AdminConversationsCreateschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsCreateschema](src/SlackWebApi/Models/AdminConversationsCreateschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4498,7 +4403,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsDeleteschema&gt; AdminConversationsDelete(string token, ContentType contentType, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsDeleteschema&gt; AdminConversationsDelete(AdminConversationsDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4521,10 +4426,15 @@ Delete a public or private channel.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsDelete(token, contentType, channelId);
+    var response = await client.AdminConversations.AdminConversationsDelete(new AdminConversationsDeleteRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsDeleteschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4533,16 +4443,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsDeleteRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsDeleteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4552,9 +4458,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsDeleteschema](Models/AdminConversationsDeleteschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsDeleteschema](src/SlackWebApi/Models/AdminConversationsDeleteschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4565,7 +4471,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsRenameschema&gt; AdminConversationsDisconnectShared(string token, ContentType contentType, string channelId, string? leavingTeamIds, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsRenameschema&gt; AdminConversationsDisconnectShared(AdminConversationsDisconnectSharedRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4588,13 +4494,16 @@ Disconnect a connected channel from one or more workspaces.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsDisconnectShared(token,
-        contentType,
-        channelId,
-        leavingTeamIds);
+    var response = await client.AdminConversations.AdminConversationsDisconnectShared(
+        new AdminConversationsDisconnectSharedRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            ChannelId = "some example string",
+        });
     // TODO: Handle 'response' of type AdminConversationsRenameschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4603,17 +4512,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>leavingTeamIds</code> | <code>string?</code> | - |
+<code>[AdminConversationsDisconnectSharedRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsDisconnectSharedRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4623,9 +4527,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsRenameschema](Models/AdminConversationsRenameschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsRenameschema](src/SlackWebApi/Models/AdminConversationsRenameschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4636,7 +4540,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsGetConversationPrefsschema&gt; AdminConversationsGetConversationPrefs(string channelId, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsGetConversationPrefsschema&gt; AdminConversationsGetConversationPrefs(AdminConversationsGetConversationPrefsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4659,12 +4563,16 @@ Get conversation preferences for a public or private channel.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsGetConversationPrefs(channelId,
-        token,
-        contentType);
+    var response = await client.AdminConversations.AdminConversationsGetConversationPrefs(
+        new AdminConversationsGetConversationPrefsRequest
+        {
+            ChannelId = "some example string",
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type AdminConversationsGetConversationPrefsschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4673,16 +4581,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>channelId</code> | <code>string</code> | The channel to get preferences for. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsGetConversationPrefsRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsGetConversationPrefsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4692,9 +4596,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsGetConversationPrefsschema](Models/AdminConversationsGetConversationPrefsschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsGetConversationPrefsschema](src/SlackWebApi/Models/AdminConversationsGetConversationPrefsschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4705,7 +4609,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsGetTeamsschema&gt; AdminConversationsGetTeams(string channelId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsGetTeamsschema&gt; AdminConversationsGetTeams(AdminConversationsGetTeamsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4728,14 +4632,15 @@ Get all the workspaces a given public or private channel is connected to within 
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsGetTeams(channelId,
-        cursor,
-        limit,
-        token,
-        contentType);
+    var response = await client.AdminConversations.AdminConversationsGetTeams(new AdminConversationsGetTeamsRequest
+    {
+        ChannelId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AdminConversationsGetTeamsschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4744,18 +4649,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>channelId</code> | <code>string</code> | The channel to determine connected workspaces within the organization for. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsGetTeamsRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsGetTeamsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4765,9 +4664,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsGetTeamsschema](Models/AdminConversationsGetTeamsschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsGetTeamsschema](src/SlackWebApi/Models/AdminConversationsGetTeamsschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4778,7 +4677,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsInviteschema&gt; AdminConversationsInvite(string token, ContentType contentType, string userIds, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsInviteschema&gt; AdminConversationsInvite(AdminConversationsInviteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4801,10 +4700,16 @@ Invite a user to a public or private channel.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsInvite(token, contentType, userIds, channelId);
+    var response = await client.AdminConversations.AdminConversationsInvite(new AdminConversationsInviteRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UserIds = "some example string",
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsInviteschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4813,17 +4718,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>userIds</code> | <code>string</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsInviteRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsInviteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4833,9 +4733,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsInviteschema](Models/AdminConversationsInviteschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsInviteschema](src/SlackWebApi/Models/AdminConversationsInviteschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4846,7 +4746,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsRenameschema1&gt; AdminConversationsRename(string token, ContentType contentType, string channelId, string name, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsRenameschema1&gt; AdminConversationsRename(AdminConversationsRenameRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4869,10 +4769,16 @@ Rename a public or private channel.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsRename(token, contentType, channelId, name);
+    var response = await client.AdminConversations.AdminConversationsRename(new AdminConversationsRenameRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+        Name = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsRenameschema1
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4881,17 +4787,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
+<code>[AdminConversationsRenameRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsRenameRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4901,9 +4802,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsRenameschema1](Models/AdminConversationsRenameschema1.cs)</code>
+**OnSuccess**: <code>[AdminConversationsRenameschema1](src/SlackWebApi/Models/AdminConversationsRenameschema1.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4914,7 +4815,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsSearchschema&gt; AdminConversationsSearch(string? teamIds, string? query, int? limit, string? cursor, string? searchChannelTypes, string? sort, string? sortDir, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsSearchschema&gt; AdminConversationsSearch(AdminConversationsSearchRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -4937,18 +4838,14 @@ Search for public or private channels in an Enterprise organization.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsSearch(teamIds,
-        query,
-        limit,
-        cursor,
-        searchChannelTypes,
-        sort,
-        sortDir,
-        token,
-        contentType);
+    var response = await client.AdminConversations.AdminConversationsSearch(new AdminConversationsSearchRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AdminConversationsSearchschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -4957,22 +4854,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamIds</code> | <code>string?</code> | Comma separated string of team IDs, signifying the workspaces to search through. |
-| <code>query</code> | <code>string?</code> | Name of the the channel to query by. |
-| <code>limit</code> | <code>int?</code> | Maximum number of items to be returned. Must be between 1 - 20 both inclusive. Default is 10. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>searchChannelTypes</code> | <code>string?</code> | The type of channel to include or exclude in the search. For example `private` will search private channels, while `private_exclude` will exclude them. For a full list of types, check the [Types section](#types). |
-| <code>sort</code> | <code>string?</code> | Possible values are `relevant` (search ranking based on what we think is closest), `name` (alphabetical), `member_count` (number of users in the channel), and `created` (date channel was created). You can optionally pair this with the `sort_dir` arg to change how it is sorted |
-| <code>sortDir</code> | <code>string?</code> | Sort direction. Possible values are `asc` for ascending order like (1, 2, 3) or (a, b, c), and `desc` for descending order like (3, 2, 1) or (c, b, a) |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsSearchRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsSearchRequest.cs)</code>
 
 </dd>
 </dl>
@@ -4982,9 +4869,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsSearchschema](Models/AdminConversationsSearchschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsSearchschema](src/SlackWebApi/Models/AdminConversationsSearchschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -4995,7 +4882,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsSetConversationPrefsschema&gt; AdminConversationsSetConversationPrefs(string token, ContentType contentType, string channelId, string prefs, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsSetConversationPrefsschema&gt; AdminConversationsSetConversationPrefs(AdminConversationsSetConversationPrefsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5018,13 +4905,17 @@ Set the posting permissions for a public or private channel.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsSetConversationPrefs(token,
-        contentType,
-        channelId,
-        prefs);
+    var response = await client.AdminConversations.AdminConversationsSetConversationPrefs(
+        new AdminConversationsSetConversationPrefsRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            ChannelId = "some example string",
+            Prefs = "some example string",
+        });
     // TODO: Handle 'response' of type AdminConversationsSetConversationPrefsschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5033,17 +4924,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>prefs</code> | <code>string</code> | - |
+<code>[AdminConversationsSetConversationPrefsRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsSetConversationPrefsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5053,9 +4939,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsSetConversationPrefsschema](Models/AdminConversationsSetConversationPrefsschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsSetConversationPrefsschema](src/SlackWebApi/Models/AdminConversationsSetConversationPrefsschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5066,7 +4952,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsSetTeams(string token, ContentType contentType, string channelId, string? teamId, string? targetTeamIds, bool? orgChannel, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsSetTeams(AdminConversationsSetTeamsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5089,15 +4975,15 @@ Set the workspaces in an Enterprise grid org that connect to a public or private
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsSetTeams(token,
-        contentType,
-        channelId,
-        teamId,
-        targetTeamIds,
-        orgChannel);
+    var response = await client.AdminConversations.AdminConversationsSetTeams(new AdminConversationsSetTeamsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5106,19 +4992,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
-| <code>targetTeamIds</code> | <code>string?</code> | - |
-| <code>orgChannel</code> | <code>bool?</code> | - |
+<code>[AdminConversationsSetTeamsRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsSetTeamsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5128,9 +5007,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5141,7 +5020,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AdminConversationsUnarchiveschema&gt; AdminConversationsUnarchive(string token, ContentType contentType, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AdminConversationsUnarchiveschema&gt; AdminConversationsUnarchive(AdminConversationsUnarchiveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5164,10 +5043,15 @@ Unarchive a public or private channel.
 ```csharp
 try
 {
-    var response = await client.AdminConversations.AdminConversationsUnarchive(token, contentType, channelId);
+    var response = await client.AdminConversations.AdminConversationsUnarchive(new AdminConversationsUnarchiveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ChannelId = "some example string",
+    });
     // TODO: Handle 'response' of type AdminConversationsUnarchiveschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5176,16 +5060,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsUnarchiveRequest](src/SlackWebApi/Requests/AdminConversations/AdminConversationsUnarchiveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5195,9 +5075,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AdminConversationsUnarchiveschema](Models/AdminConversationsUnarchiveschema.cs)</code>
+**OnSuccess**: <code>[AdminConversationsUnarchiveschema](src/SlackWebApi/Models/AdminConversationsUnarchiveschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5209,10 +5089,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminConversationsEkm
 
-> Source: [AdminConversationsEkm](Api/AdminConversationsEkm.cs)
+> Source: [AdminConversationsEkm](src/SlackWebApi/Api/AdminConversationsEkm.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsEkmListOriginalConnectedChannelInfo(string token, string? channelIds, string? teamIds, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsEkmListOriginalConnectedChannelInfo(AdminConversationsEkmListOriginalConnectedChannelInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5235,15 +5115,15 @@ List all disconnected channels—i.e., channels that were once connected to othe
 ```csharp
 try
 {
-    var response = await client.AdminConversationsEkm.AdminConversationsEkmListOriginalConnectedChannelInfo(token,
-        channelIds,
-        teamIds,
-        limit,
-        cursor,
-        contentType);
+    var response = await client.AdminConversationsEkm.AdminConversationsEkmListOriginalConnectedChannelInfo(
+        new AdminConversationsEkmListOriginalConnectedChannelInfoRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5252,19 +5132,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>channelIds</code> | <code>string?</code> | A comma-separated list of channels to filter to. |
-| <code>teamIds</code> | <code>string?</code> | A comma-separated list of the workspaces to which the channels you would like returned belong. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsEkmListOriginalConnectedChannelInfoRequest](src/SlackWebApi/Requests/AdminConversationsEkm/AdminConversationsEkmListOriginalConnectedChannelInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5274,9 +5147,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5288,10 +5161,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminConversationsRestrictAccess
 
-> Source: [AdminConversationsRestrictAccess](Api/AdminConversationsRestrictAccess.cs)
+> Source: [AdminConversationsRestrictAccess](src/SlackWebApi/Api/AdminConversationsRestrictAccess.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessAddGroup(ContentType contentType, string token, string groupId, string channelId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessAddGroup(AdminConversationsRestrictAccessAddGroupRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5314,14 +5187,17 @@ Add an allowlist of IDP groups for accessing a channel
 ```csharp
 try
 {
-    var response = await client.AdminConversationsRestrictAccess.AdminConversationsRestrictAccessAddGroup(contentType,
-        token,
-        groupId,
-        channelId,
-        teamId);
+    var response = await client.AdminConversationsRestrictAccess.AdminConversationsRestrictAccessAddGroup(
+        new AdminConversationsRestrictAccessAddGroupRequest
+        {
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            Token = "some example string",
+            GroupId = "some example string",
+            ChannelId = "some example string",
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5330,18 +5206,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>groupId</code> | <code>string</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminConversationsRestrictAccessAddGroupRequest](src/SlackWebApi/Requests/AdminConversationsRestrictAccess/AdminConversationsRestrictAccessAddGroupRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5351,9 +5221,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5364,7 +5234,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessListGroups(string token, string channelId, string? teamId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessListGroups(AdminConversationsRestrictAccessListGroupsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5387,13 +5257,16 @@ List all IDP Groups linked to a channel
 ```csharp
 try
 {
-    var response = await client.AdminConversationsRestrictAccess.AdminConversationsRestrictAccessListGroups(token,
-        channelId,
-        teamId,
-        contentType);
+    var response = await client.AdminConversationsRestrictAccess.AdminConversationsRestrictAccessListGroups(
+        new AdminConversationsRestrictAccessListGroupsRequest
+        {
+            Token = "some example string",
+            ChannelId = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5402,17 +5275,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.conversations:read` |
-| <code>channelId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | The workspace where the channel exists. This argument is required for channels only tied to one workspace, and optional for channels that are shared across an organization. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminConversationsRestrictAccessListGroupsRequest](src/SlackWebApi/Requests/AdminConversationsRestrictAccess/AdminConversationsRestrictAccessListGroupsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5422,9 +5290,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5435,7 +5303,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessRemoveGroup(ContentType contentType, string token, string teamId, string groupId, string channelId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminConversationsRestrictAccessRemoveGroup(AdminConversationsRestrictAccessRemoveGroupRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5458,14 +5326,18 @@ Remove a linked IDP group linked from a private channel
 ```csharp
 try
 {
-    var response = await client.AdminConversationsRestrictAccess.AdminConversationsRestrictAccessRemoveGroup(contentType,
-        token,
-        teamId,
-        groupId,
-        channelId);
+    var response = await client.AdminConversationsRestrictAccess.AdminConversationsRestrictAccessRemoveGroup(
+        new AdminConversationsRestrictAccessRemoveGroupRequest
+        {
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            Token = "some example string",
+            TeamId = "some example string",
+            GroupId = "some example string",
+            ChannelId = "some example string",
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5474,18 +5346,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>groupId</code> | <code>string</code> | - |
-| <code>channelId</code> | <code>string</code> | - |
+<code>[AdminConversationsRestrictAccessRemoveGroupRequest](src/SlackWebApi/Requests/AdminConversationsRestrictAccess/AdminConversationsRestrictAccessRemoveGroupRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5495,9 +5361,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5509,10 +5375,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminEmoji
 
-> Source: [AdminEmoji](Api/AdminEmoji.cs)
+> Source: [AdminEmoji](src/SlackWebApi/Api/AdminEmoji.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiAdd(ContentType contentType, string token, string name, string url, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiAdd(AdminEmojiAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5535,10 +5401,16 @@ Add an emoji.
 ```csharp
 try
 {
-    var response = await client.AdminEmoji.AdminEmojiAdd(contentType, token, name, url);
+    var response = await client.AdminEmoji.AdminEmojiAdd(new AdminEmojiAddRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        Name = "some example string",
+        Url = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5547,17 +5419,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>url</code> | <code>string</code> | - |
+<code>[AdminEmojiAddRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5567,9 +5434,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5580,7 +5447,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiAddAlias(ContentType contentType, string token, string name, string aliasFor, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiAddAlias(AdminEmojiAddAliasRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5603,10 +5470,16 @@ Add an emoji alias.
 ```csharp
 try
 {
-    var response = await client.AdminEmoji.AdminEmojiAddAlias(contentType, token, name, aliasFor);
+    var response = await client.AdminEmoji.AdminEmojiAddAlias(new AdminEmojiAddAliasRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        Name = "some example string",
+        AliasFor = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5615,17 +5488,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>aliasFor</code> | <code>string</code> | - |
+<code>[AdminEmojiAddAliasRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiAddAliasRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5635,9 +5503,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5648,7 +5516,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiList(AdminEmojiListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5671,10 +5539,14 @@ List emoji for an Enterprise Grid organization.
 ```csharp
 try
 {
-    var response = await client.AdminEmoji.AdminEmojiList(token, cursor, limit, contentType);
+    var response = await client.AdminEmoji.AdminEmojiList(new AdminEmojiListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5683,17 +5555,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminEmojiListRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5703,9 +5570,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5716,7 +5583,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiRemove(ContentType contentType, string token, string name, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiRemove(AdminEmojiRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5739,10 +5606,15 @@ Remove an emoji across an Enterprise Grid organization
 ```csharp
 try
 {
-    var response = await client.AdminEmoji.AdminEmojiRemove(contentType, token, name);
+    var response = await client.AdminEmoji.AdminEmojiRemove(new AdminEmojiRemoveRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        Name = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5751,16 +5623,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
+<code>[AdminEmojiRemoveRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5770,9 +5638,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5783,7 +5651,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiRename(ContentType contentType, string token, string name, string newName, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminEmojiRename(AdminEmojiRenameRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5806,10 +5674,16 @@ Rename an emoji.
 ```csharp
 try
 {
-    var response = await client.AdminEmoji.AdminEmojiRename(contentType, token, name, newName);
+    var response = await client.AdminEmoji.AdminEmojiRename(new AdminEmojiRenameRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        Name = "some example string",
+        NewName = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5818,17 +5692,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>newName</code> | <code>string</code> | - |
+<code>[AdminEmojiRenameRequest](src/SlackWebApi/Requests/AdminEmoji/AdminEmojiRenameRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5838,9 +5707,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5852,10 +5721,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminInviteRequests
 
-> Source: [AdminInviteRequests](Api/AdminInviteRequests.cs)
+> Source: [AdminInviteRequests](src/SlackWebApi/Api/AdminInviteRequests.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsApprove(string token, ContentType contentType, string inviteRequestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsApprove(AdminInviteRequestsApproveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5878,13 +5747,15 @@ Approve a workspace invite request.
 ```csharp
 try
 {
-    var response = await client.AdminInviteRequests.AdminInviteRequestsApprove(token,
-        contentType,
-        inviteRequestId,
-        teamId);
+    var response = await client.AdminInviteRequests.AdminInviteRequestsApprove(new AdminInviteRequestsApproveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        InviteRequestId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5893,17 +5764,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>inviteRequestId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminInviteRequestsApproveRequest](src/SlackWebApi/Requests/AdminInviteRequests/AdminInviteRequestsApproveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5913,9 +5779,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5926,7 +5792,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsDeny(string token, ContentType contentType, string inviteRequestId, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsDeny(AdminInviteRequestsDenyRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -5949,13 +5815,15 @@ Deny a workspace invite request.
 ```csharp
 try
 {
-    var response = await client.AdminInviteRequests.AdminInviteRequestsDeny(token,
-        contentType,
-        inviteRequestId,
-        teamId);
+    var response = await client.AdminInviteRequests.AdminInviteRequestsDeny(new AdminInviteRequestsDenyRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        InviteRequestId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -5964,17 +5832,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>inviteRequestId</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminInviteRequestsDenyRequest](src/SlackWebApi/Requests/AdminInviteRequests/AdminInviteRequestsDenyRequest.cs)</code>
 
 </dd>
 </dl>
@@ -5984,9 +5847,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -5997,7 +5860,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsList(string? teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsList(AdminInviteRequestsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6020,10 +5883,14 @@ List all pending workspace invite requests.
 ```csharp
 try
 {
-    var response = await client.AdminInviteRequests.AdminInviteRequestsList(teamId, cursor, limit, token, contentType);
+    var response = await client.AdminInviteRequests.AdminInviteRequestsList(new AdminInviteRequestsListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6032,18 +5899,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string?</code> | ID for the workspace where the invite requests were made. |
-| <code>cursor</code> | <code>string?</code> | Value of the `next_cursor` field sent as part of the previous API response |
-| <code>limit</code> | <code>int?</code> | The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminInviteRequestsListRequest](src/SlackWebApi/Requests/AdminInviteRequests/AdminInviteRequestsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6053,9 +5914,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6067,10 +5928,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminInviteRequestsApproved
 
-> Source: [AdminInviteRequestsApproved](Api/AdminInviteRequestsApproved.cs)
+> Source: [AdminInviteRequestsApproved](src/SlackWebApi/Api/AdminInviteRequestsApproved.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsApprovedList(string? teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsApprovedList(AdminInviteRequestsApprovedListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6093,14 +5954,15 @@ List all approved workspace invite requests.
 ```csharp
 try
 {
-    var response = await client.AdminInviteRequestsApproved.AdminInviteRequestsApprovedList(teamId,
-        cursor,
-        limit,
-        token,
-        contentType);
+    var response = await client.AdminInviteRequestsApproved.AdminInviteRequestsApprovedList(
+        new AdminInviteRequestsApprovedListRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6109,18 +5971,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string?</code> | ID for the workspace where the invite requests were made. |
-| <code>cursor</code> | <code>string?</code> | Value of the `next_cursor` field sent as part of the previous API response |
-| <code>limit</code> | <code>int?</code> | The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminInviteRequestsApprovedListRequest](src/SlackWebApi/Requests/AdminInviteRequestsApproved/AdminInviteRequestsApprovedListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6130,9 +5986,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6144,10 +6000,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminInviteRequestsDenied
 
-> Source: [AdminInviteRequestsDenied](Api/AdminInviteRequestsDenied.cs)
+> Source: [AdminInviteRequestsDenied](src/SlackWebApi/Api/AdminInviteRequestsDenied.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsDeniedList(string? teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminInviteRequestsDeniedList(AdminInviteRequestsDeniedListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6170,14 +6026,15 @@ List all denied workspace invite requests.
 ```csharp
 try
 {
-    var response = await client.AdminInviteRequestsDenied.AdminInviteRequestsDeniedList(teamId,
-        cursor,
-        limit,
-        token,
-        contentType);
+    var response = await client.AdminInviteRequestsDenied.AdminInviteRequestsDeniedList(
+        new AdminInviteRequestsDeniedListRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6186,18 +6043,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string?</code> | ID for the workspace where the invite requests were made. |
-| <code>cursor</code> | <code>string?</code> | Value of the `next_cursor` field sent as part of the previous api response |
-| <code>limit</code> | <code>int?</code> | The number of results that will be returned by the API on each invocation. Must be between 1 - 1000 both inclusive |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.invites:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminInviteRequestsDeniedListRequest](src/SlackWebApi/Requests/AdminInviteRequestsDenied/AdminInviteRequestsDeniedListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6207,9 +6058,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6221,10 +6072,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminTeams
 
-> Source: [AdminTeams](Api/AdminTeams.cs)
+> Source: [AdminTeams](src/SlackWebApi/Api/AdminTeams.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsCreate(string token, ContentType contentType, string teamDomain, string teamName, string? teamDescription, string? teamDiscoverability, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsCreate(AdminTeamsCreateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6247,15 +6098,16 @@ Create an Enterprise team.
 ```csharp
 try
 {
-    var response = await client.AdminTeams.AdminTeamsCreate(token,
-        contentType,
-        teamDomain,
-        teamName,
-        teamDescription,
-        teamDiscoverability);
+    var response = await client.AdminTeams.AdminTeamsCreate(new AdminTeamsCreateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamDomain = "some example string",
+        TeamName = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6264,19 +6116,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamDomain</code> | <code>string</code> | - |
-| <code>teamName</code> | <code>string</code> | - |
-| <code>teamDescription</code> | <code>string?</code> | - |
-| <code>teamDiscoverability</code> | <code>string?</code> | - |
+<code>[AdminTeamsCreateRequest](src/SlackWebApi/Requests/AdminTeams/AdminTeamsCreateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6286,9 +6131,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6299,7 +6144,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsList(int? limit, string? cursor, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsList(AdminTeamsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6322,10 +6167,14 @@ List all teams on an Enterprise organization
 ```csharp
 try
 {
-    var response = await client.AdminTeams.AdminTeamsList(limit, cursor, token, contentType);
+    var response = await client.AdminTeams.AdminTeamsList(new AdminTeamsListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6334,17 +6183,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 100 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminTeamsListRequest](src/SlackWebApi/Requests/AdminTeams/AdminTeamsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6354,9 +6198,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6368,10 +6212,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminTeamsAdmins
 
-> Source: [AdminTeamsAdmins](Api/AdminTeamsAdmins.cs)
+> Source: [AdminTeamsAdmins](src/SlackWebApi/Api/AdminTeamsAdmins.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsAdminsList(string token, string teamId, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsAdminsList(AdminTeamsAdminsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6394,10 +6238,15 @@ List all of the admins on a given workspace.
 ```csharp
 try
 {
-    var response = await client.AdminTeamsAdmins.AdminTeamsAdminsList(token, teamId, limit, cursor, contentType);
+    var response = await client.AdminTeamsAdmins.AdminTeamsAdminsList(new AdminTeamsAdminsListRequest
+    {
+        Token = "some example string",
+        TeamId = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6406,18 +6255,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminTeamsAdminsListRequest](src/SlackWebApi/Requests/AdminTeamsAdmins/AdminTeamsAdminsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6427,9 +6270,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6441,10 +6284,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminTeamsOwners
 
-> Source: [AdminTeamsOwners](Api/AdminTeamsOwners.cs)
+> Source: [AdminTeamsOwners](src/SlackWebApi/Api/AdminTeamsOwners.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsOwnersList(string token, string teamId, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsOwnersList(AdminTeamsOwnersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6467,10 +6310,15 @@ List all of the owners on a given workspace.
 ```csharp
 try
 {
-    var response = await client.AdminTeamsOwners.AdminTeamsOwnersList(token, teamId, limit, cursor, contentType);
+    var response = await client.AdminTeamsOwners.AdminTeamsOwnersList(new AdminTeamsOwnersListRequest
+    {
+        Token = "some example string",
+        TeamId = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6479,18 +6327,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Must be between 1 - 1000 both inclusive. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminTeamsOwnersListRequest](src/SlackWebApi/Requests/AdminTeamsOwners/AdminTeamsOwnersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6500,9 +6342,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6514,10 +6356,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminTeamsSettings
 
-> Source: [AdminTeamsSettings](Api/AdminTeamsSettings.cs)
+> Source: [AdminTeamsSettings](src/SlackWebApi/Api/AdminTeamsSettings.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsInfo(string teamId, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsInfo(AdminTeamsSettingsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6540,10 +6382,15 @@ Fetch information about settings in a workspace
 ```csharp
 try
 {
-    var response = await client.AdminTeamsSettings.AdminTeamsSettingsInfo(teamId, token, contentType);
+    var response = await client.AdminTeamsSettings.AdminTeamsSettingsInfo(new AdminTeamsSettingsInfoRequest
+    {
+        TeamId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6552,16 +6399,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminTeamsSettingsInfoRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6571,9 +6414,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6584,7 +6427,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDefaultChannels(ContentType contentType, string token, string teamId, string channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDefaultChannels(AdminTeamsSettingsSetDefaultChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6607,13 +6450,17 @@ Set the default channels of a workspace.
 ```csharp
 try
 {
-    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetDefaultChannels(contentType,
-        token,
-        teamId,
-        channelIds);
+    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetDefaultChannels(
+        new AdminTeamsSettingsSetDefaultChannelsRequest
+        {
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            Token = "some example string",
+            TeamId = "some example string",
+            ChannelIds = "some example string",
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6622,17 +6469,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>channelIds</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetDefaultChannelsRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetDefaultChannelsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6642,9 +6484,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6655,7 +6497,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDescription(string token, ContentType contentType, string teamId, string description, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDescription(AdminTeamsSettingsSetDescriptionRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6678,13 +6520,17 @@ Set the description of a given workspace.
 ```csharp
 try
 {
-    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetDescription(token,
-        contentType,
-        teamId,
-        description);
+    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetDescription(
+        new AdminTeamsSettingsSetDescriptionRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            TeamId = "some example string",
+            Description = "some example string",
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6693,17 +6539,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>description</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetDescriptionRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetDescriptionRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6713,9 +6554,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6726,7 +6567,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDiscoverability(string token, ContentType contentType, string teamId, string discoverability, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetDiscoverability(AdminTeamsSettingsSetDiscoverabilityRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6749,13 +6590,17 @@ An API method that allows admins to set the discoverability of a given workspace
 ```csharp
 try
 {
-    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetDiscoverability(token,
-        contentType,
-        teamId,
-        discoverability);
+    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetDiscoverability(
+        new AdminTeamsSettingsSetDiscoverabilityRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+            TeamId = "some example string",
+            Discoverability = "some example string",
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6764,17 +6609,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>discoverability</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetDiscoverabilityRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetDiscoverabilityRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6784,9 +6624,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6797,7 +6637,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetIcon(ContentType contentType, string token, string imageUrl, string teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetIcon(AdminTeamsSettingsSetIconRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6820,10 +6660,16 @@ Sets the icon of a workspace.
 ```csharp
 try
 {
-    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetIcon(contentType, token, imageUrl, teamId);
+    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetIcon(new AdminTeamsSettingsSetIconRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        ImageUrl = "some example string",
+        TeamId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6832,17 +6678,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>imageUrl</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetIconRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetIconRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6852,9 +6693,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6865,7 +6706,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetName(string token, ContentType contentType, string teamId, string name, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminTeamsSettingsSetName(AdminTeamsSettingsSetNameRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6888,10 +6729,16 @@ Set the name of a given workspace.
 ```csharp
 try
 {
-    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetName(token, contentType, teamId, name);
+    var response = await client.AdminTeamsSettings.AdminTeamsSettingsSetName(new AdminTeamsSettingsSetNameRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        Name = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6900,17 +6747,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
+<code>[AdminTeamsSettingsSetNameRequest](src/SlackWebApi/Requests/AdminTeamsSettings/AdminTeamsSettingsSetNameRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6920,9 +6762,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -6934,10 +6776,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminUsergroups
 
-> Source: [AdminUsergroups](Api/AdminUsergroups.cs)
+> Source: [AdminUsergroups](src/SlackWebApi/Api/AdminUsergroups.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsAddChannels(string token, ContentType contentType, string usergroupId, string channelIds, string? teamId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsAddChannels(AdminUsergroupsAddChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -6960,14 +6802,16 @@ Add one or more default channels to an IDP group.
 ```csharp
 try
 {
-    var response = await client.AdminUsergroups.AdminUsergroupsAddChannels(token,
-        contentType,
-        usergroupId,
-        channelIds,
-        teamId);
+    var response = await client.AdminUsergroups.AdminUsergroupsAddChannels(new AdminUsergroupsAddChannelsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UsergroupId = "some example string",
+        ChannelIds = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -6976,18 +6820,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroupId</code> | <code>string</code> | - |
-| <code>channelIds</code> | <code>string</code> | - |
-| <code>teamId</code> | <code>string?</code> | - |
+<code>[AdminUsergroupsAddChannelsRequest](src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsAddChannelsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -6997,9 +6835,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7010,7 +6848,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsAddTeams(string token, ContentType contentType, string usergroupId, string teamIds, bool? autoProvision, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsAddTeams(AdminUsergroupsAddTeamsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7033,14 +6871,16 @@ Associate one or more default workspaces with an organization-wide IDP group.
 ```csharp
 try
 {
-    var response = await client.AdminUsergroups.AdminUsergroupsAddTeams(token,
-        contentType,
-        usergroupId,
-        teamIds,
-        autoProvision);
+    var response = await client.AdminUsergroups.AdminUsergroupsAddTeams(new AdminUsergroupsAddTeamsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UsergroupId = "some example string",
+        TeamIds = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7049,18 +6889,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.teams:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroupId</code> | <code>string</code> | - |
-| <code>teamIds</code> | <code>string</code> | - |
-| <code>autoProvision</code> | <code>bool?</code> | - |
+<code>[AdminUsergroupsAddTeamsRequest](src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsAddTeamsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7070,9 +6904,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7083,7 +6917,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsListChannels(string usergroupId, string? teamId, bool? includeNumMembers, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsListChannels(AdminUsergroupsListChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7106,14 +6940,15 @@ List the channels linked to an org-level IDP group (user group).
 ```csharp
 try
 {
-    var response = await client.AdminUsergroups.AdminUsergroupsListChannels(usergroupId,
-        teamId,
-        includeNumMembers,
-        token,
-        contentType);
+    var response = await client.AdminUsergroups.AdminUsergroupsListChannels(new AdminUsergroupsListChannelsRequest
+    {
+        UsergroupId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7122,18 +6957,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>usergroupId</code> | <code>string</code> | ID of the IDP group to list default channels for. |
-| <code>teamId</code> | <code>string?</code> | ID of the the workspace. |
-| <code>includeNumMembers</code> | <code>bool?</code> | Flag to include or exclude the count of members per channel. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.usergroups:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminUsergroupsListChannelsRequest](src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsListChannelsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7143,9 +6972,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7156,7 +6985,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsRemoveChannels(string token, ContentType contentType, string usergroupId, string channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsergroupsRemoveChannels(AdminUsergroupsRemoveChannelsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7179,13 +7008,16 @@ Remove one or more default channels from an org-level IDP group (user group).
 ```csharp
 try
 {
-    var response = await client.AdminUsergroups.AdminUsergroupsRemoveChannels(token,
-        contentType,
-        usergroupId,
-        channelIds);
+    var response = await client.AdminUsergroups.AdminUsergroupsRemoveChannels(new AdminUsergroupsRemoveChannelsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UsergroupId = "some example string",
+        ChannelIds = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7194,17 +7026,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroupId</code> | <code>string</code> | - |
-| <code>channelIds</code> | <code>string</code> | - |
+<code>[AdminUsergroupsRemoveChannelsRequest](src/SlackWebApi/Requests/AdminUsergroups/AdminUsergroupsRemoveChannelsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7214,9 +7041,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7228,10 +7055,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminUsers
 
-> Source: [AdminUsers](Api/AdminUsers.cs)
+> Source: [AdminUsers](src/SlackWebApi/Api/AdminUsers.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersAssign(string token, ContentType contentType, string teamId, string userId, bool? isRestricted, bool? isUltraRestricted, string? channelIds, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersAssign(AdminUsersAssignRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7254,16 +7081,16 @@ Add an Enterprise user to a workspace.
 ```csharp
 try
 {
-    var response = await client.AdminUsers.AdminUsersAssign(token,
-        contentType,
-        teamId,
-        userId,
-        isRestricted,
-        isUltraRestricted,
-        channelIds);
+    var response = await client.AdminUsers.AdminUsersAssign(new AdminUsersAssignRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7272,20 +7099,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
-| <code>isRestricted</code> | <code>bool?</code> | - |
-| <code>isUltraRestricted</code> | <code>bool?</code> | - |
-| <code>channelIds</code> | <code>string?</code> | - |
+<code>[AdminUsersAssignRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersAssignRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7295,9 +7114,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7308,7 +7127,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersInvite(string token, ContentType contentType, string teamId, string email, string channelIds, string? customMessage, string? realName, bool? resend, bool? isRestricted, bool? isUltraRestricted, string? guestExpirationTs, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersInvite(AdminUsersInviteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7331,20 +7150,17 @@ Invite a user to a workspace.
 ```csharp
 try
 {
-    var response = await client.AdminUsers.AdminUsersInvite(token,
-        contentType,
-        teamId,
-        email,
-        channelIds,
-        customMessage,
-        realName,
-        resend,
-        isRestricted,
-        isUltraRestricted,
-        guestExpirationTs);
+    var response = await client.AdminUsers.AdminUsersInvite(new AdminUsersInviteRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        Email = "some example string",
+        ChannelIds = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7353,24 +7169,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>email</code> | <code>string</code> | - |
-| <code>channelIds</code> | <code>string</code> | - |
-| <code>customMessage</code> | <code>string?</code> | - |
-| <code>realName</code> | <code>string?</code> | - |
-| <code>resend</code> | <code>bool?</code> | - |
-| <code>isRestricted</code> | <code>bool?</code> | - |
-| <code>isUltraRestricted</code> | <code>bool?</code> | - |
-| <code>guestExpirationTs</code> | <code>string?</code> | - |
+<code>[AdminUsersInviteRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersInviteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7380,9 +7184,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7393,7 +7197,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersList(string teamId, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersList(AdminUsersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7416,10 +7220,15 @@ List users on a workspace
 ```csharp
 try
 {
-    var response = await client.AdminUsers.AdminUsersList(teamId, cursor, limit, token, contentType);
+    var response = await client.AdminUsers.AdminUsersList(new AdminUsersListRequest
+    {
+        TeamId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7428,18 +7237,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>teamId</code> | <code>string</code> | The ID (`T1234`) of the workspace. |
-| <code>cursor</code> | <code>string?</code> | Set `cursor` to `next_cursor` returned by the previous call to list items in the next page. |
-| <code>limit</code> | <code>int?</code> | Limit for how many users to be retrieved per page |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AdminUsersListRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7449,9 +7252,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7462,7 +7265,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersRemove(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersRemove(AdminUsersRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7485,10 +7288,16 @@ Remove a user from a workspace.
 ```csharp
 try
 {
-    var response = await client.AdminUsers.AdminUsersRemove(token, contentType, teamId, userId);
+    var response = await client.AdminUsers.AdminUsersRemove(new AdminUsersRemoveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7497,17 +7306,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
+<code>[AdminUsersRemoveRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7517,9 +7321,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7530,7 +7334,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetAdmin(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetAdmin(AdminUsersSetAdminRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7553,10 +7357,16 @@ Set an existing guest, regular user, or owner to be an admin user.
 ```csharp
 try
 {
-    var response = await client.AdminUsers.AdminUsersSetAdmin(token, contentType, teamId, userId);
+    var response = await client.AdminUsers.AdminUsersSetAdmin(new AdminUsersSetAdminRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7565,17 +7375,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
+<code>[AdminUsersSetAdminRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersSetAdminRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7585,9 +7390,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7598,7 +7403,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetExpiration(string token, ContentType contentType, string teamId, string userId, int expirationTs, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetExpiration(AdminUsersSetExpirationRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7621,10 +7426,17 @@ Set an expiration for a guest user
 ```csharp
 try
 {
-    var response = await client.AdminUsers.AdminUsersSetExpiration(token, contentType, teamId, userId, expirationTs);
+    var response = await client.AdminUsers.AdminUsersSetExpiration(new AdminUsersSetExpirationRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+        ExpirationTs = 1,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7633,18 +7445,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
-| <code>expirationTs</code> | <code>int</code> | - |
+<code>[AdminUsersSetExpirationRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersSetExpirationRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7654,9 +7460,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7667,7 +7473,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetOwner(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetOwner(AdminUsersSetOwnerRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7690,10 +7496,16 @@ Set an existing guest, regular user, or admin user to be a workspace owner.
 ```csharp
 try
 {
-    var response = await client.AdminUsers.AdminUsersSetOwner(token, contentType, teamId, userId);
+    var response = await client.AdminUsers.AdminUsersSetOwner(new AdminUsersSetOwnerRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7702,17 +7514,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
+<code>[AdminUsersSetOwnerRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersSetOwnerRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7722,9 +7529,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7735,7 +7542,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetRegular(string token, ContentType contentType, string teamId, string userId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSetRegular(AdminUsersSetRegularRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7758,10 +7565,16 @@ Set an existing guest user, admin user, or owner to be a regular user.
 ```csharp
 try
 {
-    var response = await client.AdminUsers.AdminUsersSetRegular(token, contentType, teamId, userId);
+    var response = await client.AdminUsers.AdminUsersSetRegular(new AdminUsersSetRegularRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7770,17 +7583,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>userId</code> | <code>string</code> | - |
+<code>[AdminUsersSetRegularRequest](src/SlackWebApi/Requests/AdminUsers/AdminUsersSetRegularRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7790,9 +7598,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7804,10 +7612,10 @@ catch (SdkException<RawError> ex)
 
 ## AdminUsersSession
 
-> Source: [AdminUsersSession](Api/AdminUsersSession.cs)
+> Source: [AdminUsersSession](src/SlackWebApi/Api/AdminUsersSession.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSessionInvalidate(string token, ContentType contentType, string teamId, int sessionId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSessionInvalidate(AdminUsersSessionInvalidateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7830,10 +7638,16 @@ Invalidate a single session for a user by session_id
 ```csharp
 try
 {
-    var response = await client.AdminUsersSession.AdminUsersSessionInvalidate(token, contentType, teamId, sessionId);
+    var response = await client.AdminUsersSession.AdminUsersSessionInvalidate(new AdminUsersSessionInvalidateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        TeamId = "some example string",
+        SessionId = 1,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7842,17 +7656,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>teamId</code> | <code>string</code> | - |
-| <code>sessionId</code> | <code>int</code> | - |
+<code>[AdminUsersSessionInvalidateRequest](src/SlackWebApi/Requests/AdminUsersSession/AdminUsersSessionInvalidateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7862,9 +7671,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7875,7 +7684,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSessionReset(string token, ContentType contentType, string userId, bool? mobileOnly, bool? webOnly, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AdminUsersSessionReset(AdminUsersSessionResetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7898,14 +7707,15 @@ Wipes all valid sessions on all devices for a given user
 ```csharp
 try
 {
-    var response = await client.AdminUsersSession.AdminUsersSessionReset(token,
-        contentType,
-        userId,
-        mobileOnly,
-        webOnly);
+    var response = await client.AdminUsersSession.AdminUsersSessionReset(new AdminUsersSessionResetRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        UserId = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7914,18 +7724,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin.users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>userId</code> | <code>string</code> | - |
-| <code>mobileOnly</code> | <code>bool?</code> | - |
-| <code>webOnly</code> | <code>bool?</code> | - |
+<code>[AdminUsersSessionResetRequest](src/SlackWebApi/Requests/AdminUsersSession/AdminUsersSessionResetRequest.cs)</code>
 
 </dd>
 </dl>
@@ -7935,9 +7739,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -7949,10 +7753,10 @@ catch (SdkException<RawError> ex)
 
 ## ApiApi
 
-> Source: [ApiApi](Api/ApiApi.cs)
+> Source: [ApiApi](src/SlackWebApi/Api/ApiApi.cs)
 
 <details>
-<summary><code>Task&lt;ApiTestsuccessschema&gt; ApiTest(string? error, string? foo, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ApiTestsuccessschema&gt; ApiTest(ApiTestRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -7975,10 +7779,13 @@ Checks API calling code.
 ```csharp
 try
 {
-    var response = await client.ApiApi.ApiTest(error, foo, contentType);
+    var response = await client.ApiApi.ApiTest(new ApiTestRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ApiTestsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -7987,16 +7794,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>error</code> | <code>string?</code> | Error response to return |
-| <code>foo</code> | <code>string?</code> | example property to return |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ApiTestRequest](src/SlackWebApi/Requests/ApiApi/ApiTestRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8006,9 +7809,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ApiTestsuccessschema](Models/ApiTestsuccessschema.cs)</code>
+**OnSuccess**: <code>[ApiTestsuccessschema](src/SlackWebApi/Models/ApiTestsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8020,10 +7823,10 @@ catch (SdkException<RawError> ex)
 
 ## Apps
 
-> Source: [Apps](Api/Apps.cs)
+> Source: [Apps](src/SlackWebApi/Api/Apps.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsEventAuthorizationsList(string eventContext, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsEventAuthorizationsList(AppsEventAuthorizationsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8046,10 +7849,15 @@ Get a list of authorizations for the given event context. Each authorization rep
 ```csharp
 try
 {
-    var response = await client.Apps.AppsEventAuthorizationsList(eventContext, cursor, limit, token, contentType);
+    var response = await client.Apps.AppsEventAuthorizationsList(new AppsEventAuthorizationsListRequest
+    {
+        EventContext = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8058,18 +7866,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>eventContext</code> | <code>string</code> | - |
-| <code>cursor</code> | <code>string?</code> | - |
-| <code>limit</code> | <code>int?</code> | - |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `authorizations:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsEventAuthorizationsListRequest](src/SlackWebApi/Requests/AppsEventAuthorizations/AppsEventAuthorizationsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8079,9 +7881,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8092,7 +7894,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AppsPermissionsInfoschema&gt; AppsPermissionsInfo(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AppsPermissionsInfoschema&gt; AppsPermissionsInfo(AppsPermissionsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8115,10 +7917,13 @@ Returns list of permissions this app has on a team.
 ```csharp
 try
 {
-    var response = await client.Apps.AppsPermissionsInfo(token, contentType);
+    var response = await client.Apps.AppsPermissionsInfo(new AppsPermissionsInfoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AppsPermissionsInfoschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8127,15 +7932,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsInfoRequest](src/SlackWebApi/Requests/AppsPermissions/AppsPermissionsInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8145,9 +7947,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AppsPermissionsInfoschema](Models/AppsPermissionsInfoschema.cs)</code>
+**OnSuccess**: <code>[AppsPermissionsInfoschema](src/SlackWebApi/Models/AppsPermissionsInfoschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8158,7 +7960,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AppsPermissionsRequestschema&gt; AppsPermissionsRequest(string token, string scopes, string triggerId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AppsPermissionsRequestschema&gt; AppsPermissionsRequest(AppsPermissionsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8181,10 +7983,16 @@ Allows an app to request additional scopes
 ```csharp
 try
 {
-    var response = await client.Apps.AppsPermissionsRequest(token, scopes, triggerId, contentType);
+    var response = await client.Apps.AppsPermissionsRequest(new AppsPermissionsRequest
+    {
+        Token = "some example string",
+        Scopes = "some example string",
+        TriggerId = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AppsPermissionsRequestschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8193,17 +8001,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>scopes</code> | <code>string</code> | A comma separated list of scopes to request for |
-| <code>triggerId</code> | <code>string</code> | Token used to trigger the permissions API |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsRequest](src/SlackWebApi/Requests/AppsPermissions/AppsPermissionsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8213,9 +8016,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AppsPermissionsRequestschema](Models/AppsPermissionsRequestschema.cs)</code>
+**OnSuccess**: <code>[AppsPermissionsRequestschema](src/SlackWebApi/Models/AppsPermissionsRequestschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8226,7 +8029,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AppsPermissionsResourcesListsuccessschema&gt; AppsPermissionsResourcesList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AppsPermissionsResourcesListsuccessschema&gt; AppsPermissionsResourcesList(AppsPermissionsResourcesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8249,10 +8052,14 @@ Returns list of resource grants this app has on a team.
 ```csharp
 try
 {
-    var response = await client.Apps.AppsPermissionsResourcesList(token, cursor, limit, contentType);
+    var response = await client.Apps.AppsPermissionsResourcesList(new AppsPermissionsResourcesListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AppsPermissionsResourcesListsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8261,17 +8068,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsResourcesListRequest](src/SlackWebApi/Requests/AppsPermissionsResources/AppsPermissionsResourcesListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8281,9 +8083,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AppsPermissionsResourcesListsuccessschema](Models/AppsPermissionsResourcesListsuccessschema.cs)</code>
+**OnSuccess**: <code>[AppsPermissionsResourcesListsuccessschema](src/SlackWebApi/Models/AppsPermissionsResourcesListsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8294,7 +8096,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ApiPermissionsScopesListsuccessschema&gt; AppsPermissionsScopesList(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ApiPermissionsScopesListsuccessschema&gt; AppsPermissionsScopesList(AppsPermissionsScopesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8317,10 +8119,14 @@ Returns list of scopes this app has on a team.
 ```csharp
 try
 {
-    var response = await client.Apps.AppsPermissionsScopesList(token, contentType);
+    var response = await client.Apps.AppsPermissionsScopesList(new AppsPermissionsScopesListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ApiPermissionsScopesListsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8329,15 +8135,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsScopesListRequest](src/SlackWebApi/Requests/AppsPermissionsScopes/AppsPermissionsScopesListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8347,9 +8150,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ApiPermissionsScopesListsuccessschema](Models/ApiPermissionsScopesListsuccessschema.cs)</code>
+**OnSuccess**: <code>[ApiPermissionsScopesListsuccessschema](src/SlackWebApi/Models/ApiPermissionsScopesListsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8360,7 +8163,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsPermissionsUsersList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsPermissionsUsersList(AppsPermissionsUsersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8383,10 +8186,14 @@ Returns list of user grants and corresponding scopes this app has on a team.
 ```csharp
 try
 {
-    var response = await client.Apps.AppsPermissionsUsersList(token, cursor, limit, contentType);
+    var response = await client.Apps.AppsPermissionsUsersList(new AppsPermissionsUsersListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8395,17 +8202,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsUsersListRequest](src/SlackWebApi/Requests/AppsPermissionsUsers/AppsPermissionsUsersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8415,9 +8217,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8428,7 +8230,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsPermissionsUsersRequest(string token, string scopes, string triggerId, string user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsPermissionsUsersRequest(AppsPermissionsUsersRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8451,10 +8253,17 @@ Enables an app to trigger a permissions modal to grant an app access to a user a
 ```csharp
 try
 {
-    var response = await client.Apps.AppsPermissionsUsersRequest(token, scopes, triggerId, user, contentType);
+    var response = await client.Apps.AppsPermissionsUsersRequest(new AppsPermissionsUsersRequest
+    {
+        Token = "some example string",
+        Scopes = "some example string",
+        TriggerId = "some example string",
+        User = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8463,18 +8272,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>scopes</code> | <code>string</code> | A comma separated list of user scopes to request for |
-| <code>triggerId</code> | <code>string</code> | Token used to trigger the request |
-| <code>user</code> | <code>string</code> | The user this scope is being requested for |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsUsersRequest](src/SlackWebApi/Requests/AppsPermissionsUsers/AppsPermissionsUsersRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8484,9 +8287,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8497,7 +8300,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AppsUninstallschema&gt; AppsUninstall(string? token, string? clientId, string? clientSecret, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AppsUninstallschema&gt; AppsUninstall(AppsUninstallRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8520,10 +8323,13 @@ Uninstalls your app from a workspace.
 ```csharp
 try
 {
-    var response = await client.Apps.AppsUninstall(token, clientId, clientSecret, contentType);
+    var response = await client.Apps.AppsUninstall(new AppsUninstallRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AppsUninstallschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8532,17 +8338,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `none` |
-| <code>clientId</code> | <code>string?</code> | Issued when you created your application. |
-| <code>clientSecret</code> | <code>string?</code> | Issued when you created your application. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsUninstallRequest](src/SlackWebApi/Requests/Apps/AppsUninstallRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8552,9 +8353,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AppsUninstallschema](Models/AppsUninstallschema.cs)</code>
+**OnSuccess**: <code>[AppsUninstallschema](src/SlackWebApi/Models/AppsUninstallschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8566,10 +8367,10 @@ catch (SdkException<RawError> ex)
 
 ## AppsEventAuthorizations
 
-> Source: [AppsEventAuthorizations](Api/AppsEventAuthorizations.cs)
+> Source: [AppsEventAuthorizations](src/SlackWebApi/Api/AppsEventAuthorizations.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsEventAuthorizationsList(string eventContext, string? cursor, int? limit, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsEventAuthorizationsList(AppsEventAuthorizationsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8592,14 +8393,16 @@ Get a list of authorizations for the given event context. Each authorization rep
 ```csharp
 try
 {
-    var response = await client.AppsEventAuthorizations.AppsEventAuthorizationsList(eventContext,
-        cursor,
-        limit,
-        token,
-        contentType);
+    var response = await client.AppsEventAuthorizations.AppsEventAuthorizationsList(
+        new AppsEventAuthorizationsListRequest
+        {
+            EventContext = "some example string",
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8608,18 +8411,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>eventContext</code> | <code>string</code> | - |
-| <code>cursor</code> | <code>string?</code> | - |
-| <code>limit</code> | <code>int?</code> | - |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `authorizations:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsEventAuthorizationsListRequest](src/SlackWebApi/Requests/AppsEventAuthorizations/AppsEventAuthorizationsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8629,9 +8426,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8643,10 +8440,10 @@ catch (SdkException<RawError> ex)
 
 ## AppsPermissions
 
-> Source: [AppsPermissions](Api/AppsPermissions.cs)
+> Source: [AppsPermissions](src/SlackWebApi/Api/AppsPermissions.cs)
 
 <details>
-<summary><code>Task&lt;AppsPermissionsInfoschema&gt; AppsPermissionsInfo(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AppsPermissionsInfoschema&gt; AppsPermissionsInfo(AppsPermissionsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8669,10 +8466,13 @@ Returns list of permissions this app has on a team.
 ```csharp
 try
 {
-    var response = await client.AppsPermissions.AppsPermissionsInfo(token, contentType);
+    var response = await client.AppsPermissions.AppsPermissionsInfo(new AppsPermissionsInfoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AppsPermissionsInfoschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8681,15 +8481,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsInfoRequest](src/SlackWebApi/Requests/AppsPermissions/AppsPermissionsInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8699,9 +8496,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AppsPermissionsInfoschema](Models/AppsPermissionsInfoschema.cs)</code>
+**OnSuccess**: <code>[AppsPermissionsInfoschema](src/SlackWebApi/Models/AppsPermissionsInfoschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8712,7 +8509,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AppsPermissionsRequestschema&gt; AppsPermissionsRequest(string token, string scopes, string triggerId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AppsPermissionsRequestschema&gt; AppsPermissionsRequest(AppsPermissionsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8735,10 +8532,16 @@ Allows an app to request additional scopes
 ```csharp
 try
 {
-    var response = await client.AppsPermissions.AppsPermissionsRequest(token, scopes, triggerId, contentType);
+    var response = await client.AppsPermissions.AppsPermissionsRequest(new AppsPermissionsRequest
+    {
+        Token = "some example string",
+        Scopes = "some example string",
+        TriggerId = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AppsPermissionsRequestschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8747,17 +8550,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>scopes</code> | <code>string</code> | A comma separated list of scopes to request for |
-| <code>triggerId</code> | <code>string</code> | Token used to trigger the permissions API |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsRequest](src/SlackWebApi/Requests/AppsPermissions/AppsPermissionsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8767,9 +8565,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AppsPermissionsRequestschema](Models/AppsPermissionsRequestschema.cs)</code>
+**OnSuccess**: <code>[AppsPermissionsRequestschema](src/SlackWebApi/Models/AppsPermissionsRequestschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8781,10 +8579,10 @@ catch (SdkException<RawError> ex)
 
 ## AppsPermissionsResources
 
-> Source: [AppsPermissionsResources](Api/AppsPermissionsResources.cs)
+> Source: [AppsPermissionsResources](src/SlackWebApi/Api/AppsPermissionsResources.cs)
 
 <details>
-<summary><code>Task&lt;AppsPermissionsResourcesListsuccessschema&gt; AppsPermissionsResourcesList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AppsPermissionsResourcesListsuccessschema&gt; AppsPermissionsResourcesList(AppsPermissionsResourcesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8807,13 +8605,15 @@ Returns list of resource grants this app has on a team.
 ```csharp
 try
 {
-    var response = await client.AppsPermissionsResources.AppsPermissionsResourcesList(token,
-        cursor,
-        limit,
-        contentType);
+    var response = await client.AppsPermissionsResources.AppsPermissionsResourcesList(
+        new AppsPermissionsResourcesListRequest
+        {
+            Token = "some example string",
+            ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        });
     // TODO: Handle 'response' of type AppsPermissionsResourcesListsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8822,17 +8622,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsResourcesListRequest](src/SlackWebApi/Requests/AppsPermissionsResources/AppsPermissionsResourcesListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8842,9 +8637,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AppsPermissionsResourcesListsuccessschema](Models/AppsPermissionsResourcesListsuccessschema.cs)</code>
+**OnSuccess**: <code>[AppsPermissionsResourcesListsuccessschema](src/SlackWebApi/Models/AppsPermissionsResourcesListsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8856,10 +8651,10 @@ catch (SdkException<RawError> ex)
 
 ## AppsPermissionsScopes
 
-> Source: [AppsPermissionsScopes](Api/AppsPermissionsScopes.cs)
+> Source: [AppsPermissionsScopes](src/SlackWebApi/Api/AppsPermissionsScopes.cs)
 
 <details>
-<summary><code>Task&lt;ApiPermissionsScopesListsuccessschema&gt; AppsPermissionsScopesList(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ApiPermissionsScopesListsuccessschema&gt; AppsPermissionsScopesList(AppsPermissionsScopesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8882,10 +8677,14 @@ Returns list of scopes this app has on a team.
 ```csharp
 try
 {
-    var response = await client.AppsPermissionsScopes.AppsPermissionsScopesList(token, contentType);
+    var response = await client.AppsPermissionsScopes.AppsPermissionsScopesList(new AppsPermissionsScopesListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ApiPermissionsScopesListsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8894,15 +8693,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsScopesListRequest](src/SlackWebApi/Requests/AppsPermissionsScopes/AppsPermissionsScopesListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8912,9 +8708,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ApiPermissionsScopesListsuccessschema](Models/ApiPermissionsScopesListsuccessschema.cs)</code>
+**OnSuccess**: <code>[ApiPermissionsScopesListsuccessschema](src/SlackWebApi/Models/ApiPermissionsScopesListsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8926,10 +8722,10 @@ catch (SdkException<RawError> ex)
 
 ## AppsPermissionsUsers
 
-> Source: [AppsPermissionsUsers](Api/AppsPermissionsUsers.cs)
+> Source: [AppsPermissionsUsers](src/SlackWebApi/Api/AppsPermissionsUsers.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsPermissionsUsersList(string token, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsPermissionsUsersList(AppsPermissionsUsersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -8952,10 +8748,14 @@ Returns list of user grants and corresponding scopes this app has on a team.
 ```csharp
 try
 {
-    var response = await client.AppsPermissionsUsers.AppsPermissionsUsersList(token, cursor, limit, contentType);
+    var response = await client.AppsPermissionsUsers.AppsPermissionsUsersList(new AppsPermissionsUsersListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -8964,17 +8764,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsUsersListRequest](src/SlackWebApi/Requests/AppsPermissionsUsers/AppsPermissionsUsersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -8984,9 +8779,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -8997,7 +8792,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsPermissionsUsersRequest(string token, string scopes, string triggerId, string user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; AppsPermissionsUsersRequest(AppsPermissionsUsersRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9020,14 +8815,17 @@ Enables an app to trigger a permissions modal to grant an app access to a user a
 ```csharp
 try
 {
-    var response = await client.AppsPermissionsUsers.AppsPermissionsUsersRequest(token,
-        scopes,
-        triggerId,
-        user,
-        contentType);
+    var response = await client.AppsPermissionsUsers.AppsPermissionsUsersRequest(new AppsPermissionsUsersRequest
+    {
+        Token = "some example string",
+        Scopes = "some example string",
+        TriggerId = "some example string",
+        User = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9036,18 +8834,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>scopes</code> | <code>string</code> | A comma separated list of user scopes to request for |
-| <code>triggerId</code> | <code>string</code> | Token used to trigger the request |
-| <code>user</code> | <code>string</code> | The user this scope is being requested for |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AppsPermissionsUsersRequest](src/SlackWebApi/Requests/AppsPermissionsUsers/AppsPermissionsUsersRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9057,9 +8849,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9071,10 +8863,10 @@ catch (SdkException<RawError> ex)
 
 ## Auth
 
-> Source: [Auth](Api/Auth.cs)
+> Source: [Auth](src/SlackWebApi/Api/Auth.cs)
 
 <details>
-<summary><code>Task&lt;AuthRevokeschema&gt; AuthRevoke(string token, bool? test, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AuthRevokeschema&gt; AuthRevoke(AuthRevokeRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9097,10 +8889,14 @@ Revokes a token.
 ```csharp
 try
 {
-    var response = await client.Auth.AuthRevoke(token, test, contentType);
+    var response = await client.Auth.AuthRevoke(new AuthRevokeRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AuthRevokeschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9109,16 +8905,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>test</code> | <code>bool?</code> | Setting this parameter to `1` triggers a _testing mode_ where the specified token will not actually be revoked. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AuthRevokeRequest](src/SlackWebApi/Requests/Auth/AuthRevokeRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9128,9 +8920,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AuthRevokeschema](Models/AuthRevokeschema.cs)</code>
+**OnSuccess**: <code>[AuthRevokeschema](src/SlackWebApi/Models/AuthRevokeschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9141,7 +8933,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;AuthTestsuccessschema&gt; AuthTest(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;AuthTestsuccessschema&gt; AuthTest(AuthTestRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9164,10 +8956,14 @@ Checks authentication & identity.
 ```csharp
 try
 {
-    var response = await client.Auth.AuthTest(token, contentType);
+    var response = await client.Auth.AuthTest(new AuthTestRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type AuthTestsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9176,15 +8972,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[AuthTestRequest](src/SlackWebApi/Requests/Auth/AuthTestRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9194,9 +8987,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[AuthTestsuccessschema](Models/AuthTestsuccessschema.cs)</code>
+**OnSuccess**: <code>[AuthTestsuccessschema](src/SlackWebApi/Models/AuthTestsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9208,10 +9001,10 @@ catch (SdkException<RawError> ex)
 
 ## Bots
 
-> Source: [Bots](Api/Bots.cs)
+> Source: [Bots](src/SlackWebApi/Api/Bots.cs)
 
 <details>
-<summary><code>Task&lt;BotsInfoschema&gt; BotsInfo(string token, string? bot, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;BotsInfoschema&gt; BotsInfo(BotsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9234,10 +9027,14 @@ Gets information about a bot user.
 ```csharp
 try
 {
-    var response = await client.Bots.BotsInfo(token, bot, contentType);
+    var response = await client.Bots.BotsInfo(new BotsInfoRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type BotsInfoschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9246,16 +9043,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users:read` |
-| <code>bot</code> | <code>string?</code> | Bot user to get info on |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[BotsInfoRequest](src/SlackWebApi/Requests/Bots/BotsInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9265,9 +9058,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[BotsInfoschema](Models/BotsInfoschema.cs)</code>
+**OnSuccess**: <code>[BotsInfoschema](src/SlackWebApi/Models/BotsInfoschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9279,10 +9072,10 @@ catch (SdkException<RawError> ex)
 
 ## Calls
 
-> Source: [Calls](Api/Calls.cs)
+> Source: [Calls](src/SlackWebApi/Api/Calls.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsAdd(string token, ContentType contentType, string externalUniqueId, string joinUrl, string? externalDisplayId, string? desktopAppJoinUrl, int? dateStart, string? title, string? createdBy, string? users, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsAdd(CallsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9305,19 +9098,16 @@ Registers a new Call.
 ```csharp
 try
 {
-    var response = await client.Calls.CallsAdd(token,
-        contentType,
-        externalUniqueId,
-        joinUrl,
-        externalDisplayId,
-        desktopAppJoinUrl,
-        dateStart,
-        title,
-        createdBy,
-        users);
+    var response = await client.Calls.CallsAdd(new CallsAddRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        ExternalUniqueId = "some example string",
+        JoinUrl = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9326,23 +9116,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `calls:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>externalUniqueId</code> | <code>string</code> | - |
-| <code>joinUrl</code> | <code>string</code> | - |
-| <code>externalDisplayId</code> | <code>string?</code> | - |
-| <code>desktopAppJoinUrl</code> | <code>string?</code> | - |
-| <code>dateStart</code> | <code>int?</code> | - |
-| <code>title</code> | <code>string?</code> | - |
-| <code>createdBy</code> | <code>string?</code> | - |
-| <code>users</code> | <code>string?</code> | - |
+<code>[CallsAddRequest](src/SlackWebApi/Requests/Calls/CallsAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9352,9 +9131,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9365,7 +9144,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsEnd(string token, ContentType contentType, string id, int? duration, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsEnd(CallsEndRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9388,10 +9167,15 @@ Ends a Call.
 ```csharp
 try
 {
-    var response = await client.Calls.CallsEnd(token, contentType, id, duration);
+    var response = await client.Calls.CallsEnd(new CallsEndRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Id = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9400,17 +9184,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `calls:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>id</code> | <code>string</code> | - |
-| <code>duration</code> | <code>int?</code> | - |
+<code>[CallsEndRequest](src/SlackWebApi/Requests/Calls/CallsEndRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9420,9 +9199,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9433,7 +9212,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsInfo(string id, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsInfo(CallsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9456,10 +9235,15 @@ Returns information about a Call.
 ```csharp
 try
 {
-    var response = await client.Calls.CallsInfo(id, token, contentType);
+    var response = await client.Calls.CallsInfo(new CallsInfoRequest
+    {
+        Id = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9468,16 +9252,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>id</code> | <code>string</code> | `id` of the Call returned by the [`calls.add`](/methods/calls.add) method. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `calls:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[CallsInfoRequest](src/SlackWebApi/Requests/Calls/CallsInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9487,9 +9267,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9500,7 +9280,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsParticipantsAdd(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsParticipantsAdd(CallsParticipantsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9523,10 +9303,16 @@ Registers new participants added to a Call.
 ```csharp
 try
 {
-    var response = await client.Calls.CallsParticipantsAdd(token, contentType, id, users);
+    var response = await client.Calls.CallsParticipantsAdd(new CallsParticipantsAddRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Id = "some example string",
+        Users = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9535,17 +9321,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `calls:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>id</code> | <code>string</code> | - |
-| <code>users</code> | <code>string</code> | - |
+<code>[CallsParticipantsAddRequest](src/SlackWebApi/Requests/CallsParticipants/CallsParticipantsAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9555,9 +9336,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9568,7 +9349,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsParticipantsRemove(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsParticipantsRemove(CallsParticipantsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9591,10 +9372,16 @@ Registers participants removed from a Call.
 ```csharp
 try
 {
-    var response = await client.Calls.CallsParticipantsRemove(token, contentType, id, users);
+    var response = await client.Calls.CallsParticipantsRemove(new CallsParticipantsRemoveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Id = "some example string",
+        Users = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9603,17 +9390,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `calls:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>id</code> | <code>string</code> | - |
-| <code>users</code> | <code>string</code> | - |
+<code>[CallsParticipantsRemoveRequest](src/SlackWebApi/Requests/CallsParticipants/CallsParticipantsRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9623,9 +9405,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9636,7 +9418,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsUpdate(string token, ContentType contentType, string id, string? title, string? joinUrl, string? desktopAppJoinUrl, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsUpdate(CallsUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9659,10 +9441,15 @@ Updates information about a Call.
 ```csharp
 try
 {
-    var response = await client.Calls.CallsUpdate(token, contentType, id, title, joinUrl, desktopAppJoinUrl);
+    var response = await client.Calls.CallsUpdate(new CallsUpdateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Id = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9671,19 +9458,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `calls:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>id</code> | <code>string</code> | - |
-| <code>title</code> | <code>string?</code> | - |
-| <code>joinUrl</code> | <code>string?</code> | - |
-| <code>desktopAppJoinUrl</code> | <code>string?</code> | - |
+<code>[CallsUpdateRequest](src/SlackWebApi/Requests/Calls/CallsUpdateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9693,9 +9473,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9707,10 +9487,10 @@ catch (SdkException<RawError> ex)
 
 ## CallsParticipants
 
-> Source: [CallsParticipants](Api/CallsParticipants.cs)
+> Source: [CallsParticipants](src/SlackWebApi/Api/CallsParticipants.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsParticipantsAdd(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsParticipantsAdd(CallsParticipantsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9733,10 +9513,16 @@ Registers new participants added to a Call.
 ```csharp
 try
 {
-    var response = await client.CallsParticipants.CallsParticipantsAdd(token, contentType, id, users);
+    var response = await client.CallsParticipants.CallsParticipantsAdd(new CallsParticipantsAddRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Id = "some example string",
+        Users = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9745,17 +9531,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `calls:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>id</code> | <code>string</code> | - |
-| <code>users</code> | <code>string</code> | - |
+<code>[CallsParticipantsAddRequest](src/SlackWebApi/Requests/CallsParticipants/CallsParticipantsAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9765,9 +9546,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9778,7 +9559,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsParticipantsRemove(string token, ContentType contentType, string id, string users, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; CallsParticipantsRemove(CallsParticipantsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9801,10 +9582,16 @@ Registers participants removed from a Call.
 ```csharp
 try
 {
-    var response = await client.CallsParticipants.CallsParticipantsRemove(token, contentType, id, users);
+    var response = await client.CallsParticipants.CallsParticipantsRemove(new CallsParticipantsRemoveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Id = "some example string",
+        Users = "some example string",
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9813,17 +9600,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `calls:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>id</code> | <code>string</code> | - |
-| <code>users</code> | <code>string</code> | - |
+<code>[CallsParticipantsRemoveRequest](src/SlackWebApi/Requests/CallsParticipants/CallsParticipantsRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9833,9 +9615,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9847,10 +9629,10 @@ catch (SdkException<RawError> ex)
 
 ## Chat
 
-> Source: [Chat](Api/Chat.cs)
+> Source: [Chat](src/SlackWebApi/Api/Chat.cs)
 
 <details>
-<summary><code>Task&lt;ChatDeletesuccessschema&gt; ChatDelete(ContentType contentType, string? token, double? ts, string? channel, bool? asUser, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatDeletesuccessschema&gt; ChatDelete(ChatDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9873,10 +9655,13 @@ Deletes a message.
 ```csharp
 try
 {
-    var response = await client.Chat.ChatDelete(contentType, token, ts, channel, asUser);
+    var response = await client.Chat.ChatDelete(new ChatDeleteRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ChatDeletesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9885,18 +9670,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `chat:write` |
-| <code>ts</code> | <code>double?</code> | - |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>asUser</code> | <code>bool?</code> | - |
+<code>[ChatDeleteRequest](src/SlackWebApi/Requests/Chat/ChatDeleteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9906,9 +9685,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatDeletesuccessschema](Models/ChatDeletesuccessschema.cs)</code>
+**OnSuccess**: <code>[ChatDeletesuccessschema](src/SlackWebApi/Models/ChatDeletesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9919,7 +9698,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ChatDeleteScheduledMessageschema&gt; ChatDeleteScheduledMessage(string token, ContentType contentType, string channel, string scheduledMessageId, bool? asUser, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatDeleteScheduledMessageschema&gt; ChatDeleteScheduledMessage(ChatDeleteScheduledMessageRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -9942,14 +9721,16 @@ Deletes a pending scheduled message from the queue.
 ```csharp
 try
 {
-    var response = await client.Chat.ChatDeleteScheduledMessage(token,
-        contentType,
-        channel,
-        scheduledMessageId,
-        asUser);
+    var response = await client.Chat.ChatDeleteScheduledMessage(new ChatDeleteScheduledMessageRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Channel = "some example string",
+        ScheduledMessageId = "some example string",
+    });
     // TODO: Handle 'response' of type ChatDeleteScheduledMessageschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -9958,18 +9739,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `chat:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string</code> | - |
-| <code>scheduledMessageId</code> | <code>string</code> | - |
-| <code>asUser</code> | <code>bool?</code> | - |
+<code>[ChatDeleteScheduledMessageRequest](src/SlackWebApi/Requests/Chat/ChatDeleteScheduledMessageRequest.cs)</code>
 
 </dd>
 </dl>
@@ -9979,9 +9754,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatDeleteScheduledMessageschema](Models/ChatDeleteScheduledMessageschema.cs)</code>
+**OnSuccess**: <code>[ChatDeleteScheduledMessageschema](src/SlackWebApi/Models/ChatDeleteScheduledMessageschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -9992,7 +9767,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ChatGetPermalinksuccessschema&gt; ChatGetPermalink(string token, string channel, string messageTs, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatGetPermalinksuccessschema&gt; ChatGetPermalink(ChatGetPermalinkRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10015,10 +9790,16 @@ Retrieve a permalink URL for a specific extant message
 ```csharp
 try
 {
-    var response = await client.Chat.ChatGetPermalink(token, channel, messageTs, contentType);
+    var response = await client.Chat.ChatGetPermalink(new ChatGetPermalinkRequest
+    {
+        Token = "some example string",
+        Channel = "some example string",
+        MessageTs = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ChatGetPermalinksuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10027,17 +9808,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>channel</code> | <code>string</code> | The ID of the conversation or channel containing the message |
-| <code>messageTs</code> | <code>string</code> | A message's `ts` value, uniquely identifying it within a channel |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ChatGetPermalinkRequest](src/SlackWebApi/Requests/Chat/ChatGetPermalinkRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10047,9 +9823,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatGetPermalinksuccessschema](Models/ChatGetPermalinksuccessschema.cs)</code>
+**OnSuccess**: <code>[ChatGetPermalinksuccessschema](src/SlackWebApi/Models/ChatGetPermalinksuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10060,7 +9836,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ChatMeMessageschema&gt; ChatMeMessage(ContentType contentType, string? token, string? channel, string? text, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatMeMessageschema&gt; ChatMeMessage(ChatMeMessageRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10083,10 +9859,13 @@ Share a me message into a channel.
 ```csharp
 try
 {
-    var response = await client.Chat.ChatMeMessage(contentType, token, channel, text);
+    var response = await client.Chat.ChatMeMessage(new ChatMeMessageRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ChatMeMessageschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10095,17 +9874,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `chat:write` |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>text</code> | <code>string?</code> | - |
+<code>[ChatMeMessageRequest](src/SlackWebApi/Requests/Chat/ChatMeMessageRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10115,9 +9889,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatMeMessageschema](Models/ChatMeMessageschema.cs)</code>
+**OnSuccess**: <code>[ChatMeMessageschema](src/SlackWebApi/Models/ChatMeMessageschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10128,7 +9902,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ChatPostEphemeralsuccessschema&gt; ChatPostEphemeral(string token, ContentType contentType, string channel, string user, bool? asUser, string? attachments, string? blocks, string? iconEmoji, string? iconUrl, bool? linkNames, string? parse, string? text, string? threadTs, string? username, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatPostEphemeralsuccessschema&gt; ChatPostEphemeral(ChatPostEphemeralRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10151,23 +9925,16 @@ Sends an ephemeral message to a user in a channel.
 ```csharp
 try
 {
-    var response = await client.Chat.ChatPostEphemeral(token,
-        contentType,
-        channel,
-        user,
-        asUser,
-        attachments,
-        blocks,
-        iconEmoji,
-        iconUrl,
-        linkNames,
-        parse,
-        text,
-        threadTs,
-        username);
+    var response = await client.Chat.ChatPostEphemeral(new ChatPostEphemeralRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Channel = "some example string",
+        User = "some example string",
+    });
     // TODO: Handle 'response' of type ChatPostEphemeralsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10176,27 +9943,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `chat:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string</code> | - |
-| <code>user</code> | <code>string</code> | - |
-| <code>asUser</code> | <code>bool?</code> | - |
-| <code>attachments</code> | <code>string?</code> | - |
-| <code>blocks</code> | <code>string?</code> | - |
-| <code>iconEmoji</code> | <code>string?</code> | - |
-| <code>iconUrl</code> | <code>string?</code> | - |
-| <code>linkNames</code> | <code>bool?</code> | - |
-| <code>parse</code> | <code>string?</code> | - |
-| <code>text</code> | <code>string?</code> | - |
-| <code>threadTs</code> | <code>string?</code> | - |
-| <code>username</code> | <code>string?</code> | - |
+<code>[ChatPostEphemeralRequest](src/SlackWebApi/Requests/Chat/ChatPostEphemeralRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10206,9 +9958,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatPostEphemeralsuccessschema](Models/ChatPostEphemeralsuccessschema.cs)</code>
+**OnSuccess**: <code>[ChatPostEphemeralsuccessschema](src/SlackWebApi/Models/ChatPostEphemeralsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10219,7 +9971,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ChatPostMessagesuccessschema&gt; ChatPostMessage(string token, ContentType contentType, string channel, string? asUser, string? attachments, string? blocks, string? iconEmoji, string? iconUrl, bool? linkNames, bool? mrkdwn, string? parse, bool? replyBroadcast, string? text, string? threadTs, bool? unfurlLinks, bool? unfurlMedia, string? username, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatPostMessagesuccessschema&gt; ChatPostMessage(ChatPostMessageRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10242,26 +9994,15 @@ Sends a message to a channel.
 ```csharp
 try
 {
-    var response = await client.Chat.ChatPostMessage(token,
-        contentType,
-        channel,
-        asUser,
-        attachments,
-        blocks,
-        iconEmoji,
-        iconUrl,
-        linkNames,
-        mrkdwn,
-        parse,
-        replyBroadcast,
-        text,
-        threadTs,
-        unfurlLinks,
-        unfurlMedia,
-        username);
+    var response = await client.Chat.ChatPostMessage(new ChatPostMessageRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Channel = "some example string",
+    });
     // TODO: Handle 'response' of type ChatPostMessagesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10270,30 +10011,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `chat:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string</code> | - |
-| <code>asUser</code> | <code>string?</code> | - |
-| <code>attachments</code> | <code>string?</code> | - |
-| <code>blocks</code> | <code>string?</code> | - |
-| <code>iconEmoji</code> | <code>string?</code> | - |
-| <code>iconUrl</code> | <code>string?</code> | - |
-| <code>linkNames</code> | <code>bool?</code> | - |
-| <code>mrkdwn</code> | <code>bool?</code> | - |
-| <code>parse</code> | <code>string?</code> | - |
-| <code>replyBroadcast</code> | <code>bool?</code> | - |
-| <code>text</code> | <code>string?</code> | - |
-| <code>threadTs</code> | <code>string?</code> | - |
-| <code>unfurlLinks</code> | <code>bool?</code> | - |
-| <code>unfurlMedia</code> | <code>bool?</code> | - |
-| <code>username</code> | <code>string?</code> | - |
+<code>[ChatPostMessageRequest](src/SlackWebApi/Requests/Chat/ChatPostMessageRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10303,9 +10026,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatPostMessagesuccessschema](Models/ChatPostMessagesuccessschema.cs)</code>
+**OnSuccess**: <code>[ChatPostMessagesuccessschema](src/SlackWebApi/Models/ChatPostMessagesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10316,7 +10039,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ChatScheduleMessagesuccessschema&gt; ChatScheduleMessage(ContentType contentType, string? token, string? channel, string? text, string? postAt, string? parse, bool? asUser, bool? linkNames, string? attachments, string? blocks, bool? unfurlLinks, bool? unfurlMedia, double? threadTs, bool? replyBroadcast, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatScheduleMessagesuccessschema&gt; ChatScheduleMessage(ChatScheduleMessageRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10339,23 +10062,13 @@ Schedules a message to be sent to a channel.
 ```csharp
 try
 {
-    var response = await client.Chat.ChatScheduleMessage(contentType,
-        token,
-        channel,
-        text,
-        postAt,
-        parse,
-        asUser,
-        linkNames,
-        attachments,
-        blocks,
-        unfurlLinks,
-        unfurlMedia,
-        threadTs,
-        replyBroadcast);
+    var response = await client.Chat.ChatScheduleMessage(new ChatScheduleMessageRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ChatScheduleMessagesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10364,27 +10077,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `chat:write` |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>text</code> | <code>string?</code> | - |
-| <code>postAt</code> | <code>string?</code> | - |
-| <code>parse</code> | <code>string?</code> | - |
-| <code>asUser</code> | <code>bool?</code> | - |
-| <code>linkNames</code> | <code>bool?</code> | - |
-| <code>attachments</code> | <code>string?</code> | - |
-| <code>blocks</code> | <code>string?</code> | - |
-| <code>unfurlLinks</code> | <code>bool?</code> | - |
-| <code>unfurlMedia</code> | <code>bool?</code> | - |
-| <code>threadTs</code> | <code>double?</code> | - |
-| <code>replyBroadcast</code> | <code>bool?</code> | - |
+<code>[ChatScheduleMessageRequest](src/SlackWebApi/Requests/Chat/ChatScheduleMessageRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10394,9 +10092,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatScheduleMessagesuccessschema](Models/ChatScheduleMessagesuccessschema.cs)</code>
+**OnSuccess**: <code>[ChatScheduleMessagesuccessschema](src/SlackWebApi/Models/ChatScheduleMessagesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10407,7 +10105,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ChatScheduledMessagesListschema&gt; ChatScheduledMessagesList(string? channel, double? latest, double? oldest, int? limit, string? cursor, ContentType contentType, string? token, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatScheduledMessagesListschema&gt; ChatScheduledMessagesList(ChatScheduledMessagesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10430,16 +10128,13 @@ Returns a list of scheduled messages.
 ```csharp
 try
 {
-    var response = await client.Chat.ChatScheduledMessagesList(channel,
-        latest,
-        oldest,
-        limit,
-        cursor,
-        contentType,
-        token);
+    var response = await client.Chat.ChatScheduledMessagesList(new ChatScheduledMessagesListRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ChatScheduledMessagesListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10448,20 +10143,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>channel</code> | <code>string?</code> | The channel of the scheduled messages |
-| <code>latest</code> | <code>double?</code> | A UNIX timestamp of the latest value in the time range |
-| <code>oldest</code> | <code>double?</code> | A UNIX timestamp of the oldest value in the time range |
-| <code>limit</code> | <code>int?</code> | Maximum number of original entries to return. |
-| <code>cursor</code> | <code>string?</code> | For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `none` |
+<code>[ChatScheduledMessagesListRequest](src/SlackWebApi/Requests/ChatScheduledMessages/ChatScheduledMessagesListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10471,9 +10158,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatScheduledMessagesListschema](Models/ChatScheduledMessagesListschema.cs)</code>
+**OnSuccess**: <code>[ChatScheduledMessagesListschema](src/SlackWebApi/Models/ChatScheduledMessagesListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10484,7 +10171,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ChatUnfurlsuccessschema&gt; ChatUnfurl(string token, ContentType contentType, string channel, string ts, string? unfurls, string? userAuthMessage, bool? userAuthRequired, string? userAuthUrl, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatUnfurlsuccessschema&gt; ChatUnfurl(ChatUnfurlRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10507,17 +10194,16 @@ Provide custom unfurl behavior for user-posted URLs
 ```csharp
 try
 {
-    var response = await client.Chat.ChatUnfurl(token,
-        contentType,
-        channel,
-        ts,
-        unfurls,
-        userAuthMessage,
-        userAuthRequired,
-        userAuthUrl);
+    var response = await client.Chat.ChatUnfurl(new ChatUnfurlRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Channel = "some example string",
+        Ts = "some example string",
+    });
     // TODO: Handle 'response' of type ChatUnfurlsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10526,21 +10212,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `links:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string</code> | - |
-| <code>ts</code> | <code>string</code> | - |
-| <code>unfurls</code> | <code>string?</code> | - |
-| <code>userAuthMessage</code> | <code>string?</code> | - |
-| <code>userAuthRequired</code> | <code>bool?</code> | - |
-| <code>userAuthUrl</code> | <code>string?</code> | - |
+<code>[ChatUnfurlRequest](src/SlackWebApi/Requests/Chat/ChatUnfurlRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10550,9 +10227,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatUnfurlsuccessschema](Models/ChatUnfurlsuccessschema.cs)</code>
+**OnSuccess**: <code>[ChatUnfurlsuccessschema](src/SlackWebApi/Models/ChatUnfurlsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10563,7 +10240,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ChatUpdatesuccessschema&gt; ChatUpdate(string token, ContentType contentType, string channel, string ts, string? asUser, string? attachments, string? blocks, string? linkNames, string? parse, string? text, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatUpdatesuccessschema&gt; ChatUpdate(ChatUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10586,19 +10263,16 @@ Updates a message.
 ```csharp
 try
 {
-    var response = await client.Chat.ChatUpdate(token,
-        contentType,
-        channel,
-        ts,
-        asUser,
-        attachments,
-        blocks,
-        linkNames,
-        parse,
-        text);
+    var response = await client.Chat.ChatUpdate(new ChatUpdateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Channel = "some example string",
+        Ts = "some example string",
+    });
     // TODO: Handle 'response' of type ChatUpdatesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10607,23 +10281,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `chat:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string</code> | - |
-| <code>ts</code> | <code>string</code> | - |
-| <code>asUser</code> | <code>string?</code> | - |
-| <code>attachments</code> | <code>string?</code> | - |
-| <code>blocks</code> | <code>string?</code> | - |
-| <code>linkNames</code> | <code>string?</code> | - |
-| <code>parse</code> | <code>string?</code> | - |
-| <code>text</code> | <code>string?</code> | - |
+<code>[ChatUpdateRequest](src/SlackWebApi/Requests/Chat/ChatUpdateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10633,9 +10296,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatUpdatesuccessschema](Models/ChatUpdatesuccessschema.cs)</code>
+**OnSuccess**: <code>[ChatUpdatesuccessschema](src/SlackWebApi/Models/ChatUpdatesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10647,10 +10310,10 @@ catch (SdkException<RawError> ex)
 
 ## ChatScheduledMessages
 
-> Source: [ChatScheduledMessages](Api/ChatScheduledMessages.cs)
+> Source: [ChatScheduledMessages](src/SlackWebApi/Api/ChatScheduledMessages.cs)
 
 <details>
-<summary><code>Task&lt;ChatScheduledMessagesListschema&gt; ChatScheduledMessagesList(string? channel, double? latest, double? oldest, int? limit, string? cursor, ContentType contentType, string? token, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ChatScheduledMessagesListschema&gt; ChatScheduledMessagesList(ChatScheduledMessagesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10673,16 +10336,13 @@ Returns a list of scheduled messages.
 ```csharp
 try
 {
-    var response = await client.ChatScheduledMessages.ChatScheduledMessagesList(channel,
-        latest,
-        oldest,
-        limit,
-        cursor,
-        contentType,
-        token);
+    var response = await client.ChatScheduledMessages.ChatScheduledMessagesList(new ChatScheduledMessagesListRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ChatScheduledMessagesListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10691,20 +10351,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>channel</code> | <code>string?</code> | The channel of the scheduled messages |
-| <code>latest</code> | <code>double?</code> | A UNIX timestamp of the latest value in the time range |
-| <code>oldest</code> | <code>double?</code> | A UNIX timestamp of the oldest value in the time range |
-| <code>limit</code> | <code>int?</code> | Maximum number of original entries to return. |
-| <code>cursor</code> | <code>string?</code> | For pagination purposes, this is the `cursor` value returned from a previous call to `chat.scheduledmessages.list` indicating where you want to start this call from. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `none` |
+<code>[ChatScheduledMessagesListRequest](src/SlackWebApi/Requests/ChatScheduledMessages/ChatScheduledMessagesListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10714,9 +10366,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ChatScheduledMessagesListschema](Models/ChatScheduledMessagesListschema.cs)</code>
+**OnSuccess**: <code>[ChatScheduledMessagesListschema](src/SlackWebApi/Models/ChatScheduledMessagesListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10728,10 +10380,10 @@ catch (SdkException<RawError> ex)
 
 ## Conversations
 
-> Source: [Conversations](Api/Conversations.cs)
+> Source: [Conversations](src/SlackWebApi/Api/Conversations.cs)
 
 <details>
-<summary><code>Task&lt;ConversationsArchivesuccessschema&gt; ConversationsArchive(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsArchivesuccessschema&gt; ConversationsArchive(ConversationsArchiveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10754,10 +10406,13 @@ Archives a conversation.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsArchive(contentType, token, channel);
+    var response = await client.Conversations.ConversationsArchive(new ConversationsArchiveRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsArchivesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10766,16 +10421,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
+<code>[ConversationsArchiveRequest](src/SlackWebApi/Requests/Conversations/ConversationsArchiveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10785,9 +10436,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsArchivesuccessschema](Models/ConversationsArchivesuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsArchivesuccessschema](src/SlackWebApi/Models/ConversationsArchivesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10798,7 +10449,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsClosesuccessschema&gt; ConversationsClose(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsClosesuccessschema&gt; ConversationsClose(ConversationsCloseRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10821,10 +10472,13 @@ Closes a direct message or multi-person direct message.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsClose(contentType, token, channel);
+    var response = await client.Conversations.ConversationsClose(new ConversationsCloseRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsClosesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10833,16 +10487,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
+<code>[ConversationsCloseRequest](src/SlackWebApi/Requests/Conversations/ConversationsCloseRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10852,9 +10502,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsClosesuccessschema](Models/ConversationsClosesuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsClosesuccessschema](src/SlackWebApi/Models/ConversationsClosesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10865,7 +10515,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsCreatesuccessschema&gt; ConversationsCreate(ContentType contentType, string? token, string? name, bool? isPrivate, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsCreatesuccessschema&gt; ConversationsCreate(ConversationsCreateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10888,10 +10538,13 @@ Initiates a public or private channel-based conversation
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsCreate(contentType, token, name, isPrivate);
+    var response = await client.Conversations.ConversationsCreate(new ConversationsCreateRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsCreatesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10900,17 +10553,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>name</code> | <code>string?</code> | - |
-| <code>isPrivate</code> | <code>bool?</code> | - |
+<code>[ConversationsCreateRequest](src/SlackWebApi/Requests/Conversations/ConversationsCreateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10920,9 +10568,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsCreatesuccessschema](Models/ConversationsCreatesuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsCreatesuccessschema](src/SlackWebApi/Models/ConversationsCreatesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -10933,7 +10581,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsHistorysuccessschema&gt; ConversationsHistory(string? token, string? channel, double? latest, double? oldest, bool? inclusive, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsHistorysuccessschema&gt; ConversationsHistory(ConversationsHistoryRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -10956,17 +10604,13 @@ Fetches a conversation's history of messages and events.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsHistory(token,
-        channel,
-        latest,
-        oldest,
-        inclusive,
-        limit,
-        cursor,
-        contentType);
+    var response = await client.Conversations.ConversationsHistory(new ConversationsHistoryRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsHistorysuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -10975,21 +10619,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:history` |
-| <code>channel</code> | <code>string?</code> | Conversation ID to fetch history for. |
-| <code>latest</code> | <code>double?</code> | End of time range of messages to include in results. |
-| <code>oldest</code> | <code>double?</code> | Start of time range of messages to include in results. |
-| <code>inclusive</code> | <code>bool?</code> | Include messages with latest or oldest timestamp in results only when either timestamp is specified. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ConversationsHistoryRequest](src/SlackWebApi/Requests/Conversations/ConversationsHistoryRequest.cs)</code>
 
 </dd>
 </dl>
@@ -10999,9 +10634,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsHistorysuccessschema](Models/ConversationsHistorysuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsHistorysuccessschema](src/SlackWebApi/Models/ConversationsHistorysuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11012,7 +10647,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsInfosuccessschema&gt; ConversationsInfo(string? token, string? channel, bool? includeLocale, bool? includeNumMembers, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsInfosuccessschema&gt; ConversationsInfo(ConversationsInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11035,14 +10670,13 @@ Retrieve information about a conversation.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsInfo(token,
-        channel,
-        includeLocale,
-        includeNumMembers,
-        contentType);
+    var response = await client.Conversations.ConversationsInfo(new ConversationsInfoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsInfosuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11051,18 +10685,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:read` |
-| <code>channel</code> | <code>string?</code> | Conversation ID to learn more about |
-| <code>includeLocale</code> | <code>bool?</code> | Set this to `true` to receive the locale for this conversation. Defaults to `false` |
-| <code>includeNumMembers</code> | <code>bool?</code> | Set to `true` to include the member count for the specified conversation. Defaults to `false` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ConversationsInfoRequest](src/SlackWebApi/Requests/Conversations/ConversationsInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11072,9 +10700,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsInfosuccessschema](Models/ConversationsInfosuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsInfosuccessschema](src/SlackWebApi/Models/ConversationsInfosuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11085,7 +10713,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsInviteerrorschema&gt; ConversationsInvite(ContentType contentType, string? token, string? channel, string? users, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsInviteerrorschema&gt; ConversationsInvite(ConversationsInviteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11108,10 +10736,13 @@ Invites users to a channel.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsInvite(contentType, token, channel, users);
+    var response = await client.Conversations.ConversationsInvite(new ConversationsInviteRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsInviteerrorschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11120,17 +10751,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>users</code> | <code>string?</code> | - |
+<code>[ConversationsInviteRequest](src/SlackWebApi/Requests/Conversations/ConversationsInviteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11140,9 +10766,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsInviteerrorschema](Models/ConversationsInviteerrorschema.cs)</code>
+**OnSuccess**: <code>[ConversationsInviteerrorschema](src/SlackWebApi/Models/ConversationsInviteerrorschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11153,7 +10779,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsJoinsuccessschema&gt; ConversationsJoin(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsJoinsuccessschema&gt; ConversationsJoin(ConversationsJoinRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11176,10 +10802,13 @@ Joins an existing conversation.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsJoin(contentType, token, channel);
+    var response = await client.Conversations.ConversationsJoin(new ConversationsJoinRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsJoinsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11188,16 +10817,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `channels:write` |
-| <code>channel</code> | <code>string?</code> | - |
+<code>[ConversationsJoinRequest](src/SlackWebApi/Requests/Conversations/ConversationsJoinRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11207,9 +10832,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsJoinsuccessschema](Models/ConversationsJoinsuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsJoinsuccessschema](src/SlackWebApi/Models/ConversationsJoinsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11220,7 +10845,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsKicksuccessschema&gt; ConversationsKick(ContentType contentType, string? token, string? channel, string? user, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsKicksuccessschema&gt; ConversationsKick(ConversationsKickRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11243,10 +10868,13 @@ Removes a user from a conversation.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsKick(contentType, token, channel, user);
+    var response = await client.Conversations.ConversationsKick(new ConversationsKickRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsKicksuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11255,17 +10883,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>user</code> | <code>string?</code> | - |
+<code>[ConversationsKickRequest](src/SlackWebApi/Requests/Conversations/ConversationsKickRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11275,9 +10898,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsKicksuccessschema](Models/ConversationsKicksuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsKicksuccessschema](src/SlackWebApi/Models/ConversationsKicksuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11288,7 +10911,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsLeavesuccessschema&gt; ConversationsLeave(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsLeavesuccessschema&gt; ConversationsLeave(ConversationsLeaveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11311,10 +10934,13 @@ Leaves a conversation.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsLeave(contentType, token, channel);
+    var response = await client.Conversations.ConversationsLeave(new ConversationsLeaveRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsLeavesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11323,16 +10949,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
+<code>[ConversationsLeaveRequest](src/SlackWebApi/Requests/Conversations/ConversationsLeaveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11342,9 +10964,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsLeavesuccessschema](Models/ConversationsLeavesuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsLeavesuccessschema](src/SlackWebApi/Models/ConversationsLeavesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11355,7 +10977,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsListsuccessschema&gt; ConversationsList(string? token, bool? excludeArchived, string? types, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsListsuccessschema&gt; ConversationsList(ConversationsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11378,15 +11000,13 @@ Lists all channels in a Slack team.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsList(token,
-        excludeArchived,
-        types,
-        limit,
-        cursor,
-        contentType);
+    var response = await client.Conversations.ConversationsList(new ConversationsListRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsListsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11395,19 +11015,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:read` |
-| <code>excludeArchived</code> | <code>bool?</code> | Set to `true` to exclude archived channels from the list |
-| <code>types</code> | <code>string?</code> | Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im` |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000. |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ConversationsListRequest](src/SlackWebApi/Requests/Conversations/ConversationsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11417,9 +11030,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsListsuccessschema](Models/ConversationsListsuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsListsuccessschema](src/SlackWebApi/Models/ConversationsListsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11430,7 +11043,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsMarksuccessschema&gt; ConversationsMark(ContentType contentType, string? token, string? channel, double? ts, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsMarksuccessschema&gt; ConversationsMark(ConversationsMarkRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11453,10 +11066,13 @@ Sets the read cursor in a channel.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsMark(contentType, token, channel, ts);
+    var response = await client.Conversations.ConversationsMark(new ConversationsMarkRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsMarksuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11465,17 +11081,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>ts</code> | <code>double?</code> | - |
+<code>[ConversationsMarkRequest](src/SlackWebApi/Requests/Conversations/ConversationsMarkRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11485,9 +11096,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsMarksuccessschema](Models/ConversationsMarksuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsMarksuccessschema](src/SlackWebApi/Models/ConversationsMarksuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11498,7 +11109,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsMemberssuccessschema&gt; ConversationsMembers(string? token, string? channel, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsMemberssuccessschema&gt; ConversationsMembers(ConversationsMembersRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11521,10 +11132,13 @@ Retrieve members of a conversation.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsMembers(token, channel, limit, cursor, contentType);
+    var response = await client.Conversations.ConversationsMembers(new ConversationsMembersRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsMemberssuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11533,18 +11147,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:read` |
-| <code>channel</code> | <code>string?</code> | ID of the conversation to retrieve members for |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ConversationsMembersRequest](src/SlackWebApi/Requests/Conversations/ConversationsMembersRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11554,9 +11162,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsMemberssuccessschema](Models/ConversationsMemberssuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsMemberssuccessschema](src/SlackWebApi/Models/ConversationsMemberssuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11567,7 +11175,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsOpensuccessschema&gt; ConversationsOpen(ContentType contentType, string? token, string? channel, string? users, bool? returnIm, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsOpensuccessschema&gt; ConversationsOpen(ConversationsOpenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11590,10 +11198,13 @@ Opens or resumes a direct message or multi-person direct message.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsOpen(contentType, token, channel, users, returnIm);
+    var response = await client.Conversations.ConversationsOpen(new ConversationsOpenRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsOpensuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11602,18 +11213,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>users</code> | <code>string?</code> | - |
-| <code>returnIm</code> | <code>bool?</code> | - |
+<code>[ConversationsOpenRequest](src/SlackWebApi/Requests/Conversations/ConversationsOpenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11623,9 +11228,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsOpensuccessschema](Models/ConversationsOpensuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsOpensuccessschema](src/SlackWebApi/Models/ConversationsOpensuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11636,7 +11241,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsRenamesuccessschema&gt; ConversationsRename(ContentType contentType, string? token, string? channel, string? name, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsRenamesuccessschema&gt; ConversationsRename(ConversationsRenameRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11659,10 +11264,13 @@ Renames a conversation.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsRename(contentType, token, channel, name);
+    var response = await client.Conversations.ConversationsRename(new ConversationsRenameRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsRenamesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11671,17 +11279,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>name</code> | <code>string?</code> | - |
+<code>[ConversationsRenameRequest](src/SlackWebApi/Requests/Conversations/ConversationsRenameRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11691,9 +11294,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsRenamesuccessschema](Models/ConversationsRenamesuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsRenamesuccessschema](src/SlackWebApi/Models/ConversationsRenamesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11704,7 +11307,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsRepliessuccessschema&gt; ConversationsReplies(string? token, string? channel, double? ts, double? latest, double? oldest, bool? inclusive, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsRepliessuccessschema&gt; ConversationsReplies(ConversationsRepliesRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11727,18 +11330,13 @@ Retrieve a thread of messages posted to a conversation
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsReplies(token,
-        channel,
-        ts,
-        latest,
-        oldest,
-        inclusive,
-        limit,
-        cursor,
-        contentType);
+    var response = await client.Conversations.ConversationsReplies(new ConversationsRepliesRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsRepliessuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11747,22 +11345,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:history` |
-| <code>channel</code> | <code>string?</code> | Conversation ID to fetch thread from. |
-| <code>ts</code> | <code>double?</code> | Unique identifier of a thread's parent message. `ts` must be the timestamp of an existing message with 0 or more replies. If there are no replies then just the single message referenced by `ts` will return - it is just an ordinary, unthreaded message. |
-| <code>latest</code> | <code>double?</code> | End of time range of messages to include in results. |
-| <code>oldest</code> | <code>double?</code> | Start of time range of messages to include in results. |
-| <code>inclusive</code> | <code>bool?</code> | Include messages with latest or oldest timestamp in results only when either timestamp is specified. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ConversationsRepliesRequest](src/SlackWebApi/Requests/Conversations/ConversationsRepliesRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11772,9 +11360,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsRepliessuccessschema](Models/ConversationsRepliessuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsRepliessuccessschema](src/SlackWebApi/Models/ConversationsRepliessuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11785,7 +11373,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsSetPurposesuccessschema&gt; ConversationsSetPurpose(ContentType contentType, string? token, string? channel, string? purpose, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsSetPurposesuccessschema&gt; ConversationsSetPurpose(ConversationsSetPurposeRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11808,10 +11396,13 @@ Sets the purpose for a conversation.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsSetPurpose(contentType, token, channel, purpose);
+    var response = await client.Conversations.ConversationsSetPurpose(new ConversationsSetPurposeRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsSetPurposesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11820,17 +11411,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>purpose</code> | <code>string?</code> | - |
+<code>[ConversationsSetPurposeRequest](src/SlackWebApi/Requests/Conversations/ConversationsSetPurposeRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11840,9 +11426,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsSetPurposesuccessschema](Models/ConversationsSetPurposesuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsSetPurposesuccessschema](src/SlackWebApi/Models/ConversationsSetPurposesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11853,7 +11439,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsSetTopicsuccessschema&gt; ConversationsSetTopic(ContentType contentType, string? token, string? channel, string? topic, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsSetTopicsuccessschema&gt; ConversationsSetTopic(ConversationsSetTopicRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11876,10 +11462,13 @@ Sets the topic for a conversation.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsSetTopic(contentType, token, channel, topic);
+    var response = await client.Conversations.ConversationsSetTopic(new ConversationsSetTopicRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsSetTopicsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11888,17 +11477,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>topic</code> | <code>string?</code> | - |
+<code>[ConversationsSetTopicRequest](src/SlackWebApi/Requests/Conversations/ConversationsSetTopicRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11908,9 +11492,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsSetTopicsuccessschema](Models/ConversationsSetTopicsuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsSetTopicsuccessschema](src/SlackWebApi/Models/ConversationsSetTopicsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11921,7 +11505,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ConversationsUnarchivesuccessschema&gt; ConversationsUnarchive(ContentType contentType, string? token, string? channel, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ConversationsUnarchivesuccessschema&gt; ConversationsUnarchive(ConversationsUnarchiveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -11944,10 +11528,13 @@ Reverses conversation archival.
 ```csharp
 try
 {
-    var response = await client.Conversations.ConversationsUnarchive(contentType, token, channel);
+    var response = await client.Conversations.ConversationsUnarchive(new ConversationsUnarchiveRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ConversationsUnarchivesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -11956,16 +11543,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:write` |
-| <code>channel</code> | <code>string?</code> | - |
+<code>[ConversationsUnarchiveRequest](src/SlackWebApi/Requests/Conversations/ConversationsUnarchiveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -11975,9 +11558,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ConversationsUnarchivesuccessschema](Models/ConversationsUnarchivesuccessschema.cs)</code>
+**OnSuccess**: <code>[ConversationsUnarchivesuccessschema](src/SlackWebApi/Models/ConversationsUnarchivesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -11989,10 +11572,10 @@ catch (SdkException<RawError> ex)
 
 ## Dialog
 
-> Source: [Dialog](Api/Dialog.cs)
+> Source: [Dialog](src/SlackWebApi/Api/Dialog.cs)
 
 <details>
-<summary><code>Task&lt;DialogOpenschema&gt; DialogOpen(string dialog, string triggerId, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;DialogOpenschema&gt; DialogOpen(DialogOpenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12015,10 +11598,16 @@ Open a dialog with a user
 ```csharp
 try
 {
-    var response = await client.Dialog.DialogOpen(dialog, triggerId, token, contentType);
+    var response = await client.Dialog.DialogOpen(new DialogOpenRequest
+    {
+        Dialog = "some example string",
+        TriggerId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type DialogOpenschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12027,17 +11616,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>dialog</code> | <code>string</code> | The dialog definition. This must be a JSON-encoded string. |
-| <code>triggerId</code> | <code>string</code> | Exchange a trigger to post to the user. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[DialogOpenRequest](src/SlackWebApi/Requests/Dialog/DialogOpenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12047,9 +11631,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[DialogOpenschema](Models/DialogOpenschema.cs)</code>
+**OnSuccess**: <code>[DialogOpenschema](src/SlackWebApi/Models/DialogOpenschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12061,10 +11645,10 @@ catch (SdkException<RawError> ex)
 
 ## Dnd
 
-> Source: [Dnd](Api/Dnd.cs)
+> Source: [Dnd](src/SlackWebApi/Api/Dnd.cs)
 
 <details>
-<summary><code>Task&lt;DndEndDndschema&gt; DndEndDnd(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;DndEndDndschema&gt; DndEndDnd(DndEndDndRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12087,10 +11671,14 @@ Ends the current user's Do Not Disturb session immediately.
 ```csharp
 try
 {
-    var response = await client.Dnd.DndEndDnd(token, contentType);
+    var response = await client.Dnd.DndEndDnd(new DndEndDndRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type DndEndDndschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12099,15 +11687,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `dnd:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[DndEndDndRequest](src/SlackWebApi/Requests/Dnd/DndEndDndRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12117,9 +11702,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[DndEndDndschema](Models/DndEndDndschema.cs)</code>
+**OnSuccess**: <code>[DndEndDndschema](src/SlackWebApi/Models/DndEndDndschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12130,7 +11715,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;DndEndSnoozeschema&gt; DndEndSnooze(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;DndEndSnoozeschema&gt; DndEndSnooze(DndEndSnoozeRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12153,10 +11738,14 @@ Ends the current user's snooze mode immediately.
 ```csharp
 try
 {
-    var response = await client.Dnd.DndEndSnooze(token, contentType);
+    var response = await client.Dnd.DndEndSnooze(new DndEndSnoozeRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type DndEndSnoozeschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12165,15 +11754,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `dnd:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[DndEndSnoozeRequest](src/SlackWebApi/Requests/Dnd/DndEndSnoozeRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12183,9 +11769,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[DndEndSnoozeschema](Models/DndEndSnoozeschema.cs)</code>
+**OnSuccess**: <code>[DndEndSnoozeschema](src/SlackWebApi/Models/DndEndSnoozeschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12196,7 +11782,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;DndInfoschema&gt; DndInfo(string? token, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;DndInfoschema&gt; DndInfo(DndInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12219,10 +11805,13 @@ Retrieves a user's current Do Not Disturb status.
 ```csharp
 try
 {
-    var response = await client.Dnd.DndInfo(token, user, contentType);
+    var response = await client.Dnd.DndInfo(new DndInfoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type DndInfoschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12231,16 +11820,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `dnd:read` |
-| <code>user</code> | <code>string?</code> | User to fetch status for (defaults to current user) |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[DndInfoRequest](src/SlackWebApi/Requests/Dnd/DndInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12250,9 +11835,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[DndInfoschema](Models/DndInfoschema.cs)</code>
+**OnSuccess**: <code>[DndInfoschema](src/SlackWebApi/Models/DndInfoschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12263,7 +11848,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;DndSetSnoozeschema&gt; DndSetSnooze(ContentType contentType, string token, string numMinutes, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;DndSetSnoozeschema&gt; DndSetSnooze(DndSetSnoozeRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12286,10 +11871,15 @@ Turns on Do Not Disturb mode for the current user, or changes its duration.
 ```csharp
 try
 {
-    var response = await client.Dnd.DndSetSnooze(contentType, token, numMinutes);
+    var response = await client.Dnd.DndSetSnooze(new DndSetSnoozeRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+        NumMinutes = "some example string",
+    });
     // TODO: Handle 'response' of type DndSetSnoozeschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12298,16 +11888,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>numMinutes</code> | <code>string</code> | - |
+<code>[DndSetSnoozeRequest](src/SlackWebApi/Requests/Dnd/DndSetSnoozeRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12317,9 +11903,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[DndSetSnoozeschema](Models/DndSetSnoozeschema.cs)</code>
+**OnSuccess**: <code>[DndSetSnoozeschema](src/SlackWebApi/Models/DndSetSnoozeschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12330,7 +11916,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; DndTeamInfo(string? token, string? users, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; DndTeamInfo(DndTeamInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12353,10 +11939,13 @@ Retrieves the Do Not Disturb status for up to 50 users on a team.
 ```csharp
 try
 {
-    var response = await client.Dnd.DndTeamInfo(token, users, contentType);
+    var response = await client.Dnd.DndTeamInfo(new DndTeamInfoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12365,16 +11954,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `dnd:read` |
-| <code>users</code> | <code>string?</code> | Comma-separated list of users to fetch Do Not Disturb status for |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[DndTeamInfoRequest](src/SlackWebApi/Requests/Dnd/DndTeamInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12384,9 +11969,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12398,10 +11983,10 @@ catch (SdkException<RawError> ex)
 
 ## Emoji
 
-> Source: [Emoji](Api/Emoji.cs)
+> Source: [Emoji](src/SlackWebApi/Api/Emoji.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; EmojiList(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; EmojiList(EmojiListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12424,10 +12009,14 @@ Lists custom emoji for a team.
 ```csharp
 try
 {
-    var response = await client.Emoji.EmojiList(token, contentType);
+    var response = await client.Emoji.EmojiList(new EmojiListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12436,15 +12025,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `emoji:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[EmojiListRequest](src/SlackWebApi/Requests/Emoji/EmojiListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12454,9 +12040,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12468,10 +12054,10 @@ catch (SdkException<RawError> ex)
 
 ## Files
 
-> Source: [Files](Api/Files.cs)
+> Source: [Files](src/SlackWebApi/Api/Files.cs)
 
 <details>
-<summary><code>Task&lt;FilesCommentsDeleteschema&gt; FilesCommentsDelete(ContentType contentType, string? token, string? file, string? id, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesCommentsDeleteschema&gt; FilesCommentsDelete(FilesCommentsDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12494,10 +12080,13 @@ Deletes an existing comment on a file.
 ```csharp
 try
 {
-    var response = await client.Files.FilesCommentsDelete(contentType, token, file, id);
+    var response = await client.Files.FilesCommentsDelete(new FilesCommentsDeleteRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type FilesCommentsDeleteschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12506,17 +12095,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `files:write:user` |
-| <code>file</code> | <code>string?</code> | - |
-| <code>id</code> | <code>string?</code> | - |
+<code>[FilesCommentsDeleteRequest](src/SlackWebApi/Requests/FilesComments/FilesCommentsDeleteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12526,9 +12110,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesCommentsDeleteschema](Models/FilesCommentsDeleteschema.cs)</code>
+**OnSuccess**: <code>[FilesCommentsDeleteschema](src/SlackWebApi/Models/FilesCommentsDeleteschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12539,7 +12123,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;FilesDeleteschema&gt; FilesDelete(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesDeleteschema&gt; FilesDelete(FilesDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12562,10 +12146,13 @@ Deletes a file.
 ```csharp
 try
 {
-    var response = await client.Files.FilesDelete(contentType, token, file);
+    var response = await client.Files.FilesDelete(new FilesDeleteRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type FilesDeleteschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12574,16 +12161,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `files:write:user` |
-| <code>file</code> | <code>string?</code> | - |
+<code>[FilesDeleteRequest](src/SlackWebApi/Requests/Files/FilesDeleteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12593,9 +12176,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesDeleteschema](Models/FilesDeleteschema.cs)</code>
+**OnSuccess**: <code>[FilesDeleteschema](src/SlackWebApi/Models/FilesDeleteschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12606,7 +12189,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;FilesInfoschema&gt; FilesInfo(string? token, string? file, string? count, string? page, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesInfoschema&gt; FilesInfo(FilesInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12629,10 +12212,13 @@ Gets information about a file.
 ```csharp
 try
 {
-    var response = await client.Files.FilesInfo(token, file, count, page, limit, cursor, contentType);
+    var response = await client.Files.FilesInfo(new FilesInfoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type FilesInfoschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12641,20 +12227,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `files:read` |
-| <code>file</code> | <code>string?</code> | Specify a file by providing its ID. |
-| <code>count</code> | <code>string?</code> | - |
-| <code>page</code> | <code>string?</code> | - |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. |
-| <code>cursor</code> | <code>string?</code> | Parameter for pagination. File comments are paginated for a single file. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection of comments. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[FilesInfoRequest](src/SlackWebApi/Requests/Files/FilesInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12664,9 +12242,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesInfoschema](Models/FilesInfoschema.cs)</code>
+**OnSuccess**: <code>[FilesInfoschema](src/SlackWebApi/Models/FilesInfoschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12677,7 +12255,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;FilesListschema&gt; FilesList(string? token, string? user, string? channel, double? tsFrom, double? tsTo, string? types, string? count, string? page, bool? showFilesHiddenByLimit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesListschema&gt; FilesList(FilesListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12700,19 +12278,13 @@ List for a team, in a channel, or from a user with applied filters.
 ```csharp
 try
 {
-    var response = await client.Files.FilesList(token,
-        user,
-        channel,
-        tsFrom,
-        tsTo,
-        types,
-        count,
-        page,
-        showFilesHiddenByLimit,
-        contentType);
+    var response = await client.Files.FilesList(new FilesListRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type FilesListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12721,23 +12293,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `files:read` |
-| <code>user</code> | <code>string?</code> | Filter files created by a single user. |
-| <code>channel</code> | <code>string?</code> | Filter files appearing in a specific channel, indicated by its ID. |
-| <code>tsFrom</code> | <code>double?</code> | Filter files created after this timestamp (inclusive). |
-| <code>tsTo</code> | <code>double?</code> | Filter files created before this timestamp (inclusive). |
-| <code>types</code> | <code>string?</code> | Filter files by type ([see below](#file_types)). You can pass multiple values in the types argument, like `types=spaces,snippets`.The default value is `all`, which does not filter the list. |
-| <code>count</code> | <code>string?</code> | - |
-| <code>page</code> | <code>string?</code> | - |
-| <code>showFilesHiddenByLimit</code> | <code>bool?</code> | Show truncated file info for files hidden due to being too old, and the team who owns the file being over the file limit. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[FilesListRequest](src/SlackWebApi/Requests/Files/FilesListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12747,9 +12308,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesListschema](Models/FilesListschema.cs)</code>
+**OnSuccess**: <code>[FilesListschema](src/SlackWebApi/Models/FilesListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12760,7 +12321,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteAdd(ContentType contentType, string? token, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteAdd(FilesRemoteAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12783,17 +12344,13 @@ Adds a file from a remote service
 ```csharp
 try
 {
-    var response = await client.Files.FilesRemoteAdd(contentType,
-        token,
-        externalId,
-        title,
-        filetype,
-        externalUrl,
-        previewImage,
-        indexableFileContents);
+    var response = await client.Files.FilesRemoteAdd(new FilesRemoteAddRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12802,21 +12359,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | - |
-| <code>externalId</code> | <code>string?</code> | - |
-| <code>title</code> | <code>string?</code> | - |
-| <code>filetype</code> | <code>string?</code> | - |
-| <code>externalUrl</code> | <code>string?</code> | - |
-| <code>previewImage</code> | <code>string?</code> | - |
-| <code>indexableFileContents</code> | <code>string?</code> | - |
+<code>[FilesRemoteAddRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12826,9 +12374,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12839,7 +12387,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteInfo(string? token, string? file, string? externalId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteInfo(FilesRemoteInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12862,10 +12410,13 @@ Retrieve information about a remote file added to Slack
 ```csharp
 try
 {
-    var response = await client.Files.FilesRemoteInfo(token, file, externalId, contentType);
+    var response = await client.Files.FilesRemoteInfo(new FilesRemoteInfoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12874,17 +12425,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `remote_files:read` |
-| <code>file</code> | <code>string?</code> | Specify a file by providing its ID. |
-| <code>externalId</code> | <code>string?</code> | Creator defined GUID for the file. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[FilesRemoteInfoRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12894,9 +12440,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12907,7 +12453,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteList(string? token, string? channel, double? tsFrom, double? tsTo, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteList(FilesRemoteListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -12930,10 +12476,13 @@ Retrieve information about a remote file added to Slack
 ```csharp
 try
 {
-    var response = await client.Files.FilesRemoteList(token, channel, tsFrom, tsTo, limit, cursor, contentType);
+    var response = await client.Files.FilesRemoteList(new FilesRemoteListRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -12942,20 +12491,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `remote_files:read` |
-| <code>channel</code> | <code>string?</code> | Filter files appearing in a specific channel, indicated by its ID. |
-| <code>tsFrom</code> | <code>double?</code> | Filter files created after this timestamp (inclusive). |
-| <code>tsTo</code> | <code>double?</code> | Filter files created before this timestamp (inclusive). |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[FilesRemoteListRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -12965,9 +12506,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -12978,7 +12519,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteRemove(ContentType contentType, string? token, string? file, string? externalId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteRemove(FilesRemoteRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13001,10 +12542,13 @@ Remove a remote file.
 ```csharp
 try
 {
-    var response = await client.Files.FilesRemoteRemove(contentType, token, file, externalId);
+    var response = await client.Files.FilesRemoteRemove(new FilesRemoteRemoveRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13013,17 +12557,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | - |
-| <code>file</code> | <code>string?</code> | - |
-| <code>externalId</code> | <code>string?</code> | - |
+<code>[FilesRemoteRemoveRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13033,9 +12572,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13046,7 +12585,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteShare(string? token, string? file, string? externalId, string? channels, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteShare(FilesRemoteShareRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13069,10 +12608,13 @@ Share a remote file into a channel.
 ```csharp
 try
 {
-    var response = await client.Files.FilesRemoteShare(token, file, externalId, channels, contentType);
+    var response = await client.Files.FilesRemoteShare(new FilesRemoteShareRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13081,18 +12623,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `remote_files:share` |
-| <code>file</code> | <code>string?</code> | Specify a file registered with Slack by providing its ID. Either this field or `external_id` or both are required. |
-| <code>externalId</code> | <code>string?</code> | The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or `file` or both are required. |
-| <code>channels</code> | <code>string?</code> | Comma-separated list of channel IDs where the file will be shared. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[FilesRemoteShareRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteShareRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13102,9 +12638,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13115,7 +12651,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteUpdate(ContentType contentType, string? token, string? file, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteUpdate(FilesRemoteUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13138,18 +12674,13 @@ Updates an existing remote file.
 ```csharp
 try
 {
-    var response = await client.Files.FilesRemoteUpdate(contentType,
-        token,
-        file,
-        externalId,
-        title,
-        filetype,
-        externalUrl,
-        previewImage,
-        indexableFileContents);
+    var response = await client.Files.FilesRemoteUpdate(new FilesRemoteUpdateRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13158,22 +12689,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | - |
-| <code>file</code> | <code>string?</code> | - |
-| <code>externalId</code> | <code>string?</code> | - |
-| <code>title</code> | <code>string?</code> | - |
-| <code>filetype</code> | <code>string?</code> | - |
-| <code>externalUrl</code> | <code>string?</code> | - |
-| <code>previewImage</code> | <code>string?</code> | - |
-| <code>indexableFileContents</code> | <code>string?</code> | - |
+<code>[FilesRemoteUpdateRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteUpdateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13183,9 +12704,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13196,7 +12717,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;FilesRevokePublicUrLschema&gt; FilesRevokePublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesRevokePublicUrLschema&gt; FilesRevokePublicUrl(FilesRevokePublicUrlRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13219,10 +12740,13 @@ Revokes public/external sharing access for a file
 ```csharp
 try
 {
-    var response = await client.Files.FilesRevokePublicUrl(contentType, token, file);
+    var response = await client.Files.FilesRevokePublicUrl(new FilesRevokePublicUrlRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type FilesRevokePublicUrLschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13231,16 +12755,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `files:write:user` |
-| <code>file</code> | <code>string?</code> | - |
+<code>[FilesRevokePublicUrlRequest](src/SlackWebApi/Requests/Files/FilesRevokePublicUrlRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13250,9 +12770,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesRevokePublicUrLschema](Models/FilesRevokePublicUrLschema.cs)</code>
+**OnSuccess**: <code>[FilesRevokePublicUrLschema](src/SlackWebApi/Models/FilesRevokePublicUrLschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13263,7 +12783,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;FilesSharedPublicUrLschema&gt; FilesSharedPublicUrl(ContentType contentType, string? token, string? file, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesSharedPublicUrLschema&gt; FilesSharedPublicUrl(FilesSharedPublicUrlRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13286,10 +12806,13 @@ Enables a file for public/external sharing.
 ```csharp
 try
 {
-    var response = await client.Files.FilesSharedPublicUrl(contentType, token, file);
+    var response = await client.Files.FilesSharedPublicUrl(new FilesSharedPublicUrlRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type FilesSharedPublicUrLschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13298,16 +12821,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `files:write:user` |
-| <code>file</code> | <code>string?</code> | - |
+<code>[FilesSharedPublicUrlRequest](src/SlackWebApi/Requests/Files/FilesSharedPublicUrlRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13317,9 +12836,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesSharedPublicUrLschema](Models/FilesSharedPublicUrLschema.cs)</code>
+**OnSuccess**: <code>[FilesSharedPublicUrLschema](src/SlackWebApi/Models/FilesSharedPublicUrLschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13330,7 +12849,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;FilesUploadschema&gt; FilesUpload(ContentType contentType, string? token, string? file, string? content, string? filetype, string? filename, string? title, string? initialComment, string? channels, double? threadTs, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesUploadschema&gt; FilesUpload(FilesUploadRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13353,19 +12872,13 @@ Uploads or creates a file.
 ```csharp
 try
 {
-    var response = await client.Files.FilesUpload(contentType,
-        token,
-        file,
-        content,
-        filetype,
-        filename,
-        title,
-        initialComment,
-        channels,
-        threadTs);
+    var response = await client.Files.FilesUpload(new FilesUploadRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type FilesUploadschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13374,23 +12887,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | - |
-| <code>file</code> | <code>string?</code> | - |
-| <code>content</code> | <code>string?</code> | - |
-| <code>filetype</code> | <code>string?</code> | - |
-| <code>filename</code> | <code>string?</code> | - |
-| <code>title</code> | <code>string?</code> | - |
-| <code>initialComment</code> | <code>string?</code> | - |
-| <code>channels</code> | <code>string?</code> | - |
-| <code>threadTs</code> | <code>double?</code> | - |
+<code>[FilesUploadRequest](src/SlackWebApi/Requests/Files/FilesUploadRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13400,9 +12902,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesUploadschema](Models/FilesUploadschema.cs)</code>
+**OnSuccess**: <code>[FilesUploadschema](src/SlackWebApi/Models/FilesUploadschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13414,10 +12916,10 @@ catch (SdkException<RawError> ex)
 
 ## FilesComments
 
-> Source: [FilesComments](Api/FilesComments.cs)
+> Source: [FilesComments](src/SlackWebApi/Api/FilesComments.cs)
 
 <details>
-<summary><code>Task&lt;FilesCommentsDeleteschema&gt; FilesCommentsDelete(ContentType contentType, string? token, string? file, string? id, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;FilesCommentsDeleteschema&gt; FilesCommentsDelete(FilesCommentsDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13440,10 +12942,13 @@ Deletes an existing comment on a file.
 ```csharp
 try
 {
-    var response = await client.FilesComments.FilesCommentsDelete(contentType, token, file, id);
+    var response = await client.FilesComments.FilesCommentsDelete(new FilesCommentsDeleteRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type FilesCommentsDeleteschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13452,17 +12957,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `files:write:user` |
-| <code>file</code> | <code>string?</code> | - |
-| <code>id</code> | <code>string?</code> | - |
+<code>[FilesCommentsDeleteRequest](src/SlackWebApi/Requests/FilesComments/FilesCommentsDeleteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13472,9 +12972,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[FilesCommentsDeleteschema](Models/FilesCommentsDeleteschema.cs)</code>
+**OnSuccess**: <code>[FilesCommentsDeleteschema](src/SlackWebApi/Models/FilesCommentsDeleteschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13486,10 +12986,10 @@ catch (SdkException<RawError> ex)
 
 ## FilesRemote
 
-> Source: [FilesRemote](Api/FilesRemote.cs)
+> Source: [FilesRemote](src/SlackWebApi/Api/FilesRemote.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteAdd(ContentType contentType, string? token, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteAdd(FilesRemoteAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13512,17 +13012,13 @@ Adds a file from a remote service
 ```csharp
 try
 {
-    var response = await client.FilesRemote.FilesRemoteAdd(contentType,
-        token,
-        externalId,
-        title,
-        filetype,
-        externalUrl,
-        previewImage,
-        indexableFileContents);
+    var response = await client.FilesRemote.FilesRemoteAdd(new FilesRemoteAddRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13531,21 +13027,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | - |
-| <code>externalId</code> | <code>string?</code> | - |
-| <code>title</code> | <code>string?</code> | - |
-| <code>filetype</code> | <code>string?</code> | - |
-| <code>externalUrl</code> | <code>string?</code> | - |
-| <code>previewImage</code> | <code>string?</code> | - |
-| <code>indexableFileContents</code> | <code>string?</code> | - |
+<code>[FilesRemoteAddRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13555,9 +13042,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13568,7 +13055,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteInfo(string? token, string? file, string? externalId, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteInfo(FilesRemoteInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13591,10 +13078,13 @@ Retrieve information about a remote file added to Slack
 ```csharp
 try
 {
-    var response = await client.FilesRemote.FilesRemoteInfo(token, file, externalId, contentType);
+    var response = await client.FilesRemote.FilesRemoteInfo(new FilesRemoteInfoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13603,17 +13093,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `remote_files:read` |
-| <code>file</code> | <code>string?</code> | Specify a file by providing its ID. |
-| <code>externalId</code> | <code>string?</code> | Creator defined GUID for the file. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[FilesRemoteInfoRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13623,9 +13108,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13636,7 +13121,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteList(string? token, string? channel, double? tsFrom, double? tsTo, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteList(FilesRemoteListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13659,10 +13144,13 @@ Retrieve information about a remote file added to Slack
 ```csharp
 try
 {
-    var response = await client.FilesRemote.FilesRemoteList(token, channel, tsFrom, tsTo, limit, cursor, contentType);
+    var response = await client.FilesRemote.FilesRemoteList(new FilesRemoteListRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13671,20 +13159,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `remote_files:read` |
-| <code>channel</code> | <code>string?</code> | Filter files appearing in a specific channel, indicated by its ID. |
-| <code>tsFrom</code> | <code>double?</code> | Filter files created after this timestamp (inclusive). |
-| <code>tsTo</code> | <code>double?</code> | Filter files created before this timestamp (inclusive). |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[FilesRemoteListRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13694,9 +13174,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13707,7 +13187,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteRemove(ContentType contentType, string? token, string? file, string? externalId, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteRemove(FilesRemoteRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13730,10 +13210,13 @@ Remove a remote file.
 ```csharp
 try
 {
-    var response = await client.FilesRemote.FilesRemoteRemove(contentType, token, file, externalId);
+    var response = await client.FilesRemote.FilesRemoteRemove(new FilesRemoteRemoveRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13742,17 +13225,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | - |
-| <code>file</code> | <code>string?</code> | - |
-| <code>externalId</code> | <code>string?</code> | - |
+<code>[FilesRemoteRemoveRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13762,9 +13240,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13775,7 +13253,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteShare(string? token, string? file, string? externalId, string? channels, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteShare(FilesRemoteShareRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13798,10 +13276,13 @@ Share a remote file into a channel.
 ```csharp
 try
 {
-    var response = await client.FilesRemote.FilesRemoteShare(token, file, externalId, channels, contentType);
+    var response = await client.FilesRemote.FilesRemoteShare(new FilesRemoteShareRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13810,18 +13291,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `remote_files:share` |
-| <code>file</code> | <code>string?</code> | Specify a file registered with Slack by providing its ID. Either this field or `external_id` or both are required. |
-| <code>externalId</code> | <code>string?</code> | The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or `file` or both are required. |
-| <code>channels</code> | <code>string?</code> | Comma-separated list of channel IDs where the file will be shared. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[FilesRemoteShareRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteShareRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13831,9 +13306,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13844,7 +13319,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteUpdate(ContentType contentType, string? token, string? file, string? externalId, string? title, string? filetype, string? externalUrl, string? previewImage, string? indexableFileContents, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; FilesRemoteUpdate(FilesRemoteUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13867,18 +13342,13 @@ Updates an existing remote file.
 ```csharp
 try
 {
-    var response = await client.FilesRemote.FilesRemoteUpdate(contentType,
-        token,
-        file,
-        externalId,
-        title,
-        filetype,
-        externalUrl,
-        previewImage,
-        indexableFileContents);
+    var response = await client.FilesRemote.FilesRemoteUpdate(new FilesRemoteUpdateRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13887,22 +13357,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | - |
-| <code>file</code> | <code>string?</code> | - |
-| <code>externalId</code> | <code>string?</code> | - |
-| <code>title</code> | <code>string?</code> | - |
-| <code>filetype</code> | <code>string?</code> | - |
-| <code>externalUrl</code> | <code>string?</code> | - |
-| <code>previewImage</code> | <code>string?</code> | - |
-| <code>indexableFileContents</code> | <code>string?</code> | - |
+<code>[FilesRemoteUpdateRequest](src/SlackWebApi/Requests/FilesRemote/FilesRemoteUpdateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13912,9 +13372,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13926,10 +13386,10 @@ catch (SdkException<RawError> ex)
 
 ## Migration
 
-> Source: [Migration](Api/Migration.cs)
+> Source: [Migration](src/SlackWebApi/Api/Migration.cs)
 
 <details>
-<summary><code>Task&lt;MigrationExchangesuccessschema&gt; MigrationExchange(string token, string users, string? teamId, bool? toOld, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;MigrationExchangesuccessschema&gt; MigrationExchange(MigrationExchangeRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -13952,10 +13412,15 @@ For Enterprise Grid workspaces, map local user IDs to global user IDs
 ```csharp
 try
 {
-    var response = await client.Migration.MigrationExchange(token, users, teamId, toOld, contentType);
+    var response = await client.Migration.MigrationExchange(new MigrationExchangeRequest
+    {
+        Token = "some example string",
+        Users = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type MigrationExchangesuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -13964,18 +13429,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `tokens.basic` |
-| <code>users</code> | <code>string</code> | A comma-separated list of user ids, up to 400 per request |
-| <code>teamId</code> | <code>string?</code> | Specify team_id starts with `T` in case of Org Token |
-| <code>toOld</code> | <code>bool?</code> | Specify `true` to convert `W` global user IDs to workspace-specific `U` IDs. Defaults to `false`. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[MigrationExchangeRequest](src/SlackWebApi/Requests/Migration/MigrationExchangeRequest.cs)</code>
 
 </dd>
 </dl>
@@ -13985,9 +13444,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[MigrationExchangesuccessschema](Models/MigrationExchangesuccessschema.cs)</code>
+**OnSuccess**: <code>[MigrationExchangesuccessschema](src/SlackWebApi/Models/MigrationExchangesuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -13999,10 +13458,10 @@ catch (SdkException<RawError> ex)
 
 ## Oauth
 
-> Source: [Oauth](Api/Oauth.cs)
+> Source: [Oauth](src/SlackWebApi/Api/Oauth.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; OauthAccess(string? clientId, string? clientSecret, string? code, string? redirectUri, bool? singleChannel, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; OauthAccess(OauthAccessRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14025,15 +13484,13 @@ Exchanges a temporary OAuth verifier code for an access token.
 ```csharp
 try
 {
-    var response = await client.Oauth.OauthAccess(clientId,
-        clientSecret,
-        code,
-        redirectUri,
-        singleChannel,
-        contentType);
+    var response = await client.Oauth.OauthAccess(new OauthAccessRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14042,19 +13499,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>clientId</code> | <code>string?</code> | Issued when you created your application. |
-| <code>clientSecret</code> | <code>string?</code> | Issued when you created your application. |
-| <code>code</code> | <code>string?</code> | The `code` param returned via the OAuth callback. |
-| <code>redirectUri</code> | <code>string?</code> | This must match the originally submitted URI (if one was sent). |
-| <code>singleChannel</code> | <code>bool?</code> | Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps). |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[OauthAccessRequest](src/SlackWebApi/Requests/Oauth/OauthAccessRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14064,9 +13514,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14077,7 +13527,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; OauthToken(string? clientId, string? clientSecret, string? code, string? redirectUri, bool? singleChannel, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; OauthToken(OauthTokenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14100,10 +13550,13 @@ Exchanges a temporary OAuth verifier code for a workspace token.
 ```csharp
 try
 {
-    var response = await client.Oauth.OauthToken(clientId, clientSecret, code, redirectUri, singleChannel, contentType);
+    var response = await client.Oauth.OauthToken(new OauthTokenRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14112,19 +13565,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>clientId</code> | <code>string?</code> | Issued when you created your application. |
-| <code>clientSecret</code> | <code>string?</code> | Issued when you created your application. |
-| <code>code</code> | <code>string?</code> | The `code` param returned via the OAuth callback. |
-| <code>redirectUri</code> | <code>string?</code> | This must match the originally submitted URI (if one was sent). |
-| <code>singleChannel</code> | <code>bool?</code> | Request the user to add your app only to a single channel. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[OauthTokenRequest](src/SlackWebApi/Requests/Oauth/OauthTokenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14134,9 +13580,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14147,7 +13593,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; OauthV2Access(string code, string? clientId, string? clientSecret, string? redirectUri, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; OauthV2Access(OauthV2AccessRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14170,10 +13616,14 @@ Exchanges a temporary OAuth verifier code for an access token.
 ```csharp
 try
 {
-    var response = await client.Oauth.OauthV2Access(code, clientId, clientSecret, redirectUri, contentType);
+    var response = await client.Oauth.OauthV2Access(new OauthV2AccessRequest
+    {
+        Code = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14182,18 +13632,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>code</code> | <code>string</code> | The `code` param returned via the OAuth callback. |
-| <code>clientId</code> | <code>string?</code> | Issued when you created your application. |
-| <code>clientSecret</code> | <code>string?</code> | Issued when you created your application. |
-| <code>redirectUri</code> | <code>string?</code> | This must match the originally submitted URI (if one was sent). |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[OauthV2AccessRequest](src/SlackWebApi/Requests/OauthV2/OauthV2AccessRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14203,9 +13647,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14217,10 +13661,10 @@ catch (SdkException<RawError> ex)
 
 ## OauthV2
 
-> Source: [OauthV2](Api/OauthV2.cs)
+> Source: [OauthV2](src/SlackWebApi/Api/OauthV2.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; OauthV2Access(string code, string? clientId, string? clientSecret, string? redirectUri, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; OauthV2Access(OauthV2AccessRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14243,10 +13687,14 @@ Exchanges a temporary OAuth verifier code for an access token.
 ```csharp
 try
 {
-    var response = await client.OauthV2.OauthV2Access(code, clientId, clientSecret, redirectUri, contentType);
+    var response = await client.OauthV2.OauthV2Access(new OauthV2AccessRequest
+    {
+        Code = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14255,18 +13703,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>code</code> | <code>string</code> | The `code` param returned via the OAuth callback. |
-| <code>clientId</code> | <code>string?</code> | Issued when you created your application. |
-| <code>clientSecret</code> | <code>string?</code> | Issued when you created your application. |
-| <code>redirectUri</code> | <code>string?</code> | This must match the originally submitted URI (if one was sent). |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[OauthV2AccessRequest](src/SlackWebApi/Requests/OauthV2/OauthV2AccessRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14276,9 +13718,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14290,10 +13732,10 @@ catch (SdkException<RawError> ex)
 
 ## Pins
 
-> Source: [Pins](Api/Pins.cs)
+> Source: [Pins](src/SlackWebApi/Api/Pins.cs)
 
 <details>
-<summary><code>Task&lt;PinsAddschema&gt; PinsAdd(string token, ContentType contentType, string channel, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;PinsAddschema&gt; PinsAdd(PinsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14316,10 +13758,15 @@ Pins an item to a channel.
 ```csharp
 try
 {
-    var response = await client.Pins.PinsAdd(token, contentType, channel, timestamp);
+    var response = await client.Pins.PinsAdd(new PinsAddRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Channel = "some example string",
+    });
     // TODO: Handle 'response' of type PinsAddschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14328,17 +13775,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `pins:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string</code> | - |
-| <code>timestamp</code> | <code>string?</code> | - |
+<code>[PinsAddRequest](src/SlackWebApi/Requests/Pins/PinsAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14348,9 +13790,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PinsAddschema](Models/PinsAddschema.cs)</code>
+**OnSuccess**: <code>[PinsAddschema](src/SlackWebApi/Models/PinsAddschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14361,7 +13803,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;object&gt; PinsList(string token, string channel, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;object&gt; PinsList(PinsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14384,10 +13826,15 @@ Lists items pinned to a channel.
 ```csharp
 try
 {
-    var response = await client.Pins.PinsList(token, channel, contentType);
+    var response = await client.Pins.PinsList(new PinsListRequest
+    {
+        Token = "some example string",
+        Channel = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type object
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14396,16 +13843,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `pins:read` |
-| <code>channel</code> | <code>string</code> | Channel to get pinned items for. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[PinsListRequest](src/SlackWebApi/Requests/Pins/PinsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14417,7 +13860,7 @@ catch (SdkException<RawError> ex)
 
 **OnSuccess**: <code>object</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14428,7 +13871,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;PinsRemoveschema&gt; PinsRemove(string token, ContentType contentType, string channel, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;PinsRemoveschema&gt; PinsRemove(PinsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14451,10 +13894,15 @@ Un-pins an item from a channel.
 ```csharp
 try
 {
-    var response = await client.Pins.PinsRemove(token, contentType, channel, timestamp);
+    var response = await client.Pins.PinsRemove(new PinsRemoveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Channel = "some example string",
+    });
     // TODO: Handle 'response' of type PinsRemoveschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14463,17 +13911,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `pins:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string</code> | - |
-| <code>timestamp</code> | <code>string?</code> | - |
+<code>[PinsRemoveRequest](src/SlackWebApi/Requests/Pins/PinsRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14483,9 +13926,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[PinsRemoveschema](Models/PinsRemoveschema.cs)</code>
+**OnSuccess**: <code>[PinsRemoveschema](src/SlackWebApi/Models/PinsRemoveschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14497,10 +13940,10 @@ catch (SdkException<RawError> ex)
 
 ## Reactions
 
-> Source: [Reactions](Api/Reactions.cs)
+> Source: [Reactions](src/SlackWebApi/Api/Reactions.cs)
 
 <details>
-<summary><code>Task&lt;ReactionsAddschema&gt; ReactionsAdd(string token, ContentType contentType, string channel, string name, string timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ReactionsAddschema&gt; ReactionsAdd(ReactionsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14523,10 +13966,17 @@ Adds a reaction to an item.
 ```csharp
 try
 {
-    var response = await client.Reactions.ReactionsAdd(token, contentType, channel, name, timestamp);
+    var response = await client.Reactions.ReactionsAdd(new ReactionsAddRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Channel = "some example string",
+        Name = "some example string",
+        Timestamp = "some example string",
+    });
     // TODO: Handle 'response' of type ReactionsAddschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14535,18 +13985,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `reactions:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>timestamp</code> | <code>string</code> | - |
+<code>[ReactionsAddRequest](src/SlackWebApi/Requests/Reactions/ReactionsAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14556,9 +14000,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ReactionsAddschema](Models/ReactionsAddschema.cs)</code>
+**OnSuccess**: <code>[ReactionsAddschema](src/SlackWebApi/Models/ReactionsAddschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14569,7 +14013,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;object&gt; ReactionsGet(string token, string? channel, string? file, string? fileComment, bool? full, string? timestamp, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;object&gt; ReactionsGet(ReactionsGetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14592,10 +14036,14 @@ Gets reactions for an item.
 ```csharp
 try
 {
-    var response = await client.Reactions.ReactionsGet(token, channel, file, fileComment, full, timestamp, contentType);
+    var response = await client.Reactions.ReactionsGet(new ReactionsGetRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type object
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14604,20 +14052,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `reactions:read` |
-| <code>channel</code> | <code>string?</code> | Channel where the message to get reactions for was posted. |
-| <code>file</code> | <code>string?</code> | File to get reactions for. |
-| <code>fileComment</code> | <code>string?</code> | File comment to get reactions for. |
-| <code>full</code> | <code>bool?</code> | If true always return the complete reaction list. |
-| <code>timestamp</code> | <code>string?</code> | Timestamp of the message to get reactions for. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ReactionsGetRequest](src/SlackWebApi/Requests/Reactions/ReactionsGetRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14629,7 +14069,7 @@ catch (SdkException<RawError> ex)
 
 **OnSuccess**: <code>object</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14640,7 +14080,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ReactionsListschema&gt; ReactionsList(string token, string? user, bool? full, int? count, int? page, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ReactionsListschema&gt; ReactionsList(ReactionsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14663,10 +14103,14 @@ Lists reactions made by a user.
 ```csharp
 try
 {
-    var response = await client.Reactions.ReactionsList(token, user, full, count, page, cursor, limit, contentType);
+    var response = await client.Reactions.ReactionsList(new ReactionsListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ReactionsListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14675,21 +14119,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `reactions:read` |
-| <code>user</code> | <code>string?</code> | Show reactions made by this user. Defaults to the authed user. |
-| <code>full</code> | <code>bool?</code> | If true always return the complete reaction list. |
-| <code>count</code> | <code>int?</code> | - |
-| <code>page</code> | <code>int?</code> | - |
-| <code>cursor</code> | <code>string?</code> | Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ReactionsListRequest](src/SlackWebApi/Requests/Reactions/ReactionsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14699,9 +14134,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ReactionsListschema](Models/ReactionsListschema.cs)</code>
+**OnSuccess**: <code>[ReactionsListschema](src/SlackWebApi/Models/ReactionsListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14712,7 +14147,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ReactionsRemoveschema&gt; ReactionsRemove(string token, ContentType contentType, string name, string? file, string? fileComment, string? channel, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ReactionsRemoveschema&gt; ReactionsRemove(ReactionsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14735,16 +14170,15 @@ Removes a reaction from an item.
 ```csharp
 try
 {
-    var response = await client.Reactions.ReactionsRemove(token,
-        contentType,
-        name,
-        file,
-        fileComment,
-        channel,
-        timestamp);
+    var response = await client.Reactions.ReactionsRemove(new ReactionsRemoveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Name = "some example string",
+    });
     // TODO: Handle 'response' of type ReactionsRemoveschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14753,20 +14187,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `reactions:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>file</code> | <code>string?</code> | - |
-| <code>fileComment</code> | <code>string?</code> | - |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>timestamp</code> | <code>string?</code> | - |
+<code>[ReactionsRemoveRequest](src/SlackWebApi/Requests/Reactions/ReactionsRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14776,9 +14202,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ReactionsRemoveschema](Models/ReactionsRemoveschema.cs)</code>
+**OnSuccess**: <code>[ReactionsRemoveschema](src/SlackWebApi/Models/ReactionsRemoveschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14790,10 +14216,10 @@ catch (SdkException<RawError> ex)
 
 ## Reminders
 
-> Source: [Reminders](Api/Reminders.cs)
+> Source: [Reminders](src/SlackWebApi/Api/Reminders.cs)
 
 <details>
-<summary><code>Task&lt;RemindersAddschema&gt; RemindersAdd(string token, ContentType contentType, string text, string time, string? user, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;RemindersAddschema&gt; RemindersAdd(RemindersAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14816,10 +14242,16 @@ Creates a reminder.
 ```csharp
 try
 {
-    var response = await client.Reminders.RemindersAdd(token, contentType, text, time, user);
+    var response = await client.Reminders.RemindersAdd(new RemindersAddRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Text = "some example string",
+        Time = "some example string",
+    });
     // TODO: Handle 'response' of type RemindersAddschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14828,18 +14260,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `reminders:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>text</code> | <code>string</code> | - |
-| <code>time</code> | <code>string</code> | - |
-| <code>user</code> | <code>string?</code> | - |
+<code>[RemindersAddRequest](src/SlackWebApi/Requests/Reminders/RemindersAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14849,9 +14275,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RemindersAddschema](Models/RemindersAddschema.cs)</code>
+**OnSuccess**: <code>[RemindersAddschema](src/SlackWebApi/Models/RemindersAddschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14862,7 +14288,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;RemindersCompleteschema&gt; RemindersComplete(ContentType contentType, string? token, string? reminder, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;RemindersCompleteschema&gt; RemindersComplete(RemindersCompleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14885,10 +14311,13 @@ Marks a reminder as complete.
 ```csharp
 try
 {
-    var response = await client.Reminders.RemindersComplete(contentType, token, reminder);
+    var response = await client.Reminders.RemindersComplete(new RemindersCompleteRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type RemindersCompleteschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14897,16 +14326,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `reminders:write` |
-| <code>reminder</code> | <code>string?</code> | - |
+<code>[RemindersCompleteRequest](src/SlackWebApi/Requests/Reminders/RemindersCompleteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14916,9 +14341,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RemindersCompleteschema](Models/RemindersCompleteschema.cs)</code>
+**OnSuccess**: <code>[RemindersCompleteschema](src/SlackWebApi/Models/RemindersCompleteschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14929,7 +14354,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;RemindersDeleteschema&gt; RemindersDelete(ContentType contentType, string? token, string? reminder, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;RemindersDeleteschema&gt; RemindersDelete(RemindersDeleteRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -14952,10 +14377,13 @@ Deletes a reminder.
 ```csharp
 try
 {
-    var response = await client.Reminders.RemindersDelete(contentType, token, reminder);
+    var response = await client.Reminders.RemindersDelete(new RemindersDeleteRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type RemindersDeleteschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -14964,16 +14392,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `reminders:write` |
-| <code>reminder</code> | <code>string?</code> | - |
+<code>[RemindersDeleteRequest](src/SlackWebApi/Requests/Reminders/RemindersDeleteRequest.cs)</code>
 
 </dd>
 </dl>
@@ -14983,9 +14407,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RemindersDeleteschema](Models/RemindersDeleteschema.cs)</code>
+**OnSuccess**: <code>[RemindersDeleteschema](src/SlackWebApi/Models/RemindersDeleteschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -14996,7 +14420,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;RemindersInfoschema&gt; RemindersInfo(string? token, string? reminder, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;RemindersInfoschema&gt; RemindersInfo(RemindersInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15019,10 +14443,13 @@ Gets information about a reminder.
 ```csharp
 try
 {
-    var response = await client.Reminders.RemindersInfo(token, reminder, contentType);
+    var response = await client.Reminders.RemindersInfo(new RemindersInfoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type RemindersInfoschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15031,16 +14458,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `reminders:read` |
-| <code>reminder</code> | <code>string?</code> | The ID of the reminder |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[RemindersInfoRequest](src/SlackWebApi/Requests/Reminders/RemindersInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15050,9 +14473,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RemindersInfoschema](Models/RemindersInfoschema.cs)</code>
+**OnSuccess**: <code>[RemindersInfoschema](src/SlackWebApi/Models/RemindersInfoschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15063,7 +14486,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;RemindersListschema&gt; RemindersList(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;RemindersListschema&gt; RemindersList(RemindersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15086,10 +14509,13 @@ Lists all reminders created by or for a given user.
 ```csharp
 try
 {
-    var response = await client.Reminders.RemindersList(token, contentType);
+    var response = await client.Reminders.RemindersList(new RemindersListRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type RemindersListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15098,15 +14524,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `reminders:read` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[RemindersListRequest](src/SlackWebApi/Requests/Reminders/RemindersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15116,9 +14539,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RemindersListschema](Models/RemindersListschema.cs)</code>
+**OnSuccess**: <code>[RemindersListschema](src/SlackWebApi/Models/RemindersListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15130,10 +14553,10 @@ catch (SdkException<RawError> ex)
 
 ## Rtm
 
-> Source: [Rtm](Api/Rtm.cs)
+> Source: [Rtm](src/SlackWebApi/Api/Rtm.cs)
 
 <details>
-<summary><code>Task&lt;RtmConnectschema&gt; RtmConnect(string token, bool? batchPresenceAware, bool? presenceSub, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;RtmConnectschema&gt; RtmConnect(RtmConnectRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15156,10 +14579,14 @@ Starts a Real Time Messaging session.
 ```csharp
 try
 {
-    var response = await client.Rtm.RtmConnect(token, batchPresenceAware, presenceSub, contentType);
+    var response = await client.Rtm.RtmConnect(new RtmConnectRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type RtmConnectschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15168,17 +14595,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `rtm:stream` |
-| <code>batchPresenceAware</code> | <code>bool?</code> | Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. |
-| <code>presenceSub</code> | <code>bool?</code> | Only deliver presence events when requested by subscription |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[RtmConnectRequest](src/SlackWebApi/Requests/Rtm/RtmConnectRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15188,9 +14610,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[RtmConnectschema](Models/RtmConnectschema.cs)</code>
+**OnSuccess**: <code>[RtmConnectschema](src/SlackWebApi/Models/RtmConnectschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15202,10 +14624,10 @@ catch (SdkException<RawError> ex)
 
 ## Search
 
-> Source: [Search](Api/Search.cs)
+> Source: [Search](src/SlackWebApi/Api/Search.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; SearchMessages(string token, string query, int? count, bool? highlight, int? page, string? sort, string? sortDir, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; SearchMessages(SearchMessagesRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15228,10 +14650,15 @@ Searches for messages matching a query.
 ```csharp
 try
 {
-    var response = await client.Search.SearchMessages(token, query, count, highlight, page, sort, sortDir, contentType);
+    var response = await client.Search.SearchMessages(new SearchMessagesRequest
+    {
+        Token = "some example string",
+        Query = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15240,21 +14667,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `search:read` |
-| <code>query</code> | <code>string</code> | Search query. |
-| <code>count</code> | <code>int?</code> | Pass the number of results you want per "page". Maximum of `100`. |
-| <code>highlight</code> | <code>bool?</code> | Pass a value of `true` to enable query highlight markers (see below). |
-| <code>page</code> | <code>int?</code> | - |
-| <code>sort</code> | <code>string?</code> | Return matches sorted by either `score` or `timestamp`. |
-| <code>sortDir</code> | <code>string?</code> | Change sort direction to ascending (`asc`) or descending (`desc`). |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[SearchMessagesRequest](src/SlackWebApi/Requests/Search/SearchMessagesRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15264,9 +14682,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15278,10 +14696,10 @@ catch (SdkException<RawError> ex)
 
 ## Stars
 
-> Source: [Stars](Api/Stars.cs)
+> Source: [Stars](src/SlackWebApi/Api/Stars.cs)
 
 <details>
-<summary><code>Task&lt;StarsAddschema&gt; StarsAdd(string token, ContentType contentType, string? channel, string? file, string? fileComment, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;StarsAddschema&gt; StarsAdd(StarsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15304,10 +14722,14 @@ Adds a star to an item.
 ```csharp
 try
 {
-    var response = await client.Stars.StarsAdd(token, contentType, channel, file, fileComment, timestamp);
+    var response = await client.Stars.StarsAdd(new StarsAddRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type StarsAddschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15316,19 +14738,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `stars:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>file</code> | <code>string?</code> | - |
-| <code>fileComment</code> | <code>string?</code> | - |
-| <code>timestamp</code> | <code>string?</code> | - |
+<code>[StarsAddRequest](src/SlackWebApi/Requests/Stars/StarsAddRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15338,9 +14753,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[StarsAddschema](Models/StarsAddschema.cs)</code>
+**OnSuccess**: <code>[StarsAddschema](src/SlackWebApi/Models/StarsAddschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15351,7 +14766,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;StarsListschema&gt; StarsList(string? token, string? count, string? page, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;StarsListschema&gt; StarsList(StarsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15374,10 +14789,13 @@ Lists stars for a user.
 ```csharp
 try
 {
-    var response = await client.Stars.StarsList(token, count, page, cursor, limit, contentType);
+    var response = await client.Stars.StarsList(new StarsListRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type StarsListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15386,19 +14804,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `stars:read` |
-| <code>count</code> | <code>string?</code> | - |
-| <code>page</code> | <code>string?</code> | - |
-| <code>cursor</code> | <code>string?</code> | Parameter for pagination. Set `cursor` equal to the `next_cursor` attribute returned by the previous request's `response_metadata`. This parameter is optional, but pagination is mandatory: the default value simply fetches the first "page" of the collection. |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[StarsListRequest](src/SlackWebApi/Requests/Stars/StarsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15408,9 +14819,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[StarsListschema](Models/StarsListschema.cs)</code>
+**OnSuccess**: <code>[StarsListschema](src/SlackWebApi/Models/StarsListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15421,7 +14832,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;StarsRemoveschema&gt; StarsRemove(string token, ContentType contentType, string? channel, string? file, string? fileComment, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;StarsRemoveschema&gt; StarsRemove(StarsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15444,10 +14855,14 @@ Removes a star from an item.
 ```csharp
 try
 {
-    var response = await client.Stars.StarsRemove(token, contentType, channel, file, fileComment, timestamp);
+    var response = await client.Stars.StarsRemove(new StarsRemoveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type StarsRemoveschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15456,19 +14871,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `stars:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>channel</code> | <code>string?</code> | - |
-| <code>file</code> | <code>string?</code> | - |
-| <code>fileComment</code> | <code>string?</code> | - |
-| <code>timestamp</code> | <code>string?</code> | - |
+<code>[StarsRemoveRequest](src/SlackWebApi/Requests/Stars/StarsRemoveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15478,9 +14886,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[StarsRemoveschema](Models/StarsRemoveschema.cs)</code>
+**OnSuccess**: <code>[StarsRemoveschema](src/SlackWebApi/Models/StarsRemoveschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15492,10 +14900,10 @@ catch (SdkException<RawError> ex)
 
 ## TeamApi
 
-> Source: [TeamApi](Api/TeamApi.cs)
+> Source: [TeamApi](src/SlackWebApi/Api/TeamApi.cs)
 
 <details>
-<summary><code>Task&lt;TeamAccessLogsschema&gt; TeamAccessLogs(string token, string? before, string? count, string? page, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;TeamAccessLogsschema&gt; TeamAccessLogs(TeamAccessLogsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15518,10 +14926,14 @@ Gets the access logs for the current team.
 ```csharp
 try
 {
-    var response = await client.TeamApi.TeamAccessLogs(token, before, count, page, contentType);
+    var response = await client.TeamApi.TeamAccessLogs(new TeamAccessLogsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type TeamAccessLogsschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15530,18 +14942,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin` |
-| <code>before</code> | <code>string?</code> | End of time range of logs to include in results (inclusive). |
-| <code>count</code> | <code>string?</code> | - |
-| <code>page</code> | <code>string?</code> | - |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[TeamAccessLogsRequest](src/SlackWebApi/Requests/TeamApi/TeamAccessLogsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15551,9 +14957,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[TeamAccessLogsschema](Models/TeamAccessLogsschema.cs)</code>
+**OnSuccess**: <code>[TeamAccessLogsschema](src/SlackWebApi/Models/TeamAccessLogsschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15564,7 +14970,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; TeamBillableInfo(string token, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; TeamBillableInfo(TeamBillableInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15587,10 +14993,14 @@ Gets billable users information for the current team.
 ```csharp
 try
 {
-    var response = await client.TeamApi.TeamBillableInfo(token, user, contentType);
+    var response = await client.TeamApi.TeamBillableInfo(new TeamBillableInfoRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15599,16 +15009,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin` |
-| <code>user</code> | <code>string?</code> | A user to retrieve the billable information for. Defaults to all users. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[TeamBillableInfoRequest](src/SlackWebApi/Requests/TeamApi/TeamBillableInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15618,9 +15024,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15631,7 +15037,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;TeamInfoschema&gt; TeamInfo(string token, string? team, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;TeamInfoschema&gt; TeamInfo(TeamInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15654,10 +15060,14 @@ Gets information about the current team.
 ```csharp
 try
 {
-    var response = await client.TeamApi.TeamInfo(token, team, contentType);
+    var response = await client.TeamApi.TeamInfo(new TeamInfoRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type TeamInfoschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15666,16 +15076,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `team:read` |
-| <code>team</code> | <code>string?</code> | Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[TeamInfoRequest](src/SlackWebApi/Requests/TeamApi/TeamInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15685,9 +15091,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[TeamInfoschema](Models/TeamInfoschema.cs)</code>
+**OnSuccess**: <code>[TeamInfoschema](src/SlackWebApi/Models/TeamInfoschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15698,7 +15104,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;TeamIntegrationLogsschema&gt; TeamIntegrationLogs(string token, string? appId, string? changeType, string? count, string? page, string? serviceId, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;TeamIntegrationLogsschema&gt; TeamIntegrationLogs(TeamIntegrationLogsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15721,17 +15127,14 @@ Gets the integration logs for the current team.
 ```csharp
 try
 {
-    var response = await client.TeamApi.TeamIntegrationLogs(token,
-        appId,
-        changeType,
-        count,
-        page,
-        serviceId,
-        user,
-        contentType);
+    var response = await client.TeamApi.TeamIntegrationLogs(new TeamIntegrationLogsRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type TeamIntegrationLogsschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15740,21 +15143,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `admin` |
-| <code>appId</code> | <code>string?</code> | Filter logs to this Slack app. Defaults to all logs. |
-| <code>changeType</code> | <code>string?</code> | Filter logs with this change type. Defaults to all logs. |
-| <code>count</code> | <code>string?</code> | - |
-| <code>page</code> | <code>string?</code> | - |
-| <code>serviceId</code> | <code>string?</code> | Filter logs to this service. Defaults to all logs. |
-| <code>user</code> | <code>string?</code> | Filter logs generated by this user’s actions. Defaults to all logs. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[TeamIntegrationLogsRequest](src/SlackWebApi/Requests/TeamApi/TeamIntegrationLogsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15764,9 +15158,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[TeamIntegrationLogsschema](Models/TeamIntegrationLogsschema.cs)</code>
+**OnSuccess**: <code>[TeamIntegrationLogsschema](src/SlackWebApi/Models/TeamIntegrationLogsschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15777,7 +15171,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;TeamProfileGetsuccessschema&gt; TeamProfileGet(string token, string? visibility, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;TeamProfileGetsuccessschema&gt; TeamProfileGet(TeamProfileGetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15800,10 +15194,14 @@ Retrieve a team's profile.
 ```csharp
 try
 {
-    var response = await client.TeamApi.TeamProfileGet(token, visibility, contentType);
+    var response = await client.TeamApi.TeamProfileGet(new TeamProfileGetRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type TeamProfileGetsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15812,16 +15210,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users.profile:read` |
-| <code>visibility</code> | <code>string?</code> | Filter by visibility. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[TeamProfileGetRequest](src/SlackWebApi/Requests/TeamProfile/TeamProfileGetRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15831,9 +15225,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[TeamProfileGetsuccessschema](Models/TeamProfileGetsuccessschema.cs)</code>
+**OnSuccess**: <code>[TeamProfileGetsuccessschema](src/SlackWebApi/Models/TeamProfileGetsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15845,10 +15239,10 @@ catch (SdkException<RawError> ex)
 
 ## TeamProfile
 
-> Source: [TeamProfile](Api/TeamProfile.cs)
+> Source: [TeamProfile](src/SlackWebApi/Api/TeamProfile.cs)
 
 <details>
-<summary><code>Task&lt;TeamProfileGetsuccessschema&gt; TeamProfileGet(string token, string? visibility, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;TeamProfileGetsuccessschema&gt; TeamProfileGet(TeamProfileGetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15871,10 +15265,14 @@ Retrieve a team's profile.
 ```csharp
 try
 {
-    var response = await client.TeamProfile.TeamProfileGet(token, visibility, contentType);
+    var response = await client.TeamProfile.TeamProfileGet(new TeamProfileGetRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type TeamProfileGetsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15883,16 +15281,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users.profile:read` |
-| <code>visibility</code> | <code>string?</code> | Filter by visibility. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[TeamProfileGetRequest](src/SlackWebApi/Requests/TeamProfile/TeamProfileGetRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15902,9 +15296,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[TeamProfileGetsuccessschema](Models/TeamProfileGetsuccessschema.cs)</code>
+**OnSuccess**: <code>[TeamProfileGetsuccessschema](src/SlackWebApi/Models/TeamProfileGetsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15916,10 +15310,10 @@ catch (SdkException<RawError> ex)
 
 ## Usergroups
 
-> Source: [Usergroups](Api/Usergroups.cs)
+> Source: [Usergroups](src/SlackWebApi/Api/Usergroups.cs)
 
 <details>
-<summary><code>Task&lt;UsergroupsCreateschema&gt; UsergroupsCreate(string token, ContentType contentType, string name, string? channels, string? description, string? handle, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsergroupsCreateschema&gt; UsergroupsCreate(UsergroupsCreateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -15942,16 +15336,15 @@ Create a User Group
 ```csharp
 try
 {
-    var response = await client.Usergroups.UsergroupsCreate(token,
-        contentType,
-        name,
-        channels,
-        description,
-        handle,
-        includeCount);
+    var response = await client.Usergroups.UsergroupsCreate(new UsergroupsCreateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Name = "some example string",
+    });
     // TODO: Handle 'response' of type UsergroupsCreateschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -15960,20 +15353,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>name</code> | <code>string</code> | - |
-| <code>channels</code> | <code>string?</code> | - |
-| <code>description</code> | <code>string?</code> | - |
-| <code>handle</code> | <code>string?</code> | - |
-| <code>includeCount</code> | <code>bool?</code> | - |
+<code>[UsergroupsCreateRequest](src/SlackWebApi/Requests/Usergroups/UsergroupsCreateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -15983,9 +15368,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsergroupsCreateschema](Models/UsergroupsCreateschema.cs)</code>
+**OnSuccess**: <code>[UsergroupsCreateschema](src/SlackWebApi/Models/UsergroupsCreateschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -15996,7 +15381,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsergroupsDisableschema&gt; UsergroupsDisable(string token, ContentType contentType, string usergroup, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsergroupsDisableschema&gt; UsergroupsDisable(UsergroupsDisableRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16019,10 +15404,15 @@ Disable an existing User Group
 ```csharp
 try
 {
-    var response = await client.Usergroups.UsergroupsDisable(token, contentType, usergroup, includeCount);
+    var response = await client.Usergroups.UsergroupsDisable(new UsergroupsDisableRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Usergroup = "some example string",
+    });
     // TODO: Handle 'response' of type UsergroupsDisableschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16031,17 +15421,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroup</code> | <code>string</code> | - |
-| <code>includeCount</code> | <code>bool?</code> | - |
+<code>[UsergroupsDisableRequest](src/SlackWebApi/Requests/Usergroups/UsergroupsDisableRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16051,9 +15436,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsergroupsDisableschema](Models/UsergroupsDisableschema.cs)</code>
+**OnSuccess**: <code>[UsergroupsDisableschema](src/SlackWebApi/Models/UsergroupsDisableschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16064,7 +15449,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsergroupsEnableschema&gt; UsergroupsEnable(string token, ContentType contentType, string usergroup, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsergroupsEnableschema&gt; UsergroupsEnable(UsergroupsEnableRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16087,10 +15472,15 @@ Enable a User Group
 ```csharp
 try
 {
-    var response = await client.Usergroups.UsergroupsEnable(token, contentType, usergroup, includeCount);
+    var response = await client.Usergroups.UsergroupsEnable(new UsergroupsEnableRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Usergroup = "some example string",
+    });
     // TODO: Handle 'response' of type UsergroupsEnableschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16099,17 +15489,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroup</code> | <code>string</code> | - |
-| <code>includeCount</code> | <code>bool?</code> | - |
+<code>[UsergroupsEnableRequest](src/SlackWebApi/Requests/Usergroups/UsergroupsEnableRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16119,9 +15504,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsergroupsEnableschema](Models/UsergroupsEnableschema.cs)</code>
+**OnSuccess**: <code>[UsergroupsEnableschema](src/SlackWebApi/Models/UsergroupsEnableschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16132,7 +15517,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsergroupsListschema&gt; UsergroupsList(string token, bool? includeUsers, bool? includeCount, bool? includeDisabled, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsergroupsListschema&gt; UsergroupsList(UsergroupsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16155,14 +15540,14 @@ List all User Groups for a team
 ```csharp
 try
 {
-    var response = await client.Usergroups.UsergroupsList(token,
-        includeUsers,
-        includeCount,
-        includeDisabled,
-        contentType);
+    var response = await client.Usergroups.UsergroupsList(new UsergroupsListRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsergroupsListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16171,18 +15556,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `usergroups:read` |
-| <code>includeUsers</code> | <code>bool?</code> | Include the list of users for each User Group. |
-| <code>includeCount</code> | <code>bool?</code> | Include the number of users in each User Group. |
-| <code>includeDisabled</code> | <code>bool?</code> | Include disabled User Groups. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsergroupsListRequest](src/SlackWebApi/Requests/Usergroups/UsergroupsListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16192,9 +15571,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsergroupsListschema](Models/UsergroupsListschema.cs)</code>
+**OnSuccess**: <code>[UsergroupsListschema](src/SlackWebApi/Models/UsergroupsListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16205,7 +15584,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsergroupsUpdateschema&gt; UsergroupsUpdate(string token, ContentType contentType, string usergroup, string? handle, string? description, string? channels, bool? includeCount, string? name, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsergroupsUpdateschema&gt; UsergroupsUpdate(UsergroupsUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16228,17 +15607,15 @@ Update an existing User Group
 ```csharp
 try
 {
-    var response = await client.Usergroups.UsergroupsUpdate(token,
-        contentType,
-        usergroup,
-        handle,
-        description,
-        channels,
-        includeCount,
-        name);
+    var response = await client.Usergroups.UsergroupsUpdate(new UsergroupsUpdateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Usergroup = "some example string",
+    });
     // TODO: Handle 'response' of type UsergroupsUpdateschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16247,21 +15624,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroup</code> | <code>string</code> | - |
-| <code>handle</code> | <code>string?</code> | - |
-| <code>description</code> | <code>string?</code> | - |
-| <code>channels</code> | <code>string?</code> | - |
-| <code>includeCount</code> | <code>bool?</code> | - |
-| <code>name</code> | <code>string?</code> | - |
+<code>[UsergroupsUpdateRequest](src/SlackWebApi/Requests/Usergroups/UsergroupsUpdateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16271,9 +15639,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsergroupsUpdateschema](Models/UsergroupsUpdateschema.cs)</code>
+**OnSuccess**: <code>[UsergroupsUpdateschema](src/SlackWebApi/Models/UsergroupsUpdateschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16284,7 +15652,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsergroupsUsersListschema&gt; UsergroupsUsersList(string token, string usergroup, bool? includeDisabled, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsergroupsUsersListschema&gt; UsergroupsUsersList(UsergroupsUsersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16307,10 +15675,15 @@ List all users in a User Group
 ```csharp
 try
 {
-    var response = await client.Usergroups.UsergroupsUsersList(token, usergroup, includeDisabled, contentType);
+    var response = await client.Usergroups.UsergroupsUsersList(new UsergroupsUsersListRequest
+    {
+        Token = "some example string",
+        Usergroup = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsergroupsUsersListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16319,17 +15692,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `usergroups:read` |
-| <code>usergroup</code> | <code>string</code> | The encoded ID of the User Group to update. |
-| <code>includeDisabled</code> | <code>bool?</code> | Allow results that involve disabled User Groups. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsergroupsUsersListRequest](src/SlackWebApi/Requests/UsergroupsUsers/UsergroupsUsersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16339,9 +15707,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsergroupsUsersListschema](Models/UsergroupsUsersListschema.cs)</code>
+**OnSuccess**: <code>[UsergroupsUsersListschema](src/SlackWebApi/Models/UsergroupsUsersListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16352,7 +15720,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsergroupsUsersUpdateschema&gt; UsergroupsUsersUpdate(string token, ContentType contentType, string usergroup, string users, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsergroupsUsersUpdateschema&gt; UsergroupsUsersUpdate(UsergroupsUsersUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16375,10 +15743,16 @@ Update the list of users for a User Group
 ```csharp
 try
 {
-    var response = await client.Usergroups.UsergroupsUsersUpdate(token, contentType, usergroup, users, includeCount);
+    var response = await client.Usergroups.UsergroupsUsersUpdate(new UsergroupsUsersUpdateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Usergroup = "some example string",
+        Users = "some example string",
+    });
     // TODO: Handle 'response' of type UsergroupsUsersUpdateschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16387,18 +15761,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroup</code> | <code>string</code> | - |
-| <code>users</code> | <code>string</code> | - |
-| <code>includeCount</code> | <code>bool?</code> | - |
+<code>[UsergroupsUsersUpdateRequest](src/SlackWebApi/Requests/UsergroupsUsers/UsergroupsUsersUpdateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16408,9 +15776,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsergroupsUsersUpdateschema](Models/UsergroupsUsersUpdateschema.cs)</code>
+**OnSuccess**: <code>[UsergroupsUsersUpdateschema](src/SlackWebApi/Models/UsergroupsUsersUpdateschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16422,10 +15790,10 @@ catch (SdkException<RawError> ex)
 
 ## UsergroupsUsers
 
-> Source: [UsergroupsUsers](Api/UsergroupsUsers.cs)
+> Source: [UsergroupsUsers](src/SlackWebApi/Api/UsergroupsUsers.cs)
 
 <details>
-<summary><code>Task&lt;UsergroupsUsersListschema&gt; UsergroupsUsersList(string token, string usergroup, bool? includeDisabled, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsergroupsUsersListschema&gt; UsergroupsUsersList(UsergroupsUsersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16448,10 +15816,15 @@ List all users in a User Group
 ```csharp
 try
 {
-    var response = await client.UsergroupsUsers.UsergroupsUsersList(token, usergroup, includeDisabled, contentType);
+    var response = await client.UsergroupsUsers.UsergroupsUsersList(new UsergroupsUsersListRequest
+    {
+        Token = "some example string",
+        Usergroup = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsergroupsUsersListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16460,17 +15833,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `usergroups:read` |
-| <code>usergroup</code> | <code>string</code> | The encoded ID of the User Group to update. |
-| <code>includeDisabled</code> | <code>bool?</code> | Allow results that involve disabled User Groups. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsergroupsUsersListRequest](src/SlackWebApi/Requests/UsergroupsUsers/UsergroupsUsersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16480,9 +15848,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsergroupsUsersListschema](Models/UsergroupsUsersListschema.cs)</code>
+**OnSuccess**: <code>[UsergroupsUsersListschema](src/SlackWebApi/Models/UsergroupsUsersListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16493,7 +15861,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsergroupsUsersUpdateschema&gt; UsergroupsUsersUpdate(string token, ContentType contentType, string usergroup, string users, bool? includeCount, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsergroupsUsersUpdateschema&gt; UsergroupsUsersUpdate(UsergroupsUsersUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16516,14 +15884,16 @@ Update the list of users for a User Group
 ```csharp
 try
 {
-    var response = await client.UsergroupsUsers.UsergroupsUsersUpdate(token,
-        contentType,
-        usergroup,
-        users,
-        includeCount);
+    var response = await client.UsergroupsUsers.UsergroupsUsersUpdate(new UsergroupsUsersUpdateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Usergroup = "some example string",
+        Users = "some example string",
+    });
     // TODO: Handle 'response' of type UsergroupsUsersUpdateschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16532,18 +15902,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `usergroups:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>usergroup</code> | <code>string</code> | - |
-| <code>users</code> | <code>string</code> | - |
-| <code>includeCount</code> | <code>bool?</code> | - |
+<code>[UsergroupsUsersUpdateRequest](src/SlackWebApi/Requests/UsergroupsUsers/UsergroupsUsersUpdateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16553,9 +15917,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsergroupsUsersUpdateschema](Models/UsergroupsUsersUpdateschema.cs)</code>
+**OnSuccess**: <code>[UsergroupsUsersUpdateschema](src/SlackWebApi/Models/UsergroupsUsersUpdateschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16567,10 +15931,10 @@ catch (SdkException<RawError> ex)
 
 ## Users
 
-> Source: [Users](Api/Users.cs)
+> Source: [Users](src/SlackWebApi/Api/Users.cs)
 
 <details>
-<summary><code>Task&lt;UsersConversationssuccessschema&gt; UsersConversations(string? token, string? user, string? types, bool? excludeArchived, int? limit, string? cursor, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersConversationssuccessschema&gt; UsersConversations(UsersConversationsRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16593,16 +15957,13 @@ List conversations the calling user may access.
 ```csharp
 try
 {
-    var response = await client.Users.UsersConversations(token,
-        user,
-        types,
-        excludeArchived,
-        limit,
-        cursor,
-        contentType);
+    var response = await client.Users.UsersConversations(new UsersConversationsRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsersConversationssuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16611,20 +15972,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `conversations:read` |
-| <code>user</code> | <code>string?</code> | Browse conversations by a specific user ID's membership. Non-public channels are restricted to those where the calling user shares membership. |
-| <code>types</code> | <code>string?</code> | Mix and match channel types by providing a comma-separated list of any combination of `public_channel`, `private_channel`, `mpim`, `im` |
-| <code>excludeArchived</code> | <code>bool?</code> | Set to `true` to exclude archived channels from the list |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000. |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsersConversationsRequest](src/SlackWebApi/Requests/Users/UsersConversationsRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16634,9 +15987,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersConversationssuccessschema](Models/UsersConversationssuccessschema.cs)</code>
+**OnSuccess**: <code>[UsersConversationssuccessschema](src/SlackWebApi/Models/UsersConversationssuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16647,7 +16000,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersDeletePhotoschema&gt; UsersDeletePhoto(ContentType contentType, string token, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersDeletePhotoschema&gt; UsersDeletePhoto(UsersDeletePhotoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16670,10 +16023,14 @@ Delete the user profile photo
 ```csharp
 try
 {
-    var response = await client.Users.UsersDeletePhoto(contentType, token);
+    var response = await client.Users.UsersDeletePhoto(new UsersDeletePhotoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+    });
     // TODO: Handle 'response' of type UsersDeletePhotoschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16682,15 +16039,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
+<code>[UsersDeletePhotoRequest](src/SlackWebApi/Requests/Users/UsersDeletePhotoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16700,9 +16054,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersDeletePhotoschema](Models/UsersDeletePhotoschema.cs)</code>
+**OnSuccess**: <code>[UsersDeletePhotoschema](src/SlackWebApi/Models/UsersDeletePhotoschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16713,7 +16067,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;ApImethodusersGetPresence&gt; UsersGetPresence(string token, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;ApImethodusersGetPresence&gt; UsersGetPresence(UsersGetPresenceRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16736,10 +16090,14 @@ Gets user presence information.
 ```csharp
 try
 {
-    var response = await client.Users.UsersGetPresence(token, user, contentType);
+    var response = await client.Users.UsersGetPresence(new UsersGetPresenceRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type ApImethodusersGetPresence
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16748,16 +16106,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users:read` |
-| <code>user</code> | <code>string?</code> | User to get presence info on. Defaults to the authed user. |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsersGetPresenceRequest](src/SlackWebApi/Requests/Users/UsersGetPresenceRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16767,9 +16121,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[ApImethodusersGetPresence](Models/ApImethodusersGetPresence.cs)</code>
+**OnSuccess**: <code>[ApImethodusersGetPresence](src/SlackWebApi/Models/ApImethodusersGetPresence.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16780,7 +16134,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;object&gt; UsersIdentity(string? token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;object&gt; UsersIdentity(UsersIdentityRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16803,10 +16157,13 @@ Get a user's identity.
 ```csharp
 try
 {
-    var response = await client.Users.UsersIdentity(token, contentType);
+    var response = await client.Users.UsersIdentity(new UsersIdentityRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type object
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16815,15 +16172,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `identity.basic` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsersIdentityRequest](src/SlackWebApi/Requests/Users/UsersIdentityRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16835,7 +16189,7 @@ catch (SdkException<RawError> ex)
 
 **OnSuccess**: <code>object</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16846,7 +16200,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersInfosuccessschema&gt; UsersInfo(string token, bool? includeLocale, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersInfosuccessschema&gt; UsersInfo(UsersInfoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16869,10 +16223,14 @@ Gets information about a user.
 ```csharp
 try
 {
-    var response = await client.Users.UsersInfo(token, includeLocale, user, contentType);
+    var response = await client.Users.UsersInfo(new UsersInfoRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsersInfosuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16881,17 +16239,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users:read` |
-| <code>includeLocale</code> | <code>bool?</code> | Set this to `true` to receive the locale for this user. Defaults to `false` |
-| <code>user</code> | <code>string?</code> | User to get info on |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsersInfoRequest](src/SlackWebApi/Requests/Users/UsersInfoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16901,9 +16254,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersInfosuccessschema](Models/UsersInfosuccessschema.cs)</code>
+**OnSuccess**: <code>[UsersInfosuccessschema](src/SlackWebApi/Models/UsersInfosuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16914,7 +16267,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersListschema&gt; UsersList(string? token, int? limit, string? cursor, bool? includeLocale, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersListschema&gt; UsersList(UsersListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -16937,10 +16290,13 @@ Lists all users in a Slack team.
 ```csharp
 try
 {
-    var response = await client.Users.UsersList(token, limit, cursor, includeLocale, contentType);
+    var response = await client.Users.UsersList(new UsersListRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsersListschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -16949,18 +16305,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string?</code> | Authentication token. Requires scope: `users:read` |
-| <code>limit</code> | <code>int?</code> | The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached. Providing no `limit` value will result in Slack attempting to deliver you the entire result set. If the collection is too large you may experience `limit_required` or HTTP 500 errors. |
-| <code>cursor</code> | <code>string?</code> | Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. |
-| <code>includeLocale</code> | <code>bool?</code> | Set this to `true` to receive the locale for users. Defaults to `false` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsersListRequest](src/SlackWebApi/Requests/Users/UsersListRequest.cs)</code>
 
 </dd>
 </dl>
@@ -16970,9 +16320,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersListschema](Models/UsersListschema.cs)</code>
+**OnSuccess**: <code>[UsersListschema](src/SlackWebApi/Models/UsersListschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -16983,7 +16333,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersLookupByEmailsuccessschema&gt; UsersLookupByEmail(string token, string email, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersLookupByEmailsuccessschema&gt; UsersLookupByEmail(UsersLookupByEmailRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17006,10 +16356,15 @@ Find a user with an email address.
 ```csharp
 try
 {
-    var response = await client.Users.UsersLookupByEmail(token, email, contentType);
+    var response = await client.Users.UsersLookupByEmail(new UsersLookupByEmailRequest
+    {
+        Token = "some example string",
+        Email = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsersLookupByEmailsuccessschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17018,16 +16373,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users:read.email` |
-| <code>email</code> | <code>string</code> | An email address belonging to a user in the workspace |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsersLookupByEmailRequest](src/SlackWebApi/Requests/Users/UsersLookupByEmailRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17037,9 +16388,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersLookupByEmailsuccessschema](Models/UsersLookupByEmailsuccessschema.cs)</code>
+**OnSuccess**: <code>[UsersLookupByEmailsuccessschema](src/SlackWebApi/Models/UsersLookupByEmailsuccessschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17050,7 +16401,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersProfileGetschema&gt; UsersProfileGet(string token, bool? includeLabels, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersProfileGetschema&gt; UsersProfileGet(UsersProfileGetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17073,10 +16424,14 @@ Retrieves a user's profile information.
 ```csharp
 try
 {
-    var response = await client.Users.UsersProfileGet(token, includeLabels, user, contentType);
+    var response = await client.Users.UsersProfileGet(new UsersProfileGetRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsersProfileGetschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17085,17 +16440,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users.profile:read` |
-| <code>includeLabels</code> | <code>bool?</code> | Include labels for each ID in custom profile fields |
-| <code>user</code> | <code>string?</code> | User to retrieve profile info for |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsersProfileGetRequest](src/SlackWebApi/Requests/UsersProfile/UsersProfileGetRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17105,9 +16455,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersProfileGetschema](Models/UsersProfileGetschema.cs)</code>
+**OnSuccess**: <code>[UsersProfileGetschema](src/SlackWebApi/Models/UsersProfileGetschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17118,7 +16468,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersProfileSetschema&gt; UsersProfileSet(string token, ContentType contentType, string? name, string? profile, string? user, string? value, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersProfileSetschema&gt; UsersProfileSet(UsersProfileSetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17141,10 +16491,14 @@ Set the profile information for a user.
 ```csharp
 try
 {
-    var response = await client.Users.UsersProfileSet(token, contentType, name, profile, user, value);
+    var response = await client.Users.UsersProfileSet(new UsersProfileSetRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsersProfileSetschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17153,19 +16507,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users.profile:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>name</code> | <code>string?</code> | - |
-| <code>profile</code> | <code>string?</code> | - |
-| <code>user</code> | <code>string?</code> | - |
-| <code>value</code> | <code>string?</code> | - |
+<code>[UsersProfileSetRequest](src/SlackWebApi/Requests/UsersProfile/UsersProfileSetRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17175,9 +16522,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersProfileSetschema](Models/UsersProfileSetschema.cs)</code>
+**OnSuccess**: <code>[UsersProfileSetschema](src/SlackWebApi/Models/UsersProfileSetschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17188,7 +16535,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersSetActiveschema&gt; UsersSetActive(string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersSetActiveschema&gt; UsersSetActive(UsersSetActiveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17211,10 +16558,14 @@ Marked a user as active. Deprecated and non-functional.
 ```csharp
 try
 {
-    var response = await client.Users.UsersSetActive(token, contentType);
+    var response = await client.Users.UsersSetActive(new UsersSetActiveRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsersSetActiveschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17223,15 +16574,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsersSetActiveRequest](src/SlackWebApi/Requests/Users/UsersSetActiveRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17241,9 +16589,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersSetActiveschema](Models/UsersSetActiveschema.cs)</code>
+**OnSuccess**: <code>[UsersSetActiveschema](src/SlackWebApi/Models/UsersSetActiveschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17254,7 +16602,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersSetPhotoschema&gt; UsersSetPhoto(ContentType contentType, string token, string? cropW, string? cropX, string? cropY, string? image, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersSetPhotoschema&gt; UsersSetPhoto(UsersSetPhotoRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17277,10 +16625,14 @@ Set the user profile photo
 ```csharp
 try
 {
-    var response = await client.Users.UsersSetPhoto(contentType, token, cropW, cropX, cropY, image);
+    var response = await client.Users.UsersSetPhoto(new UsersSetPhotoRequest
+    {
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Token = "some example string",
+    });
     // TODO: Handle 'response' of type UsersSetPhotoschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17289,19 +16641,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>token</code> | <code>string</code> | - |
-| <code>cropW</code> | <code>string?</code> | - |
-| <code>cropX</code> | <code>string?</code> | - |
-| <code>cropY</code> | <code>string?</code> | - |
-| <code>image</code> | <code>string?</code> | - |
+<code>[UsersSetPhotoRequest](src/SlackWebApi/Requests/Users/UsersSetPhotoRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17311,9 +16656,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersSetPhotoschema](Models/UsersSetPhotoschema.cs)</code>
+**OnSuccess**: <code>[UsersSetPhotoschema](src/SlackWebApi/Models/UsersSetPhotoschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17324,7 +16669,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersSetPresenceschema&gt; UsersSetPresence(string token, ContentType contentType, string presence, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersSetPresenceschema&gt; UsersSetPresence(UsersSetPresenceRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17347,10 +16692,15 @@ Manually sets user presence.
 ```csharp
 try
 {
-    var response = await client.Users.UsersSetPresence(token, contentType, presence);
+    var response = await client.Users.UsersSetPresence(new UsersSetPresenceRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+        Presence = "some example string",
+    });
     // TODO: Handle 'response' of type UsersSetPresenceschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17359,16 +16709,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>presence</code> | <code>string</code> | - |
+<code>[UsersSetPresenceRequest](src/SlackWebApi/Requests/Users/UsersSetPresenceRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17378,9 +16724,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersSetPresenceschema](Models/UsersSetPresenceschema.cs)</code>
+**OnSuccess**: <code>[UsersSetPresenceschema](src/SlackWebApi/Models/UsersSetPresenceschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17392,10 +16738,10 @@ catch (SdkException<RawError> ex)
 
 ## UsersProfile
 
-> Source: [UsersProfile](Api/UsersProfile.cs)
+> Source: [UsersProfile](src/SlackWebApi/Api/UsersProfile.cs)
 
 <details>
-<summary><code>Task&lt;UsersProfileGetschema&gt; UsersProfileGet(string token, bool? includeLabels, string? user, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersProfileGetschema&gt; UsersProfileGet(UsersProfileGetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17418,10 +16764,14 @@ Retrieves a user's profile information.
 ```csharp
 try
 {
-    var response = await client.UsersProfile.UsersProfileGet(token, includeLabels, user, contentType);
+    var response = await client.UsersProfile.UsersProfileGet(new UsersProfileGetRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsersProfileGetschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17430,17 +16780,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users.profile:read` |
-| <code>includeLabels</code> | <code>bool?</code> | Include labels for each ID in custom profile fields |
-| <code>user</code> | <code>string?</code> | User to retrieve profile info for |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[UsersProfileGetRequest](src/SlackWebApi/Requests/UsersProfile/UsersProfileGetRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17450,9 +16795,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersProfileGetschema](Models/UsersProfileGetschema.cs)</code>
+**OnSuccess**: <code>[UsersProfileGetschema](src/SlackWebApi/Models/UsersProfileGetschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17463,7 +16808,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;UsersProfileSetschema&gt; UsersProfileSet(string token, ContentType contentType, string? name, string? profile, string? user, string? value, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;UsersProfileSetschema&gt; UsersProfileSet(UsersProfileSetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17486,10 +16831,14 @@ Set the profile information for a user.
 ```csharp
 try
 {
-    var response = await client.UsersProfile.UsersProfileSet(token, contentType, name, profile, user, value);
+    var response = await client.UsersProfile.UsersProfileSet(new UsersProfileSetRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type UsersProfileSetschema
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17498,19 +16847,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `users.profile:write` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
-| <code>name</code> | <code>string?</code> | - |
-| <code>profile</code> | <code>string?</code> | - |
-| <code>user</code> | <code>string?</code> | - |
-| <code>value</code> | <code>string?</code> | - |
+<code>[UsersProfileSetRequest](src/SlackWebApi/Requests/UsersProfile/UsersProfileSetRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17520,9 +16862,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[UsersProfileSetschema](Models/UsersProfileSetschema.cs)</code>
+**OnSuccess**: <code>[UsersProfileSetschema](src/SlackWebApi/Models/UsersProfileSetschema.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17534,10 +16876,10 @@ catch (SdkException<RawError> ex)
 
 ## Views
 
-> Source: [Views](Api/Views.cs)
+> Source: [Views](src/SlackWebApi/Api/Views.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; ViewsOpen(string triggerId, string view, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; ViewsOpen(ViewsOpenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17560,10 +16902,16 @@ Open a view for a user.
 ```csharp
 try
 {
-    var response = await client.Views.ViewsOpen(triggerId, view, token, contentType);
+    var response = await client.Views.ViewsOpen(new ViewsOpenRequest
+    {
+        TriggerId = "some example string",
+        View = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17572,17 +16920,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>triggerId</code> | <code>string</code> | Exchange a trigger to post to the user. |
-| <code>view</code> | <code>string</code> | A [view payload](/reference/surfaces/views). This must be a JSON-encoded string. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ViewsOpenRequest](src/SlackWebApi/Requests/Views/ViewsOpenRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17592,9 +16935,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17605,7 +16948,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; ViewsPublish(string userId, string view, string? hash, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; ViewsPublish(ViewsPublishRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17628,10 +16971,16 @@ Publish a static view for a User.
 ```csharp
 try
 {
-    var response = await client.Views.ViewsPublish(userId, view, hash, token, contentType);
+    var response = await client.Views.ViewsPublish(new ViewsPublishRequest
+    {
+        UserId = "some example string",
+        View = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17640,18 +16989,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>userId</code> | <code>string</code> | `id` of the user you want publish a view to. |
-| <code>view</code> | <code>string</code> | A [view payload](/reference/surfaces/views). This must be a JSON-encoded string. |
-| <code>hash</code> | <code>string?</code> | A string that represents view state to protect against possible race conditions. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ViewsPublishRequest](src/SlackWebApi/Requests/Views/ViewsPublishRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17661,9 +17004,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17674,7 +17017,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; ViewsPush(string triggerId, string view, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; ViewsPush(ViewsPushRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17697,10 +17040,16 @@ Push a view onto the stack of a root view.
 ```csharp
 try
 {
-    var response = await client.Views.ViewsPush(triggerId, view, token, contentType);
+    var response = await client.Views.ViewsPush(new ViewsPushRequest
+    {
+        TriggerId = "some example string",
+        View = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17709,17 +17058,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>triggerId</code> | <code>string</code> | Exchange a trigger to post to the user. |
-| <code>view</code> | <code>string</code> | A [view payload](/reference/surfaces/views). This must be a JSON-encoded string. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ViewsPushRequest](src/SlackWebApi/Requests/Views/ViewsPushRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17729,9 +17073,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17742,7 +17086,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; ViewsUpdate(string? viewId, string? externalId, string? view, string? hash, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; ViewsUpdate(ViewsUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17765,10 +17109,14 @@ Update an existing view.
 ```csharp
 try
 {
-    var response = await client.Views.ViewsUpdate(viewId, externalId, view, hash, token, contentType);
+    var response = await client.Views.ViewsUpdate(new ViewsUpdateRequest
+    {
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17777,19 +17125,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>viewId</code> | <code>string?</code> | A unique identifier of the view to be updated. Either `view_id` or `external_id` is required. |
-| <code>externalId</code> | <code>string?</code> | A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either `view_id` or `external_id` is required. |
-| <code>view</code> | <code>string?</code> | A [view object](/reference/surfaces/views). This must be a JSON-encoded string. |
-| <code>hash</code> | <code>string?</code> | A string that represents view state to protect against possible race conditions. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `none` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[ViewsUpdateRequest](src/SlackWebApi/Requests/Views/ViewsUpdateRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17799,9 +17140,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17813,10 +17154,10 @@ catch (SdkException<RawError> ex)
 
 ## Workflows
 
-> Source: [Workflows](Api/Workflows.cs)
+> Source: [Workflows](src/SlackWebApi/Api/Workflows.cs)
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; WorkflowsStepCompleted(string workflowStepExecuteId, string? outputs, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; WorkflowsStepCompleted(WorkflowsStepCompletedRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17839,10 +17180,15 @@ Indicate that an app's step in a workflow completed execution.
 ```csharp
 try
 {
-    var response = await client.Workflows.WorkflowsStepCompleted(workflowStepExecuteId, outputs, token, contentType);
+    var response = await client.Workflows.WorkflowsStepCompleted(new WorkflowsStepCompletedRequest
+    {
+        WorkflowStepExecuteId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17851,17 +17197,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>workflowStepExecuteId</code> | <code>string</code> | Context identifier that maps to the correct workflow step execution. |
-| <code>outputs</code> | <code>string?</code> | Key-value object of outputs from your step. Keys of this object reflect the configured `key` properties of your [`outputs`](/reference/workflows/workflow_step#output) array from your `workflow_step` object. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `workflow.steps:execute` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[WorkflowsStepCompletedRequest](src/SlackWebApi/Requests/Workflows/WorkflowsStepCompletedRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17871,9 +17212,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17884,7 +17225,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; WorkflowsStepFailed(string workflowStepExecuteId, string error, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; WorkflowsStepFailed(WorkflowsStepFailedRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17907,10 +17248,16 @@ Indicate that an app's step in a workflow failed to execute.
 ```csharp
 try
 {
-    var response = await client.Workflows.WorkflowsStepFailed(workflowStepExecuteId, error, token, contentType);
+    var response = await client.Workflows.WorkflowsStepFailed(new WorkflowsStepFailedRequest
+    {
+        WorkflowStepExecuteId = "some example string",
+        Error = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17919,17 +17266,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>workflowStepExecuteId</code> | <code>string</code> | Context identifier that maps to the correct workflow step execution. |
-| <code>error</code> | <code>string</code> | A JSON-based object with a `message` property that should contain a human readable error message. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `workflow.steps:execute` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[WorkflowsStepFailedRequest](src/SlackWebApi/Requests/Workflows/WorkflowsStepFailedRequest.cs)</code>
 
 </dd>
 </dl>
@@ -17939,9 +17281,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>
@@ -17952,7 +17294,7 @@ catch (SdkException<RawError> ex)
 </details>
 
 <details>
-<summary><code>Task&lt;Defaultsuccesstemplate&gt; WorkflowsUpdateStep(string workflowStepEditId, string? inputs, string? outputs, string? stepName, string? stepImageUrl, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default);</code></summary>
+<summary><code>Task&lt;Defaultsuccesstemplate&gt; WorkflowsUpdateStep(WorkflowsUpdateStepRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default);</code></summary>
 
 <dl>
 <dd>
@@ -17975,16 +17317,15 @@ Update the configuration for a workflow extension step.
 ```csharp
 try
 {
-    var response = await client.Workflows.WorkflowsUpdateStep(workflowStepEditId,
-        inputs,
-        outputs,
-        stepName,
-        stepImageUrl,
-        token,
-        contentType);
+    var response = await client.Workflows.WorkflowsUpdateStep(new WorkflowsUpdateStepRequest
+    {
+        WorkflowStepEditId = "some example string",
+        Token = "some example string",
+        ContentType = ContentType.ApplicationXWwwFormUrlencoded,
+    });
     // TODO: Handle 'response' of type Defaultsuccesstemplate
 }
-catch (SdkException<RawError> ex)
+catch (ApiException<RawError> ex)
 {
     // TODO: Handle 'ex.Error' of type RawError
 }
@@ -17993,20 +17334,12 @@ catch (SdkException<RawError> ex)
 </dd>
 </dl>
 
-### Parameters
+### Request
 
 <dl>
 <dd>
 
-| Name | Type | Description |
-| --- | --- | --- |
-| <code>workflowStepEditId</code> | <code>string</code> | A context identifier provided with `view_submission` payloads used to call back to `workflows.updateStep`. |
-| <code>inputs</code> | <code>string?</code> | A JSON key-value map of inputs required from a user during configuration. This is the data your app expects to receive when the workflow step starts. **Please note**: the embedded variable format is set and replaced by the workflow system. You cannot create custom variables that will be replaced at runtime. [Read more about variables in workflow steps here](/workflows/steps#variables). |
-| <code>outputs</code> | <code>string?</code> | An JSON array of output objects used during step execution. This is the data your app agrees to provide when your workflow step was executed. |
-| <code>stepName</code> | <code>string?</code> | An optional field that can be used to override the step name that is shown in the Workflow Builder. |
-| <code>stepImageUrl</code> | <code>string?</code> | An optional field that can be used to override app image that is shown in the Workflow Builder. |
-| <code>token</code> | <code>string</code> | Authentication token. Requires scope: `workflow.steps:execute` |
-| <code>contentType</code> | <code>[ContentType](Models/Enums/ContentType.cs)</code> | - |
+<code>[WorkflowsUpdateStepRequest](src/SlackWebApi/Requests/Workflows/WorkflowsUpdateStepRequest.cs)</code>
 
 </dd>
 </dl>
@@ -18016,9 +17349,9 @@ catch (SdkException<RawError> ex)
 <dl>
 <dd>
 
-**OnSuccess**: <code>[Defaultsuccesstemplate](Models/Defaultsuccesstemplate.cs)</code>
+**OnSuccess**: <code>[Defaultsuccesstemplate](src/SlackWebApi/Models/Defaultsuccesstemplate.cs)</code>
 
-**OnError**: <code>[SdkException](Core/Exceptions/SdkException.cs)&lt;[RawError](Core/ErrorResponse/RawError.cs)&gt;</code>
+**OnError**: <code>[ApiException](src/SlackWebApi/Core/Exceptions/ApiException.cs)&lt;[RawError](src/SlackWebApi/Core/ErrorResponse/RawError.cs)&gt;</code>
 
 </dd>
 </dl>

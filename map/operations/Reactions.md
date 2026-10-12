@@ -2,59 +2,64 @@
 
 # Reactions — operations
 
-Accessor: `client.Reactions` · Source: `Api/Reactions.cs` · 4 operations
+Accessor: `client.Reactions` · Source: `src/SlackWebApi/Api/Reactions.cs` · 4 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### ReactionsAdd
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ReactionsAdd(string token, ContentType contentType, string channel, string name, string timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
+- **Signature**: `ReactionsAdd(ReactionsAddRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Channel`, `Name`, `Timestamp`
 - **Returns**: `ReactionsAddschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ReactionsAddschema` | `Models/ReactionsAddschema.cs` |
+| `ReactionsAddRequest` | `src/SlackWebApi/Requests/Reactions/ReactionsAddRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ReactionsAddschema` | `src/SlackWebApi/Models/ReactionsAddschema.cs` |
 
 ### ReactionsGet
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ReactionsGet(string token, string? channel, string? file, string? fileComment, bool? full, string? timestamp, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 5 params (`channel` … `timestamp`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `token` ← `token`, `channel` ← `channel`, `file` ← `file`, `file_comment` ← `fileComment`, `full` ← `full`, `timestamp` ← `timestamp`
+- **Signature**: `ReactionsGet(ReactionsGetRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `channel` ← `Channel`, `file` ← `File`, `file_comment` ← `FileComment`, `full` ← `Full`, `timestamp` ← `Timestamp`
 - **Returns**: `object`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
+| `ReactionsGetRequest` | `src/SlackWebApi/Requests/Reactions/ReactionsGetRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
 
 ### ReactionsList
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ReactionsList(string token, string? user, bool? full, int? count, int? page, string? cursor, int? limit, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 6 params (`user` … `limit`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `token` ← `token`, `user` ← `user`, `full` ← `full`, `count` ← `count`, `page` ← `page`, `cursor` ← `cursor`, `limit` ← `limit`
+- **Signature**: `ReactionsList(ReactionsListRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `token` ← `Token`, `user` ← `User`, `full` ← `Full`, `count` ← `Count`, `page` ← `Page`, `cursor` ← `Cursor`, `limit` ← `Limit`
 - **Returns**: `ReactionsListschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ReactionsListschema` | `Models/ReactionsListschema.cs` |
+| `ReactionsListRequest` | `src/SlackWebApi/Requests/Reactions/ReactionsListRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ReactionsListschema` | `src/SlackWebApi/Models/ReactionsListschema.cs` |
 
 ### ReactionsRemove
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ReactionsRemove(string token, ContentType contentType, string name, string? file, string? fileComment, string? channel, string? timestamp, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`file` … `timestamp`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
+- **Signature**: `ReactionsRemove(ReactionsRemoveRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`, `Name`
 - **Returns**: `ReactionsRemoveschema`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `ReactionsRemoveschema` | `Models/ReactionsRemoveschema.cs` |
+| `ReactionsRemoveRequest` | `src/SlackWebApi/Requests/Reactions/ReactionsRemoveRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `ReactionsRemoveschema` | `src/SlackWebApi/Models/ReactionsRemoveschema.cs` |
 

@@ -2,61 +2,67 @@
 
 # Views — operations
 
-Accessor: `client.Views` · Source: `Api/Views.cs` · 4 operations
+Accessor: `client.Views` · Source: `src/SlackWebApi/Api/Views.cs` · 4 operations
 
 **Type sources**: the file declaring each type an operation names (`RawError` excluded — see sdk-map.md).
 
 ### ViewsOpen
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ViewsOpen(string triggerId, string view, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `trigger_id` ← `triggerId`, `view` ← `view`
+- **Signature**: `ViewsOpen(ViewsOpenRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `TriggerId`, `View`, `Token`, `ContentType`
+- **Query params (wire ← C#)**: `trigger_id` ← `TriggerId`, `view` ← `View`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `ViewsOpenRequest` | `src/SlackWebApi/Requests/Views/ViewsOpenRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### ViewsPublish
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ViewsPublish(string userId, string view, string? hash, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - `hash` — nullable, no default → **must pass explicitly**
-- **Query params (wire ← C#)**: `user_id` ← `userId`, `view` ← `view`, `hash` ← `hash`
+- **Signature**: `ViewsPublish(ViewsPublishRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `UserId`, `View`, `Token`, `ContentType`
+- **Query params (wire ← C#)**: `user_id` ← `UserId`, `view` ← `View`, `hash` ← `Hash`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `ViewsPublishRequest` | `src/SlackWebApi/Requests/Views/ViewsPublishRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### ViewsPush
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ViewsPush(string triggerId, string view, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-- **Query params (wire ← C#)**: `trigger_id` ← `triggerId`, `view` ← `view`
+- **Signature**: `ViewsPush(ViewsPushRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `TriggerId`, `View`, `Token`, `ContentType`
+- **Query params (wire ← C#)**: `trigger_id` ← `TriggerId`, `view` ← `View`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `ViewsPushRequest` | `src/SlackWebApi/Requests/Views/ViewsPushRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
 ### ViewsUpdate
 
 - **Auth**: `options.SlackAuth`
-- **Signature**: `ViewsUpdate(string? viewId, string? externalId, string? view, string? hash, string token, ContentType contentType, RequestOptions? requestOptions = null, CancellationToken ct = default)`
-  - 4 params (`viewId` … `hash`) — nullable, no default → **must pass explicitly** (pass `null` to skip)
-- **Query params (wire ← C#)**: `view_id` ← `viewId`, `external_id` ← `externalId`, `view` ← `view`, `hash` ← `hash`
+- **Signature**: `ViewsUpdate(ViewsUpdateRequest request, RequestOptions? requestOptions = null, CancellationToken cancellationToken = default)`
+  - required: `Token`, `ContentType`
+- **Query params (wire ← C#)**: `view_id` ← `ViewId`, `external_id` ← `ExternalId`, `view` ← `View`, `hash` ← `Hash`
 - **Returns**: `Defaultsuccesstemplate`
-- **Error**: `SdkException<RawError>` — **Case B**
+- **Error**: `ApiException<RawError>` — **Case B**
 
 | Type | Source |
 | --- | --- |
-| `ContentType` | `Models/Enums/ContentType.cs` |
-| `Defaultsuccesstemplate` | `Models/Defaultsuccesstemplate.cs` |
+| `ViewsUpdateRequest` | `src/SlackWebApi/Requests/Views/ViewsUpdateRequest.cs` |
+| `ContentType` | `src/SlackWebApi/Models/Enums/ContentType.cs` |
+| `Defaultsuccesstemplate` | `src/SlackWebApi/Models/Defaultsuccesstemplate.cs` |
 
