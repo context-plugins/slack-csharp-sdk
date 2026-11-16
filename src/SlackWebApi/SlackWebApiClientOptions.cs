@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using SlackWebApi.Core.Authentication.OAuth2;
 using SlackWebApi.Core.Authentication.OAuth2.AuthorizationCode;
 using SlackWebApi.Core.Configuration;
 using SlackWebApi.Core.Hooks;
@@ -23,5 +22,4 @@ public class SlackWebApiClientOptions
     public TimeSpan? StreamReadTimeout { get; set; } = TimeSpan.FromSeconds(60);
     public IReadOnlyList<SdkHook> Hooks { get; set; } = [];
     public OAuth2AuthorizationCodeCredentials? SlackAuth { get; set; }
-    public IOAuth2RefreshableTokenStrategy<OAuth2AuthorizationCodeCredentials>? SlackAuthTokenStrategy { get; set; }
 }

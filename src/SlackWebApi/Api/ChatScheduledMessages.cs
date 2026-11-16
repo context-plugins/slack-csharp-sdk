@@ -54,7 +54,7 @@ public sealed class ChatScheduledMessages
             EmptyBody.Instance,
             JsonResponse.Create<ChatScheduledMessagesListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

@@ -48,7 +48,7 @@ public sealed class ApiApi
             EmptyBody.Instance,
             JsonResponse.Create<ApiTestsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

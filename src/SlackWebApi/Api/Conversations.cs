@@ -53,7 +53,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel)),
             JsonResponse.Create<ConversationsArchivesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -84,7 +84,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel)),
             JsonResponse.Create<ConversationsClosesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -115,7 +115,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("name", request.Name), new Param("is_private", request.IsPrivate)),
             JsonResponse.Create<ConversationsCreatesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -150,7 +150,7 @@ public sealed class Conversations
             EmptyBody.Instance,
             JsonResponse.Create<ConversationsHistorysuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -182,7 +182,7 @@ public sealed class Conversations
             EmptyBody.Instance,
             JsonResponse.Create<ConversationsInfosuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -213,7 +213,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel), new Param("users", request.Users)),
             JsonResponse.Create<ConversationsInviteerrorschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -244,7 +244,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel)),
             JsonResponse.Create<ConversationsJoinsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -275,7 +275,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel), new Param("user", request.User)),
             JsonResponse.Create<ConversationsKicksuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -306,7 +306,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel)),
             JsonResponse.Create<ConversationsLeavesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -339,7 +339,7 @@ public sealed class Conversations
             EmptyBody.Instance,
             JsonResponse.Create<ConversationsListsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -370,7 +370,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel), new Param("ts", request.Ts)),
             JsonResponse.Create<ConversationsMarksuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -402,7 +402,7 @@ public sealed class Conversations
             EmptyBody.Instance,
             JsonResponse.Create<ConversationsMemberssuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -436,7 +436,7 @@ public sealed class Conversations
                 new Param("return_im", request.ReturnIm)),
             JsonResponse.Create<ConversationsOpensuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -467,7 +467,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel), new Param("name", request.Name)),
             JsonResponse.Create<ConversationsRenamesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -503,7 +503,7 @@ public sealed class Conversations
             EmptyBody.Instance,
             JsonResponse.Create<ConversationsRepliessuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -534,7 +534,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel), new Param("purpose", request.Purpose)),
             JsonResponse.Create<ConversationsSetPurposesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -565,7 +565,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel), new Param("topic", request.Topic)),
             JsonResponse.Create<ConversationsSetTopicsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -596,7 +596,7 @@ public sealed class Conversations
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel)),
             JsonResponse.Create<ConversationsUnarchivesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

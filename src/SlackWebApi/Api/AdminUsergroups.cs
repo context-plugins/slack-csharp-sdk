@@ -56,7 +56,7 @@ public sealed class AdminUsergroups
                 new Param("team_id", request.TeamId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -90,7 +90,7 @@ public sealed class AdminUsergroups
                 new Param("auto_provision", request.AutoProvision)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -121,7 +121,7 @@ public sealed class AdminUsergroups
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -154,7 +154,7 @@ public sealed class AdminUsergroups
                 new Param("channel_ids", request.ChannelIds)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

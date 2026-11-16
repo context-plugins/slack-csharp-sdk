@@ -57,7 +57,7 @@ public sealed class Stars
                 new Param("timestamp", request.Timestamp)),
             JsonResponse.Create<StarsAddschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -90,7 +90,7 @@ public sealed class Stars
             EmptyBody.Instance,
             JsonResponse.Create<StarsListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -125,7 +125,7 @@ public sealed class Stars
                 new Param("timestamp", request.Timestamp)),
             JsonResponse.Create<StarsRemoveschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

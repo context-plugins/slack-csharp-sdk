@@ -51,7 +51,7 @@ public sealed class Workflows
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -78,7 +78,7 @@ public sealed class Workflows
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -111,7 +111,7 @@ public sealed class Workflows
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

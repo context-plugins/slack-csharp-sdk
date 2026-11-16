@@ -56,7 +56,7 @@ public sealed class FilesRemote
                 new Param("indexable_file_contents", request.IndexableFileContents)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -87,7 +87,7 @@ public sealed class FilesRemote
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -121,7 +121,7 @@ public sealed class FilesRemote
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -151,7 +151,7 @@ public sealed class FilesRemote
                 new Param("external_id", request.ExternalId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -183,7 +183,7 @@ public sealed class FilesRemote
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -218,7 +218,7 @@ public sealed class FilesRemote
                 new Param("indexable_file_contents", request.IndexableFileContents)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

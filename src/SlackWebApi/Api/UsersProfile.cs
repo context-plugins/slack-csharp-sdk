@@ -53,7 +53,7 @@ public sealed class UsersProfile
             EmptyBody.Instance,
             JsonResponse.Create<UsersProfileGetschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -88,7 +88,7 @@ public sealed class UsersProfile
                 new Param("value", request.Value)),
             JsonResponse.Create<UsersProfileSetschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

@@ -53,7 +53,7 @@ public sealed class AdminTeamsOwners
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

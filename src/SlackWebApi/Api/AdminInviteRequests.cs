@@ -55,7 +55,7 @@ public sealed class AdminInviteRequests
                 new Param("team_id", request.TeamId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -88,7 +88,7 @@ public sealed class AdminInviteRequests
                 new Param("team_id", request.TeamId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -119,7 +119,7 @@ public sealed class AdminInviteRequests
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

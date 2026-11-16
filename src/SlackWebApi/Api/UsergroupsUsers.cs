@@ -53,7 +53,7 @@ public sealed class UsergroupsUsers
             EmptyBody.Instance,
             JsonResponse.Create<UsergroupsUsersListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -87,7 +87,7 @@ public sealed class UsergroupsUsers
                 new Param("include_count", request.IncludeCount)),
             JsonResponse.Create<UsergroupsUsersUpdateschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

@@ -62,7 +62,7 @@ public sealed class Calls
                 new Param("users", request.Users)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -93,7 +93,7 @@ public sealed class Calls
             FormUrlEncodedRequest.Create(new Param("id", request.Id), new Param("duration", request.Duration)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -120,7 +120,7 @@ public sealed class Calls
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -151,7 +151,7 @@ public sealed class Calls
             FormUrlEncodedRequest.Create(new Param("id", request.Id), new Param("users", request.Users)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -182,7 +182,7 @@ public sealed class Calls
             FormUrlEncodedRequest.Create(new Param("id", request.Id), new Param("users", request.Users)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -217,7 +217,7 @@ public sealed class Calls
                 new Param("desktop_app_join_url", request.DesktopAppJoinUrl)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

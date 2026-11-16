@@ -59,7 +59,7 @@ public sealed class Usergroups
                 new Param("include_count", request.IncludeCount)),
             JsonResponse.Create<UsergroupsCreateschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -92,7 +92,7 @@ public sealed class Usergroups
                 new Param("include_count", request.IncludeCount)),
             JsonResponse.Create<UsergroupsDisableschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -125,7 +125,7 @@ public sealed class Usergroups
                 new Param("include_count", request.IncludeCount)),
             JsonResponse.Create<UsergroupsEnableschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -157,7 +157,7 @@ public sealed class Usergroups
             EmptyBody.Instance,
             JsonResponse.Create<UsergroupsListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -194,7 +194,7 @@ public sealed class Usergroups
                 new Param("name", request.Name)),
             JsonResponse.Create<UsergroupsUpdateschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -225,7 +225,7 @@ public sealed class Usergroups
             EmptyBody.Instance,
             JsonResponse.Create<UsergroupsUsersListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -259,7 +259,7 @@ public sealed class Usergroups
                 new Param("include_count", request.IncludeCount)),
             JsonResponse.Create<UsergroupsUsersUpdateschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

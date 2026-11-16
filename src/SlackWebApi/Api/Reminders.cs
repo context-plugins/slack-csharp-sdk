@@ -56,7 +56,7 @@ public sealed class Reminders
                 new Param("user", request.User)),
             JsonResponse.Create<RemindersAddschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -87,7 +87,7 @@ public sealed class Reminders
             FormUrlEncodedRequest.Create(new Param("reminder", request.Reminder)),
             JsonResponse.Create<RemindersCompleteschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -118,7 +118,7 @@ public sealed class Reminders
             FormUrlEncodedRequest.Create(new Param("reminder", request.Reminder)),
             JsonResponse.Create<RemindersDeleteschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -145,7 +145,7 @@ public sealed class Reminders
             EmptyBody.Instance,
             JsonResponse.Create<RemindersInfoschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -172,7 +172,7 @@ public sealed class Reminders
             EmptyBody.Instance,
             JsonResponse.Create<RemindersListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

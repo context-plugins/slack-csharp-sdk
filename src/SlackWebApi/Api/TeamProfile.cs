@@ -48,7 +48,7 @@ public sealed class TeamProfile
             EmptyBody.Instance,
             JsonResponse.Create<TeamProfileGetsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

@@ -52,7 +52,7 @@ public sealed class Rtm
             EmptyBody.Instance,
             JsonResponse.Create<RtmConnectschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

@@ -55,7 +55,7 @@ public sealed class Pins
                 new Param("timestamp", request.Timestamp)),
             JsonResponse.Create<PinsAddschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -82,7 +82,7 @@ public sealed class Pins
             EmptyBody.Instance,
             JsonResponse.Create<object>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -115,7 +115,7 @@ public sealed class Pins
                 new Param("timestamp", request.Timestamp)),
             JsonResponse.Create<PinsRemoveschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

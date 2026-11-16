@@ -87,6 +87,36 @@ var options = new SlackWebApiClientOptions
 var client = new SlackWebApiClient(httpClient, options);
 ```
 
+### Credentials, tokens and 401s
+
+Every credential is an option on `SlackWebApiClientOptions`.
+
+OAuth2 credentials (`OAuth2AuthorizationCodeCredentials`) are exchanged for a token the SDK caches and renews before it expires. The authorization-code grant holds one token and requests every scope its flow declares, so one consent covers every operation; it keeps the refresh token the server issues and uses it to renew silently. Setting `Scope` on the credentials replaces that with one token requested with that value, and an empty `Scope` requests none. Set it to the scopes your client is registered for whenever the API declares more than it grants you: the default asks for the whole catalogue, and an authorization server that enforces per-client scope registration answers `invalid_scope` to that request.
+
+When a server answers `401 Unauthorized`:
+
+- An OAuth2-authenticated call drops the rejected token, obtains a new one and is sent again, once, under every retry setting including `RetryOptions.Disabled()`. The retry is logged as `attempt 1/1: 401 Unauthorized`; `RetryOptions.OnRetry` is not called for it. A second `401` is returned to you.
+
+A request whose body cannot be re-sent (a stream upload) is never retried either, but its `401` still drops the cached token, so the next call recovers. A hook that replaces the `Authorization` header makes the token comparison miss; the one retry still happens.
+
+### Required and optional auth
+
+An operation sends only the credentials its API declares. If a required credential is not configured, the call fails before anything is sent with an `AuthSchemeException` that names the scheme (`… requires the SlackAuth scheme, which is not configured.`). A credential that is set but blank is treated as configured and sent as-is: the SDK checks presence, never content.
+
+### Credentials from environment variables
+
+`SlackAuth` has no environment default. The only environment variable the client reads is for logging:
+
+| Option | Environment variables |
+| --- | --- |
+| logging | `SLACK_WEB_API_LOG` = `info`, `debug` or `trace` (read only when no `ILoggerFactory` is set; `AddSlackWebApiClient` always supplies the container's) |
+
+Hosted applications that already use the .NET options pattern can bind the whole options object from `IConfiguration`, which picks up environment variables through the configuration provider (`SlackWebApi__SlackAuth__ClientId`, and so on):
+
+```csharp
+services.AddSlackWebApiClient(options => configuration.GetSection("SlackWebApi").Bind(options));
+```
+
 ---
 
 ## Usage
@@ -169,7 +199,7 @@ Everything the SDK raises for a call derives from `SdkException`, which carries 
 | `ResponseDeserializationException` | A response body did not match the type the spec declares | `TargetType`, plus the `ApiException` members |
 | `SdkConnectionException` | The request could not be sent, or the response body could not be read |  |
 | `SdkTimeoutException` | An attempt, the transport, or a Server-Sent Events stream went silent (derives from `SdkConnectionException`) | `Timeout` |
-| `AuthSchemeException` | A credential could not be applied — for example the OAuth2 token endpoint refused it | `SchemeFailures` |
+| `AuthSchemeException` | A required credential is not configured, or could not be applied — for example the OAuth2 token endpoint refused it | `SchemeFailures` |
 
 Catch from specific to general: `ApiException` means the server answered, `SdkConnectionException` means it did not, and `SdkException` is everything the SDK raises. Your own cancellation surfaces as the usual `OperationCanceledException`, never wrapped.
 

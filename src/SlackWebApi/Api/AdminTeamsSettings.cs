@@ -49,7 +49,7 @@ public sealed class AdminTeamsSettings
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -79,7 +79,7 @@ public sealed class AdminTeamsSettings
                 new Param("channel_ids", request.ChannelIds)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -112,7 +112,7 @@ public sealed class AdminTeamsSettings
                 new Param("description", request.Description)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -145,7 +145,7 @@ public sealed class AdminTeamsSettings
                 new Param("discoverability", request.Discoverability)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -175,7 +175,7 @@ public sealed class AdminTeamsSettings
                 new Param("team_id", request.TeamId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -206,7 +206,7 @@ public sealed class AdminTeamsSettings
             FormUrlEncodedRequest.Create(new Param("team_id", request.TeamId), new Param("name", request.Name)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

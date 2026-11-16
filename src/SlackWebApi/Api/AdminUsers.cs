@@ -58,7 +58,7 @@ public sealed class AdminUsers
                 new Param("channel_ids", request.ChannelIds)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -98,7 +98,7 @@ public sealed class AdminUsers
                 new Param("guest_expiration_ts", request.GuestExpirationTs)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -129,7 +129,7 @@ public sealed class AdminUsers
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -160,7 +160,7 @@ public sealed class AdminUsers
             FormUrlEncodedRequest.Create(new Param("team_id", request.TeamId), new Param("user_id", request.UserId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -191,7 +191,7 @@ public sealed class AdminUsers
             FormUrlEncodedRequest.Create(new Param("team_id", request.TeamId), new Param("user_id", request.UserId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -225,7 +225,7 @@ public sealed class AdminUsers
                 new Param("expiration_ts", request.ExpirationTs)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -256,7 +256,7 @@ public sealed class AdminUsers
             FormUrlEncodedRequest.Create(new Param("team_id", request.TeamId), new Param("user_id", request.UserId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -287,7 +287,7 @@ public sealed class AdminUsers
             FormUrlEncodedRequest.Create(new Param("team_id", request.TeamId), new Param("user_id", request.UserId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

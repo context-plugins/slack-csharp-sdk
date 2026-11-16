@@ -57,7 +57,7 @@ public sealed class Users
             EmptyBody.Instance,
             JsonResponse.Create<UsersConversationssuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -84,7 +84,7 @@ public sealed class Users
             FormUrlEncodedRequest.Create(new Param("token", request.Token)),
             JsonResponse.Create<UsersDeletePhotoschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -111,7 +111,7 @@ public sealed class Users
             EmptyBody.Instance,
             JsonResponse.Create<ApImethodusersGetPresence>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -138,7 +138,7 @@ public sealed class Users
             EmptyBody.Instance,
             JsonResponse.Create<object>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -169,7 +169,7 @@ public sealed class Users
             EmptyBody.Instance,
             JsonResponse.Create<UsersInfosuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -201,7 +201,7 @@ public sealed class Users
             EmptyBody.Instance,
             JsonResponse.Create<UsersListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -228,7 +228,7 @@ public sealed class Users
             EmptyBody.Instance,
             JsonResponse.Create<UsersLookupByEmailsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -259,7 +259,7 @@ public sealed class Users
             EmptyBody.Instance,
             JsonResponse.Create<UsersProfileGetschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -294,7 +294,7 @@ public sealed class Users
                 new Param("value", request.Value)),
             JsonResponse.Create<UsersProfileSetschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -325,7 +325,7 @@ public sealed class Users
             EmptyBody.Instance,
             JsonResponse.Create<UsersSetActiveschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -357,7 +357,7 @@ public sealed class Users
                 new Param("image", request.Image)),
             JsonResponse.Create<UsersSetPhotoschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -388,7 +388,7 @@ public sealed class Users
             FormUrlEncodedRequest.Create(new Param("presence", request.Presence)),
             JsonResponse.Create<UsersSetPresenceschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

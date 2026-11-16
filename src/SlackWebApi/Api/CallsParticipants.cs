@@ -53,7 +53,7 @@ public sealed class CallsParticipants
             FormUrlEncodedRequest.Create(new Param("id", request.Id), new Param("users", request.Users)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -84,7 +84,7 @@ public sealed class CallsParticipants
             FormUrlEncodedRequest.Create(new Param("id", request.Id), new Param("users", request.Users)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

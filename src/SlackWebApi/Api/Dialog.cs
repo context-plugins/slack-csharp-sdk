@@ -48,7 +48,7 @@ public sealed class Dialog
             EmptyBody.Instance,
             JsonResponse.Create<DialogOpenschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

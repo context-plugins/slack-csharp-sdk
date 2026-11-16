@@ -54,7 +54,7 @@ public sealed class TeamApi
             EmptyBody.Instance,
             JsonResponse.Create<TeamAccessLogsschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -81,7 +81,7 @@ public sealed class TeamApi
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -108,7 +108,7 @@ public sealed class TeamApi
             EmptyBody.Instance,
             JsonResponse.Create<TeamInfoschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -143,7 +143,7 @@ public sealed class TeamApi
             EmptyBody.Instance,
             JsonResponse.Create<TeamIntegrationLogsschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -170,7 +170,7 @@ public sealed class TeamApi
             EmptyBody.Instance,
             JsonResponse.Create<TeamProfileGetsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

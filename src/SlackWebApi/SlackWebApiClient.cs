@@ -1,6 +1,7 @@
 using System.Net.Http;
 using SlackWebApi.Api;
 using SlackWebApi.Core;
+using SlackWebApi.Core.Configuration;
 using SlackWebApi.Core.Logging;
 using SlackWebApi.Core.Models;
 
@@ -31,7 +32,10 @@ public sealed class SlackWebApiClient
             new HeaderParam("X-APIMatic-Runtime", RuntimeEnvironment.Runtime),
         ]);
         var resiliencePipelineFactory = new ResiliencePipelineFactory(options.Retry, options.TimeProvider);
-        var httpLogger = new HttpLogger(options.Logging, "SlackWebApiClient", options.TimeProvider);
+        var httpLogger = new HttpLogger(
+            options.Logging.WithEnvironmentDefaults("SLACK_WEB_API_LOG"),
+            "SlackWebApiClient",
+            options.TimeProvider);
         var responseContexts = new ResponseContextFactory(options.TimeProvider, options.StreamReadTimeout);
         _rawClient =
             new RawClient(

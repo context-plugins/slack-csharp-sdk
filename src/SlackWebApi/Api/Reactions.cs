@@ -56,7 +56,7 @@ public sealed class Reactions
                 new Param("timestamp", request.Timestamp)),
             JsonResponse.Create<ReactionsAddschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -90,7 +90,7 @@ public sealed class Reactions
             EmptyBody.Instance,
             JsonResponse.Create<object>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -125,7 +125,7 @@ public sealed class Reactions
             EmptyBody.Instance,
             JsonResponse.Create<ReactionsListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -161,7 +161,7 @@ public sealed class Reactions
                 new Param("timestamp", request.Timestamp)),
             JsonResponse.Create<ReactionsRemoveschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

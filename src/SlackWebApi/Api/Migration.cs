@@ -53,7 +53,7 @@ public sealed class Migration
             EmptyBody.Instance,
             JsonResponse.Create<MigrationExchangesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

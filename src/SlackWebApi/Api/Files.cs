@@ -55,7 +55,7 @@ public sealed class Files
             FormUrlEncodedRequest.Create(new Param("file", request.File), new Param("id", request.Id)),
             JsonResponse.Create<FilesCommentsDeleteschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -86,7 +86,7 @@ public sealed class Files
             FormUrlEncodedRequest.Create(new Param("file", request.File)),
             JsonResponse.Create<FilesDeleteschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -120,7 +120,7 @@ public sealed class Files
             EmptyBody.Instance,
             JsonResponse.Create<FilesInfoschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -157,7 +157,7 @@ public sealed class Files
             EmptyBody.Instance,
             JsonResponse.Create<FilesListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -191,7 +191,7 @@ public sealed class Files
                 new Param("indexable_file_contents", request.IndexableFileContents)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -222,7 +222,7 @@ public sealed class Files
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -256,7 +256,7 @@ public sealed class Files
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -286,7 +286,7 @@ public sealed class Files
                 new Param("external_id", request.ExternalId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -318,7 +318,7 @@ public sealed class Files
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -353,7 +353,7 @@ public sealed class Files
                 new Param("indexable_file_contents", request.IndexableFileContents)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -384,7 +384,7 @@ public sealed class Files
             FormUrlEncodedRequest.Create(new Param("file", request.File)),
             JsonResponse.Create<FilesRevokePublicUrLschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -415,7 +415,7 @@ public sealed class Files
             FormUrlEncodedRequest.Create(new Param("file", request.File)),
             JsonResponse.Create<FilesSharedPublicUrLschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -451,7 +451,7 @@ public sealed class Files
                 new Param("thread_ts", request.ThreadTs)),
             JsonResponse.Create<FilesUploadschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

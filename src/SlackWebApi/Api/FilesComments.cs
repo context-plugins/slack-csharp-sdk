@@ -53,7 +53,7 @@ public sealed class FilesComments
             FormUrlEncodedRequest.Create(new Param("file", request.File), new Param("id", request.Id)),
             JsonResponse.Create<FilesCommentsDeleteschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

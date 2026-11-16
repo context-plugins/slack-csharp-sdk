@@ -57,7 +57,7 @@ public sealed class Apps
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -84,7 +84,7 @@ public sealed class Apps
             EmptyBody.Instance,
             JsonResponse.Create<AppsPermissionsInfoschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -115,7 +115,7 @@ public sealed class Apps
             EmptyBody.Instance,
             JsonResponse.Create<AppsPermissionsRequestschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -142,7 +142,7 @@ public sealed class Apps
             EmptyBody.Instance,
             JsonResponse.Create<AppsPermissionsResourcesListsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -169,7 +169,7 @@ public sealed class Apps
             EmptyBody.Instance,
             JsonResponse.Create<ApiPermissionsScopesListsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -196,7 +196,7 @@ public sealed class Apps
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -228,7 +228,7 @@ public sealed class Apps
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -259,7 +259,7 @@ public sealed class Apps
             EmptyBody.Instance,
             JsonResponse.Create<AppsUninstallschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

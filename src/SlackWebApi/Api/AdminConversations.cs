@@ -53,7 +53,7 @@ public sealed class AdminConversations
             FormUrlEncodedRequest.Create(new Param("channel_id", request.ChannelId)),
             JsonResponse.Create<AdminConversationsArchiveschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -84,7 +84,7 @@ public sealed class AdminConversations
             FormUrlEncodedRequest.Create(new Param("channel_id", request.ChannelId)),
             JsonResponse.Create<AdminConversationsConvertToPrivateschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -120,7 +120,7 @@ public sealed class AdminConversations
                 new Param("team_id", request.TeamId)),
             JsonResponse.Create<AdminConversationsCreateschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -151,7 +151,7 @@ public sealed class AdminConversations
             FormUrlEncodedRequest.Create(new Param("channel_id", request.ChannelId)),
             JsonResponse.Create<AdminConversationsDeleteschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -184,7 +184,7 @@ public sealed class AdminConversations
                 new Param("leaving_team_ids", request.LeavingTeamIds)),
             JsonResponse.Create<AdminConversationsRenameschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -211,7 +211,7 @@ public sealed class AdminConversations
             EmptyBody.Instance,
             JsonResponse.Create<AdminConversationsGetConversationPrefsschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -242,7 +242,7 @@ public sealed class AdminConversations
             EmptyBody.Instance,
             JsonResponse.Create<AdminConversationsGetTeamsschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -275,7 +275,7 @@ public sealed class AdminConversations
                 new Param("channel_id", request.ChannelId)),
             JsonResponse.Create<AdminConversationsInviteschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -306,7 +306,7 @@ public sealed class AdminConversations
             FormUrlEncodedRequest.Create(new Param("channel_id", request.ChannelId), new Param("name", request.Name)),
             JsonResponse.Create<AdminConversationsRenameschema1>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -341,7 +341,7 @@ public sealed class AdminConversations
             EmptyBody.Instance,
             JsonResponse.Create<AdminConversationsSearchschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -372,7 +372,7 @@ public sealed class AdminConversations
             FormUrlEncodedRequest.Create(new Param("channel_id", request.ChannelId), new Param("prefs", request.Prefs)),
             JsonResponse.Create<AdminConversationsSetConversationPrefsschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -407,7 +407,7 @@ public sealed class AdminConversations
                 new Param("org_channel", request.OrgChannel)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -438,7 +438,7 @@ public sealed class AdminConversations
             FormUrlEncodedRequest.Create(new Param("channel_id", request.ChannelId)),
             JsonResponse.Create<AdminConversationsUnarchiveschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

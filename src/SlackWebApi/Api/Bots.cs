@@ -48,7 +48,7 @@ public sealed class Bots
             EmptyBody.Instance,
             JsonResponse.Create<BotsInfoschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

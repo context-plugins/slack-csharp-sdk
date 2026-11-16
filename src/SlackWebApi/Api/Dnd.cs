@@ -53,7 +53,7 @@ public sealed class Dnd
             EmptyBody.Instance,
             JsonResponse.Create<DndEndDndschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -84,7 +84,7 @@ public sealed class Dnd
             EmptyBody.Instance,
             JsonResponse.Create<DndEndSnoozeschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -111,7 +111,7 @@ public sealed class Dnd
             EmptyBody.Instance,
             JsonResponse.Create<DndInfoschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -140,7 +140,7 @@ public sealed class Dnd
                 new Param("num_minutes", request.NumMinutes)),
             JsonResponse.Create<DndSetSnoozeschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -167,7 +167,7 @@ public sealed class Dnd
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

@@ -48,7 +48,7 @@ public sealed class AppsPermissions
             EmptyBody.Instance,
             JsonResponse.Create<AppsPermissionsInfoschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -79,7 +79,7 @@ public sealed class AppsPermissions
             EmptyBody.Instance,
             JsonResponse.Create<AppsPermissionsRequestschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

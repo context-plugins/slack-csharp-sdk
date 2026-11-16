@@ -48,7 +48,7 @@ public sealed class Auth
             EmptyBody.Instance,
             JsonResponse.Create<AuthRevokeschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -75,7 +75,7 @@ public sealed class Auth
             EmptyBody.Instance,
             JsonResponse.Create<AuthTestsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

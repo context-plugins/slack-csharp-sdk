@@ -57,7 +57,7 @@ public sealed class Chat
                 new Param("as_user", request.AsUser)),
             JsonResponse.Create<ChatDeletesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -91,7 +91,7 @@ public sealed class Chat
                 new Param("as_user", request.AsUser)),
             JsonResponse.Create<ChatDeleteScheduledMessageschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -122,7 +122,7 @@ public sealed class Chat
             EmptyBody.Instance,
             JsonResponse.Create<ChatGetPermalinksuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -153,7 +153,7 @@ public sealed class Chat
             FormUrlEncodedRequest.Create(new Param("channel", request.Channel), new Param("text", request.Text)),
             JsonResponse.Create<ChatMeMessageschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -196,7 +196,7 @@ public sealed class Chat
                 new Param("username", request.Username)),
             JsonResponse.Create<ChatPostEphemeralsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -242,7 +242,7 @@ public sealed class Chat
                 new Param("username", request.Username)),
             JsonResponse.Create<ChatPostMessagesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -285,7 +285,7 @@ public sealed class Chat
                 new Param("reply_broadcast", request.ReplyBroadcast)),
             JsonResponse.Create<ChatScheduleMessagesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -318,7 +318,7 @@ public sealed class Chat
             EmptyBody.Instance,
             JsonResponse.Create<ChatScheduledMessagesListschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -355,7 +355,7 @@ public sealed class Chat
                 new Param("user_auth_url", request.UserAuthUrl)),
             JsonResponse.Create<ChatUnfurlsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -394,7 +394,7 @@ public sealed class Chat
                 new Param("text", request.Text)),
             JsonResponse.Create<ChatUpdatesuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

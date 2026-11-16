@@ -52,7 +52,7 @@ public sealed class AdminEmoji
                 new Param("url", request.Url)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -82,7 +82,7 @@ public sealed class AdminEmoji
                 new Param("alias_for", request.AliasFor)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -109,7 +109,7 @@ public sealed class AdminEmoji
             EmptyBody.Instance,
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -136,7 +136,7 @@ public sealed class AdminEmoji
             FormUrlEncodedRequest.Create(new Param("token", request.Token), new Param("name", request.Name)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -166,7 +166,7 @@ public sealed class AdminEmoji
                 new Param("new_name", request.NewName)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

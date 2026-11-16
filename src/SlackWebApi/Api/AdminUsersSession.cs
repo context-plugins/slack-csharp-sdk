@@ -55,7 +55,7 @@ public sealed class AdminUsersSession
                 new Param("session_id", request.SessionId)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 
@@ -89,7 +89,7 @@ public sealed class AdminUsersSession
                 new Param("web_only", request.WebOnly)),
             JsonResponse.Create<Defaultsuccesstemplate>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }

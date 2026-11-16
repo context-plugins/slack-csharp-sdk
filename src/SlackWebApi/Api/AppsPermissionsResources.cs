@@ -48,7 +48,7 @@ public sealed class AppsPermissionsResources
             EmptyBody.Instance,
             JsonResponse.Create<AppsPermissionsResourcesListsuccessschema>(),
             RawErrorResponse.Instance,
-            [_auth.SlackAuth],
+            _auth.SlackAuth,
             requestOptions,
             cancellationToken);
 }
